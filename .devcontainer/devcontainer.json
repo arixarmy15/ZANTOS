@@ -1,0 +1,29 @@
+{
+  "name": "TradeCheck",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-24-bookworm",
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "TradeCheck (Next.js)",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "npm ci && npx playwright install --with-deps chromium",
+  "secrets": {
+    "ANTHROPIC_API_KEY": {
+      "description": "Anthropic API key used server-side for document extraction. Never commit it.",
+      "documentationUrl": "https://docs.claude.com/en/api/overview"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "vitest.explorer",
+        "ms-playwright.playwright"
+      ]
+    }
+  }
+}
