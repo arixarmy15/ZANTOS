@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TradeCheck design specimen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+    />
+    <style>
+      /* Values mirror design/tokens.json. This file is a design specimen, not product code. */
+      :root {
+        color-scheme: light;
+        --ledger: #f2f4f3;
+        --paper: #ffffff;
+        --carbon: #17212b;
+        --slate: #55616c;
+        --rule: #d5dce0;
+        --harbor: #0e5e6d;
+        --harbor-strong: #0a4955;
+        --harbor-tint: #e2eef0;
+        --evidence-wash: #dde8eb;
+        --control-border: #78838d;
+        --error-fg: #b42318;
+        --error-bg: #fdecea;
+        --error-border: #f0b4ae;
+        --warning-fg: #8a4a00;
+        --warning-bg: #fff3db;
+        --warning-border: #edc678;
+        --info-fg: #2a5ba8;
+        --info-bg: #e9f0fb;
+        --info-border: #b6caeb;
+        --success-fg: #1d6b36;
+        --success-bg: #e6f4ea;
+        --success-border: #a8d4b4;
+        --unverified-fg: #55616c;
+        --unverified-bg: #eef1f3;
+        --unverified-border: #78838d;
+        --font-sans:
+          "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI",
+          "Noto Sans", sans-serif;
+        --font-arabic:
+          "IBM Plex Sans Arabic", "IBM Plex Sans", "Noto Sans Arabic", "Segoe UI", sans-serif;
+        --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+        --duration-instant: 80ms;
+        --duration-fast: 140ms;
+        --duration-normal: 200ms;
+        --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+        --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+        --shadow-overlay: 0 1px 2px rgba(23, 33, 43, 0.06), 0 8px 24px rgba(23, 33, 43, 0.12);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      body {
+        margin: 0;
+        background: var(--ledger);
+        color: var(--carbon);
+        font: 400 14px/20px var(--font-sans);
+        font-variant-numeric: tabular-nums;
+      }
+      html[dir="rtl"] body {
+        font-family: var(--font-arabic);
+        line-height: 22px;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        font-weight: 600;
+        text-wrap: balance;
+      }
+      h1 {
+        font-size: 28px;
+        line-height: 34px;
+      }
+      h2 {
+        font-size: 18px;
+        line-height: 24px;
+      }
+      h3 {
+        font-size: 15px;
+        line-height: 20px;
+      }
+      p {
+        margin: 0;
+        text-wrap: pretty;
+      }
+      .mono {
+        font-family: var(--font-mono);
+      }
+      .code,
+      .tag.ref,
+      bdi.mono {
+        white-space: nowrap;
+      }
+      .muted {
+        color: var(--slate);
+      }
+      :focus-visible {
+        outline: 2px solid var(--harbor);
+        outline-offset: 2px;
+      }
+
+      /* Shell */
+      .topbar {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        height: 48px;
+        padding-inline: 16px;
+        background: var(--paper);
+        border-block-end: 1px solid var(--rule);
+      }
+      .wordmark {
+        font-weight: 600;
+        font-size: 16px;
+        font-family: var(--font-sans);
+      }
+      .topbar nav {
+        display: flex;
+        gap: 16px;
+        flex: 1;
+      }
+      .topbar nav a,
+      .topbar .btn {
+        white-space: nowrap;
+      }
+      .menu-button {
+        display: none;
+        margin-inline-start: auto;
+      }
+      .topbar nav a {
+        color: var(--carbon);
+        text-decoration: none;
+        padding-block: 14px;
+        border-block-end: 2px solid transparent;
+      }
+      .topbar nav a[aria-current="page"] {
+        border-block-end-color: var(--harbor);
+      }
+      main {
+        max-width: 1440px;
+        margin-inline: auto;
+        padding: 24px 16px 48px;
+        display: grid;
+        gap: 40px;
+      }
+      section {
+        display: grid;
+        gap: 16px;
+      }
+      .specimen-note {
+        border-inline-start: 3px solid var(--slate);
+        padding: 8px 12px;
+        background: var(--paper);
+        color: var(--slate);
+      }
+      footer {
+        padding: 16px;
+        color: var(--slate);
+        border-block-start: 1px solid var(--rule);
+        background: var(--paper);
+        font-size: 13px;
+        line-height: 18px;
+      }
+
+      /* Swatches */
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 0;
+        border: 1px solid var(--rule);
+        background: var(--paper);
+      }
+      .swatch {
+        display: grid;
+        grid-template-rows: 56px auto;
+        border-inline-end: 1px solid var(--rule);
+        border-block-end: 1px solid var(--rule);
+      }
+      .swatch-chip {
+        border-block-end: 1px solid var(--rule);
+      }
+      .swatch-body {
+        padding: 8px 12px;
+        display: grid;
+        gap: 2px;
+        font-size: 13px;
+        line-height: 18px;
+      }
+
+      /* Tags */
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        min-height: 20px;
+        padding-inline: 6px;
+        border-radius: 2px;
+        border: 1px solid var(--rule);
+        background: var(--paper);
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .tag svg {
+        width: 14px;
+        height: 14px;
+        flex: none;
+      }
+      .tag.error {
+        color: var(--error-fg);
+        background: var(--error-bg);
+        border-color: var(--error-border);
+      }
+      .tag.warning {
+        color: var(--warning-fg);
+        background: var(--warning-bg);
+        border-color: var(--warning-border);
+      }
+      .tag.info {
+        color: var(--info-fg);
+        background: var(--info-bg);
+        border-color: var(--info-border);
+      }
+      .tag.success {
+        color: var(--success-fg);
+        background: var(--success-bg);
+        border-color: var(--success-border);
+      }
+      .tag.unverified {
+        color: var(--unverified-fg);
+        background: var(--unverified-bg);
+        border: 1px dashed var(--unverified-border);
+      }
+      .tag.ref {
+        font-family: var(--font-mono);
+        color: var(--carbon);
+      }
+      svg.icon {
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.75;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      /* Type */
+      .type-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--paper);
+        border: 1px solid var(--rule);
+      }
+      .type-table th,
+      .type-table td {
+        text-align: start;
+        padding: 10px 12px;
+        border-block-end: 1px solid var(--rule);
+        vertical-align: baseline;
+      }
+      .type-table th {
+        font-weight: 500;
+        color: var(--slate);
+        font-size: 13px;
+        white-space: nowrap;
+      }
+
+      /* Scales */
+      .scale {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: flex-end;
+      }
+      .scale-item {
+        display: grid;
+        gap: 4px;
+        justify-items: start;
+        font-size: 12px;
+        color: var(--slate);
+      }
+      .space-bar {
+        background: var(--harbor);
+        height: 12px;
+      }
+      .radius-box {
+        width: 56px;
+        height: 40px;
+        border: 1px solid var(--control-border);
+        background: var(--paper);
+      }
+
+      /* Controls */
+      .controls {
+        display: grid;
+        gap: 16px;
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        padding: 16px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 36px;
+        padding-inline: 14px;
+        border-radius: 4px;
+        border: 1px solid var(--control-border);
+        background: var(--paper);
+        color: var(--carbon);
+        font-family: inherit;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 500;
+        cursor: pointer;
+        transition-property: background-color, border-color, color, transform;
+        transition-duration: var(--duration-fast);
+        transition-timing-function: var(--ease-standard);
+      }
+      .btn:hover {
+        background: var(--ledger);
+      }
+      .btn:active {
+        transform: scale(0.98);
+        transition-duration: var(--duration-instant);
+      }
+      .btn.primary {
+        background: var(--harbor);
+        border-color: var(--harbor);
+        color: #fff;
+      }
+      .btn.primary:hover {
+        background: var(--harbor-strong);
+        border-color: var(--harbor-strong);
+      }
+      .btn.ghost {
+        border-color: transparent;
+        background: transparent;
+      }
+      .btn.ghost:hover {
+        background: var(--ledger);
+      }
+      .btn.destructive {
+        color: var(--error-fg);
+        border-color: var(--error-fg);
+      }
+      .btn svg {
+        width: 16px;
+        height: 16px;
+      }
+      .field {
+        display: grid;
+        gap: 4px;
+        max-width: 360px;
+      }
+      .field label {
+        font-weight: 500;
+      }
+      .field input {
+        height: 36px;
+        padding-inline: 10px;
+        border: 1px solid var(--control-border);
+        border-radius: 4px;
+        background: var(--paper);
+        color: var(--carbon);
+        font: inherit;
+      }
+      .field input::placeholder {
+        color: var(--slate);
+      }
+      .field input[aria-invalid="true"] {
+        border-color: var(--error-fg);
+      }
+      .field .error-text {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        color: var(--error-fg);
+        font-size: 13px;
+        line-height: 18px;
+      }
+      .field .error-text svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      /* Evidence ledger specimen */
+      .check-header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 24px;
+        align-items: baseline;
+        padding: 12px 16px;
+        background: var(--paper);
+        border: 1px solid var(--rule);
+        border-block-end: 0;
+      }
+      .summary-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 20px;
+      }
+      .summary-strip span {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+      }
+      .summary-strip svg {
+        width: 16px;
+        height: 16px;
+      }
+      .ledger {
+        display: grid;
+        grid-template-columns: 7fr 5fr;
+        border: 1px solid var(--rule);
+        background: var(--paper);
+        min-height: 420px;
+      }
+      .doc-pane {
+        border-inline-end: 1px solid var(--rule);
+        background: var(--ledger);
+        padding: 16px;
+        overflow: auto;
+      }
+      .page {
+        --margin: 64px;
+        background: var(--paper);
+        outline: 1px solid rgba(0, 0, 0, 0.1);
+        outline-offset: -1px;
+        padding: 24px;
+        display: grid;
+        gap: 10px;
+        max-width: 560px;
+      }
+      .page-label {
+        font-size: 12px;
+        color: var(--slate);
+      }
+      .line {
+        margin-inline-end: calc(var(--margin) + 8px);
+        height: 8px;
+        background: var(--rule);
+        border-radius: 1px;
+      }
+      .evidence-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 8px var(--margin);
+        column-gap: 8px;
+        align-items: stretch;
+      }
+      .evidence {
+        background: var(--evidence-wash);
+        color: var(--carbon);
+        padding: 2px 4px;
+        font-size: 13px;
+        line-height: 20px;
+      }
+      .bracket {
+        border: 2px solid var(--harbor);
+        border-inline-start: 0;
+        transform-origin: top;
+        animation: draw var(--duration-normal) var(--ease-out);
+      }
+      .margin-tag {
+        align-self: start;
+        justify-self: start;
+      }
+      @keyframes draw {
+        from {
+          transform: scaleY(0);
+        }
+        to {
+          transform: scaleY(1);
+        }
+      }
+      .findings {
+        display: grid;
+        align-content: start;
+      }
+      .findings h3 {
+        padding: 12px 16px;
+        border-block-end: 1px solid var(--rule);
+      }
+      .finding {
+        display: grid;
+        gap: 6px;
+        padding: 12px 16px;
+        border-block-end: 1px solid var(--rule);
+        border-inline-start: 3px solid transparent;
+      }
+      .finding[aria-selected="true"] {
+        background: var(--harbor-tint);
+        border-inline-start-color: var(--harbor);
+      }
+      .finding .meta {
+        color: var(--slate);
+        font-size: 13px;
+        line-height: 18px;
+      }
+      .finding blockquote {
+        margin: 0;
+        padding-inline-start: 10px;
+        border-inline-start: 2px solid var(--rule);
+        font-size: 13px;
+        line-height: 18px;
+      }
+      .ai-block {
+        justify-items: start;
+        border: 1px solid var(--rule);
+        border-radius: 4px;
+        padding: 12px;
+        display: grid;
+        gap: 8px;
+        background: var(--paper);
+        max-width: 72ch;
+        font-size: 16px;
+        line-height: 24px;
+      }
+      .empty {
+        display: grid;
+        gap: 8px;
+        justify-items: start;
+        padding: 24px 16px;
+        background: var(--paper);
+        border: 1px solid var(--rule);
+      }
+      .empty svg {
+        width: 20px;
+        height: 20px;
+        color: var(--slate);
+      }
+      .dropzone {
+        display: grid;
+        gap: 6px;
+        justify-items: start;
+        padding: 20px;
+        border: 1px dashed var(--control-border);
+        border-radius: 4px;
+        background: var(--paper);
+      }
+      .viz-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0;
+        border: 1px solid var(--rule);
+        background: var(--paper);
+        width: fit-content;
+      }
+      .viz-row span {
+        width: 48px;
+        height: 32px;
+        border-inline-end: 2px solid var(--paper);
+      }
+
+      @media (max-width: 639px) {
+        .topbar nav {
+          display: none;
+        }
+        .menu-button {
+          display: inline-flex;
+        }
+      }
+      @media (max-width: 767px) {
+        .findings {
+          order: -1;
+          border-block-end: 1px solid var(--rule);
+        }
+      }
+      @media (max-width: 1023px) {
+        .ledger {
+          grid-template-columns: 1fr;
+        }
+        .doc-pane {
+          border-inline-end: 0;
+          border-block-end: 1px solid var(--rule);
+        }
+      }
+      @media (min-width: 768px) {
+        main {
+          padding-inline: 24px;
+        }
+        .topbar {
+          padding-inline: 24px;
+        }
+      }
+      @media (min-width: 1280px) {
+        main {
+          padding-inline: 32px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition-property: opacity, background-color, border-color, color !important;
+          transition-duration: 0ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-error" viewBox="0 0 24 24">
+        <path d="M12 16h.01" />
+        <path d="M12 8v4" />
+        <path
+          d="M15.312 2a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586l-4.688-4.688A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2z"
+        />
+      </symbol>
+      <symbol id="i-warning" viewBox="0 0 24 24">
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+        <path d="M12 9v4" />
+        <path d="M12 17h.01" />
+      </symbol>
+      <symbol id="i-info" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 16v-4" />
+        <path d="M12 8h.01" />
+      </symbol>
+      <symbol id="i-success" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="m9 12 2 2 4-4" />
+      </symbol>
+      <symbol id="i-unverified" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+        <path d="M12 17h.01" />
+      </symbol>
+      <symbol id="i-gauge" viewBox="0 0 24 24">
+        <path d="m12 14 4-4" />
+        <path d="M3.34 19a10 10 0 1 1 17.32 0" />
+      </symbol>
+      <symbol id="i-pen" viewBox="0 0 24 24">
+        <path d="M13 21h8" />
+        <path
+          d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+        />
+      </symbol>
+      <symbol id="i-bot" viewBox="0 0 24 24">
+        <path d="M12 8V4H8" />
+        <rect width="16" height="12" x="4" y="8" rx="2" />
+        <path d="M2 14h2" />
+        <path d="M20 14h2" />
+        <path d="M15 13v2" />
+        <path d="M9 13v2" />
+      </symbol>
+      <symbol id="i-file" viewBox="0 0 24 24">
+        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+        <path d="M10 9H8" />
+        <path d="M16 13H8" />
+        <path d="M16 17H8" />
+      </symbol>
+      <symbol id="i-upload" viewBox="0 0 24 24">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <path d="m17 8-5-5-5 5" />
+        <path d="M12 3v12" />
+      </symbol>
+    </svg>
+
+    <header class="topbar">
+      <span class="wordmark">TradeCheck</span>
+      <nav aria-label="Specimen navigation">
+        <a href="#" aria-current="page">Checks</a>
+        <a href="#">New check</a>
+      </nav>
+      <button class="btn ghost menu-button" type="button" aria-label="Menu">Menu</button>
+      <button class="btn ghost" type="button" id="dir-toggle">RTL / العربية</button>
+    </header>
+
+    <main>
+      <section>
+        <h1>Design specimen</h1>
+        <p class="specimen-note">
+          <bdi
+            >Placeholder content only — not product data. Labels such as "Document A" and "Finding
+            message" stand in for real content, which comes from the user's own documents.</bdi
+          >
+        </p>
+      </section>
+
+      <section aria-labelledby="h-colour">
+        <h2 id="h-colour">Named colours</h2>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="swatch-chip" style="background: var(--ledger)"></div>
+            <div class="swatch-body">
+              <strong>Ledger</strong><span class="mono">#F2F4F3</span
+              ><span class="muted">App background</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: var(--paper)"></div>
+            <div class="swatch-body">
+              <strong>Paper</strong><span class="mono">#FFFFFF</span
+              ><span class="muted">Surfaces</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: var(--carbon)"></div>
+            <div class="swatch-body">
+              <strong>Carbon</strong><span class="mono">#17212B</span
+              ><span class="muted">Text · 16.29:1</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: var(--slate)"></div>
+            <div class="swatch-body">
+              <strong>Slate</strong><span class="mono">#55616C</span
+              ><span class="muted">Secondary text · 6.34:1</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: var(--rule)"></div>
+            <div class="swatch-body">
+              <strong>Rule</strong><span class="mono">#D5DCE0</span
+              ><span class="muted">Hairlines</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-chip" style="background: var(--harbor)"></div>
+            <div class="swatch-body">
+              <strong>Harbor</strong><span class="mono">#0E5E6D</span
+              ><span class="muted">Action & linkage · 7.39:1</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="h-status">
+        <h2 id="h-status">Status and field markers</h2>
+        <div class="row">
+          <span class="tag error"
+            ><svg class="icon" aria-hidden="true"><use href="#i-error" /></svg>Error</span
+          >
+          <span class="tag warning"
+            ><svg class="icon" aria-hidden="true"><use href="#i-warning" /></svg>Warning</span
+          >
+          <span class="tag info"
+            ><svg class="icon" aria-hidden="true"><use href="#i-info" /></svg>Info</span
+          >
+          <span class="tag success"
+            ><svg class="icon" aria-hidden="true"><use href="#i-success" /></svg>Passed</span
+          >
+          <span class="tag unverified"
+            ><svg class="icon" aria-hidden="true"><use href="#i-unverified" /></svg>Could not be
+            verified</span
+          >
+        </div>
+        <div class="row">
+          <span class="tag warning"
+            ><svg class="icon" aria-hidden="true"><use href="#i-gauge" /></svg>Low confidence —
+            please verify</span
+          >
+          <span class="tag"
+            ><svg class="icon" aria-hidden="true"><use href="#i-pen" /></svg>Corrected by you</span
+          >
+          <span class="tag"
+            ><svg class="icon" aria-hidden="true"><use href="#i-bot" /></svg>AI-generated
+            draft</span
+          >
+          <span class="tag ref">F3</span>
+        </div>
+      </section>
+
+      <section aria-labelledby="h-type">
+        <h2 id="h-type">Type</h2>
+        <table class="type-table">
+          <tbody>
+            <tr>
+              <th scope="row">page 28/34</th>
+              <td style="font-size: 28px; line-height: 34px; font-weight: 600">Shipment check</td>
+            </tr>
+            <tr>
+              <th scope="row">heading 22/28</th>
+              <td style="font-size: 22px; line-height: 28px; font-weight: 600">
+                Documents and findings
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">title 18/24</th>
+              <td style="font-size: 18px; line-height: 24px; font-weight: 600">Extracted fields</td>
+            </tr>
+            <tr>
+              <th scope="row">body 14/20</th>
+              <td>Örnek metin — ğ ü ş ı ö ç İ Ğ Ü Ş Ö Ç · Größe · señal · élément</td>
+            </tr>
+            <tr>
+              <th scope="row">Arabic body</th>
+              <td lang="ar" dir="rtl" style="font-family: var(--font-arabic); line-height: 22px">
+                نص تجريبي لعرض الخط العربي في الواجهة
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">small 13/18</th>
+              <td style="font-size: 13px; line-height: 18px">
+                Document A · page 2 · 1,234.50 · 12,345.00
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">mono codes</th>
+              <td class="mono">
+                <bdi class="code">HS 0000.00</bdi> · <bdi class="code">ISO 4217</bdi> ·
+                <bdi class="code">R-ARITH-01</bdi> · <bdi class="code">F3</bdi>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section aria-labelledby="h-scale">
+        <h2 id="h-scale">Space and radius</h2>
+        <div class="scale">
+          <div class="scale-item"><span class="space-bar" style="width: 4px"></span>4</div>
+          <div class="scale-item"><span class="space-bar" style="width: 8px"></span>8</div>
+          <div class="scale-item"><span class="space-bar" style="width: 12px"></span>12</div>
+          <div class="scale-item"><span class="space-bar" style="width: 16px"></span>16</div>
+          <div class="scale-item"><span class="space-bar" style="width: 24px"></span>24</div>
+          <div class="scale-item"><span class="space-bar" style="width: 32px"></span>32</div>
+          <div class="scale-item"><span class="space-bar" style="width: 48px"></span>48</div>
+          <div class="scale-item"><span class="space-bar" style="width: 64px"></span>64</div>
+        </div>
+        <div class="scale">
+          <div class="scale-item"><span class="radius-box" style="border-radius: 0"></span>0</div>
+          <div class="scale-item">
+            <span class="radius-box" style="border-radius: 2px"></span>2 · tags
+          </div>
+          <div class="scale-item">
+            <span class="radius-box" style="border-radius: 4px"></span>4 · controls
+          </div>
+          <div class="scale-item">
+            <span class="radius-box" style="border-radius: 6px"></span>6 · dialogs
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="h-controls">
+        <h2 id="h-controls">Controls</h2>
+        <div class="controls">
+          <div class="row">
+            <button class="btn primary" type="button">Export report</button>
+            <button class="btn" type="button">Add documents</button>
+            <button class="btn ghost" type="button">Show in document</button>
+            <button class="btn destructive" type="button">Delete check</button>
+          </div>
+          <div class="field">
+            <label for="f-value">Field label</label>
+            <input
+              id="f-value"
+              placeholder="Value"
+              aria-invalid="true"
+              aria-describedby="f-value-error"
+            />
+            <span class="error-text" id="f-value-error"
+              ><svg class="icon" aria-hidden="true"><use href="#i-error" /></svg>Error message with
+              a way to fix it</span
+            >
+          </div>
+          <div class="dropzone">
+            <svg class="icon" width="20" height="20" aria-hidden="true">
+              <use href="#i-upload" />
+            </svg>
+            <strong>Drop files here or browse</strong>
+            <span class="muted">PDF, PNG or JPG · up to 20 MB per file · limits from settings</span>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="h-ledger">
+        <h2 id="h-ledger">Evidence ledger</h2>
+        <div>
+          <div class="check-header">
+            <strong>Check name</strong>
+            <div class="summary-strip" aria-label="Findings summary">
+              <span style="color: var(--error-fg)"
+                ><svg class="icon" aria-hidden="true"><use href="#i-error" /></svg>Errors
+                <bdi class="mono">n</bdi></span
+              >
+              <span style="color: var(--warning-fg)"
+                ><svg class="icon" aria-hidden="true"><use href="#i-warning" /></svg>Warnings
+                <bdi class="mono">n</bdi></span
+              >
+              <span style="color: var(--info-fg)"
+                ><svg class="icon" aria-hidden="true"><use href="#i-info" /></svg>Info
+                <bdi class="mono">n</bdi></span
+              >
+            </div>
+            <span class="muted">Model · input/output tokens</span>
+          </div>
+          <div class="ledger">
+            <div class="doc-pane" aria-label="Document A, page 1">
+              <div class="page">
+                <span class="page-label">Document A · page 1</span>
+                <div class="line" style="width: 60%"></div>
+                <div class="line" style="width: 85%"></div>
+                <div class="line" style="width: 72%"></div>
+                <div class="evidence-row">
+                  <mark class="evidence" aria-describedby="finding-f1"
+                    ><bdi
+                      >Excerpt from the document, as printed on the page — it can run over more than
+                      one line</bdi
+                    ></mark
+                  >
+                  <span class="bracket" aria-hidden="true"></span>
+                  <span class="tag ref margin-tag error"
+                    ><svg class="icon" aria-hidden="true"><use href="#i-error" /></svg>F1</span
+                  >
+                </div>
+                <div class="line" style="width: 90%"></div>
+                <div class="line" style="width: 40%"></div>
+                <div class="line" style="width: 78%"></div>
+                <div class="line" style="width: 66%"></div>
+              </div>
+            </div>
+            <div class="findings">
+              <h3>Findings</h3>
+              <div class="finding" id="finding-f1" aria-selected="true">
+                <div class="row">
+                  <span class="tag ref">F1</span>
+                  <span class="tag error"
+                    ><svg class="icon" aria-hidden="true"><use href="#i-error" /></svg>Error</span
+                  >
+                </div>
+                <p>Finding message</p>
+                <blockquote>
+                  Excerpt from the document
+                  <div class="meta">Document A · page 1</div>
+                </blockquote>
+              </div>
+              <div class="finding">
+                <div class="row">
+                  <span class="tag ref">F2</span>
+                  <span class="tag warning"
+                    ><svg class="icon" aria-hidden="true"><use href="#i-warning" /></svg
+                    >Warning</span
+                  >
+                </div>
+                <p>Finding message</p>
+                <div class="meta">Document B · page 1 · Document C · page 2</div>
+              </div>
+              <div class="finding">
+                <div class="row">
+                  <span class="tag ref">F3</span>
+                  <span class="tag unverified"
+                    ><svg class="icon" aria-hidden="true"><use href="#i-unverified" /></svg>Could
+                    not be verified</span
+                  >
+                </div>
+                <p>Finding message</p>
+                <div class="meta">Exact position not available</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ai-block">
+          <span class="tag"
+            ><svg class="icon" aria-hidden="true"><use href="#i-bot" /></svg>AI-generated
+            explanation</span
+          >
+          <p><bdi>Plain-language explanation text appears here, in the interface language.</bdi></p>
+        </div>
+      </section>
+
+      <section aria-labelledby="h-empty">
+        <h2 id="h-empty">Empty state</h2>
+        <div class="empty">
+          <svg class="icon" aria-hidden="true"><use href="#i-file" /></svg>
+          <p><bdi>No checks yet. Start one by adding the documents for a shipment.</bdi></p>
+          <button class="btn primary" type="button">New check</button>
+        </div>
+      </section>
+
+      <section aria-labelledby="h-viz">
+        <h2 id="h-viz">Chart colours</h2>
+        <p class="muted">
+          <bdi
+            >series1 first, then the validated categorical order (direct labels or a table view are
+            required for slots 3–5).</bdi
+          >
+        </p>
+        <div class="viz-row" aria-hidden="true">
+          <span style="background: #007fa0"></span><span style="background: #eb6834"></span
+          ><span style="background: #1baf7a"></span><span style="background: #eda100"></span
+          ><span style="background: #e87ba4"></span><span style="background: #008300"></span
+          ><span style="background: #6250d6"></span><span style="background: #e34948"></span>
+        </div>
+      </section>
+    </main>
+
+    <footer><bdi>For information only — not official customs or legal advice.</bdi></footer>
+
+    <script>
+      document.getElementById("dir-toggle").addEventListener("click", () => {
+        const root = document.documentElement;
+        const rtl = root.dir !== "rtl";
+        root.dir = rtl ? "rtl" : "ltr";
+        root.lang = rtl ? "ar" : "en";
+      });
+    </script>
+  </body>
+</html>

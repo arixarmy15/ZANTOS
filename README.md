@@ -2,7 +2,7 @@
 
 A multilingual pre-shipment check for international trade documents. Exporters upload their commercial invoice, packing list and purchase order; TradeCheck extracts the fields, compares the documents with each other and reports errors and gaps, each one linked to the evidence in the document.
 
-> **Status: early development (Phase 0 — repository skeleton).** There is no hosted version and the app does not run yet. This README is a draft and will be completed in Phase 6.
+> **Status: early development (Phase 1 — design system, awaiting approval).** There is no hosted version and the app does not run yet. The design direction and tokens are in [DESIGN.md](DESIGN.md). This README is a draft and will be completed in Phase 6.
 
 ## What TradeCheck is — and is not
 
