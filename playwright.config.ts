@@ -26,7 +26,7 @@ export default defineConfig({
     { name: "desktop", use: { ...chromium, viewport: { width: 1440, height: 900 } } },
   ],
   webServer: {
-    command: `npm run build && npm run start -- --port ${port}`,
+    command: `node -e "require('fs').rmSync('.e2e-data',{recursive:true,force:true})" && npm run build && npm run start -- --port ${port}`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,

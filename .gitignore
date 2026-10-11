@@ -49,3 +49,6 @@ Thumbs.db
 
 # End-to-end test data
 /.e2e-data/
+
+# Vitest reporter output
+.vitest/

@@ -1,6 +1,7 @@
-import { Upload } from "lucide-react";
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
+import { requireLocale } from "@/i18n/require-locale";
+import { NewCheckForm } from "@/components/checks/new-check-form";
 import { PageContainer, PageHeader } from "@/components/page-header";
 import { Notice } from "@/components/ui/notice";
 import { getServerEnv, isAnthropicConfigured } from "@/lib/config/env";
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function NewCheckPage({ params }: Props) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  requireLocale(locale);
   const t = await getTranslations();
   const env = getServerEnv();
 
@@ -30,21 +31,14 @@ export default async function NewCheckPage({ params }: Props) {
           {t("permission.apiKeyMissingBody")}
         </Notice>
       )}
-      <div className="grid justify-items-start gap-1.5 rounded-sm border border-dashed border-control-border bg-paper p-5">
-        <Upload aria-hidden="true" className="size-5 text-slate" />
-        <p className="font-medium">{t("upload.dropTitle")}</p>
-        <p className="text-small text-slate">
-          {t("upload.limits", {
-            maxMb: env.UPLOAD_MAX_FILE_MB,
-            maxPages: env.UPLOAD_MAX_PAGES,
-            maxFiles: env.UPLOAD_MAX_FILES_PER_CHECK,
-          })}
-        </p>
-        <p className="text-small text-slate">
-          {t("upload.privacy", { hours: env.RETENTION_HOURS })}
-        </p>
-      </div>
-      <p className="text-slate">{t("upload.noDocuments")}</p>
+      <NewCheckForm
+        retentionHours={env.RETENTION_HOURS}
+        limits={{
+          maxMb: env.UPLOAD_MAX_FILE_MB,
+          maxPages: env.UPLOAD_MAX_PAGES,
+          maxFiles: env.UPLOAD_MAX_FILES_PER_CHECK,
+        }}
+      />
     </PageContainer>
   );
 }

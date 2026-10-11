@@ -7,3 +7,5 @@ test-results/
 package-lock.json
 /samples/
 /data/
+.vitest/
+.e2e-data/

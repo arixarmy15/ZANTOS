@@ -21,6 +21,10 @@ import { routing } from "@/i18n/routing";
 
 type Props = { children: React.ReactNode; params: Promise<{ locale: string }> };
 
+// Only the configured locales are valid. Anything else (for example a browser asking for
+// /favicon.ico, which the proxy does not handle) is a 404 before any page code runs.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
