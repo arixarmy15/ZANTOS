@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens from design/tokens.json (see DESIGN.md). Tailwind's default palette, type,
+ * radius and shadow scales are removed so only TradeCheck tokens can be used.
+ */
+@theme {
+  --color-*: initial;
+  --color-ledger: #f2f4f3;
+  --color-paper: #ffffff;
+  --color-carbon: #17212b;
+  --color-slate: #55616c;
+  --color-rule: #d5dce0;
+  --color-harbor: #0e5e6d;
+  --color-harbor-strong: #0a4955;
+  --color-harbor-tint: #e2eef0;
+  --color-evidence-wash: #dde8eb;
+  --color-control-border: #78838d;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --color-error-fg: #b42318;
+  --color-error-bg: #fdecea;
+  --color-error-border: #f0b4ae;
+  --color-error-mark: #c9372c;
+  --color-warning-fg: #8a4a00;
+  --color-warning-bg: #fff3db;
+  --color-warning-border: #edc678;
+  --color-warning-mark: #b86e00;
+  --color-info-fg: #2a5ba8;
+  --color-info-bg: #e9f0fb;
+  --color-info-border: #b6caeb;
+  --color-info-mark: #3a6cc0;
+  --color-success-fg: #1d6b36;
+  --color-success-bg: #e6f4ea;
+  --color-success-border: #a8d4b4;
+  --color-success-mark: #2b8446;
+  --color-unverified-fg: #55616c;
+  --color-unverified-bg: #eef1f3;
+  --color-unverified-border: #78838d;
+  --color-unverified-mark: #7d8891;
+
+  --color-viz-series1: #007fa0;
+  --color-viz-grid: #e4e8ea;
+  --color-viz-axis: #b9c1c7;
+
+  --font-sans:
+    "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", "Noto Sans",
+    sans-serif;
+  --font-arabic:
+    "IBM Plex Sans Arabic", "IBM Plex Sans", "Noto Sans Arabic", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --text-*: initial;
+  --text-caption: 12px;
+  --text-caption--line-height: 16px;
+  --text-small: 13px;
+  --text-small--line-height: 18px;
+  --text-body: 14px;
+  --text-body--line-height: 20px;
+  --text-reading: 16px;
+  --text-reading--line-height: 24px;
+  --text-title-sm: 15px;
+  --text-title-sm--line-height: 20px;
+  --text-title: 18px;
+  --text-title--line-height: 24px;
+  --text-heading: 22px;
+  --text-heading--line-height: 28px;
+  --text-page: 28px;
+  --text-page--line-height: 34px;
+
+  --radius-*: initial;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  --shadow-*: initial;
+  --shadow-overlay: 0 1px 2px rgba(23, 33, 43, 0.06), 0 8px 24px rgba(23, 33, 43, 0.12);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --animate-overlay-in: overlay-in var(--duration-fast) var(--ease-out);
+  --animate-dialog-in: dialog-in var(--duration-normal) var(--ease-out);
+  --animate-popover-in: popover-in var(--duration-fast) var(--ease-out);
+  --animate-bracket-draw: bracket-draw var(--duration-normal) var(--ease-out);
+  --animate-fade-in: overlay-in var(--duration-fast) var(--ease-out);
+}
+
+:root {
+  color-scheme: light;
+  --duration-instant: 80ms;
+  --duration-fast: 140ms;
+  --duration-normal: 200ms;
+  --duration-slow: 280ms;
+  --scrim: rgba(23, 33, 43, 0.48);
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+@keyframes popover-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@keyframes bracket-draw {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+/* Interactive state changes: colour only, retargetable, never `transition: all`. */
+@utility transition-control {
+  transition-property: color, background-color, border-color, box-shadow, transform;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-standard);
+}
+
+/* Press feedback for buttons only (DESIGN.md §9). */
+@utility press {
+  @media (prefers-reduced-motion: no-preference) {
+    &:active:not(:disabled) {
+      transform: scale(0.98);
+      transition-duration: var(--duration-instant);
+    }
+  }
+}
+
+@utility code {
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ledger);
+    color: var(--color-carbon);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    font-variant-numeric: tabular-nums;
+  }
+
+  html:lang(ar) body {
+    font-family: var(--font-arabic);
+    line-height: 22px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-harbor);
+    outline-offset: 2px;
+  }
+
+  /* Sticky headers must not hide the focused element (WCAG 2.4.11). */
+  html {
+    scroll-padding-block-start: 64px;
+  }
+
+  img {
+    outline: 1px solid rgba(0, 0, 0, 0.1);
+    outline-offset: -1px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+      transition-property: opacity, color, background-color, border-color !important;
+      transition-duration: 0ms !important;
+    }
+  }
+}
+
+@media print {
+  body {
+    background: var(--color-paper);
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "name": "English",
+    "direction": "ltr"
+  },
+  "metadata": {
+    "title": "TradeCheck",
+    "description": "Multilingual pre-shipment check for commercial invoices, packing lists and purchase orders."
+  },
+  "nav": {
+    "home": "TradeCheck home",
+    "main": "Main",
+    "checks": "Checks",
+    "newCheck": "New check",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "skipToContent": "Skip to content"
+  },
+  "footer": {
+    "notice": "For information only — not official customs or legal advice.",
+    "positioning": "TradeCheck is a pre-shipment check you run yourself. It does not replace a customs broker or professional advice."
+  },
+  "status": {
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Info",
+    "success": "Passed",
+    "unverified": "Could not be verified"
+  },
+  "home": {
+    "title": "Checks",
+    "emptyTitle": "No checks yet",
+    "emptyBody": "Start one by adding the documents for a shipment.",
+    "newCheck": "New check"
+  },
+  "newCheck": {
+    "title": "New check",
+    "intro": "Add the commercial invoice, packing list and purchase order for one shipment. TradeCheck reads them, compares them and lists what needs attention, with the evidence from each document."
+  },
+  "upload": {
+    "dropTitle": "Drop files here or browse",
+    "browse": "Browse files",
+    "limits": "PDF, PNG or JPG · up to {maxMb} MB per file · up to {maxPages} pages per PDF · up to {maxFiles} files per check",
+    "privacy": "Files are deleted automatically after {hours, plural, one {# hour} other {# hours}}. You can delete them sooner at any time.",
+    "noDocuments": "No documents added yet."
+  },
+  "permission": {
+    "apiKeyMissingTitle": "Document reading is not set up",
+    "apiKeyMissingBody": "The server has no ANTHROPIC_API_KEY, so documents cannot be read yet. The operator can add it as described in the README."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This page does not exist, or the check it belonged to has been deleted.",
+    "back": "Back to checks"
+  }
+}

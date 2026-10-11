@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "name": "Español",
+    "direction": "ltr"
+  },
+  "metadata": {
+    "title": "TradeCheck",
+    "description": "Comprobación multilingüe previa al envío para facturas comerciales, listas de empaque y órdenes de compra."
+  },
+  "nav": {
+    "home": "Inicio de TradeCheck",
+    "main": "Principal",
+    "checks": "Comprobaciones",
+    "newCheck": "Nueva comprobación",
+    "menu": "Menú",
+    "closeMenu": "Cerrar menú",
+    "language": "Idioma",
+    "skipToContent": "Saltar al contenido"
+  },
+  "footer": {
+    "notice": "Solo con fines informativos: no constituye asesoramiento aduanero ni legal oficial.",
+    "positioning": "TradeCheck es una comprobación previa al envío que realiza usted mismo. No sustituye a un agente de aduanas ni a un asesoramiento profesional."
+  },
+  "status": {
+    "error": "Error",
+    "warning": "Advertencia",
+    "info": "Información",
+    "success": "Superada",
+    "unverified": "No se pudo verificar"
+  },
+  "home": {
+    "title": "Comprobaciones",
+    "emptyTitle": "Aún no hay comprobaciones",
+    "emptyBody": "Empiece añadiendo los documentos de un envío.",
+    "newCheck": "Nueva comprobación"
+  },
+  "newCheck": {
+    "title": "Nueva comprobación",
+    "intro": "Añada la factura comercial, la lista de empaque y la orden de compra de un envío. TradeCheck los lee, los compara entre sí y enumera lo que requiere atención, con la evidencia de cada documento."
+  },
+  "upload": {
+    "dropTitle": "Suelte los archivos aquí o examine",
+    "browse": "Examinar archivos",
+    "limits": "PDF, PNG o JPG · hasta {maxMb} MB por archivo · hasta {maxPages} páginas por PDF · hasta {maxFiles} archivos por comprobación",
+    "privacy": "Los archivos se eliminan automáticamente tras {hours, plural, one {# hora} other {# horas}}. Puede eliminarlos antes en cualquier momento.",
+    "noDocuments": "Aún no se han añadido documentos."
+  },
+  "permission": {
+    "apiKeyMissingTitle": "La lectura de documentos no está configurada",
+    "apiKeyMissingBody": "El servidor no tiene ANTHROPIC_API_KEY, por lo que aún no se pueden leer documentos. El operador puede añadirla como se describe en el README."
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "body": "Esta página no existe o la comprobación a la que pertenecía se ha eliminado.",
+    "back": "Volver a las comprobaciones"
+  }
+}

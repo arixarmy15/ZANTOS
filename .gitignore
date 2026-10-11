@@ -46,3 +46,6 @@ Thumbs.db
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# End-to-end test data
+/.e2e-data/

@@ -1,0 +1,67 @@
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/500.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@fontsource/ibm-plex-sans-arabic/400.css";
+import "@fontsource/ibm-plex-sans-arabic/500.css";
+import "@fontsource/ibm-plex-sans-arabic/600.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "../globals.css";
+
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import type * as React from "react";
+import { Providers } from "@/components/shell/providers";
+import { SiteFooter } from "@/components/shell/site-footer";
+import { SiteHeader } from "@/components/shell/site-header";
+import { getLanguages } from "@/i18n/languages";
+import { routing } from "@/i18n/routing";
+
+type Props = { children: React.ReactNode; params: Promise<{ locale: string }> };
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: { default: t("title"), template: `%s · ${t("title")}` },
+    description: t("description"),
+  };
+}
+
+export default async function LocaleLayout({ children, params }: Props) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+
+  const languages = await getLanguages();
+  const direction = languages.find((language) => language.code === locale)?.direction ?? "ltr";
+  const t = await getTranslations("nav");
+
+  return (
+    <html lang={locale} dir={direction}>
+      <body className="flex min-h-dvh flex-col">
+        <NextIntlClientProvider>
+          <Providers dir={direction}>
+            <a
+              href="#main"
+              className="sr-only z-50 bg-paper px-3 py-2 font-medium text-harbor focus:not-sr-only focus:fixed focus:start-2 focus:top-2"
+            >
+              {t("skipToContent")}
+            </a>
+            <SiteHeader languages={languages.map(({ code, name }) => ({ code, name }))} />
+            <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
+              {children}
+            </main>
+            <SiteFooter />
+          </Providers>
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
+}

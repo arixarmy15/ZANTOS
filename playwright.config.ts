@@ -30,5 +30,7 @@ export default defineConfig({
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
+    // Isolated storage; no API key, so nothing is sent to Anthropic during tests.
+    env: { DATA_DIR: ".e2e-data", ANTHROPIC_API_KEY: "" },
   },
 });

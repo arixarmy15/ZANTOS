@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "name": "Türkçe",
+    "direction": "ltr"
+  },
+  "metadata": {
+    "title": "TradeCheck",
+    "description": "Ticari fatura, çeki listesi ve sipariş belgeleri için çok dilli sevkiyat öncesi kontrol."
+  },
+  "nav": {
+    "home": "TradeCheck ana sayfa",
+    "main": "Ana",
+    "checks": "Kontroller",
+    "newCheck": "Yeni kontrol",
+    "menu": "Menü",
+    "closeMenu": "Menüyü kapat",
+    "language": "Dil",
+    "skipToContent": "İçeriğe geç"
+  },
+  "footer": {
+    "notice": "Yalnızca bilgilendirme amaçlıdır — resmî gümrük veya hukuki danışmanlık değildir.",
+    "positioning": "TradeCheck, sevkiyattan önce kendi başınıza yaptığınız bir ön kontroldür. Gümrük müşavirinin veya profesyonel danışmanlığın yerini almaz."
+  },
+  "status": {
+    "error": "Hata",
+    "warning": "Uyarı",
+    "info": "Bilgi",
+    "success": "Geçti",
+    "unverified": "Doğrulanamadı"
+  },
+  "home": {
+    "title": "Kontroller",
+    "emptyTitle": "Henüz kontrol yok",
+    "emptyBody": "Bir sevkiyatın belgelerini ekleyerek başlayın.",
+    "newCheck": "Yeni kontrol"
+  },
+  "newCheck": {
+    "title": "Yeni kontrol",
+    "intro": "Bir sevkiyata ait ticari faturayı, çeki listesini ve sipariş belgesini ekleyin. TradeCheck bunları okur, birbiriyle karşılaştırır ve dikkat gerektiren noktaları her belgedeki kanıtıyla birlikte listeler."
+  },
+  "upload": {
+    "dropTitle": "Dosyaları buraya bırakın veya seçin",
+    "browse": "Dosya seç",
+    "limits": "PDF, PNG veya JPG · dosya başına en fazla {maxMb} MB · PDF başına en fazla {maxPages} sayfa · kontrol başına en fazla {maxFiles} dosya",
+    "privacy": "Dosyalar {hours, plural, one {# saat} other {# saat}} sonra otomatik olarak silinir. İstediğiniz zaman daha önce silebilirsiniz.",
+    "noDocuments": "Henüz belge eklenmedi."
+  },
+  "permission": {
+    "apiKeyMissingTitle": "Belge okuma ayarlanmamış",
+    "apiKeyMissingBody": "Sunucuda ANTHROPIC_API_KEY tanımlı olmadığı için belgeler henüz okunamıyor. Yönetici, README'de açıklandığı şekilde ekleyebilir."
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "body": "Bu sayfa yok ya da ait olduğu kontrol silinmiş.",
+    "back": "Kontrollere dön"
+  }
+}

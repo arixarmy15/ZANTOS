@@ -2,7 +2,7 @@
 
 A multilingual pre-shipment check for international trade documents. Exporters upload their commercial invoice, packing list and purchase order; TradeCheck extracts the fields, compares the documents with each other and reports errors and gaps, each one linked to the evidence in the document.
 
-> **Status: early development (Phase 1 — design system, awaiting approval).** There is no hosted version and the app does not run yet. The design direction and tokens are in [DESIGN.md](DESIGN.md). This README is a draft and will be completed in Phase 6.
+> **Status: early development (Phase 2 — application skeleton).** There is no hosted version and the app does not run yet. The design direction and tokens are in [DESIGN.md](DESIGN.md). This README is a draft and will be completed in Phase 6.
 
 ## What TradeCheck is — and is not
 
@@ -54,7 +54,7 @@ cp .env.example .env.local   # then set ANTHROPIC_API_KEY in .env.local
 npm run test
 ```
 
-The development server (`npm run dev`) becomes available in Phase 2.
+Run `npm run dev` and open http://localhost:3000 — you are redirected to your browser's language.
 
 ### GitHub Codespaces
 

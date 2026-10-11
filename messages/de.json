@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "name": "Deutsch",
+    "direction": "ltr"
+  },
+  "metadata": {
+    "title": "TradeCheck",
+    "description": "Mehrsprachige Prüfung vor dem Versand für Handelsrechnungen, Packlisten und Bestellungen."
+  },
+  "nav": {
+    "home": "TradeCheck – Startseite",
+    "main": "Haupt",
+    "checks": "Prüfungen",
+    "newCheck": "Neue Prüfung",
+    "menu": "Menü",
+    "closeMenu": "Menü schließen",
+    "language": "Sprache",
+    "skipToContent": "Zum Inhalt springen"
+  },
+  "footer": {
+    "notice": "Nur zur Information – keine amtliche Zoll- oder Rechtsberatung.",
+    "positioning": "TradeCheck ist eine Vorabprüfung vor dem Versand, die Sie selbst durchführen. Sie ersetzt weder einen Zollagenten noch eine fachliche Beratung."
+  },
+  "status": {
+    "error": "Fehler",
+    "warning": "Warnung",
+    "info": "Hinweis",
+    "success": "Bestanden",
+    "unverified": "Nicht überprüfbar"
+  },
+  "home": {
+    "title": "Prüfungen",
+    "emptyTitle": "Noch keine Prüfungen",
+    "emptyBody": "Beginnen Sie, indem Sie die Dokumente einer Sendung hinzufügen.",
+    "newCheck": "Neue Prüfung"
+  },
+  "newCheck": {
+    "title": "Neue Prüfung",
+    "intro": "Fügen Sie Handelsrechnung, Packliste und Bestellung einer Sendung hinzu. TradeCheck liest sie, vergleicht sie miteinander und listet auf, was Aufmerksamkeit braucht – mit dem Beleg aus jedem Dokument."
+  },
+  "upload": {
+    "dropTitle": "Dateien hier ablegen oder auswählen",
+    "browse": "Dateien auswählen",
+    "limits": "PDF, PNG oder JPG · bis zu {maxMb} MB pro Datei · bis zu {maxPages} Seiten pro PDF · bis zu {maxFiles} Dateien pro Prüfung",
+    "privacy": "Dateien werden nach {hours, plural, one {# Stunde} other {# Stunden}} automatisch gelöscht. Sie können sie jederzeit früher löschen.",
+    "noDocuments": "Noch keine Dokumente hinzugefügt."
+  },
+  "permission": {
+    "apiKeyMissingTitle": "Das Lesen von Dokumenten ist nicht eingerichtet",
+    "apiKeyMissingBody": "Auf dem Server ist kein ANTHROPIC_API_KEY hinterlegt, daher können noch keine Dokumente gelesen werden. Der Betreiber kann ihn wie in der README beschrieben hinzufügen."
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "body": "Diese Seite existiert nicht, oder die zugehörige Prüfung wurde gelöscht.",
+    "back": "Zurück zu den Prüfungen"
+  }
+}

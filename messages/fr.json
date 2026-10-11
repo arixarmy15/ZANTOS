@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "name": "Français",
+    "direction": "ltr"
+  },
+  "metadata": {
+    "title": "TradeCheck",
+    "description": "Vérification multilingue avant expédition pour factures commerciales, listes de colisage et bons de commande."
+  },
+  "nav": {
+    "home": "Accueil TradeCheck",
+    "main": "Principale",
+    "checks": "Vérifications",
+    "newCheck": "Nouvelle vérification",
+    "menu": "Menu",
+    "closeMenu": "Fermer le menu",
+    "language": "Langue",
+    "skipToContent": "Aller au contenu"
+  },
+  "footer": {
+    "notice": "À titre informatif uniquement — ne constitue pas un conseil douanier ou juridique officiel.",
+    "positioning": "TradeCheck est une vérification avant expédition que vous effectuez vous-même. Il ne remplace ni un commissionnaire en douane ni un conseil professionnel."
+  },
+  "status": {
+    "error": "Erreur",
+    "warning": "Avertissement",
+    "info": "Information",
+    "success": "Réussi",
+    "unverified": "Vérification impossible"
+  },
+  "home": {
+    "title": "Vérifications",
+    "emptyTitle": "Aucune vérification pour l'instant",
+    "emptyBody": "Commencez par ajouter les documents d'une expédition.",
+    "newCheck": "Nouvelle vérification"
+  },
+  "newCheck": {
+    "title": "Nouvelle vérification",
+    "intro": "Ajoutez la facture commerciale, la liste de colisage et le bon de commande d'une expédition. TradeCheck les lit, les compare entre eux et liste les points qui demandent votre attention, avec la preuve tirée de chaque document."
+  },
+  "upload": {
+    "dropTitle": "Déposez les fichiers ici ou parcourez",
+    "browse": "Parcourir les fichiers",
+    "limits": "PDF, PNG ou JPG · jusqu'à {maxMb} Mo par fichier · jusqu'à {maxPages} pages par PDF · jusqu'à {maxFiles} fichiers par vérification",
+    "privacy": "Les fichiers sont supprimés automatiquement après {hours, plural, one {# heure} other {# heures}}. Vous pouvez les supprimer plus tôt à tout moment.",
+    "noDocuments": "Aucun document ajouté pour l'instant."
+  },
+  "permission": {
+    "apiKeyMissingTitle": "La lecture des documents n'est pas configurée",
+    "apiKeyMissingBody": "Le serveur n'a pas de ANTHROPIC_API_KEY ; les documents ne peuvent donc pas encore être lus. L'opérateur peut l'ajouter comme indiqué dans le README."
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "body": "Cette page n'existe pas, ou la vérification à laquelle elle appartenait a été supprimée.",
+    "back": "Retour aux vérifications"
+  }
+}
