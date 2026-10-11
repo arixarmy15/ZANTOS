@@ -45,7 +45,6 @@ export async function POST(_request: Request, { params }: Context) {
       documentType: extraction.documentType,
       documentLanguage: extraction.documentLanguage,
     });
-    await storage.clearCached(checkId, "");
     return NextResponse.json({ status: "extracted", usage });
   } catch (caught) {
     const error: AiError = toAiError(caught);

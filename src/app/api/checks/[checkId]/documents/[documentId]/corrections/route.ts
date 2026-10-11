@@ -42,7 +42,6 @@ export async function PUT(request: Request, { params }: Context) {
     }
     await storage.setCorrection(documentId, body.data.path, normalizedValue);
   }
-  // Findings and AI texts depend on the values; they are recomputed on the next view.
-  await storage.clearCached(checkId, "");
+  // Findings are recomputed on the next view; AI results are cached by content hash.
   return new NextResponse(null, { status: 204 });
 }

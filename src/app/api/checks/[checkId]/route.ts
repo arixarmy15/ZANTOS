@@ -25,7 +25,6 @@ export async function PATCH(request: Request, { params }: Context) {
     tolerance: body.data.tolerance,
     name: body.data.name === undefined ? undefined : body.data.name || null,
   });
-  await storage.clearCached(checkId, "");
   return new NextResponse(null, { status: 204 });
 }
 

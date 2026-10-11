@@ -98,9 +98,20 @@ Translations other than English are **machine-generated drafts and need human re
 
 The interface language and the document language are independent: documents can be in any language Claude can read.
 
-## Rule packs (planned)
+## Checks
 
-Country-specific rules will live in `/rules/<ISO 3166-1 alpha-2 code>/`. The folder structure and interface will be prepared in Phase 4 but left empty; a rule may only be added together with a verifiable source. A step-by-step guide will be added here.
+All arithmetic and rule-based checks are deterministic code (`src/lib/validation/`), using exact decimal arithmetic. Claude is asked only whether two differently written names or goods descriptions mean the same thing; those answers are labelled "AI-assisted", cached by content hash, and a missing or low-confidence answer is shown as "could not be verified".
+
+| Category         | Checks                                                                                                                                                                                                          |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Arithmetic       | quantity × unit price = line total; lines add up to the document total (configurable tolerance); line quantities add up to the total quantity; net ≤ gross weight                                               |
+| Across documents | total quantity, packages, gross and net weight (unit-converted), order reference, currency, Incoterms® rule and place, origin, destination, exporter, importer, goods descriptions, HS codes (first six digits) |
+| Formats          | ISO 4217 currency, ISO 3166-1 country, Incoterms® 2020, HS code format (never the classification), IBAN check digits, readable values, purchase order dated first                                               |
+| Completeness     | expected fields per document type, missing or unread documents, a general reminder to check the destination country's rules                                                                                     |
+
+## Rule packs
+
+Country-specific rules live in `/rules/<ISO 3166-1 alpha-2 code>/` and run when a document names that country as its destination. The interface and registry exist, but **no pack ships**: a rule may only be added together with the official source it implements. See [`rules/README.md`](rules/README.md) for the step-by-step guide.
 
 ## Roadmap
 

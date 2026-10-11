@@ -17,7 +17,6 @@ export async function PATCH(request: Request, { params }: Context) {
   if (!body.success) return errorResponse("invalid_request", 400);
   const storage = await getStorage();
   await storage.updateDocument(documentId, { documentType: body.data.documentType });
-  await storage.clearCached(checkId, "");
   return new NextResponse(null, { status: 204 });
 }
 
@@ -27,6 +26,5 @@ export async function DELETE(_request: Request, { params }: Context) {
   if ("response" in found) return found.response;
   const storage = await getStorage();
   await storage.deleteDocument(checkId, documentId);
-  await storage.clearCached(checkId, "");
   return new NextResponse(null, { status: 204 });
 }
