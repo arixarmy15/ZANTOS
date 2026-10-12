@@ -1,0 +1,55 @@
+{
+  "contract": "Tickline v3 \"Notebook Tabs\": a shipment file as a binder. Purpose: let operations and accounting staff check one shipment's invoice, packing list and purchase order against each other and see each problem on its page. Audience: exporters, forwarders' documentation teams and customs brokers' back offices, on office monitors and phones. First scan: what disagrees, in which document, on which line. Tone: calm, organised, tactile. Memorable detail: the binder sheet with coloured document tabs and punched margin, where selecting a finding marks its evidence in both documents. Constraints: WCAG 2.2 AA, six languages including Arabic (RTL), no fake data, Next.js + Tailwind.",
+  "targetViewports": ["390x844", "834x1112", "1440x900"],
+  "accessibility": {
+    "status": "pass",
+    "evidence": "axe (WCAG 2.2 AA tags) passes on every page in six languages at all three viewports (e2e/shell.spec.ts, e2e/results.spec.ts, e2e/check-flow.spec.ts); contrast pairs including tabs and charcoal bands pass in test/design-tokens.test.ts; focus ring switches to the butter accent on charcoal; status always has icon and label."
+  },
+  "responsive": {
+    "status": "pass",
+    "evidence": "e2e/mobile.spec.ts sweeps every screen at 320 and 390 px for sideways scrolling, 44 px touch targets and 16 px form text; the two-panel hero stacks below 1024 px; screenshots at 390x844, 834x1112 and 1440x900 inspected."
+  },
+  "contentStates": {
+    "loading": {
+      "status": "pass",
+      "evidence": "Document reading shows 'Reading…' per document and the viewer reserves an A4 frame while a PDF loads (check page screenshots; e2e/screenshots.spec.ts captures the loading state)."
+    },
+    "empty": {
+      "status": "pass",
+      "evidence": "Check list and documents show one line explaining what is missing and a next action (Start a check / Add documents); covered by e2e/screenshots.spec.ts empty state."
+    },
+    "error": {
+      "status": "pass",
+      "evidence": "Rejected uploads name the reason next to the file and keep the rest (e2e/check-flow.spec.ts, e2e/mobile.spec.ts 'files selected')."
+    },
+    "partial": {
+      "status": "pass",
+      "evidence": "Unread documents and comparisons waiting for AI are shown as 'Could not be verified' with a notice; visible in check-390x844.png and check-1440x900.png."
+    },
+    "success": {
+      "status": "pass",
+      "evidence": "Findings summary, rule list ('Checks that ran') and report; e2e/results.spec.ts."
+    },
+    "permission": {
+      "status": "pass",
+      "evidence": "Without a configured AI provider, reading is disabled with 'Document reading is not set up' and a pointer to the README; visible in check-1440x900.png."
+    }
+  },
+  "renderedEvidence": [
+    {
+      "viewport": "390x844",
+      "artifact": "overview-390x844.png",
+      "observation": "Charcoal panel with Bodoni title, cobalt primary action and ruled lines; binder sheet below on the desk with yellow and mint tabs; no sideways scroll."
+    },
+    {
+      "viewport": "834x1112",
+      "artifact": "overview-834x1112.png",
+      "observation": "Hero stacks: title spans the width on charcoal, binder sheet full width below; tabs, punched margin and evidence marks aligned."
+    },
+    {
+      "viewport": "1440x900",
+      "artifact": "overview-1440x900.png",
+      "observation": "Two-panel split: charcoal headline panel and desk panel with the binder sheet; F1 selected marks packages 12 and 14 in both documents."
+    }
+  ]
+}

@@ -1,5 +1,8 @@
 "use client";
 
+import { cn } from "@/lib/utils";
+import { documentTab } from "./document-tab";
+
 import { ExternalLink, FileText, RotateCw, Trash2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useId, useState } from "react";
@@ -124,7 +127,18 @@ export function DocumentsPanel({
             const isReading = reading.has(doc.id) || doc.status === "extracting";
             const status = isReading ? "extracting" : doc.status;
             return (
-              <li key={doc.id} className="grid gap-3 px-4 py-3 md:grid-cols-[minmax(0,1fr)_auto]">
+              <li
+                key={doc.id}
+                className="relative grid gap-3 px-4 py-3 ps-6 md:grid-cols-[minmax(0,1fr)_auto]"
+              >
+                {/* The document type's binder tab along the row's start edge. */}
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    "absolute inset-y-3 start-0 w-1.5 rounded-e-full",
+                    documentTab(doc.documentType),
+                  )}
+                />
                 <div className="grid min-w-0 gap-1">
                   <div className="flex min-w-0 items-center gap-2">
                     <FileText aria-hidden="true" className="size-4 shrink-0 text-slate" />

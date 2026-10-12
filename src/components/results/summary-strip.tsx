@@ -24,9 +24,7 @@ export function SummaryStrip({ summary }: { summary: CheckSummary }) {
               <Icon aria-hidden="true" className="size-4 shrink-0" />
               {t(`counts.${status}`)}
             </dt>
-            <dd className="text-page font-semibold tabular-nums text-carbon [font-stretch:112%]">
-              {count}
-            </dd>
+            <dd className="text-page font-semibold tabular-nums text-carbon">{count}</dd>
           </div>
         );
       })}

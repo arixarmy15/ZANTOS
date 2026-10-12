@@ -1,9 +1,10 @@
-import "@fontsource-variable/archivo/wdth.css";
+import "@fontsource-variable/bodoni-moda/opsz.css";
+import "@fontsource-variable/dm-sans/opsz.css";
 import "@fontsource/ibm-plex-sans-arabic/400.css";
 import "@fontsource/ibm-plex-sans-arabic/500.css";
 import "@fontsource/ibm-plex-sans-arabic/600.css";
-import "@fontsource/geist-mono/400.css";
-import "@fontsource/geist-mono/500.css";
+import "@fontsource/dm-mono/400.css";
+import "@fontsource/dm-mono/500.css";
 import "../globals.css";
 
 import type { Metadata, Viewport } from "next";

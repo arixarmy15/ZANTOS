@@ -11,6 +11,33 @@
 `dataviz`, and `brand-guidelines` (structure only — see [§3](#3-brand)). `liquid-glass-design` was
 reviewed and deliberately not applied — see [§12](#12-deliberately-not-used).
 
+**Current design: v3 "Notebook Tabs" — see [§18](#18-redesign-v3-notebook-tabs-october-2026).**
+Where §18 gives a value, it replaces the one in the earlier sections and in §17.
+
+## 0. Skills behind the current design (v3)
+
+All from the ECC skill collection in the owner's Drive (`tasarım skill/ECC-main/skills/`), read in
+full before use. One was reviewed and left out on purpose.
+
+| #   | Skill                                  | What it decided in v3                                                                                                                                                                                                       |
+| --- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | `frontend-slides` → `STYLE_PRESETS.md` | The direction: **Notebook Tabs** (cream paper on a warm desk, coloured binder tabs, punched margin) combined with the **Electric Studio** two-panel split for the overview hero. Chosen to differ from v1, v2 and "Signal". |
+| 2   | `frontend-design-direction`            | The design contract, the six content states and the finish gate. Its `check-evidence` script is in the repo (`scripts/design/check-evidence.mjs`, `npm run design:evidence`) with the record in `design/evidence/v3/`.      |
+| 3   | `design-system`                        | Tokens rebuilt in `design/tokens.json` and the `@theme` block, contrast pairs extended to the tabs and charcoal bands, and its "AI slop" checklist (§18).                                                                   |
+| 4   | `gan-style-harness`                    | The four-criterion rubric used to score v2 against v3 from screenshots (§18); threshold 7.0.                                                                                                                                |
+| 5   | `make-interfaces-feel-better`          | Press scale 0.96, no `transition: all`, 44 px targets, tabular numbers, balanced heading wraps, concentric radii (sheet 6 → tab 3).                                                                                         |
+| 6   | `motion-foundations`                   | Duration tokens 80 / 180 / 350 / 600 ms with one ease-out curve; only `transform` and `opacity` animate; reduced motion removes movement.                                                                                   |
+| 7   | `motion-patterns`                      | The hero enters as a stagger at 80 ms steps (title, lead, actions, facts, then the binder sheet at 320 ms) — inside the 50–100 ms rule.                                                                                     |
+| 8   | `motion-advanced`                      | The evidence bracket draws in (`scaleY` from the top) when a finding is selected; nothing loops.                                                                                                                            |
+| 9   | `accessibility`                        | WCAG 2.2 AA: contrast of every new pair, target size, focus visible on charcoal (butter ring), status never by colour alone — tabs are categorical, never a status.                                                         |
+| 10  | `frontend-a11y`                        | Landmarks and skip link kept; punched holes and tab stripes are `aria-hidden`; evidence marks keep their screen-reader text.                                                                                                |
+| 11  | `brand-voice`                          | Copy unchanged in tone: direct, figures and mechanisms, no superlatives. OG image facts shortened to fit one line.                                                                                                          |
+| 12  | `seo`                                  | Open Graph / Twitter image regenerated in the new look from the product's own figures (rule count, language count); titles, descriptions, JSON-LD unchanged and still tested.                                               |
+| 13  | `liquid-glass-design`                  | **Not used.** It is an iOS 26 SwiftUI/UIKit material; a translucent glass layer would also fight the paper-and-ink idea.                                                                                                    |
+
+The Drive's "taste" skills were checked again; they cover music-video direction and do not apply
+to an interface.
+
 ---
 
 ## 1. Design direction
@@ -571,3 +598,60 @@ The rule list became one ruled "manifest" sheet instead of four identical cards.
 **Verified:** contrast pairs in `design/tokens.json` (now including the deep-water pairs), axe
 WCAG 2.2 AA on every page in six languages, the phone sweep at 320 and 390 px, and screenshots
 at 390 and 1440 px in English and Arabic.
+
+## 18. Redesign v3: "Notebook Tabs" (October 2026)
+
+The owner asked for a new, clearly different design built from the Drive design skills (§0). It
+supersedes §17's colour, type, radius, elevation and hero; status colours, accessibility, RTL and
+the evidence model are unchanged.
+
+**Idea.** A shipment file is a binder: the invoice, the packing list and the order are sheets with
+coloured tabs, punched along the margin, lying on a desk. Checking them is reading the sheets
+side by side and marking what disagrees. The interface uses that literally in one place (the
+overview's binder sheet) and quietly everywhere else (tab colours on the documents).
+
+| Token        | Value                                                                          | Use                                                                        |
+| ------------ | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| Desk         | `#ECE8E0`                                                                      | App background (`ledger`)                                                  |
+| Paper        | `#FFFDF8`                                                                      | Surfaces and sheets                                                        |
+| Charcoal ink | `#23252B`                                                                      | Text, and the hero and call-to-action panels (`deep`)                      |
+| Slate        | `#5A5D66`                                                                      | Secondary text, mark rules                                                 |
+| Rule         | `#DDD6C8`                                                                      | Hairlines between rows                                                     |
+| Cobalt       | `#2B45C4`                                                                      | Action and linkage: buttons, links, focus, evidence brackets, chart series |
+| Butter       | `#F6E3A1`                                                                      | Figures, focus ring and links on charcoal; the invoice tab                 |
+| Tabs         | `#F6E3A1` invoice · `#BFE3CF` packing list · `#D6CCF2` order · `#F3C9C9` other | Document type, always with the type's name                                 |
+
+- **Type:** Bodoni Moda (variable, optical size) for `h1` and section headings only — the serif
+  sits where the binder has its printed titles. DM Sans for the interface, DM Mono for codes and
+  values. Arabic headings stay in IBM Plex Sans Arabic with no letter-spacing. Bodoni was tried
+  at body sizes and rejected: its hairlines break up below ~24 px.
+- **Shape:** paper corners — 3 px tags, 6 px sheets and panels, 10 px menus, 12 px dialogs. Warm
+  paper shadows (brown-tinted, short) instead of v2's navy elevation.
+- **Overview hero:** a two-panel split. Left: charcoal with faint ruled lines like a notebook
+  page, the headline, lead, actions and figures. Right: the desk with the binder sheet —
+  punched margin, yellow and mint tabs on the two documents, and the interactive evidence.
+- **App screens:** each document in the check gets a stripe in its type's tab colour; panels and
+  the summary strip use the paper radius and shadow; the summary numbers stay in the sans.
+- **Brand mark:** the two rules in slate and the tick in cobalt; icons and the manifest
+  background follow the desk colour.
+
+**Slop check** (`design-system`): no gradient blobs, no glass, no purple-blue gradient, no neon on
+black, no identical icon-card grid, no all-caps eyebrows, no emoji, one accent colour for
+action. Cream and serif is a known tell; here it is used deliberately and limited to headings, and
+the tabs, punched margin and charcoal panel keep it from reading as a generic "editorial" theme.
+
+**Scores** (`gan-style-harness`; weights Design 0.3, Originality 0.2, Craft 0.3, Functionality 0.2;
+pass ≥ 7.0). A self-evaluation from the screenshots in `design/evidence/v3/` and the v2
+screenshots, not an independent review:
+
+| Criterion     | v2 "Deep water" | v3 "Notebook Tabs" | Note                                                            |
+| ------------- | --------------- | ------------------ | --------------------------------------------------------------- |
+| Design        | 7.0             | 8.0                | One idea carried from hero to document list                     |
+| Originality   | 6.0             | 8.0                | Binder tabs and punched margin come from the subject            |
+| Craft         | 7.0             | 7.5                | Aligned tabs and evidence marks; Bodoni limited to large sizes  |
+| Functionality | 8.0             | 8.0                | Same flows, tests and states; tab colours add document identity |
+| **Weighted**  | **7.0**         | **7.85**           | Passes; iteration stopped                                       |
+
+**Verified:** `npm run check` (contrast pairs in `design/tokens.json` include the tabs and
+charcoal), `npm run design:evidence`, the Playwright suite with axe (WCAG 2.2 AA) at 390, 834 and
+1440 px in six languages, and the screenshots in `design/evidence/v3/`.

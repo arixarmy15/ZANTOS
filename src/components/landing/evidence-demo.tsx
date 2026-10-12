@@ -77,23 +77,29 @@ export function EvidenceDemo() {
 
   return (
     <figure aria-labelledby={captionId} className="grid min-w-0 gap-6">
-      <div className="relative">
-        {/* Two carbon copies behind the top sheet: the stack of paperwork being compared. */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 translate-y-3 rotate-[2deg] rounded-xl bg-paper/10 ring-1 ring-on-deep/15 motion-safe:animate-copy-fan"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 translate-y-1.5 -rotate-[1.25deg] rounded-xl bg-paper/20 ring-1 ring-on-deep/20 motion-safe:animate-copy-fan"
-        />
-        <div className="relative overflow-hidden rounded-xl bg-paper text-carbon shadow-raised ring-1 ring-carbon/10 motion-safe:animate-sheet-rise">
-          <p className="flex items-center gap-2 border-b border-rule bg-ledger px-4 py-2.5 text-small font-semibold">
-            <span aria-hidden="true" className="size-2 rounded-full bg-harbor" />
+      <div className="relative motion-safe:animate-sheet-rise [animation-delay:320ms]">
+        {/*
+         * A binder sheet: punched holes in the margin and one coloured tab per document type,
+         * the same tab colours the check page uses for the documents.
+         */}
+        <div className="relative overflow-hidden rounded-lg bg-paper text-carbon shadow-raised ring-1 ring-carbon/10">
+          <p className="flex items-center justify-between gap-3 border-b border-rule px-4 py-2.5 ps-10 text-small font-semibold">
             {t("label")}
           </p>
-          <div className="grid grid-cols-2 divide-x divide-rule rtl:divide-x-reverse">
+          <div
+            aria-hidden="true"
+            className="absolute inset-y-0 start-0 grid w-7 content-evenly justify-items-center border-e border-dashed border-rule"
+          >
+            {[0, 1, 2].map((hole) => (
+              <span
+                key={hole}
+                className="size-3 rounded-full bg-ledger shadow-[inset_0_1px_2px_rgba(35,37,43,0.35)]"
+              />
+            ))}
+          </div>
+          <div className="ms-7 grid grid-cols-2 divide-x divide-rule rtl:divide-x-reverse">
             <DocumentSheet
+              tab="bg-tab-invoice"
               title={t("invoice")}
               number="INV-2026-0147"
               file={INVOICE_FILE}
@@ -101,6 +107,7 @@ export function EvidenceDemo() {
               selected={selected}
             />
             <DocumentSheet
+              tab="bg-tab-packing"
               title={t("packingList")}
               number="PL-2026-0147"
               file={PACKING_FILE}
@@ -108,7 +115,10 @@ export function EvidenceDemo() {
               selected={selected}
             />
           </div>
-          <ul aria-label={t("findingsLabel")} className="divide-y divide-rule border-t border-rule">
+          <ul
+            aria-label={t("findingsLabel")}
+            className="ms-7 divide-y divide-rule border-t border-rule"
+          >
             {findings.map((finding) => (
               <li key={finding.ref}>
                 <button
@@ -130,7 +140,7 @@ export function EvidenceDemo() {
           </ul>
         </div>
       </div>
-      <figcaption id={captionId} className="text-small text-on-deep-muted">
+      <figcaption id={captionId} className="text-small text-slate">
         {t("caption")}
       </figcaption>
     </figure>
@@ -138,6 +148,7 @@ export function EvidenceDemo() {
 }
 
 function DocumentSheet({
+  tab,
   title,
   number,
   file,
@@ -149,13 +160,16 @@ function DocumentSheet({
   file: string;
   fields: Field[];
   selected: Ref;
+  /** Background class of the document type's binder tab. */
+  tab: string;
 }) {
   const t = useTranslations("landing.demo");
   return (
     <div className="flex min-w-0 flex-col">
-      <div className="grid gap-0.5 border-b border-rule px-3 py-2">
+      {/* The header is the document's binder tab, in its type colour. */}
+      <div className={cn("grid gap-0.5 border-b border-carbon/10 px-3 py-2", tab)}>
         <p className="truncate text-small font-semibold">{title}</p>
-        <p className="code truncate text-caption text-slate">{number}</p>
+        <p className="code truncate text-caption text-carbon/80">{number}</p>
       </div>
       <dl>
         {fields.map((field) => {

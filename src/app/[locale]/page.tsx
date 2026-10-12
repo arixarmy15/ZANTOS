@@ -140,24 +140,24 @@ export default async function OverviewPage({ params }: Props) {
       />
 
       {/*
-       * Hero on deep water: what it is, the next step, and the product doing its job. The
-       * chart grid and the one glow behind the document stack are the page's only decoration.
+       * Hero as a two-panel split: the headline on a charcoal panel, the product on the desk
+       * beside it as a binder sheet. One load sequence, 80 ms apart, is the page's only
+       * unprompted motion.
        */}
-      <section
-        aria-labelledby="hero-heading"
-        className="on-deep relative isolate overflow-hidden bg-deep text-on-deep"
-      >
-        <div aria-hidden="true" className="hero-chart absolute inset-0 -z-10" />
-        <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-page pt-12 pb-16 md:pt-20 md:pb-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
-          <div className="grid content-start gap-7">
+      <section aria-labelledby="hero-heading" className="grid border-b border-rule lg:grid-cols-2">
+        <div className="on-deep relative isolate flex bg-deep text-on-deep lg:justify-end">
+          <div aria-hidden="true" className="hero-chart absolute inset-0 -z-10" />
+          <div className="grid w-full content-center gap-7 px-page pt-12 pb-14 md:pt-20 md:pb-20 lg:max-w-[600px] lg:pe-14">
             <h1
               id="hero-heading"
-              className="text-display-sm font-semibold text-paper md:text-display"
+              className="text-display-sm text-paper motion-safe:animate-sheet-rise md:text-display"
             >
               {t("hero.title")}
             </h1>
-            <p className="max-w-[56ch] text-lead text-on-deep-muted">{t("hero.lead")}</p>
-            <div className="flex flex-wrap gap-3">
+            <p className="max-w-[52ch] text-lead text-on-deep-muted motion-safe:animate-sheet-rise motion-safe:[animation-delay:80ms]">
+              {t("hero.lead")}
+            </p>
+            <div className="flex flex-wrap gap-3 motion-safe:animate-sheet-rise motion-safe:[animation-delay:160ms]">
               {startCheck(t("hero.start"))}
               <Button asChild variant="on-deep" size="lg">
                 <a href="#how-it-works">{t("hero.how")}</a>
@@ -165,14 +165,18 @@ export default async function OverviewPage({ params }: Props) {
             </div>
             <ul
               aria-label={t("hero.factsLabel")}
-              className="grid gap-2 border-t border-deep-rule pt-5 text-small text-on-deep-muted sm:grid-cols-3 sm:gap-4"
+              className="grid gap-2 border-t border-deep-rule pt-5 text-small text-on-deep-muted motion-safe:animate-sheet-rise motion-safe:[animation-delay:240ms] sm:grid-cols-3 sm:gap-4"
             >
               <Fact icon={ListChecks}>{t("hero.rules", { count: ruleCount })}</Fact>
               <Fact icon={Clock}>{t("hero.retention", { hours })}</Fact>
               <Fact icon={Languages}>{t("hero.languages", { count: languages.length })}</Fact>
             </ul>
           </div>
-          <EvidenceDemo />
+        </div>
+        <div className="flex bg-ledger">
+          <div className="grid w-full content-center px-page py-12 md:py-20 lg:max-w-[640px] lg:ps-14">
+            <EvidenceDemo />
+          </div>
         </div>
       </section>
 
@@ -195,7 +199,7 @@ export default async function OverviewPage({ params }: Props) {
           </div>
           <aside aria-label={t("sources")} className="grid content-start gap-4">
             <figure className="surface grid gap-3 border-s-4 border-s-harbor p-6">
-              <p className="text-display-sm font-semibold text-harbor tabular-nums [font-stretch:112%]">
+              <p className="text-display-sm font-semibold text-harbor tabular-nums">
                 <bdi dir="ltr">{t("problem.statValue")}</bdi>
               </p>
               <p className="text-reading">{t("problem.statText")}</p>
@@ -357,7 +361,7 @@ export default async function OverviewPage({ params }: Props) {
       >
         <div className="mx-auto grid max-w-[1200px] gap-px bg-rule px-0 md:grid-cols-2">
           <div className="grid content-start gap-5 bg-paper px-page py-16 md:py-24 md:pe-12">
-            <h2 className="text-page font-semibold md:text-display-sm">{t("ai.title")}</h2>
+            <h2 className="font-display text-page md:text-display-sm">{t("ai.title")}</h2>
             <p className="text-reading text-slate">{t("ai.body")}</p>
             <ul className="grid gap-3">
               <Point icon={Braces}>{t("ai.items.schema")}</Point>
@@ -366,7 +370,7 @@ export default async function OverviewPage({ params }: Props) {
             </ul>
           </div>
           <div className="grid content-start gap-5 bg-paper px-page py-16 md:py-24 md:ps-12">
-            <h2 className="text-page font-semibold md:text-display-sm">{t("privacy.title")}</h2>
+            <h2 className="font-display text-page md:text-display-sm">{t("privacy.title")}</h2>
             <ul className="grid gap-3">
               <Point icon={Server}>{t("privacy.items.local")}</Point>
               <Point icon={Trash2}>{t("privacy.items.retention", { hours })}</Point>
@@ -435,7 +439,7 @@ export default async function OverviewPage({ params }: Props) {
         <div aria-hidden="true" className="hero-chart absolute inset-0 -z-10 opacity-60" />
         <div className="mx-auto grid max-w-[1200px] items-center gap-8 px-page py-16 md:grid-cols-[minmax(0,1fr)_auto] md:py-24">
           <div className="grid gap-6">
-            <h2 id="cta-heading" className="text-page font-semibold text-paper md:text-display-sm">
+            <h2 id="cta-heading" className="font-display text-page text-paper md:text-display-sm">
               {t("cta.title")}
             </h2>
             <p className="max-w-[56ch] text-lead text-on-deep-muted">{t("cta.body")}</p>

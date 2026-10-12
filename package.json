@@ -22,12 +22,14 @@
     "check": "npm run lint && npm run typecheck && npm run format:check && npm run test && npm run check:secrets",
     "test:live": "AI_LIVE_TEST=1 node --env-file-if-exists=.env.local node_modules/vitest/vitest.mjs run test/live",
     "ai:models": "node --env-file-if-exists=.env.local scripts/list-models.mjs",
-    "og:image": "node scripts/generate-og-image.mjs"
+    "og:image": "node scripts/generate-og-image.mjs",
+    "design:evidence": "node scripts/design/check-evidence.mjs design/evidence/v3/report.json"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.133.0",
-    "@fontsource-variable/archivo": "^5.3.0",
-    "@fontsource/geist-mono": "^5.3.0",
+    "@fontsource-variable/bodoni-moda": "^5.3.0",
+    "@fontsource-variable/dm-sans": "^5.3.0",
+    "@fontsource/dm-mono": "^5.3.0",
     "@fontsource/ibm-plex-mono": "^5.3.0",
     "@fontsource/ibm-plex-sans": "^5.3.0",
     "@fontsource/ibm-plex-sans-arabic": "^5.3.0",

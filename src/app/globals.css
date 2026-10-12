@@ -6,26 +6,32 @@
  */
 @theme {
   --color-*: initial;
-  /* "Deep water and signal": harbour fog, deep-water navy ink, teal action, signal orange. */
-  --color-ledger: #eef2f6;
-  --color-paper: #ffffff;
-  --color-carbon: #0e2a47;
-  --color-slate: #4a5b70;
-  --color-rule: #d9e1ea;
-  --color-harbor: #0f766e;
-  --color-harbor-strong: #115e59;
-  --color-harbor-tint: #e3f4f1;
-  --color-evidence-wash: #cfede7;
-  --color-control-border: #7d8a9b;
-  /* Deep-water bands (overview hero, call to action) and the light used on them only. */
-  --color-deep: #0e2a47;
-  --color-deep-raised: #16365a;
-  --color-deep-rule: #2a4a70;
-  --color-on-deep: #eaf1f8;
-  --color-on-deep-muted: #a9bbd0;
-  --color-glow: #5eead4;
-  /* Signal orange: decorative marks on deep water only, never text on light, never a status. */
-  --color-signal: #ff7a1a;
+  /*
+   * v3 "Notebook Tabs": a shipment file as a binder. A warm desk, cream paper sheets in
+   * charcoal ink, cobalt for action and linkage, and one pastel tab per document type.
+   */
+  --color-ledger: #ece8e0;
+  --color-paper: #fffdf8;
+  --color-carbon: #23252b;
+  --color-slate: #5a5d66;
+  --color-rule: #ddd6c8;
+  --color-harbor: #2b45c4;
+  --color-harbor-strong: #1f339a;
+  --color-harbor-tint: #e7ebfb;
+  --color-evidence-wash: #dce3fb;
+  --color-control-border: #8a8476;
+  /* Charcoal bands (overview hero, call to action) and the light used on them. */
+  --color-deep: #23252b;
+  --color-deep-raised: #30333b;
+  --color-deep-rule: #464a54;
+  --color-on-deep: #f6f2ea;
+  --color-on-deep-muted: #bdb6a8;
+  --color-glow: #f6e3a1;
+  /* Binder tabs, one per document type. Categorical, never a status. */
+  --color-tab-invoice: #f6e3a1;
+  --color-tab-packing: #bfe3cf;
+  --color-tab-order: #d6ccf2;
+  --color-tab-other: #f3c9c9;
   --color-transparent: transparent;
   --color-current: currentColor;
 
@@ -37,10 +43,10 @@
   --color-warning-bg: #fff3db;
   --color-warning-border: #edc678;
   --color-warning-mark: #b86e00;
-  --color-info-fg: #2a5ba8;
-  --color-info-bg: #e9f0fb;
-  --color-info-border: #b6caeb;
-  --color-info-mark: #3a6cc0;
+  --color-info-fg: #1d6a84;
+  --color-info-bg: #e2f1f6;
+  --color-info-border: #a9d3e0;
+  --color-info-mark: #2a7f9b;
   --color-success-fg: #1d6b36;
   --color-success-bg: #e6f4ea;
   --color-success-border: #a8d4b4;
@@ -50,16 +56,18 @@
   --color-unverified-border: #78838d;
   --color-unverified-mark: #7d8891;
 
-  --color-viz-series1: #007fa0;
+  --color-viz-series1: #2b45c4;
   --color-viz-grid: #e4e8ea;
   --color-viz-axis: #b9c1c7;
 
   --font-sans:
-    "Archivo Variable", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", "Noto Sans",
+    "DM Sans Variable", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", "Noto Sans",
     sans-serif;
+  /* Display serif for h1 and h2 only; Arabic headings stay in Plex Sans Arabic. */
+  --font-display: "Bodoni Moda Variable", "DM Sans Variable", Georgia, serif;
   --font-arabic:
-    "IBM Plex Sans Arabic", "Archivo Variable", "Noto Sans Arabic", "Segoe UI", sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    "IBM Plex Sans Arabic", "DM Sans Variable", "Noto Sans Arabic", "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   --text-*: initial;
   --text-caption: 12px;
@@ -87,21 +95,21 @@
   --text-display--line-height: 58px;
 
   --radius-*: initial;
-  /* A radius per level, not one for everything: tags, controls, menus, panels, sheets. */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
+  /* Paper is nearly square; controls and tabs are softer. Outer = inner + padding. */
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 6px;
+  --radius-xl: 12px;
   --radius-full: 9999px;
 
   --shadow-*: initial;
-  /* Elevation levels, tinted with the deep-water navy rather than neutral grey. */
-  --shadow-xs: 0 1px 2px rgba(14, 42, 71, 0.07);
-  --shadow-card: 0 1px 2px rgba(14, 42, 71, 0.05), 0 6px 20px -8px rgba(14, 42, 71, 0.14);
-  --shadow-raised: 0 2px 6px rgba(14, 42, 71, 0.08), 0 30px 60px -20px rgba(14, 42, 71, 0.35);
-  --shadow-overlay: 0 1px 2px rgba(14, 42, 71, 0.08), 0 20px 48px -12px rgba(14, 42, 71, 0.3);
-  --shadow-primary: 0 1px 2px rgba(15, 118, 110, 0.3), 0 4px 12px -2px rgba(15, 118, 110, 0.35);
+  /* Paper elevation: a tight contact shadow plus a soft warm cast, layered and transparent. */
+  --shadow-xs: 0 1px 1px rgba(35, 37, 43, 0.06);
+  --shadow-card: 0 1px 1px rgba(35, 37, 43, 0.05), 0 3px 10px -4px rgba(60, 48, 30, 0.14);
+  --shadow-raised: 0 1px 2px rgba(35, 37, 43, 0.08), 0 24px 40px -18px rgba(20, 16, 10, 0.45);
+  --shadow-overlay: 0 1px 2px rgba(35, 37, 43, 0.08), 0 18px 40px -12px rgba(20, 16, 10, 0.35);
+  --shadow-primary: 0 1px 1px rgba(31, 51, 154, 0.3), 0 4px 10px -4px rgba(31, 51, 154, 0.45);
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
@@ -114,16 +122,15 @@
   --animate-fade-in: overlay-in var(--duration-fast) var(--ease-out);
   --animate-fade-out: fade-out var(--duration-fast) var(--ease-in);
   --animate-sheet-up: sheet-up var(--duration-normal) var(--ease-out);
-  --animate-sheet-rise: sheet-rise 600ms var(--ease-out) both;
-  --animate-copy-fan: copy-fan 700ms 200ms var(--ease-out) both;
+  --animate-sheet-rise: sheet-rise var(--duration-slow) var(--ease-out) both;
 }
 
 :root {
   color-scheme: light;
   --duration-instant: 80ms;
-  --duration-fast: 140ms;
-  --duration-normal: 200ms;
-  --duration-slow: 280ms;
+  --duration-fast: 180ms;
+  --duration-normal: 350ms;
+  --duration-slow: 600ms;
   --scrim: rgba(23, 33, 43, 0.48);
 }
 
@@ -149,7 +156,7 @@
 @keyframes dialog-in {
   from {
     opacity: 0;
-    transform: scale(0.98);
+    transform: scale(0.96);
   }
 }
 
@@ -160,18 +167,11 @@
   }
 }
 
-/* The overview's one orchestrated moment: the copies fan out behind the top sheet. */
+/* The overview's one orchestrated moment: the binder's sheets settle in, 80 ms apart. */
 @keyframes sheet-rise {
   from {
     opacity: 0;
     transform: translateY(16px);
-  }
-}
-
-@keyframes copy-fan {
-  from {
-    opacity: 0;
-    transform: none;
   }
 }
 
@@ -192,7 +192,7 @@
 @utility press {
   @media (prefers-reduced-motion: no-preference) {
     &:active:not(:disabled) {
-      transform: scale(0.98);
+      transform: scale(0.96);
       transition-duration: var(--duration-instant);
     }
   }
@@ -204,26 +204,15 @@
 }
 
 /*
- * Deep-water bands: a harbour-chart grid fading out downwards and one teal glow where the
- * document stack sits. Focus rings switch to the glow so they stay visible on navy.
+ * Charcoal bands: faint ruled lines, like the sheets in a binder seen from above. One
+ * accent only (the butter tab colour), so no glow or gradient wash.
  */
 @utility hero-chart {
-  background-image:
-    radial-gradient(55% 60% at 74% 48%, rgb(94 234 212 / 0.2), transparent 70%),
-    linear-gradient(rgb(42 74 112 / 0.5) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(42 74 112 / 0.5) 1px, transparent 1px);
-  background-size:
-    100% 100%,
-    56px 56px,
-    56px 56px;
-  mask-image: linear-gradient(to bottom, #000 55%, transparent);
-
-  &:dir(rtl) {
-    background-image:
-      radial-gradient(55% 60% at 26% 48%, rgb(94 234 212 / 0.2), transparent 70%),
-      linear-gradient(var(--color-deep-rule) 1px, transparent 1px),
-      linear-gradient(90deg, var(--color-deep-rule) 1px, transparent 1px);
-  }
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 31px,
+    rgb(246 242 234 / 0.06) 31px 32px
+  );
 }
 
 @utility on-deep {
@@ -299,17 +288,19 @@
   }
 
   /*
-   * Headings use Archivo's expanded widths, like the stencilled marks on containers and
-   * crates; body text stays at normal width for reading. Arabic is never stretched or spaced.
+   * Bodoni Moda (optical sizes) for page titles and the overview's section titles
+   * (class font-display); it needs 24 px or more, so small panel headings stay in DM Sans.
+   * Arabic keeps its own face.
    */
   h1,
-  h2 {
-    font-stretch: 112%;
-    letter-spacing: -0.015em;
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
   html:lang(ar) h1,
-  html:lang(ar) h2 {
-    font-stretch: 100%;
+  html:lang(ar) .font-display {
+    font-family: var(--font-arabic);
     letter-spacing: 0;
   }
 
