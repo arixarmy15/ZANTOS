@@ -4,11 +4,11 @@
     "direction": "ltr"
   },
   "metadata": {
-    "title": "TradeCheck",
+    "title": "Tickline",
     "description": "Vérification multilingue avant expédition pour factures commerciales, listes de colisage et bons de commande."
   },
   "nav": {
-    "home": "Accueil TradeCheck",
+    "home": "Accueil Tickline",
     "main": "Principale",
     "overview": "Présentation",
     "checks": "Vérifications",
@@ -20,7 +20,7 @@
   },
   "footer": {
     "notice": "À titre informatif uniquement — ne constitue pas un conseil douanier ou juridique officiel.",
-    "positioning": "TradeCheck est une vérification avant expédition que vous effectuez vous-même. Il ne remplace ni un commissionnaire en douane ni un conseil professionnel."
+    "positioning": "Tickline est une vérification avant expédition que vous effectuez vous-même. Il ne remplace ni un commissionnaire en douane ni un conseil professionnel."
   },
   "status": {
     "error": "Erreur",
@@ -47,7 +47,7 @@
   },
   "newCheck": {
     "title": "Nouvelle vérification",
-    "intro": "Ajoutez la facture commerciale, la liste de colisage et le bon de commande d'une expédition. TradeCheck les lit, les compare entre eux et liste les points qui demandent votre attention, avec la preuve tirée de chaque document.",
+    "intro": "Ajoutez la facture commerciale, la liste de colisage et le bon de commande d'une expédition. Tickline les lit, les compare entre eux et liste les points qui demandent votre attention, avec la preuve tirée de chaque document.",
     "nameLabel": "Référence de l'expédition (facultatif)",
     "nameHint": "Par exemple le numéro de commande ou de réservation. Vous seul le voyez.",
     "selected": "Fichiers sélectionnés",
@@ -305,7 +305,7 @@
       "fmt-incoterm-retired": "{document} : {value} provient des Incoterms® {edition} et ne fait pas partie des Incoterms® 2020.",
       "fmt-incoterm-no-place": "{document} : la règle Incoterms® {value} est indiquée sans lieu convenu.",
       "fmt-hs-short": "{document}, ligne {line} : le code SH {value} compte moins de six chiffres. La partie harmonisée au niveau international d'un code SH compte six chiffres.",
-      "fmt-hs-expert": "Les codes SH ne sont vérifiés que sur leur format. TradeCheck ne vérifie pas le classement ; faites-le confirmer par un expert en douane.",
+      "fmt-hs-expert": "Les codes SH ne sont vérifiés que sur leur format. Tickline ne vérifie pas le classement ; faites-le confirmer par un expert en douane.",
       "fmt-iban": "{document} : l'IBAN {value} n'est pas valide (structure ou clé de contrôle).",
       "date-order": "{docB} est daté du {dateB}, avant le bon de commande ({docA}, {dateA}).",
       "req-field": "{document} : {field} introuvable.",
@@ -405,7 +405,7 @@
     "email": {
       "open": "Rédiger un e-mail de correction",
       "title": "Brouillon d'e-mail de correction",
-      "description": "Le modèle d'IA rédige un e-mail demandant à l'émetteur des documents de corriger les erreurs et avertissements constatés. TradeCheck n'envoie jamais d'e-mail : copiez le brouillon ou ouvrez-le dans votre propre messagerie.",
+      "description": "Le modèle d'IA rédige un e-mail demandant à l'émetteur des documents de corriger les erreurs et avertissements constatés. Tickline n'envoie jamais d'e-mail : copiez le brouillon ou ouvrez-le dans votre propre messagerie.",
       "language": "Langue de l'e-mail",
       "generate": "Rédiger l'e-mail",
       "regenerate": "Rédiger à nouveau",
@@ -418,7 +418,7 @@
       "copied": "Copié",
       "copyFailed": "Le brouillon n'a pas pu être copié. Sélectionnez le texte et copiez-le manuellement.",
       "openMail": "Ouvrir dans la messagerie",
-      "neverSent": "TradeCheck n'envoie pas cet e-mail."
+      "neverSent": "Tickline n'envoie pas cet e-mail."
     },
     "jump": {
       "label": "Sur cette page",
@@ -429,7 +429,7 @@
     },
     "identifiers": {
       "heading": "Identifiants des parties",
-      "lead": "TradeCheck vérifie le format de ces numéros et la concordance des documents. Seul le service officiel peut confirmer qu'un numéro est enregistré, et au nom de qui.",
+      "lead": "Tickline vérifie le format de ces numéros et la concordance des documents. Seul le service officiel peut confirmer qu'un numéro est enregistré, et au nom de qui.",
       "party": "Partie",
       "kind": "Numéro",
       "value": "Valeur",
@@ -476,11 +476,11 @@
     }
   },
   "landing": {
-    "metaTitle": "TradeCheck : vérifier facture, liste de colisage et commande avant expédition",
-    "metaDescription": "Importez la facture commerciale, la liste de colisage et le bon de commande. TradeCheck les compare champ par champ et montre chaque écart sur la page d'origine.",
+    "metaTitle": "Tickline : vérifier facture, liste de colisage et commande avant expédition",
+    "metaDescription": "Importez la facture commerciale, la liste de colisage et le bon de commande. Tickline les compare champ par champ et montre chaque écart sur la page d'origine.",
     "hero": {
       "title": "Repérez les écarts entre documents avant le départ des marchandises",
-      "lead": "TradeCheck lit la facture commerciale, la liste de colisage et le bon de commande d'une expédition, les compare champ par champ et affiche chaque constat à côté de la ligne d'où il provient.",
+      "lead": "Tickline lit la facture commerciale, la liste de colisage et le bon de commande d'une expédition, les compare champ par champ et affiche chaque constat à côté de la ligne d'où il provient.",
       "start": "Lancer une vérification",
       "how": "Voir comment ça marche",
       "factsLabel": "En bref",
@@ -523,7 +523,7 @@
       "statSource": "ICC Technical Advisory Briefing n° 3 (2022)",
       "ruleText": "Selon l'article 14 (d) des RUU 600, les données d'un document ne doivent pas être en contradiction avec celles des autres documents présentés.",
       "ruleSource": "ICC Règles et usances uniformes relatives aux crédits documentaires",
-      "scope": "TradeCheck n'examine pas les crédits documentaires. Il vérifie que vos propres documents concordent avant que quiconque ne les examine."
+      "scope": "Tickline n'examine pas les crédits documentaires. Il vérifie que vos propres documents concordent avant que quiconque ne les examine."
     },
     "how": {
       "title": "Comment se déroule une vérification",
@@ -564,11 +564,11 @@
       "quote": "Packages: 12"
     },
     "principles": {
-      "title": "Ce que TradeCheck ne fera pas",
+      "title": "Ce que Tickline ne fera pas",
       "items": {
         "hs": {
           "title": "Classer vos marchandises",
-          "body": "Le format des codes SH est vérifié et ils sont comparés entre vos documents. TradeCheck ne propose jamais de classement."
+          "body": "Le format des codes SH est vérifié et ils sont comparés entre vos documents. Tickline ne propose jamais de classement."
         },
         "sources": {
           "title": "Inventer des règles nationales",
@@ -616,7 +616,7 @@
       "title": "Questions",
       "items": {
         "compliance": {
-          "q": "TradeCheck me dit-il si mon expédition est conforme ?",
+          "q": "Tickline me dit-il si mon expédition est conforme ?",
           "a": "Non. Il montre où vos documents se contredisent ou contiennent des valeurs non valides, et liste chaque vérification effectuée. Il ne statue pas sur la conformité douanière et ne constitue pas un conseil officiel."
         },
         "documents": {
@@ -644,7 +644,7 @@
           "a": "Non. Il n'examine pas les crédits documentaires et ne classe pas les marchandises. Les codes SH ne sont vérifiés que pour leur format et leur cohérence entre vos documents."
         },
         "counterparty": {
-          "q": "TradeCheck vérifie-t-il que le vendeur ou l'acheteur est une entreprise réelle ?",
+          "q": "Tickline vérifie-t-il que le vendeur ou l'acheteur est une entreprise réelle ?",
           "a": "Non. Il vérifie le format des numéros de TVA et EORI et leur cohérence entre vos documents, et renvoie vers les services VIES et EORI de la Commission européenne pour confirmer qu'un numéro est enregistré. Les vérifications de registre du commerce, de sanctions et de solvabilité relèvent d'autres services."
         }
       }
@@ -653,7 +653,8 @@
       "title": "Vérifiez votre prochaine expédition avant son départ",
       "body": "Ajoutez la facture, la liste de colisage et le bon de commande d'une expédition et voyez où ils divergent.",
       "start": "Lancer une vérification",
-      "checks": "Voir vos vérifications"
+      "checks": "Voir vos vérifications",
+      "contact": "Des questions ou des remarques ? Écrivez au fondateur à <mail>{email}</mail>."
     },
     "sources": "Sources"
   }

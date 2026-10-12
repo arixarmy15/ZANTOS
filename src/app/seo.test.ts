@@ -29,16 +29,16 @@ describe("robots.txt and sitemap", () => {
   });
 
   it("lists the overview page in every language once SITE_URL is set", () => {
-    env = parseServerEnv({ SITE_URL: "https://tradecheck.example.com/" });
-    expect(robots().sitemap).toBe("https://tradecheck.example.com/sitemap.xml");
+    env = parseServerEnv({ SITE_URL: "https://tickline.example.com/" });
+    expect(robots().sitemap).toBe("https://tickline.example.com/sitemap.xml");
     const entries = sitemap();
     expect(entries.map((entry) => entry.url)).toEqual([
-      "https://tradecheck.example.com/en",
-      "https://tradecheck.example.com/tr",
-      "https://tradecheck.example.com/ar",
+      "https://tickline.example.com/en",
+      "https://tickline.example.com/tr",
+      "https://tickline.example.com/ar",
     ]);
     expect(entries[0]!.alternates?.languages).toMatchObject({
-      ar: "https://tradecheck.example.com/ar",
+      ar: "https://tickline.example.com/ar",
     });
   });
 

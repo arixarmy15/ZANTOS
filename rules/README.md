@@ -1,6 +1,6 @@
 # Country rule packs
 
-TradeCheck's built-in checks use only international standards and general trade practice
+Tickline's built-in checks use only international standards and general trade practice
 (arithmetic, cross-document consistency, ISO 4217, ISO 3166-1, Incoterms® 2020, the 6-digit
 HS format, IBAN check digits). Rules that depend on a destination country — required
 fields, tax identifiers, licences, declarations — belong in a **rule pack** here.

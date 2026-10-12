@@ -17,7 +17,7 @@ export function SiteHeader({ languages }: { languages: LanguageOption[] }) {
         >
           <BrandMark className="size-6" />
           <span className="font-sans" lang="en" dir="ltr">
-            TradeCheck
+            Tickline
           </span>
         </Link>
         <nav aria-label={t("main")} className="hidden flex-1 sm:block">

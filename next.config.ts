@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
   // breaks that path, so the server uses the published package as is.
   serverExternalPackages: ["pdfjs-dist"],
   env: {
-    TRADECHECK_LOCALES: locales.join(","),
+    TICKLINE_LOCALES: locales.join(","),
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

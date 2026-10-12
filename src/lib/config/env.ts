@@ -14,7 +14,7 @@ const emptyToUndefined = (value: unknown) =>
 const intInRange = (min: number, max: number, fallback: number) =>
   z.preprocess(emptyToUndefined, z.coerce.number().int().min(min).max(max).default(fallback));
 
-/** AI providers TradeCheck can call. */
+/** AI providers Tickline can call. */
 export const AI_PROVIDERS = ["anthropic", "openai-compatible"] as const;
 export type AiProvider = (typeof AI_PROVIDERS)[number];
 
@@ -58,6 +58,8 @@ export const serverEnvSchema = z.object({
   UPLOAD_MAX_PAGES: intInRange(1, 100, 20),
   UPLOAD_MAX_FILES_PER_CHECK: intInRange(1, 20, 10),
   RETENTION_HOURS: intInRange(1, 720, 24),
+  // Address shown on the overview page for questions and feedback, e.g. founder@your-domain.
+  CONTACT_EMAIL: z.preprocess(emptyToUndefined, z.email().optional()),
   // Public address of this deployment, for canonical and language links, the sitemap and
   // social previews. Leave unset for local use.
   SITE_URL: z.preprocess(

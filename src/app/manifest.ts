@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
 
 /**
- * Lets phones add TradeCheck to the home screen. There is deliberately no service worker:
+ * Lets phones add Tickline to the home screen. There is deliberately no service worker:
  * checks hold confidential documents, so nothing is cached for offline use.
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "TradeCheck",
-    short_name: "TradeCheck",
+    name: "Tickline",
+    short_name: "Tickline",
     description:
       "Multilingual pre-shipment check for commercial invoices, packing lists and purchase orders.",
     start_url: "/",

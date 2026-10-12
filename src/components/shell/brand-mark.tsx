@@ -1,6 +1,6 @@
 import { useId } from "react";
 
-// The TradeCheck mark: two ruled lines reconciled by one tick (design/brand/mark.svg).
+// The Tickline mark: two ruled lines reconciled by one tick (design/brand/mark.svg).
 export function BrandMark({ className }: { className?: string }) {
   const maskId = `tc-knockout-${useId()}`;
   const tick = "M9.1 15 12.1 18.5 21.1 5.5";

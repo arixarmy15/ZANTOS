@@ -4,11 +4,11 @@
     "direction": "ltr"
   },
   "metadata": {
-    "title": "TradeCheck",
+    "title": "Tickline",
     "description": "Ticari fatura, çeki listesi ve sipariş belgeleri için çok dilli sevkiyat öncesi kontrol."
   },
   "nav": {
-    "home": "TradeCheck ana sayfa",
+    "home": "Tickline ana sayfa",
     "main": "Ana",
     "overview": "Genel bakış",
     "checks": "Kontroller",
@@ -20,7 +20,7 @@
   },
   "footer": {
     "notice": "Yalnızca bilgilendirme amaçlıdır — resmî gümrük veya hukuki danışmanlık değildir.",
-    "positioning": "TradeCheck, sevkiyattan önce kendi başınıza yaptığınız bir ön kontroldür. Gümrük müşavirinin veya profesyonel danışmanlığın yerini almaz."
+    "positioning": "Tickline, sevkiyattan önce kendi başınıza yaptığınız bir ön kontroldür. Gümrük müşavirinin veya profesyonel danışmanlığın yerini almaz."
   },
   "status": {
     "error": "Hata",
@@ -47,7 +47,7 @@
   },
   "newCheck": {
     "title": "Yeni kontrol",
-    "intro": "Bir sevkiyata ait ticari faturayı, çeki listesini ve sipariş belgesini ekleyin. TradeCheck bunları okur, birbiriyle karşılaştırır ve dikkat gerektiren noktaları her belgedeki kanıtıyla birlikte listeler.",
+    "intro": "Bir sevkiyata ait ticari faturayı, çeki listesini ve sipariş belgesini ekleyin. Tickline bunları okur, birbiriyle karşılaştırır ve dikkat gerektiren noktaları her belgedeki kanıtıyla birlikte listeler.",
     "nameLabel": "Sevkiyat referansı (isteğe bağlı)",
     "nameHint": "Örneğin sipariş veya rezervasyon numarası. Yalnızca siz görürsünüz.",
     "selected": "Seçilen dosyalar",
@@ -305,7 +305,7 @@
       "fmt-incoterm-retired": "{document}: {value}, Incoterms® {edition} sürümüne ait; Incoterms® 2020'de yer almıyor.",
       "fmt-incoterm-no-place": "{document}: {value} Incoterms® kuralı teslim yeri belirtilmeden verilmiş.",
       "fmt-hs-short": "{document}, satır {line}: {value} HS kodu altı haneden kısa. HS kodunun uluslararası uyumlaştırılmış kısmı altı hanedir.",
-      "fmt-hs-expert": "HS kodları yalnızca biçim açısından kontrol edilir. TradeCheck sınıflandırmayı doğrulamaz; bir gümrük uzmanına onaylatın.",
+      "fmt-hs-expert": "HS kodları yalnızca biçim açısından kontrol edilir. Tickline sınıflandırmayı doğrulamaz; bir gümrük uzmanına onaylatın.",
       "fmt-iban": "{document}: {value} IBAN'ı geçerli değil (yapı veya kontrol haneleri).",
       "date-order": "{docB} {dateB} tarihli; bu, sipariş belgesinden ({docA}, {dateA}) önce.",
       "req-field": "{document}: {field} bulunamadı.",
@@ -405,7 +405,7 @@
     "email": {
       "open": "Düzeltme e-postası taslağı",
       "title": "Düzeltme e-postası taslağı",
-      "description": "Yapay zekâ modeli, belgeyi düzenleyen kişiden bulunan hata ve uyarıları düzeltmesini isteyen bir e-posta taslağı hazırlar. TradeCheck asla e-posta göndermez: taslağı kopyalayın veya kendi e-posta programınızda açın.",
+      "description": "Yapay zekâ modeli, belgeyi düzenleyen kişiden bulunan hata ve uyarıları düzeltmesini isteyen bir e-posta taslağı hazırlar. Tickline asla e-posta göndermez: taslağı kopyalayın veya kendi e-posta programınızda açın.",
       "language": "E-postanın dili",
       "generate": "Taslak hazırla",
       "regenerate": "Yeniden hazırla",
@@ -418,7 +418,7 @@
       "copied": "Kopyalandı",
       "copyFailed": "Taslak kopyalanamadı. Metni seçip elle kopyalayın.",
       "openMail": "E-posta programında aç",
-      "neverSent": "TradeCheck bu e-postayı göndermez."
+      "neverSent": "Tickline bu e-postayı göndermez."
     },
     "jump": {
       "label": "Bu sayfada",
@@ -429,7 +429,7 @@
     },
     "identifiers": {
       "heading": "Taraf kimlik numaraları",
-      "lead": "TradeCheck bu numaraların biçimini ve belgelerin uyuştuğunu kontrol eder. Bir numaranın kayıtlı olup olmadığı ve kime ait olduğu yalnızca resmî servisle doğrulanabilir.",
+      "lead": "Tickline bu numaraların biçimini ve belgelerin uyuştuğunu kontrol eder. Bir numaranın kayıtlı olup olmadığı ve kime ait olduğu yalnızca resmî servisle doğrulanabilir.",
       "party": "Taraf",
       "kind": "Numara",
       "value": "Değer",
@@ -476,11 +476,11 @@
     }
   },
   "landing": {
-    "metaTitle": "TradeCheck: sevkiyattan önce fatura, çeki listesi ve siparişi kontrol edin",
-    "metaDescription": "Ticari faturayı, çeki listesini ve sipariş belgesini yükleyin. TradeCheck bunları alan alan karşılaştırır ve her uyuşmazlığı geldiği sayfada gösterir.",
+    "metaTitle": "Tickline: sevkiyattan önce fatura, çeki listesi ve siparişi kontrol edin",
+    "metaDescription": "Ticari faturayı, çeki listesini ve sipariş belgesini yükleyin. Tickline bunları alan alan karşılaştırır ve her uyuşmazlığı geldiği sayfada gösterir.",
     "hero": {
       "title": "Belge uyuşmazlıklarını mallar yola çıkmadan yakalayın",
-      "lead": "TradeCheck bir sevkiyatın ticari faturasını, çeki listesini ve sipariş belgesini okur, bunları alan alan karşılaştırır ve her bulguyu geldiği satırın yanında gösterir.",
+      "lead": "Tickline bir sevkiyatın ticari faturasını, çeki listesini ve sipariş belgesini okur, bunları alan alan karşılaştırır ve her bulguyu geldiği satırın yanında gösterir.",
       "start": "Kontrol başlat",
       "how": "Nasıl çalıştığını görün",
       "factsLabel": "Kısaca",
@@ -523,7 +523,7 @@
       "statSource": "ICC Teknik Danışma Notu No. 3 (2022)",
       "ruleText": "UCP 600 madde 14 (d) uyarınca bir belgedeki veriler, sunulan diğer belgelerdeki verilerle çelişmemelidir.",
       "ruleSource": "ICC Akreditiflere İlişkin Tek Tip Kurallar ve Uygulamalar",
-      "scope": "TradeCheck akreditifleri incelemez. Başkası bakmadan önce kendi belgelerinizin birbiriyle uyuştuğunu kontrol eder."
+      "scope": "Tickline akreditifleri incelemez. Başkası bakmadan önce kendi belgelerinizin birbiriyle uyuştuğunu kontrol eder."
     },
     "how": {
       "title": "Bir kontrol nasıl çalışır",
@@ -564,11 +564,11 @@
       "quote": "Packages: 12"
     },
     "principles": {
-      "title": "TradeCheck'in yapmayacakları",
+      "title": "Tickline'ın yapmayacakları",
       "items": {
         "hs": {
           "title": "Mallarınızı sınıflandırmak",
-          "body": "HS kodlarının biçimi kontrol edilir ve belgeleriniz arasında karşılaştırılır. TradeCheck asla sınıflandırma önermez."
+          "body": "HS kodlarının biçimi kontrol edilir ve belgeleriniz arasında karşılaştırılır. Tickline asla sınıflandırma önermez."
         },
         "sources": {
           "title": "Ülke kuralı uydurmak",
@@ -616,7 +616,7 @@
       "title": "Sorular",
       "items": {
         "compliance": {
-          "q": "TradeCheck sevkiyatımın mevzuata uygun olup olmadığını söyler mi?",
+          "q": "Tickline sevkiyatımın mevzuata uygun olup olmadığını söyler mi?",
           "a": "Hayır. Belgelerinizin nerede birbiriyle çeliştiğini ya da geçersiz değer içerdiğini gösterir ve çalışan her kontrolü listeler. Gümrük uygunluğuna karar vermez ve resmî danışmanlık değildir."
         },
         "documents": {
@@ -644,7 +644,7 @@
           "a": "Hayır. Akreditifleri incelemez ve malları sınıflandırmaz. HS kodları yalnızca biçim ve belgeleriniz arasındaki tutarlılık açısından kontrol edilir."
         },
         "counterparty": {
-          "q": "TradeCheck satıcının veya alıcının gerçek bir şirket olduğunu doğrular mı?",
+          "q": "Tickline satıcının veya alıcının gerçek bir şirket olduğunu doğrular mı?",
           "a": "Hayır. KDV ve EORI numaralarını biçim ve belgeleriniz arasındaki tutarlılık açısından kontrol eder; bir numaranın kayıtlı olduğunu doğrulamak için Avrupa Komisyonu'nun VIES ve EORI servislerine bağlantı verir. Ticaret sicili, yaptırım ve kredi kontrolleri ayrı hizmetlerdir."
         }
       }
@@ -653,7 +653,8 @@
       "title": "Bir sonraki sevkiyatınızı yola çıkmadan kontrol edin",
       "body": "Bir sevkiyatın faturasını, çeki listesini ve sipariş belgesini ekleyin ve nerede uyuşmadıklarını görün.",
       "start": "Kontrol başlat",
-      "checks": "Kontrollerinizi görüntüleyin"
+      "checks": "Kontrollerinizi görüntüleyin",
+      "contact": "Sorunuz ya da geri bildiriminiz mi var? Kurucuya <mail>{email}</mail> adresinden yazın."
     },
     "sources": "Kaynaklar"
   }

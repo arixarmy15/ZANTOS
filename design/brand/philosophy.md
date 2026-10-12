@@ -1,6 +1,6 @@
 # Reconciled Lines
 
-_A design philosophy, written with the `canvas-design` skill before drawing the TradeCheck mark._
+_A design philosophy, written with the `canvas-design` skill before drawing the Tickline mark._
 
 Reconciled Lines begins from the quietest objects in any office: the ruled line and the small mark
 someone makes beside it after checking. A line is a promise that something was written; a mark

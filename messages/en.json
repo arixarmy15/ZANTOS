@@ -4,11 +4,11 @@
     "direction": "ltr"
   },
   "metadata": {
-    "title": "TradeCheck",
+    "title": "Tickline",
     "description": "Multilingual pre-shipment check for commercial invoices, packing lists and purchase orders."
   },
   "nav": {
-    "home": "TradeCheck home",
+    "home": "Tickline home",
     "main": "Main",
     "overview": "Overview",
     "checks": "Checks",
@@ -20,7 +20,7 @@
   },
   "footer": {
     "notice": "For information only — not official customs or legal advice.",
-    "positioning": "TradeCheck is a pre-shipment check you run yourself. It does not replace a customs broker or professional advice."
+    "positioning": "Tickline is a pre-shipment check you run yourself. It does not replace a customs broker or professional advice."
   },
   "status": {
     "error": "Error",
@@ -47,7 +47,7 @@
   },
   "newCheck": {
     "title": "New check",
-    "intro": "Add the commercial invoice, packing list and purchase order for one shipment. TradeCheck reads them, compares them and lists what needs attention, with the evidence from each document.",
+    "intro": "Add the commercial invoice, packing list and purchase order for one shipment. Tickline reads them, compares them and lists what needs attention, with the evidence from each document.",
     "nameLabel": "Shipment reference (optional)",
     "nameHint": "For example the order or booking number. Only you see it.",
     "selected": "Selected files",
@@ -305,7 +305,7 @@
       "fmt-incoterm-retired": "{document}: {value} is from Incoterms® {edition} and is not part of Incoterms® 2020.",
       "fmt-incoterm-no-place": "{document}: the Incoterms® rule {value} is given without a named place.",
       "fmt-hs-short": "{document}, line {line}: the HS code {value} has fewer than six digits. The internationally harmonized part of an HS code is six digits.",
-      "fmt-hs-expert": "HS codes are checked for format only. TradeCheck does not verify the classification; have it confirmed by a customs expert.",
+      "fmt-hs-expert": "HS codes are checked for format only. Tickline does not verify the classification; have it confirmed by a customs expert.",
       "fmt-iban": "{document}: the IBAN {value} is not valid (structure or check digits).",
       "date-order": "{docB} is dated {dateB}, before the purchase order ({docA}, {dateA}).",
       "req-field": "{document}: {field} was not found.",
@@ -405,7 +405,7 @@
     "email": {
       "open": "Draft correction e-mail",
       "title": "Correction e-mail draft",
-      "description": "The AI model drafts an e-mail asking the document issuer to correct the errors and warnings found. TradeCheck never sends e-mail: copy the draft or open it in your own mail program.",
+      "description": "The AI model drafts an e-mail asking the document issuer to correct the errors and warnings found. Tickline never sends e-mail: copy the draft or open it in your own mail program.",
       "language": "Language of the e-mail",
       "generate": "Draft e-mail",
       "regenerate": "Draft again",
@@ -418,7 +418,7 @@
       "copied": "Copied",
       "copyFailed": "The draft could not be copied. Select the text and copy it by hand.",
       "openMail": "Open in mail program",
-      "neverSent": "TradeCheck does not send this e-mail."
+      "neverSent": "Tickline does not send this e-mail."
     },
     "jump": {
       "label": "On this page",
@@ -429,7 +429,7 @@
     },
     "identifiers": {
       "heading": "Party identifiers",
-      "lead": "TradeCheck checks the format of these numbers and that the documents agree. Whether a number is registered, and to whom, can only be confirmed by the official service.",
+      "lead": "Tickline checks the format of these numbers and that the documents agree. Whether a number is registered, and to whom, can only be confirmed by the official service.",
       "party": "Party",
       "kind": "Number",
       "value": "Value",
@@ -476,11 +476,11 @@
     }
   },
   "landing": {
-    "metaTitle": "TradeCheck: check invoice, packing list and PO before shipment",
-    "metaDescription": "Upload the commercial invoice, packing list and purchase order. TradeCheck compares them field by field and shows each mismatch on the page it came from.",
+    "metaTitle": "Tickline: check invoice, packing list and PO before shipment",
+    "metaDescription": "Upload the commercial invoice, packing list and purchase order. Tickline compares them field by field and shows each mismatch on the page it came from.",
     "hero": {
       "title": "Catch document mismatches before the goods leave",
-      "lead": "TradeCheck reads the commercial invoice, packing list and purchase order for one shipment, compares them field by field and shows every finding next to the line it came from.",
+      "lead": "Tickline reads the commercial invoice, packing list and purchase order for one shipment, compares them field by field and shows every finding next to the line it came from.",
       "start": "Start a check",
       "how": "See how it works",
       "factsLabel": "At a glance",
@@ -523,7 +523,7 @@
       "statSource": "ICC Technical Advisory Briefing No. 3 (2022)",
       "ruleText": "Under UCP 600, article 14 (d), data in one document must not conflict with data in the other documents presented.",
       "ruleSource": "ICC Uniform Customs and Practice for Documentary Credits",
-      "scope": "TradeCheck does not examine letters of credit. It checks that your own documents agree with each other before anyone else looks at them."
+      "scope": "Tickline does not examine letters of credit. It checks that your own documents agree with each other before anyone else looks at them."
     },
     "how": {
       "title": "How a check works",
@@ -564,11 +564,11 @@
       "quote": "Packages: 12"
     },
     "principles": {
-      "title": "What TradeCheck will not do",
+      "title": "What Tickline will not do",
       "items": {
         "hs": {
           "title": "Classify your goods",
-          "body": "HS codes are checked for format and compared between your documents. TradeCheck never suggests a classification."
+          "body": "HS codes are checked for format and compared between your documents. Tickline never suggests a classification."
         },
         "sources": {
           "title": "Invent country rules",
@@ -616,7 +616,7 @@
       "title": "Questions",
       "items": {
         "compliance": {
-          "q": "Does TradeCheck tell me whether my shipment is compliant?",
+          "q": "Does Tickline tell me whether my shipment is compliant?",
           "a": "No. It shows where your documents disagree with each other or contain invalid values, and lists every check that ran. It does not decide customs compliance and is not official advice."
         },
         "documents": {
@@ -644,7 +644,7 @@
           "a": "No. It does not examine letters of credit and does not classify goods. HS codes are only checked for format and for consistency across your documents."
         },
         "counterparty": {
-          "q": "Does TradeCheck verify that the seller or buyer is a real company?",
+          "q": "Does Tickline verify that the seller or buyer is a real company?",
           "a": "No. It checks VAT and EORI numbers for format and for consistency across your documents, and links to the European Commission's VIES and EORI services to confirm that a number is registered. Company registry, sanctions and credit checks are separate services."
         }
       }
@@ -653,7 +653,8 @@
       "title": "Check your next shipment before it leaves",
       "body": "Add the invoice, packing list and purchase order for one shipment and see where they disagree.",
       "start": "Start a check",
-      "checks": "View your checks"
+      "checks": "View your checks",
+      "contact": "Questions or feedback? Write to the founder at <mail>{email}</mail>."
     },
     "sources": "Sources"
   }

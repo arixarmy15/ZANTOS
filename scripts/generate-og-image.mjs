@@ -69,7 +69,7 @@ const html = `<!doctype html><html><head><style>
 </style></head><body>
   <div class="left">
     <div>
-      <div class="brand">${mark.replace(/ width="24" height="24"/, "")}TradeCheck</div>
+      <div class="brand">${mark.replace(/ width="24" height="24"/, "")}Tickline</div>
       <h1>Catch document mismatches before the goods leave</h1>
       <p class="lead">Invoice, packing list and purchase order, compared field by field — with the evidence on the page.</p>
     </div>

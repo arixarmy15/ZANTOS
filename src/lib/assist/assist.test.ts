@@ -156,7 +156,7 @@ describe("cachedAssist", () => {
   let dir: string;
   let storage: SqliteStorage;
   beforeEach(() => {
-    dir = mkdtempSync(join(tmpdir(), "tradecheck-"));
+    dir = mkdtempSync(join(tmpdir(), "tickline-"));
     storage = new SqliteStorage(dir, 24);
   });
   afterEach(() => rmSync(dir, { recursive: true, force: true }));

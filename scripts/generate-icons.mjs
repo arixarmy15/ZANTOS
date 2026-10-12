@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Renders the TradeCheck mark (design/brand/mark.svg) into the PNG icons phones need: the web
+// Renders the Tickline mark (design/brand/mark.svg) into the PNG icons phones need: the web
 // app manifest icons (192, 512, maskable 512) and the Apple touch icon (180). Uses Playwright's
 // Chromium; set PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH to use an installed browser.
 import { readFileSync } from "node:fs";

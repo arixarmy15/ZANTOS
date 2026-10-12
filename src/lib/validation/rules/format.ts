@@ -181,7 +181,7 @@ export const incotermFormatRule: Rule = {
 
 /**
  * HS codes: format only. The first six digits are the internationally harmonized part;
- * longer codes are national extensions (8 to 12 digits). TradeCheck never suggests or
+ * longer codes are national extensions (8 to 12 digits). Tickline never suggests or
  * confirms a classification, so every document with HS codes gets an expert-review note.
  */
 export const hsFormatRule: Rule = {

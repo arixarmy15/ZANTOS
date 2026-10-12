@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: t("metaDescription"),
     openGraph: {
       type: "website",
-      siteName: "TradeCheck",
+      siteName: "Tickline",
       title: t("metaTitle"),
       description: t("metaDescription"),
       locale,
@@ -104,7 +104,7 @@ export default async function OverviewPage({ params }: Props) {
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      name: "TradeCheck",
+      name: "Tickline",
       applicationCategory: "BusinessApplication",
       operatingSystem: "Web",
       description: t("metaDescription"),
@@ -433,6 +433,21 @@ export default async function OverviewPage({ params }: Props) {
                 <Link href="/checks">{t("cta.checks")}</Link>
               </Button>
             </div>
+            {env.CONTACT_EMAIL ? (
+              <p className="text-body text-slate">
+                {t.rich("cta.contact", {
+                  email: env.CONTACT_EMAIL,
+                  mail: (chunks) => (
+                    <a
+                      href={`mailto:${env.CONTACT_EMAIL}`}
+                      className="inline-flex min-h-6 items-center text-harbor underline underline-offset-2 hover:text-harbor-strong pointer-coarse:min-h-11"
+                    >
+                      <bdi dir="ltr">{chunks}</bdi>
+                    </a>
+                  ),
+                })}
+              </p>
+            ) : null}
           </div>
         </div>
       </section>

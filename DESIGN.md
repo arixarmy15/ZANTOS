@@ -1,4 +1,4 @@
-# TradeCheck — Design System
+# Tickline — Design System
 
 > Status: **Phase 1 draft, awaiting product-owner approval.** No interface code exists yet.
 > Tokens live in [`design/tokens.json`](design/tokens.json) and are contrast-tested by
@@ -95,9 +95,12 @@ follows `brand-guidelines`. **None of that skill's values are used** — it ship
 palette and typefaces (a cream background, a serif body face and earth-toned accents), which is both
 a different brand and exactly the pattern the brief rules out.
 
-- **Name:** TradeCheck — one word, capital T and C. Never "Trade Check", never all caps.
-- **Wordmark:** "TradeCheck" set in IBM Plex Sans SemiBold, Carbon on light surfaces. Both halves
-  in the same colour; no highlighted syllable.
+- **Name:** Tickline — one word, capital T only. Never "TickLine", "Tick Line" or all caps. The
+  name is the auditor's tick beside a line of figures, which is also what the mark draws. Renamed
+  from "TradeCheck" in October 2026 because that name is used by a Dutch company-verification
+  service in an adjacent market (see [docs/analysis-gettradecheck.md](docs/analysis-gettradecheck.md)).
+- **Wordmark:** "Tickline" set in IBM Plex Sans SemiBold, Carbon on light surfaces, one colour;
+  no highlighted syllable.
 - **Mark (concept, drawn in Phase 2 with `canvas-design`):** two short horizontal rules — two
   documents — crossed by a single tick: "cross-checked". Harbor tick, Slate rules. Must stay legible
   at 16 px (favicon).
@@ -135,7 +138,7 @@ secondary text uses Slate everywhere.
 Status is never colour alone: every status has a **shape-distinct icon** (readable in greyscale and
 print) and a **text label**. Icons are from Lucide, the shadcn/ui default.
 
-| Status         | Meaning in TradeCheck                                                                     | Icon             | Text `fg` | Tint `bg` | Chart `mark` | Contrast (fg on Paper / on tint) |
+| Status         | Meaning in Tickline                                                                       | Icon             | Text `fg` | Tint `bg` | Chart `mark` | Contrast (fg on Paper / on tint) |
 | -------------- | ----------------------------------------------------------------------------------------- | ---------------- | --------- | --------- | ------------ | -------------------------------- |
 | **Error**      | A check failed: the documents contradict each other or a value is invalid                 | `octagon-alert`  | `#B42318` | `#FDECEA` | `#C9372C`    | 6.57 / 5.75                      |
 | **Warning**    | Needs review: likely problem, tolerance exceeded, low-confidence field                    | `triangle-alert` | `#8A4A00` | `#FFF3DB` | `#B86E00`    | 6.86 / 6.24                      |
@@ -463,7 +466,7 @@ hreflang; `brand-voice` for the voice rules below; `frontend-design-direction` a
 `make-interfaces-feel-better` as for the rest of the product. This time the owner asked for
 research, so external sources were consulted — only for the figures quoted on the page.
 
-**Positioning** (`marketing-campaign`, phase 2): _TradeCheck helps the people who prepare export
+**Positioning** (`marketing-campaign`, phase 2): _Tickline helps the people who prepare export
 paperwork catch contradictions between the invoice, packing list and purchase order before the
 goods leave, by reading each document and running deterministic cross-checks that point to the
 page and line._ The angle is the moment before shipment, when a mismatch is still cheap to fix.
@@ -473,12 +476,12 @@ list mismatches are among the most common causes of customs holds; that informs 
 typical mismatches. Only two figures are quoted, each with its source linked beside it: the ICC
 Banking Commission's estimate that 65–80 % of documents presented under letters of credit are
 refused on first presentation (Technical Advisory Briefing No. 3, 27 June 2022) and UCP 600
-article 14 (d) ("data … must not conflict"). The page says plainly that TradeCheck does not
+article 14 (d) ("data … must not conflict"). The page says plainly that Tickline does not
 examine letters of credit. No logos, testimonials, user counts or invented metrics: there are
 none, and the brief forbids fake data.
 
 **Section order:** hero → problem (with sources) → how a check works (in the order the user does
-it) → what every check covers → evidence → what TradeCheck will not do → AI and privacy →
+it) → what every check covers → evidence → what Tickline will not do → AI and privacy →
 audience and languages → questions → final call to action. Product figures (rule count, upload
 limits, retention, languages) are read from the engine, the server configuration and the message
 files, so the page cannot promise something the product does not do.
@@ -494,7 +497,7 @@ rest of the product.
 **Voice** (`brand-voice`, `marketing-campaign` hard bans): plain, specific, no superlatives, no
 "game-changing", no fake urgency, no exclamation marks; every claim is either a product fact or
 sourced. Calls to action name the action ("Start a check", "View your checks"), never "Learn
-more". The product's limits get their own section ("What TradeCheck will not do").
+more". The product's limits get their own section ("What Tickline will not do").
 
 **SEO** (`seo`): one h1; h2/h3 follow the content; a 50–70 character title and a 120–160
 character description per language; `SoftwareApplication` and `FAQPage` JSON-LD that mirror the
@@ -519,7 +522,7 @@ Added after reviewing gettradecheck.com, a Dutch counterparty-verification servi
 and EORI numbers are extracted, checked for their sourced structure and compared across
 documents. Below the checks that ran, a "Party identifiers" list shows each distinct number,
 the documents that print it and a link to the official service that can confirm it (VIES, the
-Commission's EORI validation), with the plain statement that TradeCheck checks format and
+Commission's EORI validation), with the plain statement that Tickline checks format and
 consistency only. Numbers are set in Plex Mono and kept left-to-right in every language; links
 open in a new tab and say so to screen readers. No score, badge or "verified" state is shown,
-because TradeCheck does not verify registration.
+because Tickline does not verify registration.

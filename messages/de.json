@@ -4,11 +4,11 @@
     "direction": "ltr"
   },
   "metadata": {
-    "title": "TradeCheck",
+    "title": "Tickline",
     "description": "Mehrsprachige Prüfung vor dem Versand für Handelsrechnungen, Packlisten und Bestellungen."
   },
   "nav": {
-    "home": "TradeCheck – Startseite",
+    "home": "Tickline – Startseite",
     "main": "Haupt",
     "overview": "Überblick",
     "checks": "Prüfungen",
@@ -20,7 +20,7 @@
   },
   "footer": {
     "notice": "Nur zur Information – keine amtliche Zoll- oder Rechtsberatung.",
-    "positioning": "TradeCheck ist eine Vorabprüfung vor dem Versand, die Sie selbst durchführen. Sie ersetzt weder einen Zollagenten noch eine fachliche Beratung."
+    "positioning": "Tickline ist eine Vorabprüfung vor dem Versand, die Sie selbst durchführen. Sie ersetzt weder einen Zollagenten noch eine fachliche Beratung."
   },
   "status": {
     "error": "Fehler",
@@ -47,7 +47,7 @@
   },
   "newCheck": {
     "title": "Neue Prüfung",
-    "intro": "Fügen Sie Handelsrechnung, Packliste und Bestellung einer Sendung hinzu. TradeCheck liest sie, vergleicht sie miteinander und listet auf, was Aufmerksamkeit braucht – mit dem Beleg aus jedem Dokument.",
+    "intro": "Fügen Sie Handelsrechnung, Packliste und Bestellung einer Sendung hinzu. Tickline liest sie, vergleicht sie miteinander und listet auf, was Aufmerksamkeit braucht – mit dem Beleg aus jedem Dokument.",
     "nameLabel": "Sendungsreferenz (optional)",
     "nameHint": "Zum Beispiel die Bestell- oder Buchungsnummer. Nur Sie sehen sie.",
     "selected": "Ausgewählte Dateien",
@@ -305,7 +305,7 @@
       "fmt-incoterm-retired": "{document}: {value} stammt aus den Incoterms® {edition} und ist nicht Teil der Incoterms® 2020.",
       "fmt-incoterm-no-place": "{document}: Die Incoterms®-Klausel {value} ist ohne benannten Ort angegeben.",
       "fmt-hs-short": "{document}, Position {line}: Der HS-Code {value} hat weniger als sechs Stellen. Der international harmonisierte Teil eines HS-Codes umfasst sechs Stellen.",
-      "fmt-hs-expert": "HS-Codes werden nur auf ihr Format geprüft. TradeCheck prüft die Einreihung nicht; lassen Sie sie von einer Zollfachkraft bestätigen.",
+      "fmt-hs-expert": "HS-Codes werden nur auf ihr Format geprüft. Tickline prüft die Einreihung nicht; lassen Sie sie von einer Zollfachkraft bestätigen.",
       "fmt-iban": "{document}: Die IBAN {value} ist ungültig (Aufbau oder Prüfziffern).",
       "date-order": "{docB} ist auf den {dateB} datiert, also vor der Bestellung ({docA}, {dateA}).",
       "req-field": "{document}: {field} wurde nicht gefunden.",
@@ -405,7 +405,7 @@
     "email": {
       "open": "Korrektur-E-Mail entwerfen",
       "title": "Entwurf einer Korrektur-E-Mail",
-      "description": "Das KI-Modell entwirft eine E-Mail, in der die ausstellende Stelle gebeten wird, die gefundenen Fehler und Warnungen zu korrigieren. TradeCheck versendet nie E-Mails: Kopieren Sie den Entwurf oder öffnen Sie ihn in Ihrem eigenen E-Mail-Programm.",
+      "description": "Das KI-Modell entwirft eine E-Mail, in der die ausstellende Stelle gebeten wird, die gefundenen Fehler und Warnungen zu korrigieren. Tickline versendet nie E-Mails: Kopieren Sie den Entwurf oder öffnen Sie ihn in Ihrem eigenen E-Mail-Programm.",
       "language": "Sprache der E-Mail",
       "generate": "E-Mail entwerfen",
       "regenerate": "Neu entwerfen",
@@ -418,7 +418,7 @@
       "copied": "Kopiert",
       "copyFailed": "Der Entwurf konnte nicht kopiert werden. Markieren Sie den Text und kopieren Sie ihn manuell.",
       "openMail": "Im E-Mail-Programm öffnen",
-      "neverSent": "TradeCheck versendet diese E-Mail nicht."
+      "neverSent": "Tickline versendet diese E-Mail nicht."
     },
     "jump": {
       "label": "Auf dieser Seite",
@@ -429,7 +429,7 @@
     },
     "identifiers": {
       "heading": "Kennnummern der Parteien",
-      "lead": "TradeCheck prüft das Format dieser Nummern und ob die Dokumente übereinstimmen. Ob eine Nummer vergeben ist und wem sie gehört, kann nur der amtliche Dienst bestätigen.",
+      "lead": "Tickline prüft das Format dieser Nummern und ob die Dokumente übereinstimmen. Ob eine Nummer vergeben ist und wem sie gehört, kann nur der amtliche Dienst bestätigen.",
       "party": "Partei",
       "kind": "Nummer",
       "value": "Wert",
@@ -476,11 +476,11 @@
     }
   },
   "landing": {
-    "metaTitle": "TradeCheck: Rechnung, Packliste und Bestellung vor dem Versand prüfen",
-    "metaDescription": "Laden Sie Handelsrechnung, Packliste und Bestellung hoch. TradeCheck vergleicht sie Feld für Feld und zeigt jede Abweichung auf der Seite, von der sie stammt.",
+    "metaTitle": "Tickline: Rechnung, Packliste und Bestellung vor dem Versand prüfen",
+    "metaDescription": "Laden Sie Handelsrechnung, Packliste und Bestellung hoch. Tickline vergleicht sie Feld für Feld und zeigt jede Abweichung auf der Seite, von der sie stammt.",
     "hero": {
       "title": "Abweichungen in den Dokumenten finden, bevor die Ware das Haus verlässt",
-      "lead": "TradeCheck liest Handelsrechnung, Packliste und Bestellung einer Sendung, vergleicht sie Feld für Feld und zeigt jeden Befund neben der Zeile, aus der er stammt.",
+      "lead": "Tickline liest Handelsrechnung, Packliste und Bestellung einer Sendung, vergleicht sie Feld für Feld und zeigt jeden Befund neben der Zeile, aus der er stammt.",
       "start": "Prüfung starten",
       "how": "So funktioniert es",
       "factsLabel": "Auf einen Blick",
@@ -523,7 +523,7 @@
       "statSource": "ICC Technical Advisory Briefing Nr. 3 (2022)",
       "ruleText": "Nach UCP 600, Artikel 14 (d), dürfen Daten in einem Dokument nicht im Widerspruch zu Daten in den anderen vorgelegten Dokumenten stehen.",
       "ruleSource": "ICC Einheitliche Richtlinien und Gebräuche für Dokumentenakkreditive",
-      "scope": "TradeCheck prüft keine Akkreditive. Es prüft, ob Ihre eigenen Dokumente übereinstimmen, bevor jemand anderes sie ansieht."
+      "scope": "Tickline prüft keine Akkreditive. Es prüft, ob Ihre eigenen Dokumente übereinstimmen, bevor jemand anderes sie ansieht."
     },
     "how": {
       "title": "So läuft eine Prüfung ab",
@@ -564,11 +564,11 @@
       "quote": "Packages: 12"
     },
     "principles": {
-      "title": "Was TradeCheck nicht tut",
+      "title": "Was Tickline nicht tut",
       "items": {
         "hs": {
           "title": "Ihre Waren einreihen",
-          "body": "HS-Codes werden auf ihr Format geprüft und zwischen Ihren Dokumenten verglichen. TradeCheck schlägt nie eine Einreihung vor."
+          "body": "HS-Codes werden auf ihr Format geprüft und zwischen Ihren Dokumenten verglichen. Tickline schlägt nie eine Einreihung vor."
         },
         "sources": {
           "title": "Länderregeln erfinden",
@@ -616,7 +616,7 @@
       "title": "Fragen",
       "items": {
         "compliance": {
-          "q": "Sagt mir TradeCheck, ob meine Sendung vorschriftsmäßig ist?",
+          "q": "Sagt mir Tickline, ob meine Sendung vorschriftsmäßig ist?",
           "a": "Nein. Es zeigt, wo sich Ihre Dokumente widersprechen oder ungültige Werte enthalten, und listet jede Prüfung auf, die gelaufen ist. Es entscheidet nicht über die Zollkonformität und ist keine offizielle Beratung."
         },
         "documents": {
@@ -644,7 +644,7 @@
           "a": "Nein. Es prüft keine Akkreditive und reiht keine Waren ein. HS-Codes werden nur auf ihr Format und auf Übereinstimmung zwischen Ihren Dokumenten geprüft."
         },
         "counterparty": {
-          "q": "Prüft TradeCheck, ob Verkäufer oder Käufer ein echtes Unternehmen ist?",
+          "q": "Prüft Tickline, ob Verkäufer oder Käufer ein echtes Unternehmen ist?",
           "a": "Nein. Es prüft USt-IdNrn. und EORI-Nummern auf Format und Übereinstimmung zwischen Ihren Dokumenten und verlinkt die Dienste VIES und EORI der Europäischen Kommission, um zu bestätigen, dass eine Nummer vergeben ist. Handelsregister-, Sanktions- und Bonitätsprüfungen sind eigene Dienste."
         }
       }
@@ -653,7 +653,8 @@
       "title": "Prüfen Sie Ihre nächste Sendung, bevor sie das Haus verlässt",
       "body": "Fügen Sie Rechnung, Packliste und Bestellung einer Sendung hinzu und sehen Sie, wo sie voneinander abweichen.",
       "start": "Prüfung starten",
-      "checks": "Ihre Prüfungen ansehen"
+      "checks": "Ihre Prüfungen ansehen",
+      "contact": "Fragen oder Rückmeldungen? Schreiben Sie dem Gründer an <mail>{email}</mail>."
     },
     "sources": "Quellen"
   }

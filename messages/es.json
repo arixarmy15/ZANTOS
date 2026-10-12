@@ -4,11 +4,11 @@
     "direction": "ltr"
   },
   "metadata": {
-    "title": "TradeCheck",
+    "title": "Tickline",
     "description": "Comprobación multilingüe previa al envío para facturas comerciales, listas de empaque y órdenes de compra."
   },
   "nav": {
-    "home": "Inicio de TradeCheck",
+    "home": "Inicio de Tickline",
     "main": "Principal",
     "overview": "Presentación",
     "checks": "Comprobaciones",
@@ -20,7 +20,7 @@
   },
   "footer": {
     "notice": "Solo con fines informativos: no constituye asesoramiento aduanero ni legal oficial.",
-    "positioning": "TradeCheck es una comprobación previa al envío que realiza usted mismo. No sustituye a un agente de aduanas ni a un asesoramiento profesional."
+    "positioning": "Tickline es una comprobación previa al envío que realiza usted mismo. No sustituye a un agente de aduanas ni a un asesoramiento profesional."
   },
   "status": {
     "error": "Error",
@@ -47,7 +47,7 @@
   },
   "newCheck": {
     "title": "Nueva comprobación",
-    "intro": "Añada la factura comercial, la lista de empaque y la orden de compra de un envío. TradeCheck los lee, los compara entre sí y enumera lo que requiere atención, con la evidencia de cada documento.",
+    "intro": "Añada la factura comercial, la lista de empaque y la orden de compra de un envío. Tickline los lee, los compara entre sí y enumera lo que requiere atención, con la evidencia de cada documento.",
     "nameLabel": "Referencia del envío (opcional)",
     "nameHint": "Por ejemplo, el número de pedido o de reserva. Solo usted lo ve.",
     "selected": "Archivos seleccionados",
@@ -305,7 +305,7 @@
       "fmt-incoterm-retired": "{document}: {value} pertenece a Incoterms® {edition} y no forma parte de Incoterms® 2020.",
       "fmt-incoterm-no-place": "{document}: la regla Incoterms® {value} se indica sin lugar designado.",
       "fmt-hs-short": "{document}, línea {line}: el código SA {value} tiene menos de seis dígitos. La parte armonizada internacionalmente de un código SA tiene seis dígitos.",
-      "fmt-hs-expert": "Los códigos SA solo se comprueban en cuanto a su formato. TradeCheck no verifica la clasificación; haga que la confirme un experto en aduanas.",
+      "fmt-hs-expert": "Los códigos SA solo se comprueban en cuanto a su formato. Tickline no verifica la clasificación; haga que la confirme un experto en aduanas.",
       "fmt-iban": "{document}: el IBAN {value} no es válido (estructura o dígitos de control).",
       "date-order": "{docB} tiene fecha {dateB}, anterior a la orden de compra ({docA}, {dateA}).",
       "req-field": "{document}: no se encontró {field}.",
@@ -405,7 +405,7 @@
     "email": {
       "open": "Redactar correo de corrección",
       "title": "Borrador de correo de corrección",
-      "description": "El modelo de IA redacta un correo en el que se pide a quien emitió los documentos que corrija los errores y advertencias encontrados. TradeCheck nunca envía correos: copie el borrador o ábralo en su propio programa de correo.",
+      "description": "El modelo de IA redacta un correo en el que se pide a quien emitió los documentos que corrija los errores y advertencias encontrados. Tickline nunca envía correos: copie el borrador o ábralo en su propio programa de correo.",
       "language": "Idioma del correo",
       "generate": "Redactar correo",
       "regenerate": "Redactar de nuevo",
@@ -418,7 +418,7 @@
       "copied": "Copiado",
       "copyFailed": "No se pudo copiar el borrador. Seleccione el texto y cópielo a mano.",
       "openMail": "Abrir en el programa de correo",
-      "neverSent": "TradeCheck no envía este correo."
+      "neverSent": "Tickline no envía este correo."
     },
     "jump": {
       "label": "En esta página",
@@ -429,7 +429,7 @@
     },
     "identifiers": {
       "heading": "Identificadores de las partes",
-      "lead": "TradeCheck comprueba el formato de estos números y que los documentos coincidan. Que un número esté registrado, y a nombre de quién, solo lo puede confirmar el servicio oficial.",
+      "lead": "Tickline comprueba el formato de estos números y que los documentos coincidan. Que un número esté registrado, y a nombre de quién, solo lo puede confirmar el servicio oficial.",
       "party": "Parte",
       "kind": "Número",
       "value": "Valor",
@@ -476,11 +476,11 @@
     }
   },
   "landing": {
-    "metaTitle": "TradeCheck: revise factura, lista de empaque y orden antes del envío",
-    "metaDescription": "Suba la factura comercial, la lista de empaque y la orden de compra. TradeCheck las compara campo por campo y muestra cada diferencia en la página de la que procede.",
+    "metaTitle": "Tickline: revise factura, lista de empaque y orden antes del envío",
+    "metaDescription": "Suba la factura comercial, la lista de empaque y la orden de compra. Tickline las compara campo por campo y muestra cada diferencia en la página de la que procede.",
     "hero": {
       "title": "Detecte las diferencias entre documentos antes de que salga la mercancía",
-      "lead": "TradeCheck lee la factura comercial, la lista de empaque y la orden de compra de un envío, las compara campo por campo y muestra cada hallazgo junto a la línea de la que procede.",
+      "lead": "Tickline lee la factura comercial, la lista de empaque y la orden de compra de un envío, las compara campo por campo y muestra cada hallazgo junto a la línea de la que procede.",
       "start": "Iniciar una comprobación",
       "how": "Ver cómo funciona",
       "factsLabel": "En resumen",
@@ -523,7 +523,7 @@
       "statSource": "ICC Technical Advisory Briefing n.º 3 (2022)",
       "ruleText": "Según el artículo 14 (d) de las UCP 600, los datos de un documento no deben contradecir los datos de los demás documentos presentados.",
       "ruleSource": "ICC Reglas y Usos Uniformes relativos a los Créditos Documentarios",
-      "scope": "TradeCheck no examina cartas de crédito. Comprueba que sus propios documentos coinciden entre sí antes de que nadie más los revise."
+      "scope": "Tickline no examina cartas de crédito. Comprueba que sus propios documentos coinciden entre sí antes de que nadie más los revise."
     },
     "how": {
       "title": "Cómo funciona una comprobación",
@@ -564,11 +564,11 @@
       "quote": "Packages: 12"
     },
     "principles": {
-      "title": "Lo que TradeCheck no hará",
+      "title": "Lo que Tickline no hará",
       "items": {
         "hs": {
           "title": "Clasificar su mercancía",
-          "body": "Se comprueba el formato de los códigos SA y se comparan entre sus documentos. TradeCheck nunca propone una clasificación."
+          "body": "Se comprueba el formato de los códigos SA y se comparan entre sus documentos. Tickline nunca propone una clasificación."
         },
         "sources": {
           "title": "Inventar reglas por país",
@@ -616,7 +616,7 @@
       "title": "Preguntas",
       "items": {
         "compliance": {
-          "q": "¿TradeCheck me dice si mi envío cumple la normativa?",
+          "q": "¿Tickline me dice si mi envío cumple la normativa?",
           "a": "No. Muestra dónde sus documentos se contradicen o contienen valores no válidos, y enumera cada comprobación ejecutada. No decide sobre el cumplimiento aduanero y no es asesoramiento oficial."
         },
         "documents": {
@@ -644,7 +644,7 @@
           "a": "No. No examina cartas de crédito ni clasifica mercancías. Los códigos SA solo se comprueban en cuanto a formato y coherencia entre sus documentos."
         },
         "counterparty": {
-          "q": "¿Verifica TradeCheck que el vendedor o el comprador sea una empresa real?",
+          "q": "¿Verifica Tickline que el vendedor o el comprador sea una empresa real?",
           "a": "No. Comprueba el formato de los NIF-IVA y números EORI y su coherencia entre sus documentos, y enlaza a los servicios VIES y EORI de la Comisión Europea para confirmar que un número está registrado. Las consultas de registro mercantil, sanciones y solvencia son servicios aparte."
         }
       }
@@ -653,7 +653,8 @@
       "title": "Compruebe su próximo envío antes de que salga",
       "body": "Añada la factura, la lista de empaque y la orden de compra de un envío y vea dónde no coinciden.",
       "start": "Iniciar una comprobación",
-      "checks": "Ver sus comprobaciones"
+      "checks": "Ver sus comprobaciones",
+      "contact": "¿Preguntas o comentarios? Escriba al fundador a <mail>{email}</mail>."
     },
     "sources": "Fuentes"
   }

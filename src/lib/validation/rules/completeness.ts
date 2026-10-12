@@ -180,7 +180,7 @@ export const requiredFieldsRule: Rule = {
 
 /**
  * The document set: what is missing, what was not compared and why, and a general
- * reminder that the destination country decides what else is needed. TradeCheck does not
+ * reminder that the destination country decides what else is needed. Tickline does not
  * list country-specific documents (no rule pack, no claim).
  */
 export const documentSetRule: Rule = {

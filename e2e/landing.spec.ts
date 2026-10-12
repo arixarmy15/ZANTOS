@@ -1,13 +1,13 @@
 import { expect, test } from "@playwright/test";
 
 /**
- * The overview page: what TradeCheck is, a working example of the evidence ledger, the real
+ * The overview page: what Tickline is, a working example of the evidence ledger, the real
  * rule list, honest sources, and the search-engine signals (structured data, robots).
  */
 
 test("the overview explains the product and leads into a check", async ({ page }, testInfo) => {
   await page.goto("/en");
-  await expect(page).toHaveTitle("TradeCheck: check invoice, packing list and PO before shipment");
+  await expect(page).toHaveTitle("Tickline: check invoice, packing list and PO before shipment");
   await expect(
     page.getByRole("heading", {
       level: 1,
@@ -45,6 +45,12 @@ test("the overview explains the product and leads into a check", async ({ page }
   // FAQ answers open in place.
   await page.getByText("How long are my files kept?").click();
   await expect(page.getByText(/deleted automatically after 24 hours/).last()).toBeVisible();
+
+  // The founder's address, from CONTACT_EMAIL.
+  await expect(page.getByRole("link", { name: "founder@example.com" })).toHaveAttribute(
+    "href",
+    "mailto:founder@example.com",
+  );
 
   await page.getByRole("link", { name: "Start a check" }).first().click();
   await expect(page).toHaveURL(/\/en\/checks\/new$/);
@@ -85,7 +91,7 @@ test("structured data matches the page and checks stay out of search engines", a
     { "@type": string; name: string },
     { "@type": string; mainEntity: { name: string }[] },
   ];
-  expect(app).toMatchObject({ "@type": "SoftwareApplication", name: "TradeCheck" });
+  expect(app).toMatchObject({ "@type": "SoftwareApplication", name: "Tickline" });
   expect(faq["@type"]).toBe("FAQPage");
   const questions = await page.locator("#faq summary").allTextContents();
   expect(faq.mainEntity.map((question) => question.name)).toEqual(

@@ -165,7 +165,7 @@ test("phones get theme colour, a manifest with icons and no auto-linked numbers"
   await expect(page.locator('link[rel="apple-touch-icon"]')).toHaveCount(1);
   const href = await page.locator('link[rel="manifest"]').getAttribute("href");
   const manifest = await (await request.get(href!)).json();
-  expect(manifest).toMatchObject({ name: "TradeCheck", display: "standalone", start_url: "/" });
+  expect(manifest).toMatchObject({ name: "Tickline", display: "standalone", start_url: "/" });
   for (const icon of manifest.icons as { src: string }[]) {
     expect((await request.get(icon.src)).status(), icon.src).toBe(200);
   }

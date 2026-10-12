@@ -14,7 +14,7 @@ export type RulePackSource = {
 /**
  * Rules for one destination country. A pack applies when a document in the check names
  * that country as its destination. Every pack must cite the official sources its rules
- * implement; TradeCheck ships none until such sources have been verified.
+ * implement; Tickline ships none until such sources have been verified.
  */
 export type RulePack = {
   /** ISO 3166-1 alpha-2 code of the destination country, e.g. "DE". */

@@ -1,5 +1,5 @@
 {
-  "name": "tradecheck",
+  "name": "tickline",
   "version": "0.0.0",
   "private": true,
   "description": "Multilingual pre-shipment check for international trade documents (commercial invoice, packing list, purchase order).",

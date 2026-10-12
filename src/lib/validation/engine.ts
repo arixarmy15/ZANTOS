@@ -151,7 +151,7 @@ export function runChecks(input: {
     } catch {
       // A broken rule must not hide the others; it is reported as not verified.
       // Only the rule id is logged, never document content.
-      console.error(`TradeCheck rule failed: ${rule.id}`);
+      console.error(`Tickline rule failed: ${rule.id}`);
       results.push({
         ruleId: rule.id,
         category: rule.category,

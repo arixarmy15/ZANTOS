@@ -1,5 +1,5 @@
 /**
- * The fields TradeCheck extracts. Adding a document type (bill of lading, air waybill,
+ * The fields Tickline extracts. Adding a document type (bill of lading, air waybill,
  * certificate of origin) means adding it to DOCUMENT_TYPES, extending these maps where it
  * has new fields, and adding its required fields in the validation rules.
  */

@@ -10,7 +10,7 @@ export type AiErrorCode =
   | "document_too_large"
   | "unsupported_document"
   | "api_error"
-  /** A failure in TradeCheck itself, not in the provider's answer. */
+  /** A failure in Tickline itself, not in the provider's answer. */
   | "internal";
 
 export type TokenUsage = {
@@ -45,5 +45,5 @@ export function aiErrorStatus(error: AiError): number {
 
 /** Errors are logged by code only: never the request, the response or document content. */
 export function logAiError(operation: string, error: AiError) {
-  console.warn(`[tradecheck] ${operation} failed: ${error.code}`);
+  console.warn(`[tickline] ${operation} failed: ${error.code}`);
 }

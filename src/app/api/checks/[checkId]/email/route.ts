@@ -22,7 +22,7 @@ const bodySchema = z.object({ language: z.string().regex(LANGUAGE_TAG) });
 
 /**
  * Drafts a correction request. The draft is only returned for the user to copy or open in
- * their own mail program; TradeCheck never sends e-mail.
+ * their own mail program; Tickline never sends e-mail.
  */
 export async function POST(request: Request, { params }: Context) {
   const { checkId } = await params;

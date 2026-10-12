@@ -1,6 +1,7 @@
 import { existsSync, mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { DatabaseSync } from "node:sqlite";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { extraction, field } from "../../../test/helpers/extraction";
 import { SqliteStorage } from "./sqlite-storage";
@@ -10,7 +11,7 @@ let storage: SqliteStorage;
 const bytes = new TextEncoder().encode("%PDF-test");
 
 beforeEach(() => {
-  dir = mkdtempSync(join(tmpdir(), "tradecheck-"));
+  dir = mkdtempSync(join(tmpdir(), "tickline-"));
   storage = new SqliteStorage(dir, 24);
 });
 
@@ -107,5 +108,23 @@ describe("SqliteStorage", () => {
     await storage.clearCached(check.id, "explain:");
     expect(await storage.getCached(check.id, "explain:F1:en")).toBeNull();
     expect(await storage.getCached(check.id, "compare:abc")).toEqual({ same: true });
+  });
+
+  it("keeps the database written under the previous name", async () => {
+    const legacy = mkdtempSync(join(tmpdir(), "tickline-legacy-"));
+    try {
+      // A data folder from before the rename holds tradecheck.sqlite.
+      const old = new DatabaseSync(join(legacy, "tradecheck.sqlite"));
+      old.exec("CREATE TABLE marker (id INTEGER); INSERT INTO marker VALUES (7);");
+      old.close();
+      const reopened = new SqliteStorage(legacy, 24);
+      expect(await reopened.listChecks()).toEqual([]);
+      expect(existsSync(join(legacy, "tradecheck.sqlite"))).toBe(false);
+      const moved = new DatabaseSync(join(legacy, "tickline.sqlite"));
+      expect(moved.prepare("SELECT id FROM marker").get()).toEqual({ id: 7 });
+      moved.close();
+    } finally {
+      rmSync(legacy, { recursive: true, force: true });
+    }
   });
 });

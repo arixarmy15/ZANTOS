@@ -1,7 +1,7 @@
 import { EU_VAT_PREFIXES } from "@/lib/validation/reference";
 import type { EffectiveDocument } from "./effective";
 
-/** Official services where a number can be confirmed. TradeCheck never queries them itself. */
+/** Official services where a number can be confirmed. Tickline never queries them itself. */
 export const VERIFICATION_LINKS = {
   vies: "https://ec.europa.eu/taxation_customs/vies/",
   eori: "https://taxation-customs.ec.europa.eu/customs/customs-procedures-import-and-export/customs-operations/economic-operators-registration-and-identification-number-eori_en",

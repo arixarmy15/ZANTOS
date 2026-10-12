@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import type { DocumentType } from "@/lib/domain/fields";
@@ -114,7 +114,11 @@ export class SqliteStorage implements Storage {
     const root = resolve(dataDir);
     this.filesDir = join(root, "files");
     mkdirSync(this.filesDir, { recursive: true, mode: 0o700 });
-    this.db = new DatabaseSync(join(root, "tradecheck.sqlite"));
+    const database = join(root, "tickline.sqlite");
+    // Data written before the rename from TradeCheck keeps working.
+    const previous = join(root, "tradecheck.sqlite");
+    if (!existsSync(database) && existsSync(previous)) renameSync(previous, database);
+    this.db = new DatabaseSync(database);
     this.db.exec(SCHEMA);
   }
 

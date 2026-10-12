@@ -1,10 +1,10 @@
-# TradeCheck
+# Tickline
 
-A multilingual pre-shipment check for international trade documents. Exporters upload the commercial invoice, packing list and purchase order for one shipment; TradeCheck reads them, compares them with each other and lists what needs attention — each finding linked to the evidence in the document.
+A multilingual pre-shipment check for international trade documents. Exporters upload the commercial invoice, packing list and purchase order for one shipment; Tickline reads them, compares them with each other and lists what needs attention — each finding linked to the evidence in the document.
 
 > **Status: MVP complete, not deployed.** All development phases are done (see [Development phases](#development-phases)). The repository is private and there is no hosted version. Design decisions are documented in [DESIGN.md](DESIGN.md).
 
-## What TradeCheck is — and is not
+## What Tickline is — and is not
 
 - It is a **self-service pre-check** that a small exporter, a freight forwarder or the operations team of a customs broker runs _before_ a shipment leaves, to catch inconsistencies early.
 - It is **not** a customs broker, a legal adviser or an official authority, and it does not replace one. Findings are **for information only and are not official customs or legal advice.** This notice appears on every page, above the results and in every report.
@@ -32,7 +32,7 @@ The model is never asked for HS codes, tax-ID formats or regulations, its prompt
 
 ## Two-minute demo
 
-Use your own documents for one shipment, kept in `/samples` (git-ignored). TradeCheck ships no sample documents or results.
+Use your own documents for one shipment, kept in `/samples` (git-ignored). Tickline ships no sample documents or results.
 
 1. `npm run dev`, open http://localhost:3000 — you land on the overview page in your browser's language; switch it top right. Select the findings in the example to see their evidence marked in both documents.
 2. **Start a check** (or **New check**) → give it a reference, drop the invoice, packing list and purchase order, **Create check** → **Continue to the check**. A file that is not really a PDF, PNG or JPG is rejected with the reason next to it.
@@ -40,7 +40,7 @@ Use your own documents for one shipment, kept in `/samples` (git-ignored). Trade
 4. **Findings.** The summary shows errors, warnings, results that could not be verified and notes, plus issues per check category. Filter by status, category or document.
 5. Click **Show in document** on a finding: the page opens with the evidence highlighted, a bracket in the margin and the same `F` tag. Click a tag in the margin to jump back to its finding.
 6. In **Extracted data**, correct a value that was read wrongly — the findings update. Change the **rounding tolerance** under "Checks that ran" to see the arithmetic checks re-run.
-7. **Explain in plain language** on a finding, or **Draft correction e-mail** for the errors and warnings (in the documents' language, changeable). Copy the draft or open it in your mail program — TradeCheck sends nothing.
+7. **Explain in plain language** on a finding, or **Draft correction e-mail** for the errors and warnings (in the documents' language, changeable). Copy the draft or open it in your mail program — Tickline sends nothing.
 8. **Open report** → **Print or save as PDF**. The token usage of every step is in the page header and in the report.
 9. **Delete check** removes the files and data immediately; otherwise they are deleted automatically after `RETENTION_HOURS`.
 
@@ -90,6 +90,7 @@ All variables are server-side only. See `.env.example` for the template.
 | `UPLOAD_MAX_FILES_PER_CHECK` | `10`                | Max documents in one check, 1–20.                                        |
 | `RETENTION_HOURS`            | `24`                | Files, extracted data and findings are deleted after this many hours.    |
 | `SITE_URL`                   | —                   | Public address; enables canonical, hreflang and sitemap URLs.            |
+| `CONTACT_EMAIL`              | —                   | Shown on the overview page as "Write to the founder", e.g. `founder@…`.  |
 
 ### Scripts
 
@@ -121,7 +122,7 @@ All arithmetic and rule-based checks are deterministic code (`src/lib/validation
 | Formats          | ISO 4217 currency, ISO 3166-1 country, Incoterms® 2020, HS code format (never the classification), IBAN check digits, EU VAT number prefix and the Dutch VAT structure, EORI structure and the Dutch EORI structure, readable values, purchase order dated first |
 | Completeness     | expected fields per document type, missing or unread documents, a general reminder to check the destination country's rules                                                                                                                                      |
 
-**Party identifiers.** VAT and EORI numbers are checked for format and for consistency across the documents only. Each sourced structure is cited in code (`src/lib/validation/reference.ts`): the EU VAT prefix (Council Directive 2006/112/EC, art. 215; `XI` from Directive (EU) 2020/1756), the Dutch VAT number NL + 9 digits + B + 2 digits (Belastingdienst), the EORI structure of a country code and up to 15 letters or digits (European Commission) and the Dutch EORI NL + 9-digit RSIN (European Commission, EORI national implementation). Whether a number is registered, and to whom, is confirmed only by the official services, so the check page and the report list each number with a link to [VIES](https://ec.europa.eu/taxation_customs/vies/) or the [EORI validation](https://taxation-customs.ec.europa.eu/customs/customs-procedures-import-and-export/customs-operations/economic-operators-registration-and-identification-number-eori_en); TradeCheck does not query them. See [docs/analysis-gettradecheck.md](docs/analysis-gettradecheck.md) for why.
+**Party identifiers.** VAT and EORI numbers are checked for format and for consistency across the documents only. Each sourced structure is cited in code (`src/lib/validation/reference.ts`): the EU VAT prefix (Council Directive 2006/112/EC, art. 215; `XI` from Directive (EU) 2020/1756), the Dutch VAT number NL + 9 digits + B + 2 digits (Belastingdienst), the EORI structure of a country code and up to 15 letters or digits (European Commission) and the Dutch EORI NL + 9-digit RSIN (European Commission, EORI national implementation). Whether a number is registered, and to whom, is confirmed only by the official services, so the check page and the report list each number with a link to [VIES](https://ec.europa.eu/taxation_customs/vies/) or the [EORI validation](https://taxation-customs.ec.europa.eu/customs/customs-procedures-import-and-export/customs-operations/economic-operators-registration-and-identification-number-eori_en); Tickline does not query them. See [docs/analysis-gettradecheck.md](docs/analysis-gettradecheck.md) for why.
 
 ## AI providers
 
@@ -150,7 +151,7 @@ The token usage of every request is recorded with the model that answered, which
 - **Evidence ledger.** Findings and the documents side by side (two panes from 1024 px, tabs on tablets, a full-screen sheet on phones). Every finding has a reference tag (`F3`); selecting it shows the page with the evidence highlighted and the same tag in the margin. PDFs are rendered in the browser with PDF.js (legacy build, for browsers a few versions old). Images and scans without a text layer list their evidence above the page as "Exact position not available".
 - **Summary and filters.** Counts by status, issues per check category (chart with a table view), filters by status, category and document, and the full list of checks that ran — "No issues found" always refers to that list.
 - **Report.** `/<language>/checks/<id>/report` is laid out for printing; "Print or save as PDF" uses the browser's print dialog, so every script (Arabic included) is shaped correctly. It carries the information-only notice, the documents, all findings with evidence, the checks that ran and the token usage.
-- **AI assistance (optional, labelled).** "Explain in plain language" for one finding, and a correction e-mail draft in the documents' language (changeable). Drafts are only shown for copying or opening in your own mail program — TradeCheck never sends e-mail. Both are cached by content hash and their tokens are added to the check's usage.
+- **AI assistance (optional, labelled).** "Explain in plain language" for one finding, and a correction e-mail draft in the documents' language (changeable). Drafts are only shown for copying or opening in your own mail program — Tickline never sends e-mail. Both are cached by content hash and their tokens are added to the check's usage.
 
 ## Rule packs
 
@@ -178,8 +179,8 @@ Interface languages: English (default), Turkish, German, Spanish, French and Ara
 `/<language>` is a public overview of the product; the list of checks is at `/<language>/checks`. It was written with the `marketing-campaign`, `seo` and `brand-voice` skills (see [DESIGN.md §15](DESIGN.md#15-overview-page)):
 
 - **Hero:** the headline, the next step (**Start a check**) and a working miniature of the evidence ledger — two synthetic documents, labelled as an example, where selecting a finding marks its evidence in both.
-- **Problem, with sources:** the ICC Banking Commission's estimate that 65–80 % of documents presented under letters of credit are refused on first presentation ([Technical Advisory Briefing No. 3, 2022](https://library.iccwbo.org/content/tfb/BRIEFINGS/20220627_TA_Briefing_No3_reducing_discrepancy_rates.pdf)) and UCP 600 article 14 (d), with the scope stated plainly: TradeCheck does not examine letters of credit.
-- **How a check works**, **what every check covers** (read from the rule engine, so the list cannot drift from the product), **evidence**, **what TradeCheck will not do**, **AI providers**, **privacy**, **audience and languages**, **questions** and a final call to action.
+- **Problem, with sources:** the ICC Banking Commission's estimate that 65–80 % of documents presented under letters of credit are refused on first presentation ([Technical Advisory Briefing No. 3, 2022](https://library.iccwbo.org/content/tfb/BRIEFINGS/20220627_TA_Briefing_No3_reducing_discrepancy_rates.pdf)) and UCP 600 article 14 (d), with the scope stated plainly: Tickline does not examine letters of credit.
+- **How a check works**, **what every check covers** (read from the rule engine, so the list cannot drift from the product), **evidence**, **what Tickline will not do**, **AI providers**, **privacy**, **audience and languages**, **questions** and a final call to action.
 - Upload limits and retention are the server's configured values, not copy.
 - **Search engines:** a unique title and description per language, `SoftwareApplication` and `FAQPage` structured data that mirror the visible text, a social preview image (`npm run og:image` regenerates it), `robots.txt` that keeps `/api/` and every check out of crawlers, `noindex` on all check pages, and — once `SITE_URL` is set — canonical and hreflang links and a sitemap of the overview page in every language.
 
@@ -191,7 +192,7 @@ Every screen works on phones down to 320 px wide, with touch emulation in the te
 - **Touch-sized controls.** On touch screens buttons, fields, tabs and menus are at least 44 px tall, and form text is 16 px so iOS does not zoom in on focus.
 - **Evidence on a small screen.** The document opens as a full-screen sheet with zoom (100–300 %) and horizontal scrolling; the page is redrawn at the shown size, so highlights stay on their text. Category and document filters fold behind "More filters", and jump links lead to each section of a check.
 - **Dialogs dock to the bottom** of the screen, and the layout respects notches and the home indicator (`viewport-fit=cover` with safe-area insets).
-- **Add to home screen** opens TradeCheck full-screen (web app manifest and icons). There is deliberately no service worker, so no documents are cached on the device.
+- **Add to home screen** opens Tickline full-screen (web app manifest and icons). There is deliberately no service worker, so no documents are cached on the device.
 
 ## Privacy and data
 

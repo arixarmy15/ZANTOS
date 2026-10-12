@@ -5,7 +5,7 @@ export default function GlobalNotFound() {
       <body style={{ fontFamily: "system-ui, sans-serif", padding: 24 }}>
         <h1>Page not found</h1>
         <p>
-          <a href="/">TradeCheck</a>
+          <a href="/">Tickline</a>
         </p>
       </body>
     </html>

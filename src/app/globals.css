@@ -2,7 +2,7 @@
 
 /*
  * Design tokens from design/tokens.json (see DESIGN.md). Tailwind's default palette, type,
- * radius and shadow scales are removed so only TradeCheck tokens can be used.
+ * radius and shadow scales are removed so only Tickline tokens can be used.
  */
 @theme {
   --color-*: initial;

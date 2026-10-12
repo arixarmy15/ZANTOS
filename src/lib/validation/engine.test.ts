@@ -112,7 +112,7 @@ describe("runChecks", () => {
       rulePack: "de-test",
     });
     expect(result.results).toHaveLength(CORE_RULES.length + 1);
-    expect(error).toHaveBeenCalledWith("TradeCheck rule failed: pack-de-broken");
+    expect(error).toHaveBeenCalledWith("Tickline rule failed: pack-de-broken");
     error.mockRestore();
   });
 });

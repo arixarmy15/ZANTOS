@@ -40,8 +40,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ...(site ? { metadataBase: new URL(site) } : {}),
     title: { default: t("title"), template: `%s · ${t("title")}` },
     description: t("description"),
-    applicationName: "TradeCheck",
-    appleWebApp: { capable: true, title: "TradeCheck", statusBarStyle: "default" },
+    applicationName: "Tickline",
+    appleWebApp: { capable: true, title: "Tickline", statusBarStyle: "default" },
     // Invoice numbers, IBANs, amounts and dates must not turn into phone, map or calendar links.
     formatDetection: { telephone: false, date: false, address: false, email: false },
   };

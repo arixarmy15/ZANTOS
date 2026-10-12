@@ -4,7 +4,7 @@ import { VERIFICATION_LINKS, type PartyIdentifier } from "@/lib/checks/identifie
 
 /**
  * The parties' VAT and EORI numbers with a link to the official service that can confirm
- * them. TradeCheck checks format and consistency only; it does not query those services.
+ * them. Tickline checks format and consistency only; it does not query those services.
  */
 export function PartyIdentifiers({ identifiers }: { identifiers: PartyIdentifier[] }) {
   const t = useTranslations("results.identifiers");

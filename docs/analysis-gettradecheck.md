@@ -16,7 +16,7 @@ recently registered web domain and a virtual office address. An instant report c
 
 ## How it differs from this project
 
-|             | gettradecheck.com                            | This project (TradeCheck, self-hosted)                                         |
+|             | gettradecheck.com                            | This project (Tickline, self-hosted)                                           |
 | ----------- | -------------------------------------------- | ------------------------------------------------------------------------------ |
 | Question    | "Is this Dutch company who it claims to be?" | "Do this shipment's invoice, packing list and order agree with each other?"    |
 | Input       | A company name or registration number        | The shipment's own documents (PDF, PNG, JPG)                                   |
@@ -57,11 +57,16 @@ not the same project.
 - **Domain-age and virtual-office signals** — heuristics, not documented requirements.
 - **Per-report pricing and an expert tier** — a business model, not a product feature.
 
+## Name
+
+gettradecheck.com trades as "TradeCheck" in the Netherlands, in an adjacent market (trade
+compliance), and this project used the same name. To avoid confusion it was renamed
+**Tickline** (October 2026). A web search found no software product of that name; the nearest
+were "Ticketline" (event ticketing) and "Tick" (time tracking). A web search is not a trademark
+search: check EUIPO, BOIP and TÜRKPATENT before a public launch.
+
 ## Open points for the owner
 
-- **Name.** gettradecheck.com trades as "TradeCheck" in the Netherlands, in an adjacent
-  market (trade compliance). Before any public launch under the same name, a trademark search
-  (EUIPO, BOIP) is advisable.
 - **VIES lookups.** If live VAT validation is wanted later, implement it against the
   Commission's published VIES technical documentation, opt-in per check, with the request
   time and the consultation number recorded in the report.
