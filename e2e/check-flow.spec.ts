@@ -89,7 +89,7 @@ test("extracted fields can be corrected and are labelled", async ({ page }, test
   await expectAccessible(page);
 });
 
-for (const locale of ["tr", "ar"]) {
+for (const locale of ["tr", "ar", "he"]) {
   test(`check page in ${locale} has no axe violations`, async ({ page }) => {
     const { checkId } = await seedCheck({
       name: `E2E ${locale}`,

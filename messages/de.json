@@ -5,7 +5,8 @@
   },
   "metadata": {
     "title": "Tickline",
-    "description": "Mehrsprachige Prüfung vor dem Versand für Handelsrechnungen, Packlisten und Bestellungen."
+    "description": "Mehrsprachige Prüfung vor dem Versand für Handelsrechnungen, Packlisten und Bestellungen.",
+    "ogAlt": "Tickline: Handelsrechnung und Packliste nebeneinander, die Packstückzahlen 12 und 14 mit F1 markiert und der Befund „Anzahl der Packstücke weicht ab“."
   },
   "nav": {
     "home": "Tickline – Startseite",
@@ -610,7 +611,7 @@
         "brokers": "Backoffices von Zollagenturen"
       },
       "languages": "Sprachen der Oberfläche",
-      "devices": "Läuft auf Desktop, Tablet und Telefon, auch in Arabisch von rechts nach links."
+      "devices": "Läuft auf Desktop, Tablet und Telefon, auch in Hebräisch und Arabisch von rechts nach links."
     },
     "faq": {
       "title": "Fragen",

@@ -89,10 +89,13 @@ for (const width of WIDTHS) {
     for (const path of [
       "/en",
       "/ar",
+      "/he",
+      "/he/checks/new",
       "/en/checks",
       "/en/checks/new",
       `/en/checks/${checkId}`,
       `/ar/checks/${checkId}`,
+      `/he/checks/${checkId}`,
       `/en/checks/${checkId}/report`,
       "/en/no-such-page",
     ]) {

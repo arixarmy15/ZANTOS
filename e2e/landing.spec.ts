@@ -121,6 +121,50 @@ test("structured data matches the page and checks stay out of search engines", a
   }
 });
 
+test("the overview is fully Hebrew, right to left, with its own type and preview", async ({
+  page,
+  request,
+}, testInfo) => {
+  test.skip(testInfo.project.name === "tablet", "Covered at phone and desktop width");
+  await page.goto("/he");
+  await expect(page.locator("html")).toHaveAttribute("lang", "he");
+  await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
+  await expect(
+    page.getByRole("heading", { level: 1, name: "מגלים אי־התאמות במסמכים לפני שהסחורה יוצאת" }),
+  ).toBeVisible();
+  await expect(page).toHaveTitle("Tickline: בדיקת חשבונית, רשימת אריזה והזמנת רכש לפני המשלוח");
+  // Headings in Frank Ruhl Libre, text in IBM Plex Sans Hebrew.
+  const fonts = await page.evaluate(() => ({
+    heading: getComputedStyle(document.querySelector("h1")!).fontFamily,
+    text: getComputedStyle(document.body).fontFamily,
+  }));
+  expect(fonts.heading).toContain("Frank Ruhl Libre");
+  expect(fonts.text).toMatch(/^"IBM Plex Sans Hebrew"/);
+  await expect
+    .poll(() =>
+      page.evaluate(() => document.fonts.check('600 32px "Frank Ruhl Libre Variable"', "א")),
+    )
+    .toBe(true);
+  // The example, the findings and the rule list are in Hebrew too.
+  const example = page.getByRole("figure").first();
+  await expect(example.getByText("חשבונית מסחרית")).toBeVisible();
+  await expect(example.getByRole("button", { name: /מספר האריזות שונה/ })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await expect(page.locator("#checks").getByRole("listitem")).toHaveCount(30);
+  // The social preview is the Hebrew card, with Hebrew alt text.
+  const image = page.locator('meta[property="og:image"]');
+  await expect(image).toHaveAttribute("content", /\/he\/opengraph-image/);
+  await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
+    "content",
+    /^Tickline: חשבונית מסחרית/,
+  );
+  const card = await request.get(new URL((await image.getAttribute("content"))!).pathname);
+  expect(card.headers()["content-type"]).toBe("image/png");
+  expect((await card.body()).byteLength).toBeGreaterThan(10_000);
+});
+
 test("the overview reads right to left in Arabic", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name === "tablet", "Covered at phone and desktop width");
   await page.goto("/ar");

@@ -4,7 +4,7 @@ import { seedConflicts } from "./helpers/conflicts";
 import { syntheticPdf } from "./helpers/seed";
 
 /**
- * Review screenshots at the three design widths and in Arabic (RTL), covering every content
+ * Review screenshots at the three design widths and in Hebrew and Arabic (RTL), covering every content
  * state. Not part of the regular run:
  *   SCREENSHOTS=1 npm run test:e2e -- e2e/screenshots.spec.ts
  * Output goes to `screenshots/` (git-ignored) and uses synthetic, labelled test data only.
@@ -13,12 +13,14 @@ test.skip(!process.env.SCREENSHOTS, "Set SCREENSHOTS=1 to capture review screens
 
 const DIR = "screenshots";
 
-test("capture check, findings and report in English and Arabic", async ({ page }, testInfo) => {
+test("capture check, findings and report in Hebrew, English and Arabic", async ({
+  page,
+}, testInfo) => {
   mkdirSync(DIR, { recursive: true });
   const width = testInfo.project.name;
   const { checkId } = await seedConflicts(`Screenshot ${width}`);
 
-  for (const locale of ["en", "ar"]) {
+  for (const locale of ["he", "en", "ar"]) {
     await page.goto(`/${locale}/checks/${checkId}`);
     await expect(page.locator("article[data-finding]").first()).toBeVisible();
     await page.screenshot({ path: `${DIR}/${width}-${locale}-check.png`, fullPage: true });

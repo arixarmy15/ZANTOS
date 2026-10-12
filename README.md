@@ -34,7 +34,7 @@ The model is never asked for HS codes, tax-ID formats or regulations, its prompt
 
 Use your own documents for one shipment, kept in `/samples` (git-ignored). Tickline ships no sample documents or results.
 
-1. `npm run dev`, open http://localhost:3000 — you land on the overview page in your browser's language; switch it top right. Select the findings in the example to see their evidence marked in both documents.
+1. `npm run dev`, open http://localhost:3000 — you land on the overview page in Hebrew (or, in the `multilingual` edition, in your browser's language); switch it top right. Select the findings in the example to see their evidence marked in both documents.
 2. **Start a check** (or **New check**) → give it a reference, drop the invoice, packing list and purchase order, **Create check** → **Continue to the check**. A file that is not really a PDF, PNG or JPG is rejected with the reason next to it.
 3. **Read documents.** Each document shows "Reading…" and then its detected type and language; the type can be changed. After reading, names and descriptions written differently are compared by the AI model automatically.
 4. **Findings.** The summary shows errors, warnings, results that could not be verified and notes, plus issues per check category. Filter by status, category or document.
@@ -105,7 +105,7 @@ All variables are server-side only. See `.env.example` for the template.
 | `npm run test:e2e`        | Playwright end-to-end and axe accessibility tests at three widths |
 | `npm run check:secrets`   | Fails if a tracked file looks like it contains a key              |
 | `npm run ai:models`       | Lists the models the OpenAI-compatible endpoint offers            |
-| `npm run og:image`        | Renders the social preview image of the overview page             |
+| `npm run og:image`        | Renders the overview's social preview image in every language     |
 | `npm run test:live`       | Opt-in checks against the configured provider (real requests)     |
 | `npm run check`           | All of the above except the end-to-end tests                      |
 
@@ -167,12 +167,23 @@ In short — the full guide is [`rules/README.md`](rules/README.md):
 
 ## Languages
 
-Interface languages: English (default), Turkish, German, Spanish, French and Arabic (right-to-left). Routes are `/<language>/…`, and the browser's language is detected on the first visit.
+Interface languages: Hebrew (default, right-to-left), English, Turkish, German, Spanish, French and Arabic (right-to-left). Routes are `/<language>/…`.
+
+**Editions.** `TICKLINE_EDITION` is read at build time (see `.env.example` and `src/i18n/edition.ts`):
+
+| Edition                  | Starting language                                                         | Language menu        |
+| ------------------------ | ------------------------------------------------------------------------- | -------------------- |
+| `hebrew` (default)       | Always Hebrew: `/` opens `/he`, whatever the browser asks for             | All 7, Hebrew first  |
+| `multilingual` (earlier) | English by default; the browser's language is detected on the first visit | All 7, English first |
+
+The `multilingual` edition is the behaviour before Hebrew became the default (the last commit with it as the only behaviour is `dd6a699`). Both editions serve every language; only the starting language and the order change.
+
+- **Hebrew** is written to the humanizer rules ([blader/humanizer](https://github.com/blader/humanizer), based on Wikipedia's "Signs of AI writing"): plain statements, no dashes as connectors, no sales words, and the plural form of address so the text does not pick a gender. `test/hebrew-writing.test.ts` checks what a machine can check; [DESIGN.md §19](DESIGN.md#19-hebrew-edition-october-2026) has the full guide. Headings use Frank Ruhl Libre and text IBM Plex Sans Hebrew.
 
 - **Adding a language** only requires adding `messages/<code>.json` with the same keys and `meta.name` / `meta.direction`; the i18n test checks key and placeholder parity.
 - Translations other than English are **machine-generated drafts and need human review** before production use.
 - The interface language and the document language are independent: documents can be in any language the configured model can read, and e-mail drafts default to the documents' language.
-- Numbers, dates and currencies are formatted with `Intl`; Arabic uses Latin digits so values look like the paper documents.
+- Numbers, dates and currencies are formatted with `Intl`; Arabic uses Latin digits so values look like the paper documents (Hebrew uses them natively).
 
 ## Overview page
 
@@ -182,7 +193,7 @@ Interface languages: English (default), Turkish, German, Spanish, French and Ara
 - **Problem, with sources:** the ICC Banking Commission's estimate that 65–80 % of documents presented under letters of credit are refused on first presentation ([Technical Advisory Briefing No. 3, 2022](https://library.iccwbo.org/content/tfb/BRIEFINGS/20220627_TA_Briefing_No3_reducing_discrepancy_rates.pdf)) and UCP 600 article 14 (d), with the scope stated plainly: Tickline does not examine letters of credit.
 - **How a check works**, **what every check covers** (read from the rule engine, so the list cannot drift from the product), **evidence**, **what Tickline will not do**, **AI providers**, **privacy**, **audience and languages**, **questions** and a final call to action.
 - Upload limits and retention are the server's configured values, not copy.
-- **Search engines:** a unique title and description per language, `SoftwareApplication` and `FAQPage` structured data that mirror the visible text, a social preview image (`npm run og:image` regenerates it), `robots.txt` that keeps `/api/` and every check out of crawlers, `noindex` on all check pages, and — once `SITE_URL` is set — canonical and hreflang links and a sitemap of the overview page in every language.
+- **Search engines:** a unique title and description per language, `SoftwareApplication` and `FAQPage` structured data that mirror the visible text, a social preview image in each language with alt text in that language (`npm run og:image` renders `public/social/<language>.png`), `robots.txt` that keeps `/api/` and every check out of crawlers, `noindex` on all check pages, and — once `SITE_URL` is set — canonical and hreflang links and a sitemap of the overview page in every language.
 
 ## Phones and tablets
 
@@ -220,7 +231,7 @@ Every screen works on phones down to 320 px wide, with touch emulation in the te
 
 - **Unit tests** (Vitest): every rule, the engine, rule-pack validation, extraction and comparison calls with a mocked client, the OpenAI-compatible client (wire format, format negotiation, retries, error mapping) and real HTTP round trips to a local stand-in with per-task routing, storage, evidence location, presentation in several languages, design tokens (WCAG contrast) and translation parity.
 - **End-to-end tests** (Playwright) at 390 (touch), 834 (touch) and 1440 px, plus a phone sweep at 320 and 390 px that fails on sideways scrolling, touch targets under 44 px or form text under 16 px: every page in every language with axe (WCAG 2.2 AA tags), upload and rejection, field correction, findings, filters, evidence selection, the report and the rounding tolerance — using synthetic, labelled fixtures generated at test time.
-- **Review screenshots** of every screen and content state at three widths, in English and Arabic: `SCREENSHOTS=1 npm run test:e2e -- e2e/screenshots.spec.ts` (output in `screenshots/`, git-ignored). The Phase 6 review is summarized in [DESIGN.md](DESIGN.md#14-phase-6-review).
+- **Review screenshots** of every screen and content state at three widths, in Hebrew, English and Arabic: `SCREENSHOTS=1 npm run test:e2e -- e2e/screenshots.spec.ts` (output in `screenshots/`, git-ignored). The Phase 6 review is summarized in [DESIGN.md](DESIGN.md#14-phase-6-review).
 
 ## Development phases
 

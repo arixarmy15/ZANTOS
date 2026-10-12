@@ -2,6 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 const locales = [
+  { code: "he", dir: "rtl" },
   { code: "en", dir: "ltr" },
   { code: "tr", dir: "ltr" },
   { code: "de", dir: "ltr" },
@@ -36,11 +37,18 @@ for (const { code, dir } of locales) {
   }
 }
 
-test("the root redirects to the browser's language", async ({ browser }) => {
+test("the Hebrew edition starts in Hebrew whatever the browser's language", async ({ browser }) => {
+  // TICKLINE_EDITION=multilingual (the earlier edition) follows the browser instead; that
+  // choice is covered by src/i18n/edition.test.ts.
   const context = await browser.newContext({ locale: "tr-TR" });
   const page = await context.newPage();
   await page.goto("/");
-  await expect(page).toHaveURL(/\/tr$/);
+  await expect(page).toHaveURL(/\/he$/);
+  await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
+  // The other languages stay one choice away.
+  await page.goto("/tr");
+  await page.goto("/");
+  await expect(page).toHaveURL(/\/he$/);
   await context.close();
 });
 

@@ -5,7 +5,8 @@
   },
   "metadata": {
     "title": "Tickline",
-    "description": "Ticari fatura, çeki listesi ve sipariş belgeleri için çok dilli sevkiyat öncesi kontrol."
+    "description": "Ticari fatura, çeki listesi ve sipariş belgeleri için çok dilli sevkiyat öncesi kontrol.",
+    "ogAlt": "Tickline: yan yana bir ticari fatura ve bir çeki listesi; 12 ve 14 olan koli sayıları F1 ile işaretli ve bulgu “Koli sayısı farklı”."
   },
   "nav": {
     "home": "Tickline ana sayfa",
@@ -610,7 +611,7 @@
         "brokers": "Gümrük müşavirliklerinin arka ofisleri"
       },
       "languages": "Arayüz dilleri",
-      "devices": "Sağdan sola Arapça dahil masaüstünde, tablette ve telefonda çalışır."
+      "devices": "Sağdan sola İbranice ve Arapça dahil masaüstünde, tablette ve telefonda çalışır."
     },
     "faq": {
       "title": "Sorular",

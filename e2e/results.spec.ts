@@ -153,7 +153,7 @@ test("the rounding tolerance re-runs the checks", async ({ page }, testInfo) => 
 });
 
 // One test per language, so each page pair has its own time budget and runs in parallel.
-for (const locale of ["en", "tr", "de", "es", "fr", "ar"]) {
+for (const locale of ["he", "en", "tr", "de", "es", "fr", "ar"]) {
   test(`results and report pass axe in ${locale}`, async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop", "Language sweep runs once");
     const { checkId } = await seedConflicts(`E2E axe ${locale}`);

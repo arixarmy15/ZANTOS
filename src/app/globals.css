@@ -67,7 +67,14 @@
   --font-display: "Bodoni Moda Variable", "DM Sans Variable", Georgia, serif;
   --font-arabic:
     "IBM Plex Sans Arabic", "DM Sans Variable", "Noto Sans Arabic", "Segoe UI", sans-serif;
-  --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  /* Hebrew: Plex Sans Hebrew for text, Frank Ruhl Libre (a Hebrew book serif) for h1 and h2. */
+  --font-hebrew:
+    "IBM Plex Sans Hebrew", "DM Sans Variable", "Noto Sans Hebrew", "Segoe UI", sans-serif;
+  --font-hebrew-display: "Frank Ruhl Libre Variable", "Bodoni Moda Variable", Georgia, serif;
+  /* Codes are Latin; Hebrew or Arabic inside a value falls back to the matching Plex face. */
+  --font-mono:
+    "DM Mono", "IBM Plex Sans Hebrew", "IBM Plex Sans Arabic", ui-monospace, "SFMono-Regular",
+    Menlo, Consolas, monospace;
 
   --text-*: initial;
   --text-caption: 12px;
@@ -272,6 +279,10 @@
     line-height: 22px;
   }
 
+  html:lang(he) body {
+    font-family: var(--font-hebrew);
+  }
+
   /*
    * Stacked grids: the column never grows past its container, so one long unbreakable string
    * (a file name, an IBAN, a reference) cannot widen the whole page on a phone. Grids with
@@ -290,7 +301,7 @@
   /*
    * Bodoni Moda (optical sizes) for page titles and the overview's section titles
    * (class font-display); it needs 24 px or more, so small panel headings stay in DM Sans.
-   * Arabic keeps its own face.
+   * Arabic keeps its own face; Hebrew uses Frank Ruhl Libre, a serif drawn for Hebrew.
    */
   h1,
   .font-display {
@@ -301,6 +312,11 @@
   html:lang(ar) h1,
   html:lang(ar) .font-display {
     font-family: var(--font-arabic);
+    letter-spacing: 0;
+  }
+  html:lang(he) h1,
+  html:lang(he) .font-display {
+    font-family: var(--font-hebrew-display);
     letter-spacing: 0;
   }
 

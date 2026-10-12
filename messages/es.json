@@ -5,7 +5,8 @@
   },
   "metadata": {
     "title": "Tickline",
-    "description": "Comprobación multilingüe previa al envío para facturas comerciales, listas de empaque y órdenes de compra."
+    "description": "Comprobación multilingüe previa al envío para facturas comerciales, listas de empaque y órdenes de compra.",
+    "ogAlt": "Tickline: una factura comercial y una lista de empaque lado a lado, con los bultos 12 y 14 marcados F1 y el hallazgo «El número de bultos no coincide»."
   },
   "nav": {
     "home": "Inicio de Tickline",
@@ -610,7 +611,7 @@
         "brokers": "Oficinas internas de agentes de aduanas"
       },
       "languages": "Idiomas de la interfaz",
-      "devices": "Funciona en ordenador, tableta y teléfono, también en árabe de derecha a izquierda."
+      "devices": "Funciona en ordenador, tableta y teléfono, también en hebreo y árabe de derecha a izquierda."
     },
     "faq": {
       "title": "Preguntas",

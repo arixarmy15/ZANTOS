@@ -5,7 +5,8 @@
   },
   "metadata": {
     "title": "Tickline",
-    "description": "Vérification multilingue avant expédition pour factures commerciales, listes de colisage et bons de commande."
+    "description": "Vérification multilingue avant expédition pour factures commerciales, listes de colisage et bons de commande.",
+    "ogAlt": "Tickline : une facture commerciale et une liste de colisage côte à côte, avec les nombres de colis 12 et 14 marqués F1 et le constat « Le nombre de colis diffère »."
   },
   "nav": {
     "home": "Accueil Tickline",
@@ -610,7 +611,7 @@
         "brokers": "Back-offices des commissionnaires en douane"
       },
       "languages": "Langues de l'interface",
-      "devices": "Fonctionne sur ordinateur, tablette et téléphone, y compris en arabe de droite à gauche."
+      "devices": "Fonctionne sur ordinateur, tablette et téléphone, y compris en hébreu et en arabe de droite à gauche."
     },
     "faq": {
       "title": "Questions",

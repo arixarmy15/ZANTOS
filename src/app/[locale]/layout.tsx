@@ -3,6 +3,11 @@ import "@fontsource-variable/dm-sans/opsz.css";
 import "@fontsource/ibm-plex-sans-arabic/400.css";
 import "@fontsource/ibm-plex-sans-arabic/500.css";
 import "@fontsource/ibm-plex-sans-arabic/600.css";
+// Hebrew faces load only for Hebrew text (their unicode-range is Hebrew).
+import "@fontsource/ibm-plex-sans-hebrew/hebrew-400.css";
+import "@fontsource/ibm-plex-sans-hebrew/hebrew-500.css";
+import "@fontsource/ibm-plex-sans-hebrew/hebrew-600.css";
+import "@fontsource-variable/frank-ruhl-libre/wght.css";
 import "@fontsource/dm-mono/400.css";
 import "@fontsource/dm-mono/500.css";
 import "../globals.css";

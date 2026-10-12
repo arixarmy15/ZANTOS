@@ -12,6 +12,7 @@
 reviewed and deliberately not applied — see [§12](#12-deliberately-not-used).
 
 **Current design: v3 "Notebook Tabs" — see [§18](#18-redesign-v3-notebook-tabs-october-2026).**
+The default language is Hebrew; see [§19](#19-hebrew-edition-october-2026) for the Hebrew edition and its writing rules.
 Where §18 gives a value, it replaces the one in the earlier sections and in §17.
 
 ## 0. Skills behind the current design (v3)
@@ -655,3 +656,56 @@ screenshots, not an independent review:
 **Verified:** `npm run check` (contrast pairs in `design/tokens.json` include the tabs and
 charcoal), `npm run design:evidence`, the Playwright suite with axe (WCAG 2.2 AA) at 390, 834 and
 1440 px in six languages, and the screenshots in `design/evidence/v3/`.
+
+## 19. Hebrew edition (October 2026)
+
+The owner asked for the product in Hebrew, written so it does not read like machine output, with
+the earlier version kept. Hebrew is now the default language; nothing else was removed.
+
+**Editions.** `TICKLINE_EDITION` (build time, `src/i18n/edition.ts`) chooses between `hebrew`
+(default: `/` always opens `/he`, Hebrew first in the menu) and `multilingual` (the earlier
+behaviour: English first, starting language from the browser). Both serve all seven languages.
+The English, Turkish, German, Spanish, French and Arabic texts are unchanged apart from two new
+strings (the social-preview alt text and Hebrew in the right-to-left sentence).
+
+**Type.** Hebrew has no Bodoni, so it gets its own pair, switched on `html:lang(he)` like Arabic:
+
+| Role                    | Face                        | Why                                                                   |
+| ----------------------- | --------------------------- | --------------------------------------------------------------------- |
+| Page and section titles | Frank Ruhl Libre (variable) | A Hebrew book and newspaper serif, the closest match to Bodoni's role |
+| Text                    | IBM Plex Sans Hebrew        | Same family as the Arabic face; clear at 13–16 px                     |
+| Codes and values        | DM Mono                     | Codes are Latin; Hebrew inside a value falls back to Plex Sans Hebrew |
+
+The Hebrew faces load only for Hebrew letters (their `unicode-range`), so Latin text in a Hebrew
+page keeps DM Sans and other languages download nothing extra.
+
+**Writing (humanizer).** The Drive skill folder has no humanizer skill, so the widely used one
+was taken from [github.com/blader/humanizer](https://github.com/blader/humanizer) (v3.1.0, MIT,
+based on Wikipedia's "Signs of AI writing"). Applied to Hebrew interface text:
+
+- **State the fact.** No "not only X but also Y" (לא רק… אלא גם), no closing line that repeats
+  the point, no staged openers ("חשוב לדעת", "בואו נ…").
+- **No dashes as connectors.** Commas, colons or a new sentence instead. A numeric range
+  (65–80%) keeps its en dash; the maqaf (־) joins a prefix to Latin or digits (ב־PDF, ל־F1).
+- **No sales words.** No חדשני, עוצמתי, בקלות, מושלם; the facts (30 rules, deleted after 24 hours)
+  do the work.
+- **One form of address.** Plural imperatives (הוסיפו, בדקו) for instructions and nouns for
+  buttons (יצירת בדיקה, מחיקה), so the text never picks a gender.
+- **Trade terms as used in Israel:** חשבונית מסחרית, רשימת אריזה, הזמנת רכש, עמיל מכס, משלח
+  בינלאומי, ארץ מקור, טובין; "evidence" is אסמכתה, the word for a supporting document reference.
+- **Hebrew punctuation:** geresh and gershayim (מס׳, מע״מ, סה״כ), and a right-to-left mark after
+  commas between Latin words (PDF,‏ PNG) so the comma sits where a Hebrew reader expects it.
+
+`test/hebrew-writing.test.ts` enforces the machine-checkable parts (dashes, exclamation marks
+and emoji, the stock phrases above, singular gendered imperatives, ASCII quotes in
+abbreviations). Like the other non-English texts, the Hebrew is machine-written and should be
+read by a native speaker before production use.
+
+**Social preview.** `npm run og:image` now renders one card per language from its message file,
+in its own type and direction (`public/social/<locale>.png`); `opengraph-image.tsx` and
+`twitter-image.tsx` serve the card and its alt text for the page's language.
+
+**Verified:** translation parity and ICU arguments for all seven languages, the writing test,
+the edition test, axe (WCAG 2.2 AA) on every page in Hebrew at three widths, the phone sweep on
+the Hebrew overview, new-check and check pages, and screenshots of the Hebrew overview at 390 and
+1440 px.

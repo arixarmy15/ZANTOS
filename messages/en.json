@@ -5,7 +5,8 @@
   },
   "metadata": {
     "title": "Tickline",
-    "description": "Multilingual pre-shipment check for commercial invoices, packing lists and purchase orders."
+    "description": "Multilingual pre-shipment check for commercial invoices, packing lists and purchase orders.",
+    "ogAlt": "Tickline: a commercial invoice and a packing list side by side, with the package counts 12 and 14 marked F1 and the finding “Number of packages differs”."
   },
   "nav": {
     "home": "Tickline home",
@@ -610,7 +611,7 @@
         "brokers": "Back offices of customs brokers"
       },
       "languages": "Interface languages",
-      "devices": "Works on desktop, tablet and phone, including right-to-left Arabic."
+      "devices": "Works on desktop, tablet and phone, including right-to-left Hebrew and Arabic."
     },
     "faq": {
       "title": "Questions",

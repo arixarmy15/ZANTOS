@@ -7,6 +7,7 @@ import {
   resolveRoute,
   serverEnvSchema,
 } from "./env";
+import { BUILD_ENV } from "@/i18n/edition";
 
 function readEnvExample(): Map<string, string> {
   const text = readFileSync(new URL("../../../.env.example", import.meta.url), "utf8");
@@ -71,8 +72,10 @@ describe("parseServerEnv", () => {
 describe(".env.example", () => {
   const example = readEnvExample();
 
-  it("documents exactly the variables the server reads", () => {
-    expect([...example.keys()].sort()).toEqual(Object.keys(serverEnvSchema.shape).sort());
+  it("documents exactly the variables the server and the build read", () => {
+    expect([...example.keys()].sort()).toEqual(
+      [...Object.keys(serverEnvSchema.shape), ...BUILD_ENV].sort(),
+    );
   });
 
   it("ships without an API key value", () => {
