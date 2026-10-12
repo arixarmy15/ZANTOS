@@ -10,6 +10,7 @@
   "nav": {
     "home": "TradeCheck home",
     "main": "Main",
+    "overview": "Overview",
     "checks": "Checks",
     "newCheck": "New check",
     "menu": "Menu",
@@ -438,5 +439,183 @@
       "explain": "Plain-language explanations",
       "email": "E-mail drafts"
     }
+  },
+  "landing": {
+    "metaTitle": "TradeCheck: check invoice, packing list and PO before shipment",
+    "metaDescription": "Upload the commercial invoice, packing list and purchase order. TradeCheck compares them field by field and shows each mismatch on the page it came from.",
+    "hero": {
+      "title": "Catch document mismatches before the goods leave",
+      "lead": "TradeCheck reads the commercial invoice, packing list and purchase order for one shipment, compares them field by field and shows every finding next to the line it came from.",
+      "start": "Start a check",
+      "how": "See how it works",
+      "factsLabel": "At a glance",
+      "rules": "{count} checks on every run",
+      "retention": "{hours, plural, one {Files deleted after # hour} other {Files deleted after # hours}}",
+      "languages": "{count} interface languages"
+    },
+    "demo": {
+      "label": "Example check",
+      "caption": "Example with synthetic documents. Select a finding to see its evidence in both documents.",
+      "findingsLabel": "Findings in the example",
+      "invoice": "Commercial invoice",
+      "packingList": "Packing list",
+      "page": "Page {page}",
+      "fields": {
+        "number": "Document no.",
+        "order": "Order ref.",
+        "incoterm": "Incoterms®",
+        "packages": "Packages",
+        "gross": "Gross weight",
+        "net": "Net weight",
+        "total": "Total"
+      },
+      "orderMatches": "Order reference matches: {value} in both documents.",
+      "evidenceFor": "Evidence for {tag}"
+    },
+    "problem": {
+      "title": "One shipment, three documents, many places to disagree",
+      "body": "Sales writes the invoice, the warehouse writes the packing list and the buyer writes the purchase order. When a count, a weight, a party or an Incoterms® rule differs between them, the shipment can be held, a payment refused or a correction requested after the goods have left.",
+      "listLabel": "Typical mismatches",
+      "items": {
+        "counts": "Package counts and weights that differ between the invoice and the packing list",
+        "totals": "Line totals that do not add up to the document total",
+        "terms": "A currency, Incoterms® rule or country that changes from one document to the next",
+        "parties": "The exporter or importer written differently on each document",
+        "missing": "Missing order references, HS codes or dates"
+      },
+      "statValue": "65–80 %",
+      "statText": "of documents presented under letters of credit are refused on first presentation, according to an estimate by the ICC Banking Commission.",
+      "statSource": "ICC Technical Advisory Briefing No. 3 (2022)",
+      "ruleText": "Under UCP 600, article 14 (d), data in one document must not conflict with data in the other documents presented.",
+      "ruleSource": "ICC Uniform Customs and Practice for Documentary Credits",
+      "scope": "TradeCheck does not examine letters of credit. It checks that your own documents agree with each other before anyone else looks at them."
+    },
+    "how": {
+      "title": "How a check works",
+      "lead": "Four steps, in the order you do them.",
+      "steps": {
+        "add": {
+          "title": "Add the documents",
+          "body": "PDF, PNG or JPG: up to {files} files per check, {mb} MB per file and {pages} pages per PDF. The document type is detected and can be changed."
+        },
+        "read": {
+          "title": "Read them",
+          "body": "An AI model transcribes each field together with the page and the text it came from. Low-confidence values are marked, and you can correct any value."
+        },
+        "check": {
+          "title": "Run the checks",
+          "body": "{count} deterministic rules compare totals, weights, parties, codes and dates across the documents. The same documents always give the same result."
+        },
+        "share": {
+          "title": "Review and share",
+          "body": "Every finding shows its evidence in the document. Print the report as a PDF or draft a correction e-mail to the person who issued the document."
+        }
+      }
+    },
+    "checks": {
+      "title": "What every check covers",
+      "lead": "These are the rules that run today, grouped as in the report. A rule that does not apply is listed as not applicable, and anything that cannot be confirmed is marked “Could not be verified” — never guessed.",
+      "count": "{count, plural, one {# rule} other {# rules}}"
+    },
+    "evidence": {
+      "title": "Every finding points to the page and the line",
+      "body": "Each finding carries a reference tag such as F1. The same tag sits in the document margin beside the evidence, so you can go from a finding to the paperwork and back.",
+      "items": {
+        "quotes": "Verbatim quotes with the document name and page",
+        "corrected": "Values you changed are labelled as corrected by you",
+        "zoom": "On a phone the page zooms, and the marks stay on their text"
+      },
+      "exampleLabel": "A finding in the report",
+      "quote": "Packages: 12"
+    },
+    "principles": {
+      "title": "What TradeCheck will not do",
+      "items": {
+        "hs": {
+          "title": "Classify your goods",
+          "body": "HS codes are checked for format and compared between your documents. TradeCheck never suggests a classification."
+        },
+        "sources": {
+          "title": "Invent country rules",
+          "body": "Country-specific requirements can only be added as rule packs that cite their source. None ship today."
+        },
+        "guess": {
+          "title": "Guess",
+          "body": "When a value is missing or a source cannot be reached, the result says “Could not be verified”."
+        },
+        "advice": {
+          "title": "Replace professional advice",
+          "body": "Results are for information only. They do not replace a customs broker, a bank's document examination or legal advice."
+        }
+      }
+    },
+    "ai": {
+      "title": "Use the model you trust",
+      "body": "Reading, name comparison, explanations and e-mail drafts each go to a model the operator configures: Anthropic, or any OpenAI-compatible endpoint such as an LLM gateway, vLLM or Ollama.",
+      "items": {
+        "schema": "Every answer is checked against a schema before it is used",
+        "data": "Document text is treated as data, never as instructions",
+        "tokens": "The tokens used are shown on every check"
+      }
+    },
+    "privacy": {
+      "title": "Your documents stay yours",
+      "items": {
+        "local": "Stored on the server you run, in a local database and folder",
+        "retention": "{hours, plural, one {Deleted automatically after # hour; delete a check at any time} other {Deleted automatically after # hours; delete a check at any time}}",
+        "send": "Sent to the AI provider only when you choose to read them",
+        "keys": "API keys stay on the server, and the pages carry no tracking scripts"
+      }
+    },
+    "audience": {
+      "title": "Made for the people who prepare the paperwork",
+      "items": {
+        "exporters": "Operations and accounting staff at exporters",
+        "forwarders": "Documentation teams at freight forwarders",
+        "brokers": "Back offices of customs brokers"
+      },
+      "languages": "Interface languages",
+      "devices": "Works on desktop, tablet and phone, including right-to-left Arabic."
+    },
+    "faq": {
+      "title": "Questions",
+      "items": {
+        "compliance": {
+          "q": "Does TradeCheck tell me whether my shipment is compliant?",
+          "a": "No. It shows where your documents disagree with each other or contain invalid values, and lists every check that ran. It does not decide customs compliance and is not official advice."
+        },
+        "documents": {
+          "q": "Which documents can I check?",
+          "a": "Commercial invoices, packing lists and purchase orders, as PDF, PNG or JPG. The documents can be in any language the configured model can read."
+        },
+        "scans": {
+          "q": "What about scanned documents?",
+          "a": "Scans and photos are read as images by models that support them. Exact highlighting needs a text layer, so for scans the evidence is shown for the whole page."
+        },
+        "retention": {
+          "q": "How long are my files kept?",
+          "a": "{hours, plural, one {Files, extracted data and findings are deleted automatically after # hour. You can delete a check yourself at any time.} other {Files, extracted data and findings are deleted automatically after # hours. You can delete a check yourself at any time.}}"
+        },
+        "corrections": {
+          "q": "Can I correct a value that was read wrongly?",
+          "a": "Yes. Every extracted value can be edited. The checks run again straight away, and the value is labelled as corrected by you."
+        },
+        "models": {
+          "q": "Which AI models does it use?",
+          "a": "The ones the operator configures: Anthropic models or any OpenAI-compatible endpoint. Each task can use a different model."
+        },
+        "lc": {
+          "q": "Does it check letters of credit or HS classification?",
+          "a": "No. It does not examine letters of credit and does not classify goods. HS codes are only checked for format and for consistency across your documents."
+        }
+      }
+    },
+    "cta": {
+      "title": "Check your next shipment before it leaves",
+      "body": "Add the invoice, packing list and purchase order for one shipment and see where they disagree.",
+      "start": "Start a check",
+      "checks": "View your checks"
+    },
+    "sources": "Sources"
   }
 }

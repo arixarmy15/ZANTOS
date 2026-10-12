@@ -46,7 +46,7 @@ test("upload creates a check; rejected files are explained; the check can be del
   await page.getByRole("button", { name: "Delete check" }).click();
   await expect(page.getByRole("dialog")).toContainText("cannot be undone");
   await page.getByRole("button", { name: "Delete permanently" }).click();
-  await expect(page).toHaveURL(/\/en$/);
+  await expect(page).toHaveURL(/\/en\/checks$/);
   await expect(page.getByText("E2E upload")).toHaveCount(0);
 });
 

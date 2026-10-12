@@ -34,8 +34,8 @@ The model is never asked for HS codes, tax-ID formats or regulations, its prompt
 
 Use your own documents for one shipment, kept in `/samples` (git-ignored). TradeCheck ships no sample documents or results.
 
-1. `npm run dev`, open http://localhost:3000 — you land in your browser's language; switch it top right.
-2. **New check** → give it a reference, drop the invoice, packing list and purchase order, **Create check** → **Continue to the check**. A file that is not really a PDF, PNG or JPG is rejected with the reason next to it.
+1. `npm run dev`, open http://localhost:3000 — you land on the overview page in your browser's language; switch it top right. Select the findings in the example to see their evidence marked in both documents.
+2. **Start a check** (or **New check**) → give it a reference, drop the invoice, packing list and purchase order, **Create check** → **Continue to the check**. A file that is not really a PDF, PNG or JPG is rejected with the reason next to it.
 3. **Read documents.** Each document shows "Reading…" and then its detected type and language; the type can be changed. After reading, names and descriptions written differently are compared by the AI model automatically.
 4. **Findings.** The summary shows errors, warnings, results that could not be verified and notes, plus issues per check category. Filter by status, category or document.
 5. Click **Show in document** on a finding: the page opens with the evidence highlighted, a bracket in the margin and the same `F` tag. Click a tag in the margin to jump back to its finding.
@@ -89,6 +89,7 @@ All variables are server-side only. See `.env.example` for the template.
 | `UPLOAD_MAX_PAGES`           | `20`                | Max pages per PDF, 1–100.                                                |
 | `UPLOAD_MAX_FILES_PER_CHECK` | `10`                | Max documents in one check, 1–20.                                        |
 | `RETENTION_HOURS`            | `24`                | Files, extracted data and findings are deleted after this many hours.    |
+| `SITE_URL`                   | —                   | Public address; enables canonical, hreflang and sitemap URLs.            |
 
 ### Scripts
 
@@ -103,6 +104,7 @@ All variables are server-side only. See `.env.example` for the template.
 | `npm run test:e2e`        | Playwright end-to-end and axe accessibility tests at three widths |
 | `npm run check:secrets`   | Fails if a tracked file looks like it contains a key              |
 | `npm run ai:models`       | Lists the models the OpenAI-compatible endpoint offers            |
+| `npm run og:image`        | Renders the social preview image of the overview page             |
 | `npm run test:live`       | Opt-in checks against the configured provider (real requests)     |
 | `npm run check`           | All of the above except the end-to-end tests                      |
 
@@ -168,6 +170,16 @@ Interface languages: English (default), Turkish, German, Spanish, French and Ara
 - Translations other than English are **machine-generated drafts and need human review** before production use.
 - The interface language and the document language are independent: documents can be in any language the configured model can read, and e-mail drafts default to the documents' language.
 - Numbers, dates and currencies are formatted with `Intl`; Arabic uses Latin digits so values look like the paper documents.
+
+## Overview page
+
+`/<language>` is a public overview of the product; the list of checks is at `/<language>/checks`. It was written with the `marketing-campaign`, `seo` and `brand-voice` skills (see [DESIGN.md §15](DESIGN.md#15-overview-page)):
+
+- **Hero:** the headline, the next step (**Start a check**) and a working miniature of the evidence ledger — two synthetic documents, labelled as an example, where selecting a finding marks its evidence in both.
+- **Problem, with sources:** the ICC Banking Commission's estimate that 65–80 % of documents presented under letters of credit are refused on first presentation ([Technical Advisory Briefing No. 3, 2022](https://library.iccwbo.org/content/tfb/BRIEFINGS/20220627_TA_Briefing_No3_reducing_discrepancy_rates.pdf)) and UCP 600 article 14 (d), with the scope stated plainly: TradeCheck does not examine letters of credit.
+- **How a check works**, **what every check covers** (read from the rule engine, so the list cannot drift from the product), **evidence**, **what TradeCheck will not do**, **AI providers**, **privacy**, **audience and languages**, **questions** and a final call to action.
+- Upload limits and retention are the server's configured values, not copy.
+- **Search engines:** a unique title and description per language, `SoftwareApplication` and `FAQPage` structured data that mirror the visible text, a social preview image (`npm run og:image` regenerates it), `robots.txt` that keeps `/api/` and every check out of crawlers, `noindex` on all check pages, and — once `SITE_URL` is set — canonical and hreflang links and a sitemap of the overview page in every language.
 
 ## Phones and tablets
 

@@ -10,6 +10,7 @@
   "nav": {
     "home": "TradeCheck ana sayfa",
     "main": "Ana",
+    "overview": "Genel bakış",
     "checks": "Kontroller",
     "newCheck": "Yeni kontrol",
     "menu": "Menü",
@@ -438,5 +439,183 @@
       "explain": "Sade dilde açıklamalar",
       "email": "E-posta taslakları"
     }
+  },
+  "landing": {
+    "metaTitle": "TradeCheck: sevkiyattan önce fatura, çeki listesi ve siparişi kontrol edin",
+    "metaDescription": "Ticari faturayı, çeki listesini ve sipariş belgesini yükleyin. TradeCheck bunları alan alan karşılaştırır ve her uyuşmazlığı geldiği sayfada gösterir.",
+    "hero": {
+      "title": "Belge uyuşmazlıklarını mallar yola çıkmadan yakalayın",
+      "lead": "TradeCheck bir sevkiyatın ticari faturasını, çeki listesini ve sipariş belgesini okur, bunları alan alan karşılaştırır ve her bulguyu geldiği satırın yanında gösterir.",
+      "start": "Kontrol başlat",
+      "how": "Nasıl çalıştığını görün",
+      "factsLabel": "Kısaca",
+      "rules": "Her çalıştırmada {count} kontrol",
+      "retention": "{hours, plural, one {Dosyalar # saat sonra silinir} other {Dosyalar # saat sonra silinir}}",
+      "languages": "{count} arayüz dili"
+    },
+    "demo": {
+      "label": "Örnek kontrol",
+      "caption": "Sentetik belgelerle örnek. Kanıtını iki belgede de görmek için bir bulgu seçin.",
+      "findingsLabel": "Örnekteki bulgular",
+      "invoice": "Ticari fatura",
+      "packingList": "Çeki listesi",
+      "page": "Sayfa {page}",
+      "fields": {
+        "number": "Belge no.",
+        "order": "Sipariş ref.",
+        "incoterm": "Incoterms®",
+        "packages": "Koli",
+        "gross": "Brüt ağırlık",
+        "net": "Net ağırlık",
+        "total": "Toplam"
+      },
+      "orderMatches": "Sipariş referansı eşleşiyor: iki belgede de {value}.",
+      "evidenceFor": "{tag} için kanıt"
+    },
+    "problem": {
+      "title": "Bir sevkiyat, üç belge, uyuşmazlık için birçok yer",
+      "body": "Faturayı satış ekibi, çeki listesini depo, sipariş belgesini alıcı hazırlar. Bir adet, ağırlık, taraf ya da Incoterms® kuralı aralarında farklı olduğunda sevkiyat bekletilebilir, ödeme reddedilebilir ya da mallar yola çıktıktan sonra düzeltme istenebilir.",
+      "listLabel": "Sık görülen uyuşmazlıklar",
+      "items": {
+        "counts": "Fatura ile çeki listesi arasında farklı koli sayıları ve ağırlıklar",
+        "totals": "Belge toplamını tutmayan satır tutarları",
+        "terms": "Bir belgeden diğerine değişen para birimi, Incoterms® kuralı ya da ülke",
+        "parties": "Her belgede farklı yazılmış ihracatçı ya da ithalatçı",
+        "missing": "Eksik sipariş referansları, HS kodları ya da tarihler"
+      },
+      "statValue": "%65–80",
+      "statText": "ICC Bankacılık Komisyonu'nun tahminine göre akreditif kapsamında sunulan belgelerin ilk ibrazda reddedilen oranı.",
+      "statSource": "ICC Teknik Danışma Notu No. 3 (2022)",
+      "ruleText": "UCP 600 madde 14 (d) uyarınca bir belgedeki veriler, sunulan diğer belgelerdeki verilerle çelişmemelidir.",
+      "ruleSource": "ICC Akreditiflere İlişkin Tek Tip Kurallar ve Uygulamalar",
+      "scope": "TradeCheck akreditifleri incelemez. Başkası bakmadan önce kendi belgelerinizin birbiriyle uyuştuğunu kontrol eder."
+    },
+    "how": {
+      "title": "Bir kontrol nasıl çalışır",
+      "lead": "Yaptığınız sırayla dört adım.",
+      "steps": {
+        "add": {
+          "title": "Belgeleri ekleyin",
+          "body": "PDF, PNG ya da JPG: kontrol başına en fazla {files} dosya, dosya başına {mb} MB ve PDF başına {pages} sayfa. Belge türü algılanır ve değiştirilebilir."
+        },
+        "read": {
+          "title": "Okutun",
+          "body": "Bir yapay zekâ modeli her alanı geldiği sayfa ve metinle birlikte aktarır. Düşük güvenli değerler işaretlenir ve her değeri düzeltebilirsiniz."
+        },
+        "check": {
+          "title": "Kontrolleri çalıştırın",
+          "body": "{count} deterministik kural toplamları, ağırlıkları, tarafları, kodları ve tarihleri belgeler arasında karşılaştırır. Aynı belgeler her zaman aynı sonucu verir."
+        },
+        "share": {
+          "title": "İnceleyin ve paylaşın",
+          "body": "Her bulgu kanıtını belgede gösterir. Raporu PDF olarak yazdırın ya da belgeyi düzenleyen kişiye bir düzeltme e-postası taslağı hazırlayın."
+        }
+      }
+    },
+    "checks": {
+      "title": "Her kontrol neleri kapsar",
+      "lead": "Bugün çalışan kurallar, rapordaki gibi gruplanmış hâlde. Uygulanamayan kural uygulanamaz olarak listelenir; doğrulanamayan her şey “Doğrulanamadı” olarak işaretlenir — asla tahmin edilmez.",
+      "count": "{count, plural, one {# kural} other {# kural}}"
+    },
+    "evidence": {
+      "title": "Her bulgu sayfayı ve satırı gösterir",
+      "body": "Her bulgunun F1 gibi bir referans etiketi vardır. Aynı etiket belgenin kenarında kanıtın yanında durur; bulgudan belgeye ve geri gidebilirsiniz.",
+      "items": {
+        "quotes": "Belge adı ve sayfasıyla birebir alıntılar",
+        "corrected": "Değiştirdiğiniz değerler sizin tarafınızdan düzeltildi olarak etiketlenir",
+        "zoom": "Telefonda sayfa yakınlaşır ve işaretler metnin üzerinde kalır"
+      },
+      "exampleLabel": "Rapordaki bir bulgu",
+      "quote": "Packages: 12"
+    },
+    "principles": {
+      "title": "TradeCheck'in yapmayacakları",
+      "items": {
+        "hs": {
+          "title": "Mallarınızı sınıflandırmak",
+          "body": "HS kodlarının biçimi kontrol edilir ve belgeleriniz arasında karşılaştırılır. TradeCheck asla sınıflandırma önermez."
+        },
+        "sources": {
+          "title": "Ülke kuralı uydurmak",
+          "body": "Ülkeye özgü gereklilikler yalnızca kaynağını gösteren kural paketleriyle eklenebilir. Bugün hiçbiri yüklü değil."
+        },
+        "guess": {
+          "title": "Tahmin etmek",
+          "body": "Bir değer eksik olduğunda ya da bir kaynağa ulaşılamadığında sonuç “Doğrulanamadı” der."
+        },
+        "advice": {
+          "title": "Profesyonel danışmanlığın yerini almak",
+          "body": "Sonuçlar yalnızca bilgi amaçlıdır. Gümrük müşavirinin, bankanın belge incelemesinin ya da hukuki danışmanlığın yerini tutmaz."
+        }
+      }
+    },
+    "ai": {
+      "title": "Güvendiğiniz modeli kullanın",
+      "body": "Okuma, ad karşılaştırma, açıklamalar ve e-posta taslakları operatörün yapılandırdığı modele gider: Anthropic ya da bir LLM ağ geçidi, vLLM veya Ollama gibi OpenAI uyumlu herhangi bir uç nokta.",
+      "items": {
+        "schema": "Her yanıt kullanılmadan önce bir şemaya göre denetlenir",
+        "data": "Belge metni talimat olarak değil, her zaman veri olarak ele alınır",
+        "tokens": "Kullanılan token sayısı her kontrolde gösterilir"
+      }
+    },
+    "privacy": {
+      "title": "Belgeleriniz sizde kalır",
+      "items": {
+        "local": "Çalıştırdığınız sunucuda, yerel bir veritabanında ve klasörde saklanır",
+        "retention": "{hours, plural, one {# saat sonra otomatik silinir; bir kontrolü istediğiniz an silebilirsiniz} other {# saat sonra otomatik silinir; bir kontrolü istediğiniz an silebilirsiniz}}",
+        "send": "Yalnızca okutmayı seçtiğinizde yapay zekâ sağlayıcısına gönderilir",
+        "keys": "API anahtarları sunucuda kalır ve sayfalarda izleme betiği yoktur"
+      }
+    },
+    "audience": {
+      "title": "Evrakı hazırlayanlar için yapıldı",
+      "items": {
+        "exporters": "İhracatçıların operasyon ve muhasebe ekipleri",
+        "forwarders": "Taşıma işleri organizatörlerinin dokümantasyon ekipleri",
+        "brokers": "Gümrük müşavirliklerinin arka ofisleri"
+      },
+      "languages": "Arayüz dilleri",
+      "devices": "Sağdan sola Arapça dahil masaüstünde, tablette ve telefonda çalışır."
+    },
+    "faq": {
+      "title": "Sorular",
+      "items": {
+        "compliance": {
+          "q": "TradeCheck sevkiyatımın mevzuata uygun olup olmadığını söyler mi?",
+          "a": "Hayır. Belgelerinizin nerede birbiriyle çeliştiğini ya da geçersiz değer içerdiğini gösterir ve çalışan her kontrolü listeler. Gümrük uygunluğuna karar vermez ve resmî danışmanlık değildir."
+        },
+        "documents": {
+          "q": "Hangi belgeleri kontrol edebilirim?",
+          "a": "PDF, PNG ya da JPG olarak ticari faturalar, çeki listeleri ve sipariş belgeleri. Belgeler yapılandırılan modelin okuyabildiği herhangi bir dilde olabilir."
+        },
+        "scans": {
+          "q": "Taranmış belgeler ne olacak?",
+          "a": "Taramalar ve fotoğraflar, destekleyen modellerce görüntü olarak okunur. Kesin vurgulama bir metin katmanı gerektirir; bu nedenle taramalarda kanıt sayfanın tamamı için gösterilir."
+        },
+        "retention": {
+          "q": "Dosyalarım ne kadar süre saklanır?",
+          "a": "{hours, plural, one {Dosyalar, çıkarılan veriler ve bulgular # saat sonra otomatik silinir. Bir kontrolü istediğiniz an kendiniz silebilirsiniz.} other {Dosyalar, çıkarılan veriler ve bulgular # saat sonra otomatik silinir. Bir kontrolü istediğiniz an kendiniz silebilirsiniz.}}"
+        },
+        "corrections": {
+          "q": "Yanlış okunan bir değeri düzeltebilir miyim?",
+          "a": "Evet. Çıkarılan her değer düzenlenebilir. Kontroller hemen yeniden çalışır ve değer sizin tarafınızdan düzeltildi olarak etiketlenir."
+        },
+        "models": {
+          "q": "Hangi yapay zekâ modellerini kullanır?",
+          "a": "Operatörün yapılandırdıklarını: Anthropic modelleri ya da OpenAI uyumlu herhangi bir uç nokta. Her görev farklı bir model kullanabilir."
+        },
+        "lc": {
+          "q": "Akreditifleri ya da HS sınıflandırmasını kontrol eder mi?",
+          "a": "Hayır. Akreditifleri incelemez ve malları sınıflandırmaz. HS kodları yalnızca biçim ve belgeleriniz arasındaki tutarlılık açısından kontrol edilir."
+        }
+      }
+    },
+    "cta": {
+      "title": "Bir sonraki sevkiyatınızı yola çıkmadan kontrol edin",
+      "body": "Bir sevkiyatın faturasını, çeki listesini ve sipariş belgesini ekleyin ve nerede uyuşmadıklarını görün.",
+      "start": "Kontrol başlat",
+      "checks": "Kontrollerinizi görüntüleyin"
+    },
+    "sources": "Kaynaklar"
   }
 }

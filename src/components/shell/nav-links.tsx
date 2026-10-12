@@ -5,10 +5,11 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 const items = [
+  { href: "/", key: "overview", match: (path: string) => path === "/" },
   {
-    href: "/",
+    href: "/checks",
     key: "checks",
-    match: (path: string) => path === "/" || /^\/checks\/(?!new)/.test(path),
+    match: (path: string) => path === "/checks" || /^\/checks\/(?!new)/.test(path),
   },
   { href: "/checks/new", key: "newCheck", match: (path: string) => path === "/checks/new" },
 ] as const;

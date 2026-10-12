@@ -89,6 +89,7 @@ for (const width of WIDTHS) {
     for (const path of [
       "/en",
       "/ar",
+      "/en/checks",
       "/en/checks/new",
       `/en/checks/${checkId}`,
       `/ar/checks/${checkId}`,
@@ -177,7 +178,7 @@ test("phone layouts: card list, folded filters, jump links, bottom sheet, zoomab
   const { checkId } = await seedConflicts("Phone layouts");
 
   // The check list is a list of rows, not a wide table.
-  await page.goto("/en");
+  await page.goto("/en/checks");
   await expect(page.getByRole("list", { name: "Your checks" })).toBeVisible();
   await expect(page.getByRole("table")).toBeHidden();
 

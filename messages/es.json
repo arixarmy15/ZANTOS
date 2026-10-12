@@ -10,6 +10,7 @@
   "nav": {
     "home": "Inicio de TradeCheck",
     "main": "Principal",
+    "overview": "Presentación",
     "checks": "Comprobaciones",
     "newCheck": "Nueva comprobación",
     "menu": "Menú",
@@ -438,5 +439,183 @@
       "explain": "Explicaciones sencillas",
       "email": "Borradores de correo"
     }
+  },
+  "landing": {
+    "metaTitle": "TradeCheck: revise factura, lista de empaque y orden antes del envío",
+    "metaDescription": "Suba la factura comercial, la lista de empaque y la orden de compra. TradeCheck las compara campo por campo y muestra cada diferencia en la página de la que procede.",
+    "hero": {
+      "title": "Detecte las diferencias entre documentos antes de que salga la mercancía",
+      "lead": "TradeCheck lee la factura comercial, la lista de empaque y la orden de compra de un envío, las compara campo por campo y muestra cada hallazgo junto a la línea de la que procede.",
+      "start": "Iniciar una comprobación",
+      "how": "Ver cómo funciona",
+      "factsLabel": "En resumen",
+      "rules": "{count} comprobaciones en cada ejecución",
+      "retention": "{hours, plural, one {Archivos eliminados tras # hora} other {Archivos eliminados tras # horas}}",
+      "languages": "{count} idiomas de interfaz"
+    },
+    "demo": {
+      "label": "Comprobación de ejemplo",
+      "caption": "Ejemplo con documentos sintéticos. Seleccione un hallazgo para ver su evidencia en ambos documentos.",
+      "findingsLabel": "Hallazgos del ejemplo",
+      "invoice": "Factura comercial",
+      "packingList": "Lista de empaque",
+      "page": "Página {page}",
+      "fields": {
+        "number": "N.º de documento",
+        "order": "Ref. de pedido",
+        "incoterm": "Incoterms®",
+        "packages": "Bultos",
+        "gross": "Peso bruto",
+        "net": "Peso neto",
+        "total": "Total"
+      },
+      "orderMatches": "La referencia de pedido coincide: {value} en ambos documentos.",
+      "evidenceFor": "Evidencia de {tag}"
+    },
+    "problem": {
+      "title": "Un envío, tres documentos, muchos puntos de desacuerdo",
+      "body": "Ventas redacta la factura, el almacén la lista de empaque y el comprador la orden de compra. Cuando un recuento, un peso, una parte o una regla Incoterms® difiere entre ellos, el envío puede retenerse, un pago rechazarse o pedirse una corrección cuando la mercancía ya ha salido.",
+      "listLabel": "Diferencias habituales",
+      "items": {
+        "counts": "Número de bultos y pesos distintos entre la factura y la lista de empaque",
+        "totals": "Importes de línea que no suman el total del documento",
+        "terms": "Una moneda, regla Incoterms® o país que cambia de un documento a otro",
+        "parties": "El exportador o el importador escrito de forma distinta en cada documento",
+        "missing": "Referencias de pedido, códigos SA o fechas que faltan"
+      },
+      "statValue": "65–80 %",
+      "statText": "de los documentos presentados bajo cartas de crédito se rechazan en la primera presentación, según una estimación de la Comisión Bancaria de la ICC.",
+      "statSource": "ICC Technical Advisory Briefing n.º 3 (2022)",
+      "ruleText": "Según el artículo 14 (d) de las UCP 600, los datos de un documento no deben contradecir los datos de los demás documentos presentados.",
+      "ruleSource": "ICC Reglas y Usos Uniformes relativos a los Créditos Documentarios",
+      "scope": "TradeCheck no examina cartas de crédito. Comprueba que sus propios documentos coinciden entre sí antes de que nadie más los revise."
+    },
+    "how": {
+      "title": "Cómo funciona una comprobación",
+      "lead": "Cuatro pasos, en el orden en que los realiza.",
+      "steps": {
+        "add": {
+          "title": "Añada los documentos",
+          "body": "PDF, PNG o JPG: hasta {files} archivos por comprobación, {mb} MB por archivo y {pages} páginas por PDF. El tipo de documento se detecta y se puede cambiar."
+        },
+        "read": {
+          "title": "Hágalos leer",
+          "body": "Un modelo de IA transcribe cada campo junto con la página y el texto del que procede. Los valores de baja confianza se marcan y puede corregir cualquier valor."
+        },
+        "check": {
+          "title": "Ejecute las comprobaciones",
+          "body": "{count} reglas deterministas comparan totales, pesos, partes, códigos y fechas entre los documentos. Los mismos documentos dan siempre el mismo resultado."
+        },
+        "share": {
+          "title": "Revise y comparta",
+          "body": "Cada hallazgo muestra su evidencia en el documento. Imprima el informe en PDF o redacte un correo de corrección para quien emitió el documento."
+        }
+      }
+    },
+    "checks": {
+      "title": "Qué cubre cada comprobación",
+      "lead": "Estas son las reglas que se ejecutan hoy, agrupadas como en el informe. Una regla que no se aplica figura como no aplicable, y lo que no se puede confirmar se marca como «No se pudo verificar», nunca se adivina.",
+      "count": "{count, plural, one {# regla} other {# reglas}}"
+    },
+    "evidence": {
+      "title": "Cada hallazgo señala la página y la línea",
+      "body": "Cada hallazgo lleva una etiqueta de referencia como F1. La misma etiqueta aparece en el margen del documento junto a la evidencia, para ir del hallazgo al documento y volver.",
+      "items": {
+        "quotes": "Citas literales con el nombre del documento y la página",
+        "corrected": "Los valores que cambie se marcan como corregidos por usted",
+        "zoom": "En el teléfono la página se amplía y las marcas siguen sobre su texto"
+      },
+      "exampleLabel": "Un hallazgo en el informe",
+      "quote": "Packages: 12"
+    },
+    "principles": {
+      "title": "Lo que TradeCheck no hará",
+      "items": {
+        "hs": {
+          "title": "Clasificar su mercancía",
+          "body": "Se comprueba el formato de los códigos SA y se comparan entre sus documentos. TradeCheck nunca propone una clasificación."
+        },
+        "sources": {
+          "title": "Inventar reglas por país",
+          "body": "Los requisitos específicos de un país solo se pueden añadir como paquetes de reglas que citan su fuente. Hoy no se incluye ninguno."
+        },
+        "guess": {
+          "title": "Adivinar",
+          "body": "Cuando falta un valor o no se puede acceder a una fuente, el resultado dice «No se pudo verificar»."
+        },
+        "advice": {
+          "title": "Sustituir el asesoramiento profesional",
+          "body": "Los resultados son solo informativos. No sustituyen a un agente de aduanas, al examen de documentos de un banco ni al asesoramiento jurídico."
+        }
+      }
+    },
+    "ai": {
+      "title": "Use el modelo en el que confía",
+      "body": "La lectura, la comparación de nombres, las explicaciones y los borradores de correo van a un modelo que configura el operador: Anthropic o cualquier punto de acceso compatible con OpenAI, como una pasarela de LLM, vLLM u Ollama.",
+      "items": {
+        "schema": "Cada respuesta se valida con un esquema antes de usarse",
+        "data": "El texto del documento se trata como datos, nunca como instrucciones",
+        "tokens": "Los tokens usados se muestran en cada comprobación"
+      }
+    },
+    "privacy": {
+      "title": "Sus documentos siguen siendo suyos",
+      "items": {
+        "local": "Se guardan en el servidor que usted gestiona, en una base de datos y una carpeta locales",
+        "retention": "{hours, plural, one {Se eliminan automáticamente tras # hora; puede eliminar una comprobación en cualquier momento} other {Se eliminan automáticamente tras # horas; puede eliminar una comprobación en cualquier momento}}",
+        "send": "Se envían al proveedor de IA solo cuando usted decide leerlos",
+        "keys": "Las claves de API se quedan en el servidor y las páginas no llevan scripts de seguimiento"
+      }
+    },
+    "audience": {
+      "title": "Hecho para quienes preparan la documentación",
+      "items": {
+        "exporters": "Equipos de operaciones y contabilidad de exportadores",
+        "forwarders": "Equipos de documentación de transitarios",
+        "brokers": "Oficinas internas de agentes de aduanas"
+      },
+      "languages": "Idiomas de la interfaz",
+      "devices": "Funciona en ordenador, tableta y teléfono, también en árabe de derecha a izquierda."
+    },
+    "faq": {
+      "title": "Preguntas",
+      "items": {
+        "compliance": {
+          "q": "¿TradeCheck me dice si mi envío cumple la normativa?",
+          "a": "No. Muestra dónde sus documentos se contradicen o contienen valores no válidos, y enumera cada comprobación ejecutada. No decide sobre el cumplimiento aduanero y no es asesoramiento oficial."
+        },
+        "documents": {
+          "q": "¿Qué documentos puedo comprobar?",
+          "a": "Facturas comerciales, listas de empaque y órdenes de compra, en PDF, PNG o JPG. Los documentos pueden estar en cualquier idioma que el modelo configurado sepa leer."
+        },
+        "scans": {
+          "q": "¿Y los documentos escaneados?",
+          "a": "Los escaneos y las fotos se leen como imágenes con modelos que lo admiten. El resaltado exacto necesita una capa de texto, por lo que en los escaneos la evidencia se muestra para toda la página."
+        },
+        "retention": {
+          "q": "¿Cuánto tiempo se guardan mis archivos?",
+          "a": "{hours, plural, one {Los archivos, los datos extraídos y los hallazgos se eliminan automáticamente tras # hora. Puede eliminar una comprobación usted mismo en cualquier momento.} other {Los archivos, los datos extraídos y los hallazgos se eliminan automáticamente tras # horas. Puede eliminar una comprobación usted mismo en cualquier momento.}}"
+        },
+        "corrections": {
+          "q": "¿Puedo corregir un valor mal leído?",
+          "a": "Sí. Todo valor extraído se puede editar. Las comprobaciones se vuelven a ejecutar al momento y el valor se marca como corregido por usted."
+        },
+        "models": {
+          "q": "¿Qué modelos de IA utiliza?",
+          "a": "Los que configure el operador: modelos de Anthropic o cualquier punto de acceso compatible con OpenAI. Cada tarea puede usar un modelo distinto."
+        },
+        "lc": {
+          "q": "¿Comprueba cartas de crédito o la clasificación SA?",
+          "a": "No. No examina cartas de crédito ni clasifica mercancías. Los códigos SA solo se comprueban en cuanto a formato y coherencia entre sus documentos."
+        }
+      }
+    },
+    "cta": {
+      "title": "Compruebe su próximo envío antes de que salga",
+      "body": "Añada la factura, la lista de empaque y la orden de compra de un envío y vea dónde no coinciden.",
+      "start": "Iniciar una comprobación",
+      "checks": "Ver sus comprobaciones"
+    },
+    "sources": "Fuentes"
   }
 }

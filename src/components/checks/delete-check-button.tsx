@@ -50,7 +50,7 @@ export function DeleteCheckButton({ checkId }: { checkId: string }) {
               setBusy(true);
               const result = await postJson(`/api/checks/${checkId}`, undefined, "DELETE");
               if (result.ok) {
-                router.replace("/");
+                router.replace("/checks");
                 router.refresh();
               } else {
                 setError(errorMessage(result.error));

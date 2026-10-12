@@ -10,6 +10,7 @@
   "nav": {
     "home": "Accueil TradeCheck",
     "main": "Principale",
+    "overview": "Présentation",
     "checks": "Vérifications",
     "newCheck": "Nouvelle vérification",
     "menu": "Menu",
@@ -438,5 +439,183 @@
       "explain": "Explications simples",
       "email": "Brouillons d'e-mail"
     }
+  },
+  "landing": {
+    "metaTitle": "TradeCheck : vérifier facture, liste de colisage et commande avant expédition",
+    "metaDescription": "Importez la facture commerciale, la liste de colisage et le bon de commande. TradeCheck les compare champ par champ et montre chaque écart sur la page d'origine.",
+    "hero": {
+      "title": "Repérez les écarts entre documents avant le départ des marchandises",
+      "lead": "TradeCheck lit la facture commerciale, la liste de colisage et le bon de commande d'une expédition, les compare champ par champ et affiche chaque constat à côté de la ligne d'où il provient.",
+      "start": "Lancer une vérification",
+      "how": "Voir comment ça marche",
+      "factsLabel": "En bref",
+      "rules": "{count} vérifications à chaque passage",
+      "retention": "{hours, plural, one {Fichiers supprimés après # heure} other {Fichiers supprimés après # heures}}",
+      "languages": "{count} langues d'interface"
+    },
+    "demo": {
+      "label": "Vérification d'exemple",
+      "caption": "Exemple avec des documents synthétiques. Sélectionnez un constat pour voir sa preuve dans les deux documents.",
+      "findingsLabel": "Constats de l'exemple",
+      "invoice": "Facture commerciale",
+      "packingList": "Liste de colisage",
+      "page": "Page {page}",
+      "fields": {
+        "number": "N° de document",
+        "order": "Réf. commande",
+        "incoterm": "Incoterms®",
+        "packages": "Colis",
+        "gross": "Poids brut",
+        "net": "Poids net",
+        "total": "Total"
+      },
+      "orderMatches": "La référence de commande concorde : {value} dans les deux documents.",
+      "evidenceFor": "Preuve pour {tag}"
+    },
+    "problem": {
+      "title": "Une expédition, trois documents, de nombreux points de désaccord",
+      "body": "Le service commercial rédige la facture, l'entrepôt la liste de colisage et l'acheteur le bon de commande. Lorsqu'un nombre, un poids, une partie ou une règle Incoterms® diffère entre eux, l'expédition peut être retenue, un paiement refusé ou une correction demandée alors que les marchandises sont déjà parties.",
+      "listLabel": "Écarts fréquents",
+      "items": {
+        "counts": "Nombres de colis et poids différents entre la facture et la liste de colisage",
+        "totals": "Montants de ligne dont la somme ne donne pas le total du document",
+        "terms": "Une devise, une règle Incoterms® ou un pays qui change d'un document à l'autre",
+        "parties": "L'exportateur ou l'importateur écrit différemment sur chaque document",
+        "missing": "Références de commande, codes SH ou dates manquants"
+      },
+      "statValue": "65–80 %",
+      "statText": "des documents présentés au titre de crédits documentaires sont refusés à la première présentation, selon une estimation de la Commission bancaire de l'ICC.",
+      "statSource": "ICC Technical Advisory Briefing n° 3 (2022)",
+      "ruleText": "Selon l'article 14 (d) des RUU 600, les données d'un document ne doivent pas être en contradiction avec celles des autres documents présentés.",
+      "ruleSource": "ICC Règles et usances uniformes relatives aux crédits documentaires",
+      "scope": "TradeCheck n'examine pas les crédits documentaires. Il vérifie que vos propres documents concordent avant que quiconque ne les examine."
+    },
+    "how": {
+      "title": "Comment se déroule une vérification",
+      "lead": "Quatre étapes, dans l'ordre où vous les effectuez.",
+      "steps": {
+        "add": {
+          "title": "Ajoutez les documents",
+          "body": "PDF, PNG ou JPG : jusqu'à {files} fichiers par vérification, {mb} Mo par fichier et {pages} pages par PDF. Le type de document est détecté et peut être modifié."
+        },
+        "read": {
+          "title": "Faites-les lire",
+          "body": "Un modèle d'IA transcrit chaque champ avec la page et le texte d'où il provient. Les valeurs peu fiables sont signalées, et vous pouvez corriger n'importe quelle valeur."
+        },
+        "check": {
+          "title": "Lancez les vérifications",
+          "body": "{count} règles déterministes comparent totaux, poids, parties, codes et dates entre les documents. Les mêmes documents donnent toujours le même résultat."
+        },
+        "share": {
+          "title": "Examinez et partagez",
+          "body": "Chaque constat montre sa preuve dans le document. Imprimez le rapport en PDF ou rédigez un e-mail de correction pour l'émetteur du document."
+        }
+      }
+    },
+    "checks": {
+      "title": "Ce que couvre chaque vérification",
+      "lead": "Voici les règles appliquées aujourd'hui, regroupées comme dans le rapport. Une règle qui ne s'applique pas est indiquée comme non applicable, et ce qui ne peut pas être confirmé est marqué « Vérification impossible » — jamais deviné.",
+      "count": "{count, plural, one {# règle} other {# règles}}"
+    },
+    "evidence": {
+      "title": "Chaque constat renvoie à la page et à la ligne",
+      "body": "Chaque constat porte une étiquette de référence comme F1. La même étiquette figure dans la marge du document à côté de la preuve : vous passez du constat au document et inversement.",
+      "items": {
+        "quotes": "Citations exactes avec le nom du document et la page",
+        "corrected": "Les valeurs que vous modifiez sont indiquées comme corrigées par vous",
+        "zoom": "Sur téléphone, la page s'agrandit et les marques restent sur leur texte"
+      },
+      "exampleLabel": "Un constat dans le rapport",
+      "quote": "Packages: 12"
+    },
+    "principles": {
+      "title": "Ce que TradeCheck ne fera pas",
+      "items": {
+        "hs": {
+          "title": "Classer vos marchandises",
+          "body": "Le format des codes SH est vérifié et ils sont comparés entre vos documents. TradeCheck ne propose jamais de classement."
+        },
+        "sources": {
+          "title": "Inventer des règles nationales",
+          "body": "Les exigences propres à un pays ne peuvent être ajoutées que sous forme de packs de règles citant leur source. Aucun n'est fourni aujourd'hui."
+        },
+        "guess": {
+          "title": "Deviner",
+          "body": "Lorsqu'une valeur manque ou qu'une source est injoignable, le résultat indique « Vérification impossible »."
+        },
+        "advice": {
+          "title": "Remplacer un conseil professionnel",
+          "body": "Les résultats sont fournis à titre d'information. Ils ne remplacent ni un commissionnaire en douane, ni l'examen des documents par une banque, ni un conseil juridique."
+        }
+      }
+    },
+    "ai": {
+      "title": "Utilisez le modèle en qui vous avez confiance",
+      "body": "La lecture, la comparaison des noms, les explications et les brouillons d'e-mail passent chacun par un modèle que l'opérateur configure : Anthropic, ou tout point d'accès compatible OpenAI, comme une passerelle LLM, vLLM ou Ollama.",
+      "items": {
+        "schema": "Chaque réponse est contrôlée par un schéma avant d'être utilisée",
+        "data": "Le texte des documents est traité comme des données, jamais comme des instructions",
+        "tokens": "Les tokens utilisés sont affichés sur chaque vérification"
+      }
+    },
+    "privacy": {
+      "title": "Vos documents restent les vôtres",
+      "items": {
+        "local": "Stockés sur le serveur que vous exploitez, dans une base de données et un dossier locaux",
+        "retention": "{hours, plural, one {Supprimés automatiquement après # heure ; supprimez une vérification à tout moment} other {Supprimés automatiquement après # heures ; supprimez une vérification à tout moment}}",
+        "send": "Envoyés au fournisseur d'IA uniquement lorsque vous choisissez de les lire",
+        "keys": "Les clés d'API restent sur le serveur, et les pages ne contiennent aucun script de suivi"
+      }
+    },
+    "audience": {
+      "title": "Conçu pour celles et ceux qui préparent les documents",
+      "items": {
+        "exporters": "Équipes opérations et comptabilité des exportateurs",
+        "forwarders": "Équipes documentation des transitaires",
+        "brokers": "Back-offices des commissionnaires en douane"
+      },
+      "languages": "Langues de l'interface",
+      "devices": "Fonctionne sur ordinateur, tablette et téléphone, y compris en arabe de droite à gauche."
+    },
+    "faq": {
+      "title": "Questions",
+      "items": {
+        "compliance": {
+          "q": "TradeCheck me dit-il si mon expédition est conforme ?",
+          "a": "Non. Il montre où vos documents se contredisent ou contiennent des valeurs non valides, et liste chaque vérification effectuée. Il ne statue pas sur la conformité douanière et ne constitue pas un conseil officiel."
+        },
+        "documents": {
+          "q": "Quels documents puis-je vérifier ?",
+          "a": "Factures commerciales, listes de colisage et bons de commande, en PDF, PNG ou JPG. Les documents peuvent être dans toute langue que le modèle configuré sait lire."
+        },
+        "scans": {
+          "q": "Et les documents numérisés ?",
+          "a": "Les numérisations et les photos sont lues comme des images par les modèles qui le permettent. Le surlignage précis nécessite une couche de texte ; pour les numérisations, la preuve est donc indiquée pour la page entière."
+        },
+        "retention": {
+          "q": "Combien de temps mes fichiers sont-ils conservés ?",
+          "a": "{hours, plural, one {Les fichiers, les données extraites et les constats sont supprimés automatiquement après # heure. Vous pouvez supprimer une vérification vous-même à tout moment.} other {Les fichiers, les données extraites et les constats sont supprimés automatiquement après # heures. Vous pouvez supprimer une vérification vous-même à tout moment.}}"
+        },
+        "corrections": {
+          "q": "Puis-je corriger une valeur mal lue ?",
+          "a": "Oui. Chaque valeur extraite peut être modifiée. Les vérifications sont relancées immédiatement et la valeur est indiquée comme corrigée par vous."
+        },
+        "models": {
+          "q": "Quels modèles d'IA utilise-t-il ?",
+          "a": "Ceux que l'opérateur configure : des modèles Anthropic ou tout point d'accès compatible OpenAI. Chaque tâche peut utiliser un modèle différent."
+        },
+        "lc": {
+          "q": "Vérifie-t-il les crédits documentaires ou le classement SH ?",
+          "a": "Non. Il n'examine pas les crédits documentaires et ne classe pas les marchandises. Les codes SH ne sont vérifiés que pour leur format et leur cohérence entre vos documents."
+        }
+      }
+    },
+    "cta": {
+      "title": "Vérifiez votre prochaine expédition avant son départ",
+      "body": "Ajoutez la facture, la liste de colisage et le bon de commande d'une expédition et voyez où ils divergent.",
+      "start": "Lancer une vérification",
+      "checks": "Voir vos vérifications"
+    },
+    "sources": "Sources"
   }
 }

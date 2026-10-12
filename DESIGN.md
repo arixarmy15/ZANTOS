@@ -452,3 +452,62 @@ languages, at all three widths.
 | Naming           | Tablet tab "Documents" next to the "Documents" file section                            | Tab renamed "Document view"                                                                                      |
 | RTL              | Arabic dates forced left-to-right displayed as "012026/03/"                            | Dates keep the language's own direction; codes and numbers stay left-to-right                                    |
 | Browser support  | PDF.js modern build needed `Map.prototype.getOrInsertComputed`; pages failed to render | PDF.js legacy build with polyfills                                                                               |
+
+## 15. Overview page
+
+The public overview at `/<language>` (the check list moved to `/<language>/checks`).
+
+**Skills used** (owner's Drive copy): `marketing-campaign` for positioning, section order and
+its quality gate; `seo` for titles, descriptions, headings, structured data, robots, sitemap and
+hreflang; `brand-voice` for the voice rules below; `frontend-design-direction` and
+`make-interfaces-feel-better` as for the rest of the product. This time the owner asked for
+research, so external sources were consulted — only for the figures quoted on the page.
+
+**Positioning** (`marketing-campaign`, phase 2): _TradeCheck helps the people who prepare export
+paperwork catch contradictions between the invoice, packing list and purchase order before the
+goods leave, by reading each document and running deterministic cross-checks that point to the
+page and line._ The angle is the moment before shipment, when a mismatch is still cheap to fix.
+
+**Research → page.** Broker and forwarder guides agree that invoice errors and invoice/packing
+list mismatches are among the most common causes of customs holds; that informs the list of
+typical mismatches. Only two figures are quoted, each with its source linked beside it: the ICC
+Banking Commission's estimate that 65–80 % of documents presented under letters of credit are
+refused on first presentation (Technical Advisory Briefing No. 3, 27 June 2022) and UCP 600
+article 14 (d) ("data … must not conflict"). The page says plainly that TradeCheck does not
+examine letters of credit. No logos, testimonials, user counts or invented metrics: there are
+none, and the brief forbids fake data.
+
+**Section order:** hero → problem (with sources) → how a check works (in the order the user does
+it) → what every check covers → evidence → what TradeCheck will not do → AI and privacy →
+audience and languages → questions → final call to action. Product figures (rule count, upload
+limits, retention, languages) are read from the engine, the server configuration and the message
+files, so the page cannot promise something the product does not do.
+
+**Visual direction.** No stock illustration, gradient or animated hero. The visual is the
+product's signature element working: a miniature evidence ledger with two synthetic documents
+whose compared rows line up, and findings that mark their evidence in both when selected (the
+bracket draws in at `normal`, as in the viewer — motion only in response to the user). Display
+sizes exist only here: `display` 44/50 and `display-sm` 32/38 for the one h1, `lead` 18/28 for
+its paragraph. Bands alternate Paper and Ledger and are separated by hairline rules, like the
+rest of the product.
+
+**Voice** (`brand-voice`, `marketing-campaign` hard bans): plain, specific, no superlatives, no
+"game-changing", no fake urgency, no exclamation marks; every claim is either a product fact or
+sourced. Calls to action name the action ("Start a check", "View your checks"), never "Learn
+more". The product's limits get their own section ("What TradeCheck will not do").
+
+**SEO** (`seo`): one h1; h2/h3 follow the content; a 50–70 character title and a 120–160
+character description per language; `SoftwareApplication` and `FAQPage` JSON-LD that mirror the
+visible text; a 1200 × 630 social preview drawn from the same example (`npm run og:image`);
+`robots.txt` disallows `/api/` and every check, check pages are `noindex`; with `SITE_URL` set,
+canonical and hreflang links (`x-default` → English) and a sitemap of the overview page.
+
+**First render, slop check, and what changed:**
+
+| Seen in the render                                                                   | Fix                                                               |
+| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| The invoice's extra Incoterms® row pushed its rows out of line with the packing list | Both documents list the compared fields first, in the same order  |
+| Faint brackets on every row that has evidence read as stray lines                    | Bracket and tag only on the selected finding's evidence           |
+| In Arabic, "65–80 %" displayed as "% 80–65"; "Incoterms®" labels lost the ®'s place  | The figure and the field labels are isolated (`<bdi>`)            |
+| axe `definition-list`: the margin marks sat directly inside the `<dl>` rows          | The marks moved into the `<dd>`, still positioned against the row |
+| A side column spanning two grid rows stretched the gap under each section heading    | Headings sit above a separate two-column grid                     |

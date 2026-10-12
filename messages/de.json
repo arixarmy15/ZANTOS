@@ -10,6 +10,7 @@
   "nav": {
     "home": "TradeCheck – Startseite",
     "main": "Haupt",
+    "overview": "Überblick",
     "checks": "Prüfungen",
     "newCheck": "Neue Prüfung",
     "menu": "Menü",
@@ -438,5 +439,183 @@
       "explain": "Erklärungen in einfachen Worten",
       "email": "E-Mail-Entwürfe"
     }
+  },
+  "landing": {
+    "metaTitle": "TradeCheck: Rechnung, Packliste und Bestellung vor dem Versand prüfen",
+    "metaDescription": "Laden Sie Handelsrechnung, Packliste und Bestellung hoch. TradeCheck vergleicht sie Feld für Feld und zeigt jede Abweichung auf der Seite, von der sie stammt.",
+    "hero": {
+      "title": "Abweichungen in den Dokumenten finden, bevor die Ware das Haus verlässt",
+      "lead": "TradeCheck liest Handelsrechnung, Packliste und Bestellung einer Sendung, vergleicht sie Feld für Feld und zeigt jeden Befund neben der Zeile, aus der er stammt.",
+      "start": "Prüfung starten",
+      "how": "So funktioniert es",
+      "factsLabel": "Auf einen Blick",
+      "rules": "{count} Prüfungen bei jedem Durchlauf",
+      "retention": "{hours, plural, one {Dateien werden nach # Stunde gelöscht} other {Dateien werden nach # Stunden gelöscht}}",
+      "languages": "{count} Sprachen der Oberfläche"
+    },
+    "demo": {
+      "label": "Beispielprüfung",
+      "caption": "Beispiel mit synthetischen Dokumenten. Wählen Sie einen Befund, um seinen Nachweis in beiden Dokumenten zu sehen.",
+      "findingsLabel": "Befunde im Beispiel",
+      "invoice": "Handelsrechnung",
+      "packingList": "Packliste",
+      "page": "Seite {page}",
+      "fields": {
+        "number": "Dokument-Nr.",
+        "order": "Bestell-Ref.",
+        "incoterm": "Incoterms®",
+        "packages": "Packstücke",
+        "gross": "Bruttogewicht",
+        "net": "Nettogewicht",
+        "total": "Summe"
+      },
+      "orderMatches": "Bestellreferenz stimmt überein: {value} in beiden Dokumenten.",
+      "evidenceFor": "Nachweis für {tag}"
+    },
+    "problem": {
+      "title": "Eine Sendung, drei Dokumente, viele Stellen für Widersprüche",
+      "body": "Die Rechnung schreibt der Vertrieb, die Packliste das Lager und die Bestellung der Käufer. Weicht eine Anzahl, ein Gewicht, eine Partei oder eine Incoterms®-Klausel zwischen ihnen ab, kann die Sendung angehalten, eine Zahlung verweigert oder eine Korrektur verlangt werden, nachdem die Ware schon unterwegs ist.",
+      "listLabel": "Typische Abweichungen",
+      "items": {
+        "counts": "Packstückzahlen und Gewichte, die sich zwischen Rechnung und Packliste unterscheiden",
+        "totals": "Positionsbeträge, die nicht die Dokumentsumme ergeben",
+        "terms": "Eine Währung, Incoterms®-Klausel oder ein Land, das sich von Dokument zu Dokument ändert",
+        "parties": "Exporteur oder Importeur in jedem Dokument anders geschrieben",
+        "missing": "Fehlende Bestellreferenzen, HS-Codes oder Daten"
+      },
+      "statValue": "65–80 %",
+      "statText": "der unter Akkreditiven vorgelegten Dokumente werden bei der ersten Vorlage zurückgewiesen, so eine Schätzung der ICC-Bankenkommission.",
+      "statSource": "ICC Technical Advisory Briefing Nr. 3 (2022)",
+      "ruleText": "Nach UCP 600, Artikel 14 (d), dürfen Daten in einem Dokument nicht im Widerspruch zu Daten in den anderen vorgelegten Dokumenten stehen.",
+      "ruleSource": "ICC Einheitliche Richtlinien und Gebräuche für Dokumentenakkreditive",
+      "scope": "TradeCheck prüft keine Akkreditive. Es prüft, ob Ihre eigenen Dokumente übereinstimmen, bevor jemand anderes sie ansieht."
+    },
+    "how": {
+      "title": "So läuft eine Prüfung ab",
+      "lead": "Vier Schritte in der Reihenfolge, in der Sie sie ausführen.",
+      "steps": {
+        "add": {
+          "title": "Dokumente hinzufügen",
+          "body": "PDF, PNG oder JPG: bis zu {files} Dateien pro Prüfung, {mb} MB pro Datei und {pages} Seiten pro PDF. Der Dokumenttyp wird erkannt und lässt sich ändern."
+        },
+        "read": {
+          "title": "Lesen lassen",
+          "body": "Ein KI-Modell überträgt jedes Feld zusammen mit der Seite und dem Text, aus dem es stammt. Unsichere Werte werden markiert, und Sie können jeden Wert korrigieren."
+        },
+        "check": {
+          "title": "Prüfungen ausführen",
+          "body": "{count} deterministische Regeln vergleichen Summen, Gewichte, Parteien, Codes und Daten über die Dokumente hinweg. Dieselben Dokumente ergeben immer dasselbe Ergebnis."
+        },
+        "share": {
+          "title": "Prüfen und weitergeben",
+          "body": "Jeder Befund zeigt seinen Nachweis im Dokument. Drucken Sie den Bericht als PDF oder entwerfen Sie eine Korrektur-E-Mail an die Person, die das Dokument ausgestellt hat."
+        }
+      }
+    },
+    "checks": {
+      "title": "Was jede Prüfung abdeckt",
+      "lead": "Das sind die Regeln, die heute laufen, gruppiert wie im Bericht. Eine Regel, die nicht greift, wird als nicht anwendbar aufgeführt, und was sich nicht bestätigen lässt, wird als „Nicht überprüfbar“ markiert — nie geraten.",
+      "count": "{count, plural, one {# Regel} other {# Regeln}}"
+    },
+    "evidence": {
+      "title": "Jeder Befund zeigt auf Seite und Zeile",
+      "body": "Jeder Befund trägt ein Referenzkennzeichen wie F1. Dasselbe Kennzeichen steht im Dokumentrand neben dem Nachweis, sodass Sie vom Befund zum Dokument und zurück gelangen.",
+      "items": {
+        "quotes": "Wörtliche Zitate mit Dokumentname und Seite",
+        "corrected": "Von Ihnen geänderte Werte sind als von Ihnen korrigiert gekennzeichnet",
+        "zoom": "Auf dem Telefon lässt sich die Seite vergrößern, und die Markierungen bleiben auf ihrem Text"
+      },
+      "exampleLabel": "Ein Befund im Bericht",
+      "quote": "Packages: 12"
+    },
+    "principles": {
+      "title": "Was TradeCheck nicht tut",
+      "items": {
+        "hs": {
+          "title": "Ihre Waren einreihen",
+          "body": "HS-Codes werden auf ihr Format geprüft und zwischen Ihren Dokumenten verglichen. TradeCheck schlägt nie eine Einreihung vor."
+        },
+        "sources": {
+          "title": "Länderregeln erfinden",
+          "body": "Länderspezifische Anforderungen können nur als Regelpakete mit Quellenangabe ergänzt werden. Derzeit ist keines enthalten."
+        },
+        "guess": {
+          "title": "Raten",
+          "body": "Fehlt ein Wert oder ist eine Quelle nicht erreichbar, lautet das Ergebnis „Nicht überprüfbar“."
+        },
+        "advice": {
+          "title": "Fachliche Beratung ersetzen",
+          "body": "Die Ergebnisse dienen nur der Information. Sie ersetzen weder einen Zollagenten noch die Dokumentenprüfung einer Bank oder eine Rechtsberatung."
+        }
+      }
+    },
+    "ai": {
+      "title": "Das Modell Ihres Vertrauens nutzen",
+      "body": "Lesen, Namensvergleich, Erklärungen und E-Mail-Entwürfe gehen jeweils an ein Modell, das der Betreiber einstellt: Anthropic oder einen beliebigen OpenAI-kompatiblen Endpunkt wie ein LLM-Gateway, vLLM oder Ollama.",
+      "items": {
+        "schema": "Jede Antwort wird vor der Verwendung gegen ein Schema geprüft",
+        "data": "Dokumenttext wird als Daten behandelt, nie als Anweisung",
+        "tokens": "Die verbrauchten Tokens werden bei jeder Prüfung angezeigt"
+      }
+    },
+    "privacy": {
+      "title": "Ihre Dokumente bleiben Ihre",
+      "items": {
+        "local": "Gespeichert auf dem Server, den Sie betreiben, in einer lokalen Datenbank und einem Ordner",
+        "retention": "{hours, plural, one {Automatisch gelöscht nach # Stunde; eine Prüfung können Sie jederzeit löschen} other {Automatisch gelöscht nach # Stunden; eine Prüfung können Sie jederzeit löschen}}",
+        "send": "An den KI-Anbieter nur gesendet, wenn Sie das Lesen auslösen",
+        "keys": "API-Schlüssel bleiben auf dem Server, und die Seiten enthalten keine Tracking-Skripte"
+      }
+    },
+    "audience": {
+      "title": "Für die Menschen, die die Papiere erstellen",
+      "items": {
+        "exporters": "Operations- und Buchhaltungsteams bei Exporteuren",
+        "forwarders": "Dokumentationsteams bei Spediteuren",
+        "brokers": "Backoffices von Zollagenturen"
+      },
+      "languages": "Sprachen der Oberfläche",
+      "devices": "Läuft auf Desktop, Tablet und Telefon, auch in Arabisch von rechts nach links."
+    },
+    "faq": {
+      "title": "Fragen",
+      "items": {
+        "compliance": {
+          "q": "Sagt mir TradeCheck, ob meine Sendung vorschriftsmäßig ist?",
+          "a": "Nein. Es zeigt, wo sich Ihre Dokumente widersprechen oder ungültige Werte enthalten, und listet jede Prüfung auf, die gelaufen ist. Es entscheidet nicht über die Zollkonformität und ist keine offizielle Beratung."
+        },
+        "documents": {
+          "q": "Welche Dokumente kann ich prüfen?",
+          "a": "Handelsrechnungen, Packlisten und Bestellungen als PDF, PNG oder JPG. Die Dokumente können in jeder Sprache sein, die das eingestellte Modell lesen kann."
+        },
+        "scans": {
+          "q": "Was ist mit gescannten Dokumenten?",
+          "a": "Scans und Fotos werden von Modellen, die das unterstützen, als Bilder gelesen. Genaue Markierungen brauchen eine Textebene, daher wird der Nachweis bei Scans für die ganze Seite gezeigt."
+        },
+        "retention": {
+          "q": "Wie lange werden meine Dateien aufbewahrt?",
+          "a": "{hours, plural, one {Dateien, ausgelesene Daten und Befunde werden nach # Stunde automatisch gelöscht. Sie können eine Prüfung jederzeit selbst löschen.} other {Dateien, ausgelesene Daten und Befunde werden nach # Stunden automatisch gelöscht. Sie können eine Prüfung jederzeit selbst löschen.}}"
+        },
+        "corrections": {
+          "q": "Kann ich einen falsch gelesenen Wert korrigieren?",
+          "a": "Ja. Jeder ausgelesene Wert lässt sich bearbeiten. Die Prüfungen laufen sofort erneut, und der Wert wird als von Ihnen korrigiert gekennzeichnet."
+        },
+        "models": {
+          "q": "Welche KI-Modelle werden verwendet?",
+          "a": "Die, die der Betreiber einstellt: Modelle von Anthropic oder ein beliebiger OpenAI-kompatibler Endpunkt. Jede Aufgabe kann ein anderes Modell nutzen."
+        },
+        "lc": {
+          "q": "Prüft es Akkreditive oder die Einreihung in den HS?",
+          "a": "Nein. Es prüft keine Akkreditive und reiht keine Waren ein. HS-Codes werden nur auf ihr Format und auf Übereinstimmung zwischen Ihren Dokumenten geprüft."
+        }
+      }
+    },
+    "cta": {
+      "title": "Prüfen Sie Ihre nächste Sendung, bevor sie das Haus verlässt",
+      "body": "Fügen Sie Rechnung, Packliste und Bestellung einer Sendung hinzu und sehen Sie, wo sie voneinander abweichen.",
+      "start": "Prüfung starten",
+      "checks": "Ihre Prüfungen ansehen"
+    },
+    "sources": "Quellen"
   }
 }

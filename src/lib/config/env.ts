@@ -58,6 +58,15 @@ export const serverEnvSchema = z.object({
   UPLOAD_MAX_PAGES: intInRange(1, 100, 20),
   UPLOAD_MAX_FILES_PER_CHECK: intInRange(1, 20, 10),
   RETENTION_HOURS: intInRange(1, 720, 24),
+  // Public address of this deployment, for canonical and language links, the sitemap and
+  // social previews. Leave unset for local use.
+  SITE_URL: z.preprocess(
+    emptyToUndefined,
+    z
+      .url({ protocol: /^https?$/ })
+      .transform((url) => url.replace(/\/+$/, ""))
+      .optional(),
+  ),
 });
 
 export type ServerEnv = z.infer<typeof serverEnvSchema>;

@@ -18,6 +18,7 @@ import { SiteFooter } from "@/components/shell/site-footer";
 import { SiteHeader } from "@/components/shell/site-header";
 import { getLanguages } from "@/i18n/languages";
 import { routing } from "@/i18n/routing";
+import { getServerEnv } from "@/lib/config/env";
 
 type Props = { children: React.ReactNode; params: Promise<{ locale: string }> };
 
@@ -32,7 +33,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata" });
+  const site = getServerEnv().SITE_URL;
   return {
+    // Absolute URLs for canonical, language and social-preview links, when the public
+    // address is known.
+    ...(site ? { metadataBase: new URL(site) } : {}),
     title: { default: t("title"), template: `%s · ${t("title")}` },
     description: t("description"),
     applicationName: "TradeCheck",

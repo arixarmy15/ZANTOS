@@ -21,7 +21,8 @@
     "check:secrets": "node scripts/check-secrets.mjs",
     "check": "npm run lint && npm run typecheck && npm run format:check && npm run test && npm run check:secrets",
     "test:live": "AI_LIVE_TEST=1 node --env-file-if-exists=.env.local node_modules/vitest/vitest.mjs run test/live",
-    "ai:models": "node --env-file-if-exists=.env.local scripts/list-models.mjs"
+    "ai:models": "node --env-file-if-exists=.env.local scripts/list-models.mjs",
+    "og:image": "node scripts/generate-og-image.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.133.0",

@@ -10,7 +10,7 @@ const locales = [
   { code: "ar", dir: "rtl" },
 ] as const;
 
-const pages = ["", "/checks/new", "/does-not-exist"];
+const pages = ["", "/checks", "/checks/new", "/does-not-exist"];
 
 async function expectNoAxeViolations(page: import("@playwright/test").Page) {
   const results = await new AxeBuilder({ page })
