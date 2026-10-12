@@ -52,6 +52,44 @@ test("the language switcher keeps the current page", async ({ page }, testInfo) 
   await expect(page.locator("html")).toHaveAttribute("lang", "de");
 });
 
+test("switching language keeps the reader's place", async ({ page }, testInfo) => {
+  // The section being read stays where it was; the page does not jump to the top.
+  await page.goto("/en#checks");
+  const top = () => page.locator("#checks").evaluate((node) => node.getBoundingClientRect().top);
+  await expect.poll(top).toBeLessThan(200);
+  await page.waitForTimeout(300);
+  const before = await top();
+  if (testInfo.project.name === "mobile") {
+    // Dispatched like a tap: Playwright's click would first scroll the sticky header button.
+    await page.getByRole("button", { name: "Menu" }).dispatchEvent("click");
+    await page.getByRole("dialog").getByLabel("Language").selectOption("ar");
+  } else {
+    await page.getByLabel("Language").selectOption("ar");
+  }
+  await expect(page).toHaveURL(/\/ar#checks$/);
+  await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
+  await expect.poll(top).toBeCloseTo(before, 0);
+});
+
+test("switching language keeps an unsent check", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "desktop", "Runs once");
+  await page.goto("/en/checks/new");
+  await page.getByLabel("Shipment reference (optional)").fill("Carried over");
+  const chooser = page.waitForEvent("filechooser");
+  await page.getByRole("button", { name: "Browse files" }).click();
+  await (
+    await chooser
+  ).setFiles({
+    name: "synthetic-invoice.pdf",
+    mimeType: "application/pdf",
+    buffer: Buffer.from("%PDF"),
+  });
+  await page.getByLabel("Language").selectOption("tr");
+  await expect(page).toHaveURL(/\/tr\/checks\/new$/);
+  await expect(page.getByLabel("Sevkiyat referansı (isteğe bağlı)")).toHaveValue("Carried over");
+  await expect(page.getByText("synthetic-invoice.pdf")).toBeVisible();
+});
+
 test("phones get a menu with navigation and the language switcher", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile", "Phone layout only");
   await page.goto("/en");

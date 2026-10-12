@@ -2,15 +2,18 @@
 
 import { CircleCheck, FileText, OctagonAlert, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { forgetCarried, peekCarried, registerCarry } from "@/components/shell/locale-switch";
 import { Dropzone } from "@/components/upload/dropzone";
 import { postJson, uploadFile } from "@/components/upload/upload-file";
 import { useErrorMessage, type Limits } from "@/components/upload/use-error-message";
 import { Link, useRouter } from "@/i18n/navigation";
 import { formatFileSize } from "@/lib/format";
+
+type Draft = { name: string; items: Item[]; checkId: string | null };
 
 type Item = {
   key: string;
@@ -31,10 +34,25 @@ export function NewCheckForm({
   const locale = useLocale();
   const router = useRouter();
   const errorMessage = useErrorMessage(limits);
-  const [name, setName] = useState("");
-  const [items, setItems] = useState<Item[]>([]);
+  // A language switch remounts the page; the reference and chosen files come along.
+  const [carried] = useState(() => peekCarried<Draft>("new-check"));
+  useEffect(() => forgetCarried("new-check"), []);
+  const [name, setName] = useState(carried?.name ?? "");
+  const [items, setItems] = useState<Item[]>(carried?.items ?? []);
   const [busy, setBusy] = useState(false);
-  const [checkId, setCheckId] = useState<string | null>(null);
+  const [checkId, setCheckId] = useState<string | null>(carried?.checkId ?? null);
+  useEffect(
+    () =>
+      registerCarry("new-check", () => ({
+        name,
+        checkId,
+        // An upload cut off by the switch is offered again rather than shown as running.
+        items: items.map((item) =>
+          item.state === "uploading" ? { ...item, state: "selected" as const, progress: 0 } : item,
+        ),
+      })),
+    [name, items, checkId],
+  );
   const [formError, setFormError] = useState<string | null>(null);
   const nameId = useId();
   const hintId = useId();

@@ -1,10 +1,17 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { useId, useTransition } from "react";
+import { useId, useLayoutEffect, useTransition } from "react";
 import { NativeSelect } from "@/components/ui/native-select";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+import {
+  carryAll,
+  currentScrollAnchor,
+  restoreScrollAnchor,
+  takeCarried,
+  type ScrollAnchor,
+} from "./locale-switch";
 
 export type LanguageOption = { code: string; name: string };
 
@@ -22,6 +29,12 @@ export function LanguageSwitcher({
   const [pending, startTransition] = useTransition();
   const id = useId();
 
+  // The reader stays where they were: the same section, not the top of the page.
+  useLayoutEffect(() => {
+    const anchor = takeCarried<ScrollAnchor | null>("scroll-anchor");
+    if (anchor) restoreScrollAnchor(anchor);
+  }, [locale]);
+
   return (
     <div className={cn("flex items-center gap-2", className)}>
       <label htmlFor={id} className="text-small text-slate">
@@ -34,7 +47,10 @@ export function LanguageSwitcher({
         className="h-8 w-auto text-small pointer-coarse:h-11"
         onChange={(event) => {
           const next = event.target.value;
-          startTransition(() => router.replace(pathname, { locale: next }));
+          carryAll({ "scroll-anchor": currentScrollAnchor() });
+          // Same page, query and #section in the other language; no jump to the top.
+          const href = `${pathname}${window.location.search}${window.location.hash}`;
+          startTransition(() => router.replace(href, { locale: next, scroll: false }));
         }}
       >
         {languages.map((language) => (
