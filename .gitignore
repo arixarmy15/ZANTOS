@@ -52,3 +52,4 @@ Thumbs.db
 
 # Vitest reporter output
 .vitest/
+/screenshots/

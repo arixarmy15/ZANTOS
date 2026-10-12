@@ -93,7 +93,8 @@
     "rate_limited": "Anthropic erhält gerade zu viele Anfragen. Versuchen Sie es in einer Minute erneut.",
     "unreachable": "Anthropic war nicht erreichbar, daher wurde nichts gelesen. Versuchen Sie es später erneut.",
     "document_too_large": "Das Dokument ist zu groß, um vom Modell gelesen zu werden.",
-    "api_error": "Anthropic hat einen Fehler gemeldet. Versuchen Sie es erneut."
+    "api_error": "Anthropic hat einen Fehler gemeldet. Versuchen Sie es erneut.",
+    "no_issues": "Es gibt keine Fehler oder Warnungen, die gemeldet werden müssten."
   },
   "check": {
     "untitled": "Prüfung vom {date, date, medium}",
@@ -304,6 +305,120 @@
       "docset-insurance": "Bei der Incoterms®-Klausel {value} schließt der Verkäufer die Transportversicherung ab, daher gehört ein Versicherungsdokument üblicherweise zu den Versanddokumenten.",
       "docset-typical": "Je nach Ware und Bestimmungsland können weitere Dokumente erforderlich sein, etwa ein Transportdokument, ein Ursprungszeugnis, Lizenzen oder Zertifikate. Prüfen Sie die Vorschriften des Bestimmungslandes.",
       "docset-typical-country": "Je nach Ware können für {country} weitere Dokumente erforderlich sein, etwa ein Transportdokument, ein Ursprungszeugnis, Lizenzen oder Zertifikate. Prüfen Sie die Vorschriften für {country}."
+    }
+  },
+  "results": {
+    "heading": "Befunde",
+    "noIssues": "Die unten aufgeführten Prüfungen haben keine Probleme gefunden.",
+    "counts": {
+      "error": "Fehler",
+      "warning": "Warnungen",
+      "unverified": "Nicht überprüfbar",
+      "info": "Hinweise"
+    },
+    "chartTitle": "Probleme nach Prüfkategorie",
+    "chartDescription": "Fehler, Warnungen und nicht überprüfbare Ergebnisse. Hinweise werden nicht gezählt.",
+    "chartTooltip": "{category} · {total, plural, one {# Problem insgesamt} other {# Probleme insgesamt}}",
+    "showTable": "Als Tabelle anzeigen",
+    "tableCategory": "Kategorie",
+    "tableIssues": "Probleme",
+    "rulesHeading": "Durchgeführte Prüfungen",
+    "rulesSummary": "{passed} bestanden · {failed} mit Problemen · {unverified} nicht überprüfbar · {notApplicable} nicht anwendbar",
+    "ruleFindings": "{count, plural, one {# Befund} other {# Befunde}}",
+    "filters": {
+      "status": "Nach Status filtern",
+      "category": "Kategorie",
+      "document": "Dokument",
+      "allCategories": "Alle Kategorien",
+      "allDocuments": "Alle Dokumente",
+      "reset": "Filter zurücksetzen",
+      "showing": "{shown} von {total} Befunden",
+      "noMatch": "Keine Befunde entsprechen diesen Filtern."
+    },
+    "tabs": {
+      "findings": "Befunde",
+      "documents": "Dokumente"
+    },
+    "finding": {
+      "evidence": "Beleg",
+      "page": "S. {page}",
+      "show": "Im Dokument zeigen",
+      "explain": "In einfachen Worten erklären",
+      "explaining": "Wird erklärt…",
+      "aiExplanation": "KI-generierte Erklärung"
+    },
+    "viewer": {
+      "document": "Dokument",
+      "pages": "Seiten",
+      "page": "Seite {page} von {count}",
+      "previous": "Vorherige Seite",
+      "next": "Nächste Seite",
+      "loading": "Dokument wird geladen…",
+      "error": "Das Dokument konnte nicht angezeigt werden.",
+      "positionUnavailable": "Genaue Position nicht verfügbar",
+      "pageImage": "Seite {page} von {name}",
+      "imageNote": "Bilder haben keine Textebene; ihre Belege werden daher über dem Bild aufgeführt statt darauf markiert.",
+      "close": "Schließen"
+    },
+    "compare": {
+      "title": "{count, plural, one {# Vergleich wartet auf die KI} other {# Vergleiche warten auf die KI}}",
+      "body": "Unterschiedlich geschriebene Namen und Warenbeschreibungen werden von Claude verglichen. Bis dahin werden sie als „nicht überprüfbar“ angezeigt.",
+      "button": "Mit KI vergleichen",
+      "comparing": "Namen und Beschreibungen werden verglichen…"
+    },
+    "tolerance": {
+      "label": "Rundungstoleranz für Beträge",
+      "hint": "Derzeit {value}. Abweichungen bis zu diesem Betrag werden bei den Positions- und Summenprüfungen akzeptiert.",
+      "apply": "Übernehmen",
+      "invalid": "Geben Sie eine Zahl wie 0.01 ein."
+    },
+    "email": {
+      "open": "Korrektur-E-Mail entwerfen",
+      "title": "Entwurf einer Korrektur-E-Mail",
+      "description": "Claude entwirft eine E-Mail, in der die ausstellende Stelle gebeten wird, die gefundenen Fehler und Warnungen zu korrigieren. TradeCheck versendet nie E-Mails: Kopieren Sie den Entwurf oder öffnen Sie ihn in Ihrem eigenen E-Mail-Programm.",
+      "language": "Sprache der E-Mail",
+      "generate": "E-Mail entwerfen",
+      "regenerate": "Neu entwerfen",
+      "generating": "Wird entworfen…",
+      "tokensNote": "{count, plural, one {# Problem wird} other {# Probleme werden}} aufgenommen. Der Entwurf verbraucht Tokens, die dem Verbrauch dieser Prüfung hinzugefügt werden.",
+      "aiDraft": "KI-generierter Entwurf – vor dem Senden lesen und korrigieren.",
+      "subject": "Betreff",
+      "body": "Nachricht",
+      "copy": "Kopieren",
+      "copied": "Kopiert",
+      "copyFailed": "Der Entwurf konnte nicht kopiert werden. Markieren Sie den Text und kopieren Sie ihn manuell.",
+      "openMail": "Im E-Mail-Programm öffnen",
+      "neverSent": "TradeCheck versendet diese E-Mail nicht."
+    }
+  },
+  "report": {
+    "open": "Bericht öffnen",
+    "title": "Prüfbericht",
+    "print": "Drucken oder als PDF speichern",
+    "back": "Zurück zur Prüfung",
+    "generated": "Bericht erstellt am {date}",
+    "tolerance": "Rundungstoleranz {value}",
+    "disclaimerHeading": "Bitte beachten",
+    "aiNote": "Claude (Anthropic) hat die Dokumente gelesen sowie Namen und Beschreibungen verglichen. Alle Berechnungen und Regelprüfungen wurden durch deterministischen Code durchgeführt. Als korrigiert markierte Werte wurden vom Benutzer eingegeben.",
+    "documents": "Dokumente",
+    "summary": "Zusammenfassung",
+    "usage": "Token-Verbrauch",
+    "columns": {
+      "file": "Datei",
+      "type": "Typ",
+      "language": "Sprache",
+      "pages": "Seiten",
+      "status": "Status",
+      "purpose": "Zweck",
+      "requests": "Anfragen",
+      "input": "Eingabe-Tokens",
+      "output": "Ausgabe-Tokens"
+    },
+    "usageKinds": {
+      "extract": "Dokumente lesen",
+      "compare": "Namen und Beschreibungen vergleichen",
+      "explain": "Erklärungen in einfachen Worten",
+      "email": "E-Mail-Entwürfe"
     }
   }
 }

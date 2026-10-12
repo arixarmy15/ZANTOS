@@ -46,7 +46,9 @@ function Value({ field }: { field: EffectiveField }) {
   const locale = useLocale();
   if (field.normalized === null) return <span className="text-slate">{t("notPrinted")}</span>;
   const text = formatNormalized(field.kind, field.normalized, locale);
-  return LTR_KINDS.has(field.kind) ? (
+  // A formatted date follows the interface language's own order (Arabic dates carry
+  // right-to-left marks), so only codes and numbers are forced left to right.
+  return LTR_KINDS.has(field.kind) && field.kind !== "date" ? (
     <bdi dir="ltr" className={cn(field.kind === "hsCode" || field.kind === "iban" ? "code" : "")}>
       {text}
     </bdi>

@@ -93,7 +93,8 @@
     "rate_limited": "Anthropic is receiving too many requests. Try again in a minute.",
     "unreachable": "Anthropic could not be reached, so nothing was read. Try again later.",
     "document_too_large": "The document is too large for the model to read.",
-    "api_error": "Anthropic returned an error. Try again."
+    "api_error": "Anthropic returned an error. Try again.",
+    "no_issues": "There are no errors or warnings to raise."
   },
   "check": {
     "untitled": "Check of {date, date, medium}",
@@ -304,6 +305,120 @@
       "docset-insurance": "Under the Incoterms® rule {value} the seller obtains cargo insurance, so an insurance document is usually part of the shipment documents.",
       "docset-typical": "Depending on the goods and the destination country, other documents may be required, such as a transport document, a certificate of origin, licences or certificates. Check the destination country's rules.",
       "docset-typical-country": "Depending on the goods, other documents may be required for {country}, such as a transport document, a certificate of origin, licences or certificates. Check the rules of {country}."
+    }
+  },
+  "results": {
+    "heading": "Findings",
+    "noIssues": "No issues found by the checks listed below.",
+    "counts": {
+      "error": "Errors",
+      "warning": "Warnings",
+      "unverified": "Could not be verified",
+      "info": "Notes"
+    },
+    "chartTitle": "Issues by check category",
+    "chartDescription": "Errors, warnings and results that could not be verified. Notes are not counted.",
+    "chartTooltip": "{category} · {total, plural, one {# issue in total} other {# issues in total}}",
+    "showTable": "Show as table",
+    "tableCategory": "Category",
+    "tableIssues": "Issues",
+    "rulesHeading": "Checks that ran",
+    "rulesSummary": "{passed} passed · {failed} found issues · {unverified} could not be verified · {notApplicable} not applicable",
+    "ruleFindings": "{count, plural, one {# finding} other {# findings}}",
+    "filters": {
+      "status": "Filter by status",
+      "category": "Category",
+      "document": "Document",
+      "allCategories": "All categories",
+      "allDocuments": "All documents",
+      "reset": "Clear filters",
+      "showing": "Showing {shown} of {total} findings",
+      "noMatch": "No findings match these filters."
+    },
+    "tabs": {
+      "findings": "Findings",
+      "documents": "Documents"
+    },
+    "finding": {
+      "evidence": "Evidence",
+      "page": "p. {page}",
+      "show": "Show in document",
+      "explain": "Explain in plain language",
+      "explaining": "Explaining…",
+      "aiExplanation": "AI-generated explanation"
+    },
+    "viewer": {
+      "document": "Document",
+      "pages": "Pages",
+      "page": "Page {page} of {count}",
+      "previous": "Previous page",
+      "next": "Next page",
+      "loading": "Loading the document…",
+      "error": "The document could not be displayed.",
+      "positionUnavailable": "Exact position not available",
+      "pageImage": "Page {page} of {name}",
+      "imageNote": "Images have no text layer, so their evidence is listed above the image instead of being marked on it.",
+      "close": "Close"
+    },
+    "compare": {
+      "title": "{count, plural, one {# comparison is waiting for AI} other {# comparisons are waiting for AI}}",
+      "body": "Names and goods descriptions that are written differently are compared by Claude. Until then they are shown as “could not be verified”.",
+      "button": "Compare with AI",
+      "comparing": "Comparing names and descriptions…"
+    },
+    "tolerance": {
+      "label": "Rounding tolerance for amounts",
+      "hint": "Currently {value}. Differences up to this amount are accepted in the line and total checks.",
+      "apply": "Apply",
+      "invalid": "Enter a number such as 0.01."
+    },
+    "email": {
+      "open": "Draft correction e-mail",
+      "title": "Correction e-mail draft",
+      "description": "Claude drafts an e-mail asking the document issuer to correct the errors and warnings found. TradeCheck never sends e-mail: copy the draft or open it in your own mail program.",
+      "language": "Language of the e-mail",
+      "generate": "Draft e-mail",
+      "regenerate": "Draft again",
+      "generating": "Drafting…",
+      "tokensNote": "{count, plural, one {# issue} other {# issues}} will be included. Drafting uses tokens, which are added to this check's usage.",
+      "aiDraft": "AI-generated draft — read and correct it before sending.",
+      "subject": "Subject",
+      "body": "Message",
+      "copy": "Copy",
+      "copied": "Copied",
+      "copyFailed": "The draft could not be copied. Select the text and copy it by hand.",
+      "openMail": "Open in mail program",
+      "neverSent": "TradeCheck does not send this e-mail."
+    }
+  },
+  "report": {
+    "open": "Open report",
+    "title": "Check report",
+    "print": "Print or save as PDF",
+    "back": "Back to check",
+    "generated": "Report created {date}",
+    "tolerance": "Rounding tolerance {value}",
+    "disclaimerHeading": "Please note",
+    "aiNote": "Claude (Anthropic) read the documents and compared names and descriptions. Every calculation and rule check was done by deterministic code. Values marked as corrected were entered by the user.",
+    "documents": "Documents",
+    "summary": "Summary",
+    "usage": "Token usage",
+    "columns": {
+      "file": "File",
+      "type": "Type",
+      "language": "Language",
+      "pages": "Pages",
+      "status": "Status",
+      "purpose": "Purpose",
+      "requests": "Requests",
+      "input": "Input tokens",
+      "output": "Output tokens"
+    },
+    "usageKinds": {
+      "extract": "Reading documents",
+      "compare": "Comparing names and descriptions",
+      "explain": "Plain-language explanations",
+      "email": "E-mail drafts"
     }
   }
 }

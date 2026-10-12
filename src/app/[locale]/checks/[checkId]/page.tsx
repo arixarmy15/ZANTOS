@@ -1,16 +1,29 @@
+import { FileText } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { requireLocale } from "@/i18n/require-locale";
 import { DeleteCheckButton } from "@/components/checks/delete-check-button";
 import { DocumentsPanel, type DocumentRow } from "@/components/checks/documents-panel";
 import { FieldTables } from "@/components/checks/field-tables";
 import { PageContainer, PageHeader } from "@/components/page-header";
+import { CategoryChart } from "@/components/results/category-chart";
+import { CompareNotice } from "@/components/results/compare-notice";
+import { EmailDraft } from "@/components/results/email-draft";
+import { EvidenceLedger } from "@/components/results/evidence-ledger";
+import { RulesOverview } from "@/components/results/rules-overview";
+import { SummaryStrip } from "@/components/results/summary-strip";
+import { ToleranceForm } from "@/components/results/tolerance-form";
+import { buttonVariants } from "@/components/ui/button";
 import { Notice } from "@/components/ui/notice";
-import { toEffectiveDocuments } from "@/lib/checks/effective";
+import { Link } from "@/i18n/navigation";
+import { requireLocale } from "@/i18n/require-locale";
+import { routing } from "@/i18n/routing";
+import { emailIssues } from "@/lib/assist/prompts";
+import { presentCheck } from "@/lib/checks/view";
 import { getServerEnv, isAnthropicConfigured } from "@/lib/config/env";
 import { formatTimestamp } from "@/lib/format";
 import { getStorage } from "@/lib/storage";
+import type { DocumentRecord } from "@/lib/storage/types";
 
 export const dynamic = "force-dynamic";
 
@@ -21,12 +34,7 @@ async function load(checkId: string) {
   const storage = await getStorage();
   const check = await storage.getCheck(checkId);
   if (!check) return null;
-  const [documents, corrections, usage] = await Promise.all([
-    storage.listDocuments(checkId),
-    storage.listCorrections(checkId),
-    storage.listUsage(checkId),
-  ]);
-  return { check, documents, corrections, usage };
+  return { storage, check, usage: await storage.listUsage(checkId) };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -39,15 +47,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+/** Languages offered for the e-mail draft: the documents' own languages first. */
+function emailLanguages(documents: DocumentRecord[], issueDocumentIds: string[], locale: string) {
+  const known = (tag: string | null): tag is string => tag !== null && tag !== "und";
+  const involved = documents
+    .filter((doc) => issueDocumentIds.includes(doc.id))
+    .map((doc) => doc.documentLanguage);
+  const all = documents.map((doc) => doc.documentLanguage);
+  const languages = [
+    ...new Set([...involved.filter(known), ...all.filter(known), ...routing.locales]),
+  ];
+  return { languages, defaultLanguage: involved.find(known) ?? all.find(known) ?? locale };
+}
+
 export default async function CheckPage({ params }: Props) {
   const { locale, checkId } = await params;
   requireLocale(locale);
   const data = await load(checkId);
   if (!data) notFound();
-  const { check, documents, corrections, usage } = data;
+  const { storage, check, usage } = data;
   const t = await getTranslations();
   const env = getServerEnv();
-  const readingEnabled = isAnthropicConfigured(env);
+  const aiEnabled = isAnthropicConfigured(env);
+  const { evaluation, findings, rules, summary } = await presentCheck(storage, check, locale);
+  const { documents, effective, pending } = evaluation;
 
   const tokens = usage.reduce(
     (sum, entry) => ({
@@ -72,12 +95,34 @@ export default async function CheckPage({ params }: Props) {
       outputTokens: docUsage.reduce((sum, entry) => sum + entry.outputTokens, 0),
     };
   });
-  const effective = toEffectiveDocuments(documents, corrections);
   const title = check.name ?? t("check.untitled", { date: new Date(check.createdAt) });
+  const issues = emailIssues(findings);
+  const email = emailLanguages(
+    documents,
+    [...new Set(issues.flatMap((issue) => issue.documentIds))],
+    locale,
+  );
+  const hasResults = effective.length > 0;
 
   return (
     <PageContainer>
-      <PageHeader title={title} actions={<DeleteCheckButton checkId={check.id} />}>
+      <PageHeader
+        title={title}
+        actions={
+          <>
+            {hasResults ? (
+              <Link
+                href={`/checks/${check.id}/report`}
+                className={buttonVariants({ variant: "secondary" })}
+              >
+                <FileText aria-hidden="true" />
+                {t("report.open")}
+              </Link>
+            ) : null}
+            <DeleteCheckButton checkId={check.id} />
+          </>
+        }
+      >
         <p className="flex flex-wrap gap-x-4 gap-y-1 text-small">
           <span>{t("check.created", { date: formatTimestamp(check.createdAt, locale) })}</span>
           <span>{t("check.autoDelete", { date: formatTimestamp(check.expiresAt, locale) })}</span>
@@ -90,16 +135,59 @@ export default async function CheckPage({ params }: Props) {
         </p>
       </PageHeader>
 
-      {readingEnabled ? null : (
+      {aiEnabled ? null : (
         <Notice status="info" title={t("permission.apiKeyMissingTitle")}>
           {t("permission.apiKeyMissingBody")}
         </Notice>
       )}
 
+      {hasResults ? (
+        <section aria-labelledby="results-heading" className="grid gap-4">
+          <div className="grid gap-1">
+            <h2 id="results-heading" className="text-title font-semibold">
+              {t("results.heading")}
+            </h2>
+            <p className="text-small text-slate">{t("footer.notice")}</p>
+          </div>
+          <div className="grid items-start gap-4 lg:grid-cols-2">
+            <div className="grid gap-3">
+              <SummaryStrip summary={summary} />
+              {summary.counts.error + summary.counts.warning + summary.counts.unverified === 0 ? (
+                <Notice status="success" title={t("results.noIssues")} />
+              ) : null}
+            </div>
+            <CategoryChart summary={summary} />
+          </div>
+          {pending.length > 0 ? (
+            <CompareNotice checkId={check.id} pending={pending.length} enabled={aiEnabled} />
+          ) : null}
+          <EvidenceLedger
+            checkId={check.id}
+            documents={effective.map((doc) => ({
+              id: doc.record.id,
+              fileName: doc.record.fileName,
+              mimeType: doc.record.mimeType,
+              pageCount: doc.record.pageCount,
+            }))}
+            findings={findings}
+            canUseAi={aiEnabled}
+            toolbar={
+              <EmailDraft
+                checkId={check.id}
+                languages={email.languages}
+                defaultLanguage={email.defaultLanguage}
+                issueCount={issues.length}
+                enabled={aiEnabled}
+              />
+            }
+          />
+        </section>
+      ) : null}
+
       <DocumentsPanel
         checkId={check.id}
         documents={rows}
-        readingEnabled={readingEnabled}
+        readingEnabled={aiEnabled}
         retentionHours={env.RETENTION_HOURS}
         limits={{
           maxMb: env.UPLOAD_MAX_FILE_MB,
@@ -107,6 +195,12 @@ export default async function CheckPage({ params }: Props) {
           maxFiles: env.UPLOAD_MAX_FILES_PER_CHECK,
         }}
       />
+
+      {hasResults ? (
+        <RulesOverview rules={rules}>
+          <ToleranceForm checkId={check.id} tolerance={check.tolerance} />
+        </RulesOverview>
+      ) : null}
 
       <section aria-labelledby="extracted-heading" className="grid gap-4">
         <h2 id="extracted-heading" className="text-title font-semibold">

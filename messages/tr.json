@@ -93,7 +93,8 @@
     "rate_limited": "Anthropic şu anda çok fazla istek alıyor. Bir dakika sonra yeniden deneyin.",
     "unreachable": "Anthropic'e ulaşılamadı; hiçbir şey okunmadı. Daha sonra yeniden deneyin.",
     "document_too_large": "Belge, modelin okuyabileceğinden büyük.",
-    "api_error": "Anthropic bir hata döndürdü. Yeniden deneyin."
+    "api_error": "Anthropic bir hata döndürdü. Yeniden deneyin.",
+    "no_issues": "Bildirilecek hata veya uyarı yok."
   },
   "check": {
     "untitled": "{date, date, medium} tarihli kontrol",
@@ -304,6 +305,120 @@
       "docset-insurance": "{value} Incoterms® kuralında nakliye sigortasını satıcı yaptırır; bu nedenle sigorta belgesi genellikle sevkiyat belgelerinin bir parçasıdır.",
       "docset-typical": "Mala ve varış ülkesine bağlı olarak taşıma belgesi, menşe şahadetnamesi, lisans veya sertifikalar gibi başka belgeler gerekebilir. Varış ülkesinin kurallarını kontrol edin.",
       "docset-typical-country": "Mala bağlı olarak {country} için taşıma belgesi, menşe şahadetnamesi, lisans veya sertifikalar gibi başka belgeler gerekebilir. {country} kurallarını kontrol edin."
+    }
+  },
+  "results": {
+    "heading": "Bulgular",
+    "noIssues": "Aşağıda listelenen kontroller sorun bulmadı.",
+    "counts": {
+      "error": "Hata",
+      "warning": "Uyarı",
+      "unverified": "Doğrulanamadı",
+      "info": "Not"
+    },
+    "chartTitle": "Kontrol kategorisine göre sorunlar",
+    "chartDescription": "Hatalar, uyarılar ve doğrulanamayan sonuçlar. Notlar sayılmaz.",
+    "chartTooltip": "{category} · {total, plural, one {toplam # sorun} other {toplam # sorun}}",
+    "showTable": "Tablo olarak göster",
+    "tableCategory": "Kategori",
+    "tableIssues": "Sorun",
+    "rulesHeading": "Çalışan kontroller",
+    "rulesSummary": "{passed} geçti · {failed} sorun buldu · {unverified} doğrulanamadı · {notApplicable} uygulanamaz",
+    "ruleFindings": "{count, plural, one {# bulgu} other {# bulgu}}",
+    "filters": {
+      "status": "Duruma göre filtrele",
+      "category": "Kategori",
+      "document": "Belge",
+      "allCategories": "Tüm kategoriler",
+      "allDocuments": "Tüm belgeler",
+      "reset": "Filtreleri temizle",
+      "showing": "{total} bulgudan {shown} tanesi gösteriliyor",
+      "noMatch": "Bu filtrelere uyan bulgu yok."
+    },
+    "tabs": {
+      "findings": "Bulgular",
+      "documents": "Belgeler"
+    },
+    "finding": {
+      "evidence": "Kanıt",
+      "page": "s. {page}",
+      "show": "Belgede göster",
+      "explain": "Sade bir dille açıkla",
+      "explaining": "Açıklanıyor…",
+      "aiExplanation": "Yapay zekâ tarafından oluşturulan açıklama"
+    },
+    "viewer": {
+      "document": "Belge",
+      "pages": "Sayfalar",
+      "page": "Sayfa {page} / {count}",
+      "previous": "Önceki sayfa",
+      "next": "Sonraki sayfa",
+      "loading": "Belge yükleniyor…",
+      "error": "Belge görüntülenemedi.",
+      "positionUnavailable": "Tam konum belirlenemedi",
+      "pageImage": "{name}, sayfa {page}",
+      "imageNote": "Görsellerde metin katmanı yoktur; bu nedenle kanıtlar görselin üzerinde işaretlenmek yerine üstünde listelenir.",
+      "close": "Kapat"
+    },
+    "compare": {
+      "title": "{count, plural, one {# karşılaştırma yapay zekâyı bekliyor} other {# karşılaştırma yapay zekâyı bekliyor}}",
+      "body": "Farklı yazılmış isimler ve mal tanımları Claude tarafından karşılaştırılır. O zamana kadar “doğrulanamadı” olarak gösterilirler.",
+      "button": "Yapay zekâ ile karşılaştır",
+      "comparing": "İsimler ve tanımlar karşılaştırılıyor…"
+    },
+    "tolerance": {
+      "label": "Tutarlar için yuvarlama toleransı",
+      "hint": "Şu anda {value}. Satır ve toplam kontrollerinde bu tutara kadar farklar kabul edilir.",
+      "apply": "Uygula",
+      "invalid": "0.01 gibi bir sayı girin."
+    },
+    "email": {
+      "open": "Düzeltme e-postası taslağı",
+      "title": "Düzeltme e-postası taslağı",
+      "description": "Claude, belgeyi düzenleyen kişiden bulunan hata ve uyarıları düzeltmesini isteyen bir e-posta taslağı hazırlar. TradeCheck asla e-posta göndermez: taslağı kopyalayın veya kendi e-posta programınızda açın.",
+      "language": "E-postanın dili",
+      "generate": "Taslak hazırla",
+      "regenerate": "Yeniden hazırla",
+      "generating": "Hazırlanıyor…",
+      "tokensNote": "{count, plural, one {# sorun} other {# sorun}} eklenecek. Taslak hazırlamak token kullanır; bu kullanım kontrolün token kullanımına eklenir.",
+      "aiDraft": "Yapay zekâ tarafından oluşturulan taslak — göndermeden önce okuyup düzeltin.",
+      "subject": "Konu",
+      "body": "İleti",
+      "copy": "Kopyala",
+      "copied": "Kopyalandı",
+      "copyFailed": "Taslak kopyalanamadı. Metni seçip elle kopyalayın.",
+      "openMail": "E-posta programında aç",
+      "neverSent": "TradeCheck bu e-postayı göndermez."
+    }
+  },
+  "report": {
+    "open": "Raporu aç",
+    "title": "Kontrol raporu",
+    "print": "Yazdır veya PDF olarak kaydet",
+    "back": "Kontrole dön",
+    "generated": "Rapor oluşturuldu: {date}",
+    "tolerance": "Yuvarlama toleransı {value}",
+    "disclaimerHeading": "Lütfen dikkat",
+    "aiNote": "Belgeleri Claude (Anthropic) okudu ve isimlerle tanımları karşılaştırdı. Tüm hesaplamalar ve kural kontrolleri deterministik kodla yapıldı. Düzeltildi olarak işaretlenen değerler kullanıcı tarafından girildi.",
+    "documents": "Belgeler",
+    "summary": "Özet",
+    "usage": "Token kullanımı",
+    "columns": {
+      "file": "Dosya",
+      "type": "Tür",
+      "language": "Dil",
+      "pages": "Sayfa",
+      "status": "Durum",
+      "purpose": "Amaç",
+      "requests": "İstek",
+      "input": "Girdi tokenı",
+      "output": "Çıktı tokenı"
+    },
+    "usageKinds": {
+      "extract": "Belgeleri okuma",
+      "compare": "İsim ve tanım karşılaştırma",
+      "explain": "Sade dilde açıklamalar",
+      "email": "E-posta taslakları"
     }
   }
 }

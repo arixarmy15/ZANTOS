@@ -109,6 +109,13 @@ All arithmetic and rule-based checks are deterministic code (`src/lib/validation
 | Formats          | ISO 4217 currency, ISO 3166-1 country, Incoterms® 2020, HS code format (never the classification), IBAN check digits, readable values, purchase order dated first                                               |
 | Completeness     | expected fields per document type, missing or unread documents, a general reminder to check the destination country's rules                                                                                     |
 
+## Results, report and AI assistance
+
+- **Evidence ledger.** Findings and the documents side by side: every finding has a reference tag (`F3`); selecting it shows the page with the evidence highlighted and the same tag in the margin. PDFs are rendered in the browser with PDF.js (legacy build, for browsers a few versions old). Images and scans without a text layer list their evidence above the page as "Exact position not available".
+- **Summary and filters.** Counts by status, issues per check category (chart with a table view), filters by status, category and document, and the full list of checks that ran — "no issues" always refers to that list.
+- **Report.** `/<language>/checks/<id>/report` is laid out for printing; "Print or save as PDF" uses the browser's print dialog, so every script (Arabic included) is shaped correctly. It carries the information-only notice, the documents, all findings with evidence, the checks that ran and the token usage.
+- **AI assistance (optional, labelled).** "Explain in plain language" for one finding, and a correction e-mail draft in the documents' language (changeable). Drafts are only shown for copying or opening in your own mail program — TradeCheck never sends e-mail. Both are cached per content hash and their tokens are added to the check's usage.
+
 ## Rule packs
 
 Country-specific rules live in `/rules/<ISO 3166-1 alpha-2 code>/` and run when a document names that country as its destination. The interface and registry exist, but **no pack ships**: a rule may only be added together with the official source it implements. See [`rules/README.md`](rules/README.md) for the step-by-step guide.

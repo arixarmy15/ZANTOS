@@ -3,6 +3,7 @@ import type { EffectiveDocument } from "@/lib/checks/effective";
 import { LOW_CONFIDENCE_THRESHOLD } from "@/lib/domain/fields";
 import type { DocumentRecord } from "@/lib/storage/types";
 import { RULE_PACKS } from "../../../rules";
+import { CATEGORY_ORDER, SEVERITY_ORDER } from "./order";
 import type { RulePack } from "./rule-pack";
 import { lineTotalRule, netGrossRule, quantitySumRule, sumTotalRule } from "./rules/arithmetic";
 import { documentSetRule, requiredFieldsRule } from "./rules/completeness";
@@ -30,16 +31,7 @@ import {
   incotermFormatRule,
   valueFormatRule,
 } from "./rules/format";
-import type {
-  Finding,
-  Rule,
-  RuleCategory,
-  RuleContext,
-  RuleResult,
-  RuleStatus,
-  SemanticVerdict,
-  Severity,
-} from "./types";
+import type { Finding, Rule, RuleContext, RuleResult, RuleStatus, SemanticVerdict } from "./types";
 
 /** The universal rules, in the order they are listed in the report. */
 export const CORE_RULES: Rule[] = [
@@ -71,13 +63,7 @@ export const CORE_RULES: Rule[] = [
   documentSetRule,
 ];
 
-export const SEVERITY_ORDER: Severity[] = ["error", "warning", "info"];
-export const CATEGORY_ORDER: RuleCategory[] = [
-  "arithmetic",
-  "crossDocument",
-  "format",
-  "completeness",
-];
+export { CATEGORY_ORDER, SEVERITY_ORDER };
 
 export type SemanticLookup = (
   kind: "party" | "goods",

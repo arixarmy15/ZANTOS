@@ -46,6 +46,7 @@ export function DocumentsPanel({
   const errorMessage = useErrorMessage(limits);
   const [reading, setReading] = useState<Set<string>>(new Set());
   const [uploading, setUploading] = useState(false);
+  const [comparing, setComparing] = useState(false);
   const [uploadErrors, setUploadErrors] = useState<{ name: string; error: string }[]>([]);
   const [announcement, setAnnouncement] = useState("");
   const hintId = useId();
@@ -65,6 +66,12 @@ export function DocumentsPanel({
       });
       router.refresh();
     }
+    // Names and goods descriptions written differently are compared once all are read.
+    setAnnouncement(t("results.compare.comparing"));
+    setComparing(true);
+    await postJson(`/api/checks/${checkId}/compare`, undefined);
+    setComparing(false);
+    router.refresh();
     setAnnouncement("");
   }
 
@@ -89,7 +96,7 @@ export function DocumentsPanel({
         {readingEnabled && pending.length > 0 ? (
           <Button
             variant="primary"
-            disabled={reading.size > 0}
+            disabled={reading.size > 0 || comparing}
             aria-describedby={hintId}
             onClick={() => void read(pending.map((doc) => doc.id))}
           >

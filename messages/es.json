@@ -93,7 +93,8 @@
     "rate_limited": "Anthropic está recibiendo demasiadas solicitudes. Inténtelo de nuevo en un minuto.",
     "unreachable": "No se pudo contactar con Anthropic, así que no se leyó nada. Inténtelo más tarde.",
     "document_too_large": "El documento es demasiado grande para que el modelo lo lea.",
-    "api_error": "Anthropic devolvió un error. Inténtelo de nuevo."
+    "api_error": "Anthropic devolvió un error. Inténtelo de nuevo.",
+    "no_issues": "No hay errores ni advertencias que comunicar."
   },
   "check": {
     "untitled": "Comprobación del {date, date, medium}",
@@ -304,6 +305,120 @@
       "docset-insurance": "Con la regla Incoterms® {value} el vendedor contrata el seguro de la mercancía, por lo que un documento de seguro suele formar parte de los documentos del envío.",
       "docset-typical": "Según la mercancía y el país de destino, pueden necesitarse otros documentos, como un documento de transporte, un certificado de origen, licencias o certificados. Consulte las normas del país de destino.",
       "docset-typical-country": "Según la mercancía, pueden necesitarse otros documentos para {country}, como un documento de transporte, un certificado de origen, licencias o certificados. Consulte las normas de {country}."
+    }
+  },
+  "results": {
+    "heading": "Hallazgos",
+    "noIssues": "Las comprobaciones indicadas a continuación no encontraron problemas.",
+    "counts": {
+      "error": "Errores",
+      "warning": "Advertencias",
+      "unverified": "No se pudo verificar",
+      "info": "Notas"
+    },
+    "chartTitle": "Problemas por categoría de comprobación",
+    "chartDescription": "Errores, advertencias y resultados que no se pudieron verificar. Las notas no se cuentan.",
+    "chartTooltip": "{category} · {total, plural, one {# problema en total} other {# problemas en total}}",
+    "showTable": "Mostrar como tabla",
+    "tableCategory": "Categoría",
+    "tableIssues": "Problemas",
+    "rulesHeading": "Comprobaciones realizadas",
+    "rulesSummary": "{passed} superadas · {failed} con problemas · {unverified} sin verificar · {notApplicable} no aplicables",
+    "ruleFindings": "{count, plural, one {# hallazgo} other {# hallazgos}}",
+    "filters": {
+      "status": "Filtrar por estado",
+      "category": "Categoría",
+      "document": "Documento",
+      "allCategories": "Todas las categorías",
+      "allDocuments": "Todos los documentos",
+      "reset": "Quitar filtros",
+      "showing": "Se muestran {shown} de {total} hallazgos",
+      "noMatch": "Ningún hallazgo coincide con estos filtros."
+    },
+    "tabs": {
+      "findings": "Hallazgos",
+      "documents": "Documentos"
+    },
+    "finding": {
+      "evidence": "Evidencia",
+      "page": "pág. {page}",
+      "show": "Mostrar en el documento",
+      "explain": "Explicar con palabras sencillas",
+      "explaining": "Explicando…",
+      "aiExplanation": "Explicación generada por IA"
+    },
+    "viewer": {
+      "document": "Documento",
+      "pages": "Páginas",
+      "page": "Página {page} de {count}",
+      "previous": "Página anterior",
+      "next": "Página siguiente",
+      "loading": "Cargando el documento…",
+      "error": "No se pudo mostrar el documento.",
+      "positionUnavailable": "Posición exacta no disponible",
+      "pageImage": "Página {page} de {name}",
+      "imageNote": "Las imágenes no tienen capa de texto, así que su evidencia se muestra encima de la imagen en lugar de marcarse sobre ella.",
+      "close": "Cerrar"
+    },
+    "compare": {
+      "title": "{count, plural, one {# comparación espera a la IA} other {# comparaciones esperan a la IA}}",
+      "body": "Claude compara los nombres y las descripciones de mercancías escritos de forma distinta. Hasta entonces se muestran como «no se pudo verificar».",
+      "button": "Comparar con IA",
+      "comparing": "Comparando nombres y descripciones…"
+    },
+    "tolerance": {
+      "label": "Tolerancia de redondeo para importes",
+      "hint": "Actualmente {value}. En las comprobaciones de líneas y totales se aceptan diferencias de hasta este importe.",
+      "apply": "Aplicar",
+      "invalid": "Introduzca un número como 0.01."
+    },
+    "email": {
+      "open": "Redactar correo de corrección",
+      "title": "Borrador de correo de corrección",
+      "description": "Claude redacta un correo en el que se pide a quien emitió los documentos que corrija los errores y advertencias encontrados. TradeCheck nunca envía correos: copie el borrador o ábralo en su propio programa de correo.",
+      "language": "Idioma del correo",
+      "generate": "Redactar correo",
+      "regenerate": "Redactar de nuevo",
+      "generating": "Redactando…",
+      "tokensNote": "Se incluirán {count, plural, one {# problema} other {# problemas}}. La redacción consume tokens, que se suman al consumo de esta comprobación.",
+      "aiDraft": "Borrador generado por IA: léalo y corríjalo antes de enviarlo.",
+      "subject": "Asunto",
+      "body": "Mensaje",
+      "copy": "Copiar",
+      "copied": "Copiado",
+      "copyFailed": "No se pudo copiar el borrador. Seleccione el texto y cópielo a mano.",
+      "openMail": "Abrir en el programa de correo",
+      "neverSent": "TradeCheck no envía este correo."
+    }
+  },
+  "report": {
+    "open": "Abrir informe",
+    "title": "Informe de comprobación",
+    "print": "Imprimir o guardar como PDF",
+    "back": "Volver a la comprobación",
+    "generated": "Informe creado el {date}",
+    "tolerance": "Tolerancia de redondeo {value}",
+    "disclaimerHeading": "Tenga en cuenta",
+    "aiNote": "Claude (Anthropic) leyó los documentos y comparó nombres y descripciones. Todos los cálculos y comprobaciones de reglas los realizó código determinista. Los valores marcados como corregidos los introdujo el usuario.",
+    "documents": "Documentos",
+    "summary": "Resumen",
+    "usage": "Consumo de tokens",
+    "columns": {
+      "file": "Archivo",
+      "type": "Tipo",
+      "language": "Idioma",
+      "pages": "Páginas",
+      "status": "Estado",
+      "purpose": "Finalidad",
+      "requests": "Solicitudes",
+      "input": "Tokens de entrada",
+      "output": "Tokens de salida"
+    },
+    "usageKinds": {
+      "extract": "Lectura de documentos",
+      "compare": "Comparación de nombres y descripciones",
+      "explain": "Explicaciones sencillas",
+      "email": "Borradores de correo"
     }
   }
 }

@@ -209,8 +209,13 @@
   }
 }
 
+/* The report is exported through the browser's print dialog ("Save as PDF"). */
 @media print {
+  @page {
+    margin: 14mm;
+  }
   body {
     background: var(--color-paper);
+    print-color-adjust: exact;
   }
 }

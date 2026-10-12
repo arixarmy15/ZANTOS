@@ -93,7 +93,8 @@
     "rate_limited": "Anthropic reçoit trop de requêtes en ce moment. Réessayez dans une minute.",
     "unreachable": "Anthropic n'a pas pu être joint ; rien n'a été lu. Réessayez plus tard.",
     "document_too_large": "Le document est trop volumineux pour être lu par le modèle.",
-    "api_error": "Anthropic a renvoyé une erreur. Réessayez."
+    "api_error": "Anthropic a renvoyé une erreur. Réessayez.",
+    "no_issues": "Il n'y a aucune erreur ni aucun avertissement à signaler."
   },
   "check": {
     "untitled": "Vérification du {date, date, medium}",
@@ -304,6 +305,120 @@
       "docset-insurance": "Avec la règle Incoterms® {value}, le vendeur souscrit l'assurance des marchandises ; un document d'assurance fait donc généralement partie des documents d'expédition.",
       "docset-typical": "Selon les marchandises et le pays de destination, d'autres documents peuvent être exigés, par exemple un document de transport, un certificat d'origine, des licences ou des certificats. Consultez les règles du pays de destination.",
       "docset-typical-country": "Selon les marchandises, d'autres documents peuvent être exigés pour {country}, par exemple un document de transport, un certificat d'origine, des licences ou des certificats. Consultez les règles applicables pour {country}."
+    }
+  },
+  "results": {
+    "heading": "Constats",
+    "noIssues": "Les vérifications listées ci-dessous n'ont trouvé aucun problème.",
+    "counts": {
+      "error": "Erreurs",
+      "warning": "Avertissements",
+      "unverified": "Vérification impossible",
+      "info": "Notes"
+    },
+    "chartTitle": "Problèmes par catégorie de vérification",
+    "chartDescription": "Erreurs, avertissements et résultats impossibles à vérifier. Les notes ne sont pas comptées.",
+    "chartTooltip": "{category} · {total, plural, one {# problème au total} other {# problèmes au total}}",
+    "showTable": "Afficher sous forme de tableau",
+    "tableCategory": "Catégorie",
+    "tableIssues": "Problèmes",
+    "rulesHeading": "Vérifications effectuées",
+    "rulesSummary": "{passed} réussies · {failed} avec problèmes · {unverified} impossibles à vérifier · {notApplicable} sans objet",
+    "ruleFindings": "{count, plural, one {# constat} other {# constats}}",
+    "filters": {
+      "status": "Filtrer par statut",
+      "category": "Catégorie",
+      "document": "Document",
+      "allCategories": "Toutes les catégories",
+      "allDocuments": "Tous les documents",
+      "reset": "Effacer les filtres",
+      "showing": "{shown} constats affichés sur {total}",
+      "noMatch": "Aucun constat ne correspond à ces filtres."
+    },
+    "tabs": {
+      "findings": "Constats",
+      "documents": "Documents"
+    },
+    "finding": {
+      "evidence": "Preuve",
+      "page": "p. {page}",
+      "show": "Afficher dans le document",
+      "explain": "Expliquer simplement",
+      "explaining": "Explication en cours…",
+      "aiExplanation": "Explication générée par IA"
+    },
+    "viewer": {
+      "document": "Document",
+      "pages": "Pages",
+      "page": "Page {page} sur {count}",
+      "previous": "Page précédente",
+      "next": "Page suivante",
+      "loading": "Chargement du document…",
+      "error": "Le document n'a pas pu être affiché.",
+      "positionUnavailable": "Position exacte indisponible",
+      "pageImage": "Page {page} de {name}",
+      "imageNote": "Les images n'ont pas de couche de texte : leurs preuves sont donc listées au-dessus de l'image au lieu d'y être marquées.",
+      "close": "Fermer"
+    },
+    "compare": {
+      "title": "{count, plural, one {# comparaison attend l'IA} other {# comparaisons attendent l'IA}}",
+      "body": "Claude compare les noms et les désignations de marchandises écrits différemment. En attendant, ils apparaissent comme « vérification impossible ».",
+      "button": "Comparer avec l'IA",
+      "comparing": "Comparaison des noms et des désignations…"
+    },
+    "tolerance": {
+      "label": "Tolérance d'arrondi pour les montants",
+      "hint": "Actuellement {value}. Les écarts jusqu'à ce montant sont acceptés dans les vérifications des lignes et des totaux.",
+      "apply": "Appliquer",
+      "invalid": "Saisissez un nombre tel que 0.01."
+    },
+    "email": {
+      "open": "Rédiger un e-mail de correction",
+      "title": "Brouillon d'e-mail de correction",
+      "description": "Claude rédige un e-mail demandant à l'émetteur des documents de corriger les erreurs et avertissements constatés. TradeCheck n'envoie jamais d'e-mail : copiez le brouillon ou ouvrez-le dans votre propre messagerie.",
+      "language": "Langue de l'e-mail",
+      "generate": "Rédiger l'e-mail",
+      "regenerate": "Rédiger à nouveau",
+      "generating": "Rédaction…",
+      "tokensNote": "{count, plural, one {# problème sera inclus} other {# problèmes seront inclus}}. La rédaction consomme des tokens, ajoutés à la consommation de ce contrôle.",
+      "aiDraft": "Brouillon généré par IA — relisez-le et corrigez-le avant de l'envoyer.",
+      "subject": "Objet",
+      "body": "Message",
+      "copy": "Copier",
+      "copied": "Copié",
+      "copyFailed": "Le brouillon n'a pas pu être copié. Sélectionnez le texte et copiez-le manuellement.",
+      "openMail": "Ouvrir dans la messagerie",
+      "neverSent": "TradeCheck n'envoie pas cet e-mail."
+    }
+  },
+  "report": {
+    "open": "Ouvrir le rapport",
+    "title": "Rapport de contrôle",
+    "print": "Imprimer ou enregistrer en PDF",
+    "back": "Retour au contrôle",
+    "generated": "Rapport créé le {date}",
+    "tolerance": "Tolérance d'arrondi {value}",
+    "disclaimerHeading": "À noter",
+    "aiNote": "Claude (Anthropic) a lu les documents et comparé les noms et les désignations. Tous les calculs et toutes les vérifications de règles ont été effectués par du code déterministe. Les valeurs marquées comme corrigées ont été saisies par l'utilisateur.",
+    "documents": "Documents",
+    "summary": "Synthèse",
+    "usage": "Consommation de tokens",
+    "columns": {
+      "file": "Fichier",
+      "type": "Type",
+      "language": "Langue",
+      "pages": "Pages",
+      "status": "Statut",
+      "purpose": "Objet",
+      "requests": "Requêtes",
+      "input": "Tokens d'entrée",
+      "output": "Tokens de sortie"
+    },
+    "usageKinds": {
+      "extract": "Lecture des documents",
+      "compare": "Comparaison des noms et désignations",
+      "explain": "Explications simples",
+      "email": "Brouillons d'e-mail"
     }
   }
 }
