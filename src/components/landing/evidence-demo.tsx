@@ -76,47 +76,61 @@ export function EvidenceDemo() {
   ];
 
   return (
-    <figure aria-labelledby={captionId} className="grid min-w-0 gap-3">
-      <div className="border border-rule bg-paper">
-        <p className="border-b border-rule px-3 py-2 text-small font-semibold">{t("label")}</p>
-        <div className="grid grid-cols-2 divide-x divide-rule rtl:divide-x-reverse">
-          <DocumentSheet
-            title={t("invoice")}
-            number="INV-2026-0147"
-            file={INVOICE_FILE}
-            fields={invoice}
-            selected={selected}
-          />
-          <DocumentSheet
-            title={t("packingList")}
-            number="PL-2026-0147"
-            file={PACKING_FILE}
-            fields={packingList}
-            selected={selected}
-          />
+    <figure aria-labelledby={captionId} className="grid min-w-0 gap-6">
+      <div className="relative">
+        {/* Two carbon copies behind the top sheet: the stack of paperwork being compared. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 translate-y-3 rotate-[2deg] rounded-xl bg-paper/10 ring-1 ring-on-deep/15 motion-safe:animate-copy-fan"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 translate-y-1.5 -rotate-[1.25deg] rounded-xl bg-paper/20 ring-1 ring-on-deep/20 motion-safe:animate-copy-fan"
+        />
+        <div className="relative overflow-hidden rounded-xl bg-paper text-carbon shadow-raised ring-1 ring-carbon/10 motion-safe:animate-sheet-rise">
+          <p className="flex items-center gap-2 border-b border-rule bg-ledger px-4 py-2.5 text-small font-semibold">
+            <span aria-hidden="true" className="size-2 rounded-full bg-harbor" />
+            {t("label")}
+          </p>
+          <div className="grid grid-cols-2 divide-x divide-rule rtl:divide-x-reverse">
+            <DocumentSheet
+              title={t("invoice")}
+              number="INV-2026-0147"
+              file={INVOICE_FILE}
+              fields={invoice}
+              selected={selected}
+            />
+            <DocumentSheet
+              title={t("packingList")}
+              number="PL-2026-0147"
+              file={PACKING_FILE}
+              fields={packingList}
+              selected={selected}
+            />
+          </div>
+          <ul aria-label={t("findingsLabel")} className="divide-y divide-rule border-t border-rule">
+            {findings.map((finding) => (
+              <li key={finding.ref}>
+                <button
+                  type="button"
+                  aria-pressed={finding.ref === selected}
+                  onClick={() => setSelected(finding.ref)}
+                  className="grid min-h-11 w-full grid-cols-[auto_minmax(0,1fr)] items-start gap-x-2 gap-y-1 border-s-[3px] border-transparent px-3 py-2.5 text-start transition-control hover:bg-ledger focus-visible:relative aria-pressed:border-s-harbor aria-pressed:bg-harbor-tint"
+                >
+                  <RefTag className={cn(finding.ref === selected && "border-harbor")}>
+                    {finding.ref}
+                  </RefTag>
+                  <span className="grid justify-items-start gap-1">
+                    <StatusTag status={finding.status} />
+                    <span className="text-small text-pretty">{finding.text}</span>
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul aria-label={t("findingsLabel")} className="divide-y divide-rule border-t border-rule">
-          {findings.map((finding) => (
-            <li key={finding.ref}>
-              <button
-                type="button"
-                aria-pressed={finding.ref === selected}
-                onClick={() => setSelected(finding.ref)}
-                className="grid min-h-11 w-full grid-cols-[auto_minmax(0,1fr)] items-start gap-x-2 gap-y-1 border-s-[3px] border-transparent px-3 py-2.5 text-start transition-control hover:bg-ledger focus-visible:relative aria-pressed:border-s-harbor aria-pressed:bg-harbor-tint"
-              >
-                <RefTag className={cn(finding.ref === selected && "border-harbor")}>
-                  {finding.ref}
-                </RefTag>
-                <span className="grid justify-items-start gap-1">
-                  <StatusTag status={finding.status} />
-                  <span className="text-small text-pretty">{finding.text}</span>
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
       </div>
-      <figcaption id={captionId} className="text-small text-slate">
+      <figcaption id={captionId} className="text-small text-on-deep-muted">
         {t("caption")}
       </figcaption>
     </figure>

@@ -223,7 +223,7 @@ function FieldRows({
     </span>
   );
   return (
-    <div className="border border-rule bg-paper md:overflow-x-auto">
+    <div className="surface md:overflow-x-auto">
       <table
         role="table"
         className="block w-full border-collapse text-start md:table md:min-w-[720px]"
@@ -351,7 +351,7 @@ function SplitFieldRows({
         <FieldRows checkId={checkId} document={document} rows={present} />
       ) : null}
       {missing.length > 0 ? (
-        <details className="group border border-rule bg-paper">
+        <details className="group surface">
           <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 px-3 py-2.5 text-slate transition-control hover:bg-ledger hover:text-carbon">
             <ChevronDown
               aria-hidden="true"
@@ -390,7 +390,7 @@ export function FieldTables({ checkId, document }: { checkId: string; document: 
             const flagged = LINE_FIELD_KEYS.some((key) => line[key].lowConfidence);
             const corrected = LINE_FIELD_KEYS.some((key) => line[key].corrected);
             return (
-              <details key={index} className="group border border-rule bg-paper">
+              <details key={index} className="group surface">
                 <summary className="flex min-h-11 cursor-pointer list-none flex-wrap items-center gap-x-3 gap-y-1 px-3 py-2.5 transition-control hover:bg-ledger">
                   <ChevronDown
                     aria-hidden="true"

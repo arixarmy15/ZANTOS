@@ -12,10 +12,16 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
+        // A light top edge and a tinted shadow give the primary action depth without a gradient
+        // that would lower its text contrast.
         primary:
-          "border-harbor bg-harbor text-paper hover:border-harbor-strong hover:bg-harbor-strong",
-        secondary: "border-control-border bg-paper text-carbon hover:bg-ledger",
+          "border-harbor-strong bg-harbor text-paper shadow-primary inset-shadow-[0_1px_0_rgb(255_255_255/0.18)] hover:bg-harbor-strong",
+        secondary:
+          "border-rule bg-paper text-carbon shadow-xs hover:border-control-border hover:bg-ledger",
         ghost: "border-transparent bg-transparent text-carbon hover:bg-ledger",
+        // For deep-water bands: an outline in the light of the band.
+        "on-deep":
+          "border-deep-rule bg-deep-raised/60 text-on-deep hover:border-on-deep-muted hover:bg-deep-raised",
         destructive: "border-error-fg bg-paper text-error-fg hover:bg-error-bg",
         "destructive-solid":
           "border-error-fg bg-error-fg text-paper hover:border-error-mark hover:bg-error-mark",

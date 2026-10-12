@@ -17,7 +17,7 @@ export function PartyIdentifiers({ identifiers }: { identifiers: PartyIdentifier
         </h2>
         <p className="max-w-[72ch] text-small text-slate">{t("lead")}</p>
       </div>
-      <ul className="divide-y divide-rule border border-rule bg-paper">
+      <ul className="divide-y divide-rule overflow-hidden surface">
         {identifiers.map((item) => (
           <li
             key={`${item.party}:${item.kind}:${item.value}`}

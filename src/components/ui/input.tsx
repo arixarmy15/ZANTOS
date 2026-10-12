@@ -2,8 +2,8 @@ import type * as React from "react";
 import { cn } from "@/lib/utils";
 
 export const controlClassName = cn(
-  "h-9 w-full min-w-0 rounded-sm border border-control-border bg-paper px-2.5 text-body text-carbon pointer-coarse:h-11",
-  "transition-control placeholder:text-slate disabled:cursor-not-allowed disabled:bg-ledger",
+  "h-9 w-full min-w-0 rounded-sm border border-control-border bg-paper px-3 text-body text-carbon shadow-xs pointer-coarse:h-11",
+  "transition-control placeholder:text-slate hover:border-slate focus-visible:border-harbor focus-visible:ring-4 focus-visible:ring-harbor/15 disabled:cursor-not-allowed disabled:bg-ledger",
   "aria-invalid:border-error-fg",
 );
 

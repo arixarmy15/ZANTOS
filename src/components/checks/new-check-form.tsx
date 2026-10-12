@@ -122,7 +122,7 @@ export function NewCheckForm({
           <h2 id="selected-files" className="text-title-sm font-semibold">
             {t("newCheck.selected")}
           </h2>
-          <ul className="divide-y divide-rule border border-rule bg-paper">
+          <ul className="divide-y divide-rule overflow-hidden surface">
             {items.map((item) => (
               <li key={item.key} className="grid gap-1.5 px-4 py-3">
                 <div className="flex items-center gap-3">

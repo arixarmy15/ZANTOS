@@ -47,7 +47,7 @@ export default async function ChecksPage({ params }: Props) {
           {/* Phones: one tappable row per check instead of a wide table. */}
           <ul
             aria-label={t("home.listCaption")}
-            className="divide-y divide-rule border border-rule bg-paper md:hidden"
+            className="divide-y divide-rule overflow-hidden surface md:hidden"
           >
             {checks.map((check) => (
               <li
@@ -85,7 +85,7 @@ export default async function ChecksPage({ params }: Props) {
             role="region"
             aria-label={t("home.listCaption")}
             tabIndex={0}
-            className="hidden overflow-x-auto border border-rule bg-paper md:block"
+            className="hidden overflow-x-auto surface md:block"
           >
             <table className="w-full min-w-[640px] border-collapse">
               <caption className="sr-only">{t("home.listCaption")}</caption>

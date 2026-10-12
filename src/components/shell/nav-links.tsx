@@ -34,9 +34,9 @@ export function NavLinks({
               onClick={onNavigate}
               aria-current={current ? "page" : undefined}
               className={cn(
-                "flex items-center px-2 text-carbon transition-control hover:text-harbor",
+                "flex items-center px-3 font-medium text-slate transition-control hover:text-carbon",
                 orientation === "horizontal"
-                  ? "h-12 border-y-2 border-transparent aria-[current=page]:border-b-harbor"
+                  ? "h-9 rounded-sm hover:bg-ledger aria-[current=page]:bg-ledger aria-[current=page]:text-carbon"
                   : "min-h-11 border-s-[3px] border-transparent ps-3 aria-[current=page]:border-s-harbor aria-[current=page]:bg-harbor-tint",
               )}
             >

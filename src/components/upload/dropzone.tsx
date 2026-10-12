@@ -43,11 +43,13 @@ export function Dropzone({
         if (!disabled) onFiles([...event.dataTransfer.files]);
       }}
       className={cn(
-        "grid justify-items-start gap-1.5 rounded-sm border border-dashed border-control-border bg-paper p-5 transition-control",
+        "grid justify-items-start gap-1.5 rounded-lg border-2 border-dashed border-control-border/70 bg-paper/70 p-6 transition-control hover:border-harbor hover:bg-harbor-tint/40",
         dragging && "border-harbor bg-harbor-tint",
       )}
     >
-      <Upload aria-hidden="true" className="size-5 text-slate" />
+      <span className="mb-1 grid size-10 place-items-center rounded-md bg-harbor-tint text-harbor">
+        <Upload aria-hidden="true" className="size-5" />
+      </span>
       {/* Touch screens have nothing to drop files from; they get a camera hint instead. */}
       <p className="font-medium">
         <span className="pointer-coarse:hidden">{t("dropTitle")}</span>

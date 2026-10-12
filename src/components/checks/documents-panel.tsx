@@ -119,7 +119,7 @@ export function DocumentsPanel({
       {documents.length === 0 ? (
         <p className="text-slate">{t("upload.noDocuments")}</p>
       ) : (
-        <ul className="divide-y divide-rule border border-rule bg-paper">
+        <ul className="divide-y divide-rule overflow-hidden surface">
           {documents.map((doc) => {
             const isReading = reading.has(doc.id) || doc.status === "extracting";
             const status = isReading ? "extracting" : doc.status;

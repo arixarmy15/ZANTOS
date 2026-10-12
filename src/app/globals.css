@@ -6,16 +6,26 @@
  */
 @theme {
   --color-*: initial;
-  --color-ledger: #f2f4f3;
+  /* "Deep water and signal": harbour fog, deep-water navy ink, teal action, signal orange. */
+  --color-ledger: #eef2f6;
   --color-paper: #ffffff;
-  --color-carbon: #17212b;
-  --color-slate: #55616c;
-  --color-rule: #d5dce0;
-  --color-harbor: #0e5e6d;
-  --color-harbor-strong: #0a4955;
-  --color-harbor-tint: #e2eef0;
-  --color-evidence-wash: #dde8eb;
-  --color-control-border: #78838d;
+  --color-carbon: #0e2a47;
+  --color-slate: #4a5b70;
+  --color-rule: #d9e1ea;
+  --color-harbor: #0f766e;
+  --color-harbor-strong: #115e59;
+  --color-harbor-tint: #e3f4f1;
+  --color-evidence-wash: #cfede7;
+  --color-control-border: #7d8a9b;
+  /* Deep-water bands (overview hero, call to action) and the light used on them only. */
+  --color-deep: #0e2a47;
+  --color-deep-raised: #16365a;
+  --color-deep-rule: #2a4a70;
+  --color-on-deep: #eaf1f8;
+  --color-on-deep-muted: #a9bbd0;
+  --color-glow: #5eead4;
+  /* Signal orange: decorative marks on deep water only, never text on light, never a status. */
+  --color-signal: #ff7a1a;
   --color-transparent: transparent;
   --color-current: currentColor;
 
@@ -45,11 +55,11 @@
   --color-viz-axis: #b9c1c7;
 
   --font-sans:
-    "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", "Noto Sans",
+    "Archivo Variable", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", "Noto Sans",
     sans-serif;
   --font-arabic:
-    "IBM Plex Sans Arabic", "IBM Plex Sans", "Noto Sans Arabic", "Segoe UI", sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    "IBM Plex Sans Arabic", "Archivo Variable", "Noto Sans Arabic", "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   --text-*: initial;
   --text-caption: 12px;
@@ -64,25 +74,34 @@
   --text-title-sm--line-height: 20px;
   --text-title: 18px;
   --text-title--line-height: 24px;
-  --text-heading: 22px;
-  --text-heading--line-height: 28px;
-  --text-page: 28px;
-  --text-page--line-height: 34px;
+  --text-heading: 24px;
+  --text-heading--line-height: 30px;
+  --text-page: 32px;
+  --text-page--line-height: 38px;
   /* Overview (landing) page only: one hero heading and its lead paragraph. */
   --text-lead: 18px;
   --text-lead--line-height: 28px;
-  --text-display-sm: 32px;
-  --text-display-sm--line-height: 38px;
-  --text-display: 44px;
-  --text-display--line-height: 50px;
+  --text-display-sm: 38px;
+  --text-display-sm--line-height: 42px;
+  --text-display: 54px;
+  --text-display--line-height: 58px;
 
   --radius-*: initial;
-  --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 6px;
+  /* A radius per level, not one for everything: tags, controls, menus, panels, sheets. */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
 
   --shadow-*: initial;
-  --shadow-overlay: 0 1px 2px rgba(23, 33, 43, 0.06), 0 8px 24px rgba(23, 33, 43, 0.12);
+  /* Elevation levels, tinted with the deep-water navy rather than neutral grey. */
+  --shadow-xs: 0 1px 2px rgba(14, 42, 71, 0.07);
+  --shadow-card: 0 1px 2px rgba(14, 42, 71, 0.05), 0 6px 20px -8px rgba(14, 42, 71, 0.14);
+  --shadow-raised: 0 2px 6px rgba(14, 42, 71, 0.08), 0 30px 60px -20px rgba(14, 42, 71, 0.35);
+  --shadow-overlay: 0 1px 2px rgba(14, 42, 71, 0.08), 0 20px 48px -12px rgba(14, 42, 71, 0.3);
+  --shadow-primary: 0 1px 2px rgba(15, 118, 110, 0.3), 0 4px 12px -2px rgba(15, 118, 110, 0.35);
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
@@ -95,6 +114,8 @@
   --animate-fade-in: overlay-in var(--duration-fast) var(--ease-out);
   --animate-fade-out: fade-out var(--duration-fast) var(--ease-in);
   --animate-sheet-up: sheet-up var(--duration-normal) var(--ease-out);
+  --animate-sheet-rise: sheet-rise 600ms var(--ease-out) both;
+  --animate-copy-fan: copy-fan 700ms 200ms var(--ease-out) both;
 }
 
 :root {
@@ -139,6 +160,21 @@
   }
 }
 
+/* The overview's one orchestrated moment: the copies fan out behind the top sheet. */
+@keyframes sheet-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes copy-fan {
+  from {
+    opacity: 0;
+    transform: none;
+  }
+}
+
 @keyframes bracket-draw {
   from {
     transform: scaleY(0);
@@ -167,6 +203,43 @@
   padding-inline: max(var(--page-gutter), env(safe-area-inset-left), env(safe-area-inset-right));
 }
 
+/*
+ * Deep-water bands: a harbour-chart grid fading out downwards and one teal glow where the
+ * document stack sits. Focus rings switch to the glow so they stay visible on navy.
+ */
+@utility hero-chart {
+  background-image:
+    radial-gradient(55% 60% at 74% 48%, rgb(94 234 212 / 0.2), transparent 70%),
+    linear-gradient(rgb(42 74 112 / 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(42 74 112 / 0.5) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    56px 56px,
+    56px 56px;
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+
+  &:dir(rtl) {
+    background-image:
+      radial-gradient(55% 60% at 26% 48%, rgb(94 234 212 / 0.2), transparent 70%),
+      linear-gradient(var(--color-deep-rule) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-deep-rule) 1px, transparent 1px);
+  }
+}
+
+@utility on-deep {
+  & :focus-visible {
+    outline-color: var(--color-glow);
+  }
+}
+
+/* A raised content surface: white, hairline border, soft shadow, rounded corners. */
+@utility surface {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
 @utility code {
   font-family: var(--font-mono);
   white-space: nowrap;
@@ -189,7 +262,7 @@
 
   html {
     /* Taps get a brand-tinted flash instead of the grey default; pinch zoom stays on. */
-    -webkit-tap-highlight-color: rgb(14 94 109 / 0.14);
+    -webkit-tap-highlight-color: rgb(15 118 110 / 0.14);
     touch-action: manipulation;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -223,6 +296,21 @@
   h2,
   h3 {
     text-wrap: balance;
+  }
+
+  /*
+   * Headings use Archivo's expanded widths, like the stencilled marks on containers and
+   * crates; body text stays at normal width for reading. Arabic is never stretched or spaced.
+   */
+  h1,
+  h2 {
+    font-stretch: 112%;
+    letter-spacing: -0.015em;
+  }
+  html:lang(ar) h1,
+  html:lang(ar) h2 {
+    font-stretch: 100%;
+    letter-spacing: 0;
   }
 
   p {

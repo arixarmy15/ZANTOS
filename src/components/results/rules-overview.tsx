@@ -46,7 +46,7 @@ export function RulesOverview({
               <h3 className="text-small font-semibold text-slate">
                 {tf(`categories.${category}`)}
               </h3>
-              <ul className="divide-y divide-rule border border-rule bg-paper">
+              <ul className="divide-y divide-rule overflow-hidden surface">
                 {inCategory.map((rule) => {
                   const display =
                     rule.status === "not_applicable" ? null : STATUS_DISPLAY[rule.status];

@@ -103,7 +103,7 @@ export default async function ReportPage({ params }: Props) {
           {t("report.documents")}
         </h2>
         {/* Phones: one block per document; the table is for wider screens and for print. */}
-        <ul className="divide-y divide-rule border border-rule bg-paper text-small sm:hidden print:hidden">
+        <ul className="divide-y divide-rule overflow-hidden surface print:rounded-none print:shadow-none text-small sm:hidden print:hidden">
           {evaluation.documents.map((doc) => (
             <li key={doc.id} className="grid gap-0.5 px-3 py-2.5">
               <span className="font-medium break-all" dir="auto">
@@ -193,7 +193,7 @@ export default async function ReportPage({ params }: Props) {
         {summary.counts.error + summary.counts.warning + summary.counts.unverified === 0 ? (
           <p>{t("results.noIssues")}</p>
         ) : null}
-        <ol className="divide-y divide-rule border border-rule bg-paper">
+        <ol className="divide-y divide-rule overflow-hidden surface print:rounded-none print:shadow-none">
           {findings.map((finding) => (
             <li key={finding.id} className="grid gap-2 px-4 py-3 break-inside-avoid">
               <div className="flex flex-wrap items-center gap-2">

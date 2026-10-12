@@ -17,12 +17,7 @@ export function EmptyState({
   className?: string;
 }) {
   return (
-    <div
-      className={cn(
-        "grid justify-items-start gap-2 border border-rule bg-paper px-4 py-6 sm:px-6",
-        className,
-      )}
-    >
+    <div className={cn("grid justify-items-start gap-2 surface px-4 py-6 sm:px-6", className)}>
       <Icon aria-hidden="true" className="size-5 text-slate" />
       <p className="font-medium">{title}</p>
       {children ? <div className="text-slate">{children}</div> : null}

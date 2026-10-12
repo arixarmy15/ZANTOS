@@ -29,7 +29,7 @@ export function Notice({
     <div
       role={role}
       className={cn(
-        "flex gap-3 border border-s-[3px] border-rule bg-paper px-4 py-3",
+        "flex gap-3 rounded-lg border border-s-4 border-rule bg-paper px-4 py-3 shadow-card",
         borderClasses[status],
         className,
       )}

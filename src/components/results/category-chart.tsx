@@ -20,10 +20,7 @@ export function CategoryChart({ summary }: { summary: CheckSummary }) {
   const max = Math.max(1, ...CATEGORY_ORDER.map((category) => counts[category]));
 
   return (
-    <figure
-      aria-labelledby={titleId}
-      className="grid content-start gap-3 border border-rule bg-paper p-4"
-    >
+    <figure aria-labelledby={titleId} className="grid content-start gap-3 surface p-4">
       <figcaption className="grid gap-0.5">
         <span id={titleId} className="text-title-sm font-semibold">
           {t("chartTitle")}

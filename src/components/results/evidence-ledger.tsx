@@ -173,7 +173,7 @@ export function EvidenceLedger({
 
   const list = (
     <div className="grid content-start gap-3">
-      <div className="grid gap-3 border border-rule bg-paper p-3">
+      <div className="grid gap-3 surface p-3">
         <div role="group" aria-label={t("filters.status")} className="flex flex-wrap gap-2">
           {STATUS_FILTERS.map((status) => {
             const Icon = statusIcons[status];
@@ -273,11 +273,7 @@ export function EvidenceLedger({
       </div>
 
       {visible.length === 0 ? (
-        <EmptyState
-          icon={SearchX}
-          title={t("filters.noMatch")}
-          className="border border-rule bg-paper p-4"
-        />
+        <EmptyState icon={SearchX} title={t("filters.noMatch")} className="surface p-4" />
       ) : (
         <ol aria-describedby={ids.count} className="divide-y divide-rule border border-rule">
           {visible.map((finding) => (

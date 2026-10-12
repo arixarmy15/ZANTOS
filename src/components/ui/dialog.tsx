@@ -11,7 +11,7 @@ export const DialogClose = DialogPrimitive.Close;
 
 function Overlay() {
   return (
-    <DialogPrimitive.Overlay className="fixed inset-0 z-40 bg-(--scrim) data-[state=open]:animate-overlay-in data-[state=closed]:animate-fade-out" />
+    <DialogPrimitive.Overlay className="fixed inset-0 z-40 bg-(--scrim) backdrop-blur-[2px] data-[state=open]:animate-overlay-in data-[state=closed]:animate-fade-out" />
   );
 }
 

@@ -342,7 +342,7 @@ export function DocumentViewer({
       </div>
 
       {unlocated.length > 0 ? (
-        <ul className="grid gap-1 border border-rule bg-paper p-3 text-small">
+        <ul className="grid gap-1 surface p-3 text-small">
           {unlocated.map(({ finding, evidence }) => {
             const Icon = statusIcons[finding.status];
             return (

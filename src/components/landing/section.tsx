@@ -26,12 +26,12 @@ export function Section({
       )}
       id={id}
     >
-      <div className={cn("mx-auto grid max-w-[1200px] gap-8 px-page py-12 md:py-16", className)}>
-        <div className="grid max-w-[72ch] gap-3">
-          <h2 id={`${id}-heading`} className="text-heading font-semibold md:text-page">
+      <div className={cn("mx-auto grid max-w-[1200px] gap-10 px-page py-16 md:py-24", className)}>
+        <div className="grid max-w-[64ch] gap-4">
+          <h2 id={`${id}-heading`} className="text-page font-semibold md:text-display-sm">
             {title}
           </h2>
-          {lead ? <p className="text-reading text-slate">{lead}</p> : null}
+          {lead ? <p className="text-lead text-slate">{lead}</p> : null}
         </div>
         {children}
       </div>

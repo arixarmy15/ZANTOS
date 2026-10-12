@@ -526,3 +526,48 @@ Commission's EORI validation), with the plain statement that Tickline checks for
 consistency only. Numbers are set in Plex Mono and kept left-to-right in every language; links
 open in a new tab and say so to screen readers. No score, badge or "verified" state is shown,
 because Tickline does not verify registration.
+
+## 17. Redesign: "Deep water and signal" (October 2026)
+
+The owner found the ledger look too plain and asked for a thorough, modern redesign. This
+section supersedes the earlier values for colour (§4.1), type (§5), radius and elevation (§6);
+everything about accessibility, status colours, RTL and evidence still applies.
+
+**Skills.** The ECC skills on the owner's Drive were reviewed again; the "taste" family turned
+out to cover music-video direction, not interfaces. Anthropic's `frontend-design` skill
+(claude-plugins-official) was used instead: decide a direction from the subject, check it against
+the common tells of generated design, spend boldness in one place, verify with screenshots.
+
+**Direction, from the subject.** Export paperwork lives in ports: deep water, navy hulls,
+stencilled marks on containers, harbour charts, and copies of the same document stacked on a
+desk. So:
+
+| Token         | Value     | Use                                                                   |
+| ------------- | --------- | --------------------------------------------------------------------- |
+| Fog           | `#EEF2F6` | App background                                                        |
+| Paper         | `#FFFFFF` | Surfaces                                                              |
+| Deep water    | `#0E2A47` | Text ink, and the overview's hero and call-to-action bands            |
+| Teal          | `#0F766E` | Action and linkage (buttons, links, focus, evidence) — unchanged role |
+| Glow          | `#5EEAD4` | Icons, links and focus ring on deep water; one glow behind the hero   |
+| Signal orange | `#FF7A1A` | Reserved for decorative marks on deep water; never text, never status |
+
+- **Type:** Archivo (variable width) for the interface — headings at 112 % width, like
+  stencilled container marks; body at normal width. Geist Mono for codes only. IBM Plex Sans
+  Arabic for Arabic, never stretched or letter-spaced.
+- **Depth:** one radius per level (tags 4, controls 8, menus 12, panels 14, sheets 20) and
+  navy-tinted elevation levels (`xs`, `card`, `raised`, `overlay`) instead of one grey shadow.
+- **The one bold element:** the overview hero on deep water, with a faint harbour-chart grid and
+  the interactive example drawn as a stack of carbon copies that fan out once on load (reduced
+  motion respected). Everything else stays quiet.
+- **App screens:** a frosted sticky header with pill navigation, raised panels, a segmented
+  tab control, larger numbers in the summary strip, a softer drop area.
+
+**Tells checked and avoided** (from `frontend-design`): no cream-and-serif, no acid accent on
+near-black (the dark band is navy from the subject, with teal as the action colour), no single
+radius and shadow on everything, no all-caps eyebrow labels, no "→" on buttons, no accented word
+in headlines. Numbered markers appear only where the content is a sequence (how a check works).
+The rule list became one ruled "manifest" sheet instead of four identical cards.
+
+**Verified:** contrast pairs in `design/tokens.json` (now including the deep-water pairs), axe
+WCAG 2.2 AA on every page in six languages, the phone sweep at 320 and 390 px, and screenshots
+at 390 and 1440 px in English and Arabic.

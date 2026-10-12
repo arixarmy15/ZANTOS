@@ -1,7 +1,14 @@
 import { useId } from "react";
 
 // The Tickline mark: two ruled lines reconciled by one tick (design/brand/mark.svg).
-export function BrandMark({ className }: { className?: string }) {
+export function BrandMark({
+  className,
+  tone = "light",
+}: {
+  className?: string;
+  /** "dark" draws the mark for ink surfaces: lighter rules and the glow tick. */
+  tone?: "light" | "dark";
+}) {
   const maskId = `tc-knockout-${useId()}`;
   const tick = "M9.1 15 12.1 18.5 21.1 5.5";
   return (
@@ -18,13 +25,18 @@ export function BrandMark({ className }: { className?: string }) {
           />
         </mask>
       </defs>
-      <g mask={`url(#${maskId})`} stroke="var(--color-slate)" strokeWidth="2" strokeLinecap="round">
+      <g
+        mask={`url(#${maskId})`}
+        stroke={tone === "dark" ? "var(--color-on-deep-muted)" : "var(--color-slate)"}
+        strokeWidth="2"
+        strokeLinecap="round"
+      >
         <path d="M2.6 9H18.6" />
         <path d="M2.6 15H8.6" />
       </g>
       <path
         d={tick}
-        stroke="var(--color-harbor)"
+        stroke={tone === "dark" ? "var(--color-glow)" : "var(--color-harbor)"}
         strokeWidth="2.6"
         strokeLinecap="round"
         strokeLinejoin="round"
