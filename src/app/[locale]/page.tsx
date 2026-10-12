@@ -58,6 +58,7 @@ const FAQ_KEYS = [
   "corrections",
   "models",
   "lc",
+  "counterparty",
 ] as const;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

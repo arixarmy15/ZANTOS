@@ -20,8 +20,8 @@ test("the overview explains the product and leads into a check", async ({ page }
     ).toHaveAttribute("aria-current", "page");
   }
 
-  // The rule list is the engine's own: 26 rules in four categories, named as in the report.
-  await expect(page.getByText("26 checks on every run")).toBeVisible();
+  // The rule list is the engine's own: 30 rules in four categories, named as in the report.
+  await expect(page.getByText("30 checks on every run")).toBeVisible();
   const checks = page.locator("#checks");
   await expect(checks.getByRole("heading", { level: 3 })).toHaveText([
     "Arithmetic",
@@ -29,7 +29,7 @@ test("the overview explains the product and leads into a check", async ({ page }
     "Formats and codes",
     "Completeness",
   ]);
-  await expect(checks.getByRole("listitem")).toHaveCount(26);
+  await expect(checks.getByRole("listitem")).toHaveCount(30);
   await expect(checks.getByText("IBAN check digits")).toBeVisible();
 
   // Figures carry their sources.

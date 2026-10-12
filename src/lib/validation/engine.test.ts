@@ -239,6 +239,8 @@ describe("finding messages", () => {
     for (const role of ["exporter", "importer"])
       for (const outcome of ["same", "different", "unknown"])
         literals.add(`xdoc-${role}-${outcome}`);
+    for (const id of ["vat-id", "eori"])
+      for (const party of ["seller", "buyer"]) literals.add(`xdoc-${id}-${party}`);
     const ruleIds = new Set(CORE_RULES.map((rule) => rule.id));
     for (const key of literals) {
       if (ruleIds.has(key) && !(key in messages)) continue;

@@ -511,3 +511,15 @@ canonical and hreflang links (`x-default` → English) and a sitemap of the over
 | In Arabic, "65–80 %" displayed as "% 80–65"; "Incoterms®" labels lost the ®'s place  | The figure and the field labels are isolated (`<bdi>`)            |
 | axe `definition-list`: the margin marks sat directly inside the `<dl>` rows          | The marks moved into the `<dd>`, still positioned against the row |
 | A side column spanning two grid rows stretched the gap under each section heading    | Headings sit above a separate two-column grid                     |
+
+## 16. Party identifiers
+
+Added after reviewing gettradecheck.com, a Dutch counterparty-verification service (see
+[docs/analysis-gettradecheck.md](docs/analysis-gettradecheck.md)). The seller's and buyer's VAT
+and EORI numbers are extracted, checked for their sourced structure and compared across
+documents. Below the checks that ran, a "Party identifiers" list shows each distinct number,
+the documents that print it and a link to the official service that can confirm it (VIES, the
+Commission's EORI validation), with the plain statement that TradeCheck checks format and
+consistency only. Numbers are set in Plex Mono and kept left-to-right in every language; links
+open in a new tab and say so to screen readers. No score, badge or "verified" state is shown,
+because TradeCheck does not verify registration.

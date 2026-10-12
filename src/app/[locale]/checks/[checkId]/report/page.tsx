@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { PageContainer } from "@/components/page-header";
 import { PrintButton } from "@/components/results/print-button";
+import { PartyIdentifiers } from "@/components/results/party-identifiers";
 import { RulesOverview } from "@/components/results/rules-overview";
 import { SummaryStrip } from "@/components/results/summary-strip";
 import { buttonVariants } from "@/components/ui/button";
@@ -44,7 +45,11 @@ export default async function ReportPage({ params }: Props) {
   if (!data) notFound();
   const { storage, check } = data;
   const t = await getTranslations();
-  const { evaluation, findings, rules, summary } = await presentCheck(storage, check, locale);
+  const { evaluation, findings, rules, summary, identifiers } = await presentCheck(
+    storage,
+    check,
+    locale,
+  );
   const usage = await storage.listUsage(checkId);
   const title = check.name ?? t("check.untitled", { date: new Date(check.createdAt) });
   const byKind = (["extract", "compare", "explain", "email"] as const)
@@ -216,6 +221,8 @@ export default async function ReportPage({ params }: Props) {
       </section>
 
       <RulesOverview rules={rules} />
+
+      <PartyIdentifiers identifiers={identifiers} />
 
       <section aria-labelledby="usage-heading" className="grid gap-2 break-inside-avoid">
         <h2 id="usage-heading" className="text-title font-semibold">

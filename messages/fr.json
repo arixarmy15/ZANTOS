@@ -177,8 +177,12 @@
       "orderReference": "Référence de commande",
       "sellerName": "Vendeur",
       "sellerAddress": "Adresse du vendeur",
+      "sellerVatId": "N° de TVA du vendeur",
+      "sellerEori": "N° EORI du vendeur",
       "buyerName": "Acheteur",
       "buyerAddress": "Adresse de l'acheteur",
+      "buyerVatId": "N° de TVA de l'acheteur",
+      "buyerEori": "N° EORI de l'acheteur",
       "shipperName": "Expéditeur",
       "consigneeName": "Destinataire",
       "currency": "Devise",
@@ -212,7 +216,9 @@
       "incoterm": "Code Incoterms, par exemple FOB",
       "weightUnit": "kg, g, t ou lb",
       "hsCode": "Chiffres uniquement, tels qu'imprimés",
-      "iban": "IBAN sans espaces"
+      "iban": "IBAN sans espaces",
+      "vatId": "Tel qu'imprimé, sans espaces, par exemple NL123456789B01",
+      "eori": "Tel qu'imprimé, sans espaces, par exemple NL123456789"
     },
     "missingCount": "{count, plural, one {# champ absent du document} other {# champs absents du document}}"
   },
@@ -247,6 +253,8 @@
       "xdoc-destination": "Pays de destination entre documents",
       "xdoc-exporter": "Exportateur (expéditeur ou vendeur) entre documents",
       "xdoc-importer": "Importateur (destinataire ou acheteur) entre documents",
+      "xdoc-vat-id": "N° de TVA entre documents",
+      "xdoc-eori": "N° EORI entre documents",
       "xdoc-goods": "Désignations des marchandises entre documents",
       "xdoc-hs": "Codes SH entre documents (six premiers chiffres)",
       "fmt-value": "Valeurs lisibles",
@@ -255,6 +263,8 @@
       "fmt-incoterm": "Règle Incoterms® 2020",
       "fmt-hs": "Format du code SH",
       "fmt-iban": "Clé de contrôle de l'IBAN",
+      "fmt-vat-id": "Préfixe du n° de TVA (UE) et structure néerlandaise",
+      "fmt-eori": "Structure du n° EORI",
       "date-order": "Bon de commande daté en premier",
       "req-fields": "Champs attendus par type de document",
       "docset": "Jeu de documents"
@@ -311,7 +321,15 @@
       "docset-other-type": "{document} n'a pas été reconnu comme facture commerciale, liste de colisage ou bon de commande et n'a pas été comparé. Modifiez son type s'il a été mal reconnu.",
       "docset-insurance": "Avec la règle Incoterms® {value}, le vendeur souscrit l'assurance des marchandises ; un document d'assurance fait donc généralement partie des documents d'expédition.",
       "docset-typical": "Selon les marchandises et le pays de destination, d'autres documents peuvent être exigés, par exemple un document de transport, un certificat d'origine, des licences ou des certificats. Consultez les règles du pays de destination.",
-      "docset-typical-country": "Selon les marchandises, d'autres documents peuvent être exigés pour {country}, par exemple un document de transport, un certificat d'origine, des licences ou des certificats. Consultez les règles applicables pour {country}."
+      "docset-typical-country": "Selon les marchandises, d'autres documents peuvent être exigés pour {country}, par exemple un document de transport, un certificat d'origine, des licences ou des certificats. Consultez les règles applicables pour {country}.",
+      "fmt-vat-id-greece": "{document} : {field} {value} commence par GR. Les numéros de TVA grecs utilisent le préfixe EL (directive TVA 2006/112/CE, article 215).",
+      "fmt-vat-id-nl": "{document} : {field} {value} n'a pas la structure d'un numéro de TVA néerlandais : NL, 9 chiffres, la lettre B et 2 chiffres, tel que publié par la Belastingdienst.",
+      "fmt-eori": "{document} : {field} {value} n'a pas la structure d'un numéro EORI : un code pays de deux lettres suivi de 15 lettres ou chiffres au plus, tel que décrit par la Commission européenne.",
+      "fmt-eori-nl": "{document} : {field} {value} n'a pas la structure d'un numéro EORI néerlandais : NL suivi du RSIN à 9 chiffres, selon la Commission européenne.",
+      "xdoc-vat-id-seller": "Le n° de TVA du vendeur diffère : {valueA} dans {docA}, {valueB} dans {docB}.",
+      "xdoc-vat-id-buyer": "Le n° de TVA de l'acheteur diffère : {valueA} dans {docA}, {valueB} dans {docB}.",
+      "xdoc-eori-seller": "Le n° EORI du vendeur diffère : {valueA} dans {docA}, {valueB} dans {docB}.",
+      "xdoc-eori-buyer": "Le n° EORI de l'acheteur diffère : {valueA} dans {docA}, {valueB} dans {docB}."
     }
   },
   "results": {
@@ -408,6 +426,23 @@
       "documents": "Documents",
       "rules": "Vérifications",
       "data": "Données extraites"
+    },
+    "identifiers": {
+      "heading": "Identifiants des parties",
+      "lead": "TradeCheck vérifie le format de ces numéros et la concordance des documents. Seul le service officiel peut confirmer qu'un numéro est enregistré, et au nom de qui.",
+      "party": "Partie",
+      "kind": "Numéro",
+      "value": "Valeur",
+      "documents": "Documents",
+      "verify": "Vérifier",
+      "seller": "Vendeur",
+      "buyer": "Acheteur",
+      "vatId": "N° de TVA",
+      "eori": "N° EORI",
+      "vies": "Vérifier dans VIES",
+      "eoriCheck": "Vérifier l'EORI",
+      "newTab": "(ouvre le site officiel dans un nouvel onglet)",
+      "notEu": "Pas un numéro de TVA de l'UE ; à vérifier auprès du pays émetteur."
     }
   },
   "report": {
@@ -607,6 +642,10 @@
         "lc": {
           "q": "Vérifie-t-il les crédits documentaires ou le classement SH ?",
           "a": "Non. Il n'examine pas les crédits documentaires et ne classe pas les marchandises. Les codes SH ne sont vérifiés que pour leur format et leur cohérence entre vos documents."
+        },
+        "counterparty": {
+          "q": "TradeCheck vérifie-t-il que le vendeur ou l'acheteur est une entreprise réelle ?",
+          "a": "Non. Il vérifie le format des numéros de TVA et EORI et leur cohérence entre vos documents, et renvoie vers les services VIES et EORI de la Commission européenne pour confirmer qu'un numéro est enregistré. Les vérifications de registre du commerce, de sanctions et de solvabilité relèvent d'autres services."
         }
       }
     },

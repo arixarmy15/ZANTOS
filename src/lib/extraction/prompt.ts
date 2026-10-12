@@ -18,6 +18,7 @@ Transcribe only what is printed in the document:
   - names, addresses, references and descriptions: as printed, with surrounding whitespace removed
   - HS codes: the digits as printed, without dots or spaces
   - IBAN: without spaces, upper case
+  - VAT identification numbers and EORI numbers: upper case, without spaces, dots or hyphens, with the country prefix only if it is printed
 - "confidence": how sure you are that both value and normalized are correct, from 0 to 1. Use lower values for unclear print, handwriting, ambiguous formats or values you had to interpret.
 - "source": the page number (1-based) and a short excerpt copied character for character from the document (at most about 120 characters) that contains the value.
 
@@ -25,6 +26,7 @@ If a field is not printed in the document, set value, normalized and source to n
 
 Header fields:
 - seller and buyer are the commercial parties; shipper and consignee are the parties named for the shipment. Fill each only when the document names it.
+- sellerVatId and buyerVatId are the party's VAT identification number (or another tax identification number printed as such); sellerEori and buyerEori are EORI numbers. Fill them only from the number printed for that party; never complete, correct or construct a number.
 - orderReference is the purchase order number this document refers to; on a purchase order itself, put its own number in documentNumber and leave orderReference null unless another reference is printed.
 - totalQuantity, packageCount and the weights are the document's printed totals, not sums you calculate.
 

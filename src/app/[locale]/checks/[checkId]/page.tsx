@@ -10,6 +10,7 @@ import { CategoryChart } from "@/components/results/category-chart";
 import { CompareNotice } from "@/components/results/compare-notice";
 import { EmailDraft } from "@/components/results/email-draft";
 import { EvidenceLedger } from "@/components/results/evidence-ledger";
+import { PartyIdentifiers } from "@/components/results/party-identifiers";
 import { RulesOverview } from "@/components/results/rules-overview";
 import { SummaryStrip } from "@/components/results/summary-strip";
 import { ToleranceForm } from "@/components/results/tolerance-form";
@@ -76,7 +77,11 @@ export default async function CheckPage({ params }: Props) {
     email: isTaskConfigured(env, "email"),
   };
   const readingModel = resolveRoute(env, "extract").model ?? "";
-  const { evaluation, findings, rules, summary } = await presentCheck(storage, check, locale);
+  const { evaluation, findings, rules, summary, identifiers } = await presentCheck(
+    storage,
+    check,
+    locale,
+  );
   const { documents, effective, pending } = evaluation;
 
   const tokens = usage.reduce(
@@ -238,6 +243,8 @@ export default async function CheckPage({ params }: Props) {
           <ToleranceForm checkId={check.id} tolerance={check.tolerance} />
         </RulesOverview>
       ) : null}
+
+      <PartyIdentifiers identifiers={identifiers} />
 
       <section aria-labelledby="extracted-heading" className="grid gap-4">
         <h2 id="extracted-heading" className="text-title font-semibold">

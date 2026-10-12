@@ -25,6 +25,8 @@ function compareAcrossDocuments<T>(
     read: (doc: EffectiveDocument) => Value<T> | null;
     equal: (a: T, b: T) => boolean;
     messageKey?: string;
+    /** Distinguishes findings when one rule compares several values. */
+    subjectPrefix?: string;
   },
 ) {
   const findings: Finding[] = [];
@@ -39,7 +41,7 @@ function compareAcrossDocuments<T>(
       finding({
         ruleId: options.ruleId,
         category: "crossDocument",
-        subject: `${a.record.id}:${b.record.id}`,
+        subject: `${options.subjectPrefix ?? ""}${a.record.id}:${b.record.id}`,
         severity: options.severity,
         messageKey: options.messageKey,
         documents: [a, b],
@@ -207,6 +209,43 @@ export const incotermRule: Rule = {
     };
   },
 };
+
+/** A party's VAT number or EORI must be the same on every document that prints it. */
+function partyIdentifierRule(
+  ruleId: "xdoc-vat-id" | "xdoc-eori",
+  keys: { seller: HeaderFieldKey; buyer: HeaderFieldKey },
+): Rule {
+  return {
+    id: ruleId,
+    category: "crossDocument",
+    run: (context) => {
+      const results = (["seller", "buyer"] as const).map((party) =>
+        compareAcrossDocuments(context, {
+          ruleId,
+          messageKey: `${ruleId}-${party}`,
+          subjectPrefix: `${party}:`,
+          severity: "error",
+          read: headerCode(keys[party], "code"),
+          equal: (a, b) => a === b,
+        }),
+      );
+      return {
+        evaluated: results.reduce((sum, result) => sum + result.evaluated, 0),
+        findings: results.flatMap((result) => result.findings),
+      };
+    },
+  };
+}
+
+export const vatIdRule = partyIdentifierRule("xdoc-vat-id", {
+  seller: "sellerVatId",
+  buyer: "buyerVatId",
+});
+
+export const eoriRule = partyIdentifierRule("xdoc-eori", {
+  seller: "sellerEori",
+  buyer: "buyerEori",
+});
 
 export const originRule: Rule = {
   id: "xdoc-origin",

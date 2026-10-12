@@ -177,8 +177,12 @@
       "orderReference": "Sipariş referansı",
       "sellerName": "Satıcı",
       "sellerAddress": "Satıcı adresi",
+      "sellerVatId": "Satıcı KDV numarası",
+      "sellerEori": "Satıcı EORI numarası",
       "buyerName": "Alıcı",
       "buyerAddress": "Alıcı adresi",
+      "buyerVatId": "Alıcı KDV numarası",
+      "buyerEori": "Alıcı EORI numarası",
       "shipperName": "Gönderici",
       "consigneeName": "Alıcı (sevk)",
       "currency": "Para birimi",
@@ -212,7 +216,9 @@
       "incoterm": "Incoterms kodu, örneğin FOB",
       "weightUnit": "kg, g, t veya lb",
       "hsCode": "Belgede yazdığı gibi yalnızca rakamlar",
-      "iban": "Boşluksuz IBAN"
+      "iban": "Boşluksuz IBAN",
+      "vatId": "Basıldığı gibi, boşluksuz; örneğin NL123456789B01",
+      "eori": "Basıldığı gibi, boşluksuz; örneğin NL123456789"
     },
     "missingCount": "{count, plural, one {Belgede bulunamayan # alan} other {Belgede bulunamayan # alan}}"
   },
@@ -247,6 +253,8 @@
       "xdoc-destination": "Belgeler arası varış ülkesi",
       "xdoc-exporter": "Belgeler arası ihracatçı (gönderici veya satıcı)",
       "xdoc-importer": "Belgeler arası ithalatçı (sevk alıcısı veya alıcı)",
+      "xdoc-vat-id": "Belgeler arası KDV numaraları",
+      "xdoc-eori": "Belgeler arası EORI numaraları",
       "xdoc-goods": "Belgeler arası mal tanımları",
       "xdoc-hs": "Belgeler arası HS kodları (ilk altı hane)",
       "fmt-value": "Okunabilir değerler",
@@ -255,6 +263,8 @@
       "fmt-incoterm": "Incoterms® 2020 kuralı",
       "fmt-hs": "HS kodu biçimi",
       "fmt-iban": "IBAN kontrol haneleri",
+      "fmt-vat-id": "KDV numarası öneki (AB) ve Hollanda yapısı",
+      "fmt-eori": "EORI numarası yapısı",
       "date-order": "Sipariş belgesinin önce tarihlenmesi",
       "req-fields": "Belge türüne göre beklenen alanlar",
       "docset": "Belge seti"
@@ -311,7 +321,15 @@
       "docset-other-type": "{document} ticari fatura, çeki listesi veya sipariş belgesi olarak tanınmadı ve karşılaştırılmadı. Yanlış tanındıysa türünü değiştirin.",
       "docset-insurance": "{value} Incoterms® kuralında nakliye sigortasını satıcı yaptırır; bu nedenle sigorta belgesi genellikle sevkiyat belgelerinin bir parçasıdır.",
       "docset-typical": "Mala ve varış ülkesine bağlı olarak taşıma belgesi, menşe şahadetnamesi, lisans veya sertifikalar gibi başka belgeler gerekebilir. Varış ülkesinin kurallarını kontrol edin.",
-      "docset-typical-country": "Mala bağlı olarak {country} için taşıma belgesi, menşe şahadetnamesi, lisans veya sertifikalar gibi başka belgeler gerekebilir. {country} kurallarını kontrol edin."
+      "docset-typical-country": "Mala bağlı olarak {country} için taşıma belgesi, menşe şahadetnamesi, lisans veya sertifikalar gibi başka belgeler gerekebilir. {country} kurallarını kontrol edin.",
+      "fmt-vat-id-greece": "{document}: {field} {value} GR ile başlıyor. Yunanistan KDV numaraları EL önekini kullanır (AB KDV Direktifi 2006/112/AT, madde 215).",
+      "fmt-vat-id-nl": "{document}: {field} {value}, Belastingdienst'in yayımladığı Hollanda KDV numarası yapısına uymuyor: NL, 9 rakam, B harfi ve 2 rakam.",
+      "fmt-eori": "{document}: {field} {value}, Avrupa Komisyonu'nun tanımladığı EORI yapısına uymuyor: iki harfli ülke kodu ve ardından en fazla 15 harf veya rakam.",
+      "fmt-eori-nl": "{document}: {field} {value}, Avrupa Komisyonu'na göre Hollanda EORI yapısına uymuyor: NL ve ardından 9 haneli RSIN.",
+      "xdoc-vat-id-seller": "Satıcının KDV numarası farklı: {docA} belgesinde {valueA}, {docB} belgesinde {valueB}.",
+      "xdoc-vat-id-buyer": "Alıcının KDV numarası farklı: {docA} belgesinde {valueA}, {docB} belgesinde {valueB}.",
+      "xdoc-eori-seller": "Satıcının EORI numarası farklı: {docA} belgesinde {valueA}, {docB} belgesinde {valueB}.",
+      "xdoc-eori-buyer": "Alıcının EORI numarası farklı: {docA} belgesinde {valueA}, {docB} belgesinde {valueB}."
     }
   },
   "results": {
@@ -408,6 +426,23 @@
       "documents": "Belgeler",
       "rules": "Kontroller",
       "data": "Çıkarılan veriler"
+    },
+    "identifiers": {
+      "heading": "Taraf kimlik numaraları",
+      "lead": "TradeCheck bu numaraların biçimini ve belgelerin uyuştuğunu kontrol eder. Bir numaranın kayıtlı olup olmadığı ve kime ait olduğu yalnızca resmî servisle doğrulanabilir.",
+      "party": "Taraf",
+      "kind": "Numara",
+      "value": "Değer",
+      "documents": "Belgeler",
+      "verify": "Doğrula",
+      "seller": "Satıcı",
+      "buyer": "Alıcı",
+      "vatId": "KDV numarası",
+      "eori": "EORI numarası",
+      "vies": "VIES'te kontrol et",
+      "eoriCheck": "EORI'yi kontrol et",
+      "newTab": "(resmî siteyi yeni sekmede açar)",
+      "notEu": "AB KDV numarası değil; düzenleyen ülkede kontrol edin."
     }
   },
   "report": {
@@ -607,6 +642,10 @@
         "lc": {
           "q": "Akreditifleri ya da HS sınıflandırmasını kontrol eder mi?",
           "a": "Hayır. Akreditifleri incelemez ve malları sınıflandırmaz. HS kodları yalnızca biçim ve belgeleriniz arasındaki tutarlılık açısından kontrol edilir."
+        },
+        "counterparty": {
+          "q": "TradeCheck satıcının veya alıcının gerçek bir şirket olduğunu doğrular mı?",
+          "a": "Hayır. KDV ve EORI numaralarını biçim ve belgeleriniz arasındaki tutarlılık açısından kontrol eder; bir numaranın kayıtlı olduğunu doğrulamak için Avrupa Komisyonu'nun VIES ve EORI servislerine bağlantı verir. Ticaret sicili, yaptırım ve kredi kontrolleri ayrı hizmetlerdir."
         }
       }
     },

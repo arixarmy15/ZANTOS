@@ -12,6 +12,7 @@ export function seedConflicts(name: string) {
           "Invoice no. INV-E2E-1",
           "Seller: Synthetic Exporter Ltd",
           "Buyer: Synthetic Importer GmbH",
+          "VAT: NL000000000B00  EORI: NL000000000",
           "Packages: 12",
           "Towels  10 x 9.00 = 95.00",
           "Total EUR 95.00",
@@ -23,6 +24,8 @@ export function seedConflicts(name: string) {
             documentDate: field("2026-03-01"),
             sellerName: field("Synthetic Exporter Ltd", at("Seller: Synthetic Exporter Ltd")),
             buyerName: field("Synthetic Importer GmbH", at("Buyer: Synthetic Importer GmbH")),
+            sellerVatId: field("NL000000000B00", at("VAT: NL000000000B00")),
+            sellerEori: field("NL000000000", at("EORI: NL000000000")),
             currency: field("EUR", at("Total EUR 95.00")),
             totalAmount: field("95.00", at("Total EUR 95.00")),
             packageCount: field("12", at("Packages: 12")),
@@ -42,6 +45,7 @@ export function seedConflicts(name: string) {
         lines: [
           "Packing list",
           "Shipper: Synthetic Export Limited",
+          "EORI: NL000000000",
           "Packages: 14",
           "Net weight 120 kg",
           "Gross weight 110 kg",
@@ -52,6 +56,7 @@ export function seedConflicts(name: string) {
           header: {
             shipperName: field("Synthetic Export Limited", at("Shipper: Synthetic Export Limited")),
             consigneeName: field("Synthetic Importer GmbH"),
+            sellerEori: field("NL000000000", at("EORI: NL000000000")),
             packageCount: field("14", at("Packages: 14")),
             netWeight: field("120", at("Net weight 120 kg")),
             netWeightUnit: field("kg", at("Net weight 120 kg")),

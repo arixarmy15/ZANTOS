@@ -177,8 +177,12 @@
       "orderReference": "Referencia del pedido",
       "sellerName": "Vendedor",
       "sellerAddress": "Dirección del vendedor",
+      "sellerVatId": "NIF-IVA del vendedor",
+      "sellerEori": "Número EORI del vendedor",
       "buyerName": "Comprador",
       "buyerAddress": "Dirección del comprador",
+      "buyerVatId": "NIF-IVA del comprador",
+      "buyerEori": "Número EORI del comprador",
       "shipperName": "Expedidor",
       "consigneeName": "Destinatario",
       "currency": "Moneda",
@@ -212,7 +216,9 @@
       "incoterm": "Código Incoterms, por ejemplo FOB",
       "weightUnit": "kg, g, t o lb",
       "hsCode": "Solo dígitos, tal como aparecen",
-      "iban": "IBAN sin espacios"
+      "iban": "IBAN sin espacios",
+      "vatId": "Tal como figura, sin espacios, por ejemplo NL123456789B01",
+      "eori": "Tal como figura, sin espacios, por ejemplo NL123456789"
     },
     "missingCount": "{count, plural, one {# campo no encontrado en el documento} other {# campos no encontrados en el documento}}"
   },
@@ -247,6 +253,8 @@
       "xdoc-destination": "País de destino entre documentos",
       "xdoc-exporter": "Exportador (expedidor o vendedor) entre documentos",
       "xdoc-importer": "Importador (destinatario o comprador) entre documentos",
+      "xdoc-vat-id": "NIF-IVA entre documentos",
+      "xdoc-eori": "Números EORI entre documentos",
       "xdoc-goods": "Descripciones de mercancías entre documentos",
       "xdoc-hs": "Códigos SA entre documentos (primeros seis dígitos)",
       "fmt-value": "Valores legibles",
@@ -255,6 +263,8 @@
       "fmt-incoterm": "Regla Incoterms® 2020",
       "fmt-hs": "Formato del código SA",
       "fmt-iban": "Dígitos de control del IBAN",
+      "fmt-vat-id": "Prefijo del NIF-IVA (UE) y estructura neerlandesa",
+      "fmt-eori": "Estructura del número EORI",
       "date-order": "Orden de compra fechada primero",
       "req-fields": "Campos esperados por tipo de documento",
       "docset": "Conjunto de documentos"
@@ -311,7 +321,15 @@
       "docset-other-type": "{document} no se reconoció como factura comercial, lista de empaque ni orden de compra, y no se comparó. Cambie su tipo si se reconoció mal.",
       "docset-insurance": "Con la regla Incoterms® {value} el vendedor contrata el seguro de la mercancía, por lo que un documento de seguro suele formar parte de los documentos del envío.",
       "docset-typical": "Según la mercancía y el país de destino, pueden necesitarse otros documentos, como un documento de transporte, un certificado de origen, licencias o certificados. Consulte las normas del país de destino.",
-      "docset-typical-country": "Según la mercancía, pueden necesitarse otros documentos para {country}, como un documento de transporte, un certificado de origen, licencias o certificados. Consulte las normas de {country}."
+      "docset-typical-country": "Según la mercancía, pueden necesitarse otros documentos para {country}, como un documento de transporte, un certificado de origen, licencias o certificados. Consulte las normas de {country}.",
+      "fmt-vat-id-greece": "{document}: {field} {value} empieza por GR. Los NIF-IVA griegos usan el prefijo EL (Directiva del IVA 2006/112/CE, artículo 215).",
+      "fmt-vat-id-nl": "{document}: {field} {value} no tiene la estructura de un NIF-IVA neerlandés: NL, 9 dígitos, la letra B y 2 dígitos, según publica la Belastingdienst.",
+      "fmt-eori": "{document}: {field} {value} no tiene la estructura de un número EORI: un código de país de dos letras seguido de hasta 15 letras o dígitos, según la Comisión Europea.",
+      "fmt-eori-nl": "{document}: {field} {value} no tiene la estructura de un número EORI neerlandés: NL seguido del RSIN de 9 dígitos, según la Comisión Europea.",
+      "xdoc-vat-id-seller": "El NIF-IVA del vendedor no coincide: {valueA} en {docA}, {valueB} en {docB}.",
+      "xdoc-vat-id-buyer": "El NIF-IVA del comprador no coincide: {valueA} en {docA}, {valueB} en {docB}.",
+      "xdoc-eori-seller": "El número EORI del vendedor no coincide: {valueA} en {docA}, {valueB} en {docB}.",
+      "xdoc-eori-buyer": "El número EORI del comprador no coincide: {valueA} en {docA}, {valueB} en {docB}."
     }
   },
   "results": {
@@ -408,6 +426,23 @@
       "documents": "Documentos",
       "rules": "Comprobaciones",
       "data": "Datos extraídos"
+    },
+    "identifiers": {
+      "heading": "Identificadores de las partes",
+      "lead": "TradeCheck comprueba el formato de estos números y que los documentos coincidan. Que un número esté registrado, y a nombre de quién, solo lo puede confirmar el servicio oficial.",
+      "party": "Parte",
+      "kind": "Número",
+      "value": "Valor",
+      "documents": "Documentos",
+      "verify": "Verificar",
+      "seller": "Vendedor",
+      "buyer": "Comprador",
+      "vatId": "NIF-IVA",
+      "eori": "Número EORI",
+      "vies": "Comprobar en VIES",
+      "eoriCheck": "Comprobar EORI",
+      "newTab": "(abre el sitio oficial en una pestaña nueva)",
+      "notEu": "No es un NIF-IVA de la UE; compruébelo con el país emisor."
     }
   },
   "report": {
@@ -607,6 +642,10 @@
         "lc": {
           "q": "¿Comprueba cartas de crédito o la clasificación SA?",
           "a": "No. No examina cartas de crédito ni clasifica mercancías. Los códigos SA solo se comprueban en cuanto a formato y coherencia entre sus documentos."
+        },
+        "counterparty": {
+          "q": "¿Verifica TradeCheck que el vendedor o el comprador sea una empresa real?",
+          "a": "No. Comprueba el formato de los NIF-IVA y números EORI y su coherencia entre sus documentos, y enlaza a los servicios VIES y EORI de la Comisión Europea para confirmar que un número está registrado. Las consultas de registro mercantil, sanciones y solvencia son servicios aparte."
         }
       }
     },

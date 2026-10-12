@@ -10,6 +10,7 @@ import { documentSetRule, requiredFieldsRule } from "./rules/completeness";
 import {
   currencyRule,
   destinationRule,
+  eoriRule,
   exporterRule,
   goodsRule,
   grossWeightRule,
@@ -21,15 +22,18 @@ import {
   originRule,
   packagesRule,
   quantityRule,
+  vatIdRule,
 } from "./rules/cross-document";
 import {
   countryFormatRule,
   currencyFormatRule,
   dateOrderRule,
+  eoriFormatRule,
   hsFormatRule,
   ibanFormatRule,
   incotermFormatRule,
   valueFormatRule,
+  vatIdFormatRule,
 } from "./rules/format";
 import type { Finding, Rule, RuleContext, RuleResult, RuleStatus, SemanticVerdict } from "./types";
 
@@ -50,6 +54,8 @@ export const CORE_RULES: Rule[] = [
   destinationRule,
   exporterRule,
   importerRule,
+  vatIdRule,
+  eoriRule,
   goodsRule,
   hsCodeRule,
   valueFormatRule,
@@ -58,6 +64,8 @@ export const CORE_RULES: Rule[] = [
   incotermFormatRule,
   hsFormatRule,
   ibanFormatRule,
+  vatIdFormatRule,
+  eoriFormatRule,
   dateOrderRule,
   requiredFieldsRule,
   documentSetRule,

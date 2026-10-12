@@ -39,7 +39,11 @@ const LTR_KINDS = new Set<FieldKind>([
   "weightUnit",
   "hsCode",
   "iban",
+  "vatId",
+  "eori",
 ]);
+
+const CODE_KINDS = new Set<FieldKind>(["hsCode", "iban", "vatId", "eori"]);
 
 function Value({ field }: { field: EffectiveField }) {
   const t = useTranslations("fields");
@@ -49,7 +53,7 @@ function Value({ field }: { field: EffectiveField }) {
   // A formatted date follows the interface language's own order (Arabic dates carry
   // right-to-left marks), so only codes and numbers are forced left to right.
   return LTR_KINDS.has(field.kind) && field.kind !== "date" ? (
-    <bdi dir="ltr" className={cn(field.kind === "hsCode" || field.kind === "iban" ? "code" : "")}>
+    <bdi dir="ltr" className={cn(CODE_KINDS.has(field.kind) ? "code" : "")}>
       {text}
     </bdi>
   ) : (

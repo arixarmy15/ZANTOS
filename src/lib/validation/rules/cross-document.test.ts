@@ -293,3 +293,40 @@ describe("xdoc-hs", () => {
     expect(byRule(different, "xdoc-hs")[0]).toMatchObject({ severity: "warning" });
   });
 });
+
+describe("party identifiers across documents", () => {
+  it("reports a seller VAT number or buyer EORI that differs between documents", () => {
+    const run = check([
+      invoice({ sellerVatId: field("NL123456789B01"), buyerEori: field("DE1234567") }),
+      packing({ sellerVatId: field("NL123456789B02"), buyerEori: field("DE1234567") }),
+      order({ buyerEori: field("DE7654321") }),
+    ]);
+    expect(byRule(run, "xdoc-vat-id")).toMatchObject([
+      {
+        severity: "error",
+        messageKey: "xdoc-vat-id-seller",
+        params: {
+          valueA: { kind: "code", value: "NL123456789B01" },
+          valueB: { kind: "code", value: "NL123456789B02" },
+        },
+      },
+    ]);
+    expect(byRule(run, "xdoc-eori").map((item) => item.messageKey)).toEqual([
+      "xdoc-eori-buyer",
+      "xdoc-eori-buyer",
+    ]);
+    // Seller and buyer findings for the same documents get distinct ids.
+    expect(new Set(run.findings.map((item) => item.id)).size).toBe(run.findings.length);
+  });
+
+  it("passes when the numbers agree and skips documents that do not print them", () => {
+    const run = check([
+      invoice({ sellerVatId: field("NL123456789B01") }),
+      packing({ sellerVatId: field("NL123456789B01") }),
+      order(),
+    ]);
+    expect(byRule(run, "xdoc-vat-id")).toEqual([]);
+    expect(run.results.find((rule) => rule.ruleId === "xdoc-vat-id")?.status).toBe("passed");
+    expect(run.results.find((rule) => rule.ruleId === "xdoc-eori")?.status).toBe("not_applicable");
+  });
+});

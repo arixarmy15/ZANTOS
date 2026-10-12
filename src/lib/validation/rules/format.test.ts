@@ -150,3 +150,63 @@ describe("date-order", () => {
     expect(run.results.find((result) => result.ruleId === "date-order")?.status).toBe("passed");
   });
 });
+
+describe("fmt-vat-id", () => {
+  const vat = (sellerVatId: string, buyerVatId?: string) =>
+    one({
+      header: {
+        sellerVatId: field(sellerVatId),
+        ...(buyerVatId ? { buyerVatId: field(buyerVatId) } : {}),
+      },
+    });
+
+  it("accepts the published Dutch structure and other EU prefixes", () => {
+    const run = vat("NL123456789B01", "DE123456789");
+    expect(byRule(run, "fmt-vat-id")).toEqual([]);
+    expect(run.results.find((rule) => rule.ruleId === "fmt-vat-id")?.status).toBe("passed");
+  });
+
+  it("reports a Dutch number without NL + 9 digits + B + 2 digits", () => {
+    for (const value of ["NL123456789", "NL12345678B01", "NL123456789B1"]) {
+      expect(byRule(vat(value), "fmt-vat-id")[0], value).toMatchObject({
+        severity: "error",
+        messageKey: "fmt-vat-id-nl",
+        params: { field: { value: "header.sellerVatId" }, value: { kind: "code", value } },
+      });
+    }
+  });
+
+  it("points out that Greece uses EL, not GR", () => {
+    expect(byRule(vat("GR123456789"), "fmt-vat-id")[0]).toMatchObject({
+      severity: "warning",
+      messageKey: "fmt-vat-id-greece",
+    });
+    expect(byRule(vat("EL123456789"), "fmt-vat-id")).toEqual([]);
+  });
+
+  it("does not judge tax numbers from outside the EU", () => {
+    const run = vat("1234567890", "CHE123456789MWST");
+    expect(byRule(run, "fmt-vat-id")).toEqual([]);
+    expect(run.results.find((rule) => rule.ruleId === "fmt-vat-id")?.status).toBe("not_applicable");
+  });
+});
+
+describe("fmt-eori", () => {
+  const eori = (value: string) => one({ header: { sellerEori: field(value) } });
+
+  it("accepts a country code with up to 15 letters or digits, and NL with the 9-digit RSIN", () => {
+    for (const value of ["NL123456789", "DE1234567", "PL1234567890ABCDE", "XI123456789000"]) {
+      expect(byRule(eori(value), "fmt-eori"), value).toEqual([]);
+    }
+  });
+
+  it("reports numbers without that structure", () => {
+    for (const value of ["123456789", "ZZ123", "DE1234567890123456"]) {
+      expect(byRule(eori(value), "fmt-eori")[0], value).toMatchObject({
+        severity: "error",
+        messageKey: "fmt-eori",
+      });
+    }
+    expect(byRule(eori("NL12345678"), "fmt-eori")[0]).toMatchObject({ messageKey: "fmt-eori-nl" });
+  });
+});

@@ -23,7 +23,9 @@ export type FieldKind =
   | "incoterm"
   | "weightUnit"
   | "hsCode"
-  | "iban";
+  | "iban"
+  | "vatId"
+  | "eori";
 
 export const HEADER_FIELDS = {
   documentNumber: "text",
@@ -31,8 +33,12 @@ export const HEADER_FIELDS = {
   orderReference: "text",
   sellerName: "party",
   sellerAddress: "text",
+  sellerVatId: "vatId",
+  sellerEori: "eori",
   buyerName: "party",
   buyerAddress: "text",
+  buyerVatId: "vatId",
+  buyerEori: "eori",
   shipperName: "party",
   consigneeName: "party",
   currency: "currency",

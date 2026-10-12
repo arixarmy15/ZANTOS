@@ -3,10 +3,14 @@ import { isValidNormalized } from "@/lib/checks/effective";
 import { evidence, finding, param, present } from "../helpers";
 import {
   CURRENCY_LIST_DATE,
+  EORI_STRUCTURE,
+  EU_VAT_PREFIXES,
   INCOTERMS_2020,
   isIsoCountry,
   isIsoCurrency,
   isUserAssignedCountryCode,
+  NL_EORI,
+  NL_VAT_ID,
   RETIRED_INCOTERMS,
 } from "../reference";
 import type { Evidence, Finding, Rule } from "../types";
@@ -268,6 +272,98 @@ export const ibanFormatRule: Rule = {
           evidence: [evidence(doc, field)],
         }),
       );
+    }
+    return { evaluated, findings };
+  },
+};
+
+const PARTY_VAT_FIELDS = ["sellerVatId", "buyerVatId"] as const;
+const PARTY_EORI_FIELDS = ["sellerEori", "buyerEori"] as const;
+
+/**
+ * EU VAT identification numbers: the prefix (EU VAT Directive, article 215) and, for Dutch
+ * numbers, the published structure. Numbers without an EU prefix (other countries' tax IDs)
+ * are not evaluated. Whether a number is registered can only be confirmed in VIES.
+ */
+export const vatIdFormatRule: Rule = {
+  id: "fmt-vat-id",
+  category: "format",
+  run: ({ documents }) => {
+    const findings: Finding[] = [];
+    let evaluated = 0;
+    for (const doc of documents) {
+      for (const key of PARTY_VAT_FIELDS) {
+        const field = doc.header[key];
+        if (!wellFormed(field)) continue;
+        const prefix = field.normalized.slice(0, 2);
+        const messageKey =
+          prefix === "GR"
+            ? "fmt-vat-id-greece"
+            : prefix === "NL" && !NL_VAT_ID.test(field.normalized)
+              ? "fmt-vat-id-nl"
+              : null;
+        if (!messageKey && !EU_VAT_PREFIXES.has(prefix)) continue;
+        evaluated++;
+        if (!messageKey) continue;
+        findings.push(
+          finding({
+            ruleId: "fmt-vat-id",
+            category: "format",
+            subject: `${doc.record.id}:${key}`,
+            severity: messageKey === "fmt-vat-id-greece" ? "warning" : "error",
+            messageKey,
+            documents: [doc],
+            params: {
+              document: param.document(doc),
+              field: param.field(field.path),
+              value: param.code(field.normalized),
+            },
+            evidence: [evidence(doc, field)],
+          }),
+        );
+      }
+    }
+    return { evaluated, findings };
+  },
+};
+
+/** EORI numbers: the EU structure and, for Dutch numbers, NL followed by the 9-digit RSIN. */
+export const eoriFormatRule: Rule = {
+  id: "fmt-eori",
+  category: "format",
+  run: ({ documents }) => {
+    const findings: Finding[] = [];
+    let evaluated = 0;
+    for (const doc of documents) {
+      for (const key of PARTY_EORI_FIELDS) {
+        const field = doc.header[key];
+        if (!wellFormed(field)) continue;
+        evaluated++;
+        const country = EORI_STRUCTURE.exec(field.normalized)?.[1];
+        const structured = country !== undefined && (country === "XI" || isIsoCountry(country));
+        const messageKey = !structured
+          ? "fmt-eori"
+          : country === "NL" && !NL_EORI.test(field.normalized)
+            ? "fmt-eori-nl"
+            : null;
+        if (!messageKey) continue;
+        findings.push(
+          finding({
+            ruleId: "fmt-eori",
+            category: "format",
+            subject: `${doc.record.id}:${key}`,
+            severity: "error",
+            messageKey,
+            documents: [doc],
+            params: {
+              document: param.document(doc),
+              field: param.field(field.path),
+              value: param.code(field.normalized),
+            },
+            evidence: [evidence(doc, field)],
+          }),
+        );
+      }
     }
     return { evaluated, findings };
   },

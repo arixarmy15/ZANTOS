@@ -177,8 +177,12 @@
       "orderReference": "Order reference",
       "sellerName": "Seller",
       "sellerAddress": "Seller address",
+      "sellerVatId": "Seller VAT number",
+      "sellerEori": "Seller EORI number",
       "buyerName": "Buyer",
       "buyerAddress": "Buyer address",
+      "buyerVatId": "Buyer VAT number",
+      "buyerEori": "Buyer EORI number",
       "shipperName": "Shipper",
       "consigneeName": "Consignee",
       "currency": "Currency",
@@ -212,7 +216,9 @@
       "incoterm": "Incoterms code, for example FOB",
       "weightUnit": "kg, g, t or lb",
       "hsCode": "Digits only, as printed",
-      "iban": "IBAN without spaces"
+      "iban": "IBAN without spaces",
+      "vatId": "As printed, without spaces, for example NL123456789B01",
+      "eori": "As printed, without spaces, for example NL123456789"
     },
     "missingCount": "{count, plural, one {# field not found in the document} other {# fields not found in the document}}"
   },
@@ -247,6 +253,8 @@
       "xdoc-destination": "Country of destination across documents",
       "xdoc-exporter": "Exporter (shipper or seller) across documents",
       "xdoc-importer": "Importer (consignee or buyer) across documents",
+      "xdoc-vat-id": "VAT numbers across documents",
+      "xdoc-eori": "EORI numbers across documents",
       "xdoc-goods": "Goods descriptions across documents",
       "xdoc-hs": "HS codes across documents (first six digits)",
       "fmt-value": "Readable values",
@@ -255,6 +263,8 @@
       "fmt-incoterm": "Incoterms® 2020 rule",
       "fmt-hs": "HS code format",
       "fmt-iban": "IBAN check digits",
+      "fmt-vat-id": "VAT number prefix (EU) and Dutch structure",
+      "fmt-eori": "EORI number structure",
       "date-order": "Purchase order dated first",
       "req-fields": "Expected fields per document type",
       "docset": "Document set"
@@ -311,7 +321,15 @@
       "docset-other-type": "{document} was not recognized as a commercial invoice, packing list or purchase order and was not compared. Change its type if it was recognized wrongly.",
       "docset-insurance": "Under the Incoterms® rule {value} the seller obtains cargo insurance, so an insurance document is usually part of the shipment documents.",
       "docset-typical": "Depending on the goods and the destination country, other documents may be required, such as a transport document, a certificate of origin, licences or certificates. Check the destination country's rules.",
-      "docset-typical-country": "Depending on the goods, other documents may be required for {country}, such as a transport document, a certificate of origin, licences or certificates. Check the rules of {country}."
+      "docset-typical-country": "Depending on the goods, other documents may be required for {country}, such as a transport document, a certificate of origin, licences or certificates. Check the rules of {country}.",
+      "fmt-vat-id-greece": "{document}: {field} {value} starts with GR. Greek VAT numbers use the prefix EL (EU VAT Directive 2006/112/EC, article 215).",
+      "fmt-vat-id-nl": "{document}: {field} {value} does not have the structure of a Dutch VAT number: NL, 9 digits, the letter B and 2 digits, as published by the Belastingdienst.",
+      "fmt-eori": "{document}: {field} {value} does not have the structure of an EORI number: a two-letter country code followed by up to 15 letters or digits, as described by the European Commission.",
+      "fmt-eori-nl": "{document}: {field} {value} does not have the structure of a Dutch EORI number: NL followed by the 9-digit RSIN, according to the European Commission.",
+      "xdoc-vat-id-seller": "Seller's VAT number differs: {valueA} in {docA}, {valueB} in {docB}.",
+      "xdoc-vat-id-buyer": "Buyer's VAT number differs: {valueA} in {docA}, {valueB} in {docB}.",
+      "xdoc-eori-seller": "Seller's EORI number differs: {valueA} in {docA}, {valueB} in {docB}.",
+      "xdoc-eori-buyer": "Buyer's EORI number differs: {valueA} in {docA}, {valueB} in {docB}."
     }
   },
   "results": {
@@ -408,6 +426,23 @@
       "documents": "Documents",
       "rules": "Checks",
       "data": "Extracted data"
+    },
+    "identifiers": {
+      "heading": "Party identifiers",
+      "lead": "TradeCheck checks the format of these numbers and that the documents agree. Whether a number is registered, and to whom, can only be confirmed by the official service.",
+      "party": "Party",
+      "kind": "Number",
+      "value": "Value",
+      "documents": "Documents",
+      "verify": "Verify",
+      "seller": "Seller",
+      "buyer": "Buyer",
+      "vatId": "VAT number",
+      "eori": "EORI number",
+      "vies": "Check in VIES",
+      "eoriCheck": "Check EORI",
+      "newTab": "(opens the official site in a new tab)",
+      "notEu": "Not an EU VAT number; check it with the issuing country."
     }
   },
   "report": {
@@ -607,6 +642,10 @@
         "lc": {
           "q": "Does it check letters of credit or HS classification?",
           "a": "No. It does not examine letters of credit and does not classify goods. HS codes are only checked for format and for consistency across your documents."
+        },
+        "counterparty": {
+          "q": "Does TradeCheck verify that the seller or buyer is a real company?",
+          "a": "No. It checks VAT and EORI numbers for format and for consistency across your documents, and links to the European Commission's VIES and EORI services to confirm that a number is registered. Company registry, sanctions and credit checks are separate services."
         }
       }
     },

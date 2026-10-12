@@ -67,10 +67,17 @@ export function toEffectiveDocuments(
         corrections.filter((c) => c.documentId === document.id).map((c) => [c.path, c]),
       );
       const extraction = document.extraction!;
+      // Documents read before a field existed simply do not have it.
+      const missing: ExtractedField = {
+        value: null,
+        normalized: null,
+        confidence: 0,
+        source: null,
+      };
       const header = Object.fromEntries(
         HEADER_FIELD_KEYS.map((key) => [
           key,
-          effective(`header.${key}`, extraction.header[key], byPath),
+          effective(`header.${key}`, extraction.header[key] ?? missing, byPath),
         ]),
       ) as Record<HeaderFieldKey, EffectiveField>;
       const lines = extraction.lines.map(
@@ -78,7 +85,7 @@ export function toEffectiveDocuments(
           Object.fromEntries(
             LINE_FIELD_KEYS.map((key) => [
               key,
-              effective(`lines.${index}.${key}`, line[key], byPath),
+              effective(`lines.${index}.${key}`, line[key] ?? missing, byPath),
             ]),
           ) as Record<LineFieldKey, EffectiveField>,
       );
@@ -99,6 +106,9 @@ const NORMALIZED_PATTERNS: Record<FieldKind, RegExp> = {
   weightUnit: /^(?:kg|g|t|lb)$/,
   hsCode: /^\d{4,12}$/,
   iban: /^[A-Z0-9]{5,34}$/,
+  // Tax and customs identifiers from any country; their structure is checked by the rules.
+  vatId: /^[A-Z0-9]{3,20}$/,
+  eori: /^[A-Z0-9]{3,20}$/,
 };
 
 export function isValidNormalized(kind: FieldKind, value: string): boolean {

@@ -177,8 +177,12 @@
       "orderReference": "Bestellreferenz",
       "sellerName": "Verkäufer",
       "sellerAddress": "Adresse des Verkäufers",
+      "sellerVatId": "USt-IdNr. des Verkäufers",
+      "sellerEori": "EORI-Nummer des Verkäufers",
       "buyerName": "Käufer",
       "buyerAddress": "Adresse des Käufers",
+      "buyerVatId": "USt-IdNr. des Käufers",
+      "buyerEori": "EORI-Nummer des Käufers",
       "shipperName": "Versender",
       "consigneeName": "Empfänger",
       "currency": "Währung",
@@ -212,7 +216,9 @@
       "incoterm": "Incoterms-Code, zum Beispiel FOB",
       "weightUnit": "kg, g, t oder lb",
       "hsCode": "Nur Ziffern, wie gedruckt",
-      "iban": "IBAN ohne Leerzeichen"
+      "iban": "IBAN ohne Leerzeichen",
+      "vatId": "Wie gedruckt, ohne Leerzeichen, z. B. NL123456789B01",
+      "eori": "Wie gedruckt, ohne Leerzeichen, z. B. NL123456789"
     },
     "missingCount": "{count, plural, one {# Feld nicht im Dokument gefunden} other {# Felder nicht im Dokument gefunden}}"
   },
@@ -247,6 +253,8 @@
       "xdoc-destination": "Bestimmungsland dokumentübergreifend",
       "xdoc-exporter": "Exporteur (Versender oder Verkäufer) dokumentübergreifend",
       "xdoc-importer": "Importeur (Empfänger oder Käufer) dokumentübergreifend",
+      "xdoc-vat-id": "USt-IdNrn. dokumentübergreifend",
+      "xdoc-eori": "EORI-Nummern dokumentübergreifend",
       "xdoc-goods": "Warenbeschreibungen dokumentübergreifend",
       "xdoc-hs": "HS-Codes dokumentübergreifend (erste sechs Stellen)",
       "fmt-value": "Lesbare Werte",
@@ -255,6 +263,8 @@
       "fmt-incoterm": "Incoterms®-2020-Klausel",
       "fmt-hs": "Format des HS-Codes",
       "fmt-iban": "IBAN-Prüfziffern",
+      "fmt-vat-id": "Präfix der USt-IdNr. (EU) und niederländischer Aufbau",
+      "fmt-eori": "Aufbau der EORI-Nummer",
       "date-order": "Bestellung zuerst datiert",
       "req-fields": "Erwartete Felder je Dokumenttyp",
       "docset": "Dokumentensatz"
@@ -311,7 +321,15 @@
       "docset-other-type": "{document} wurde nicht als Handelsrechnung, Packliste oder Bestellung erkannt und nicht verglichen. Ändern Sie den Typ, falls er falsch erkannt wurde.",
       "docset-insurance": "Bei der Incoterms®-Klausel {value} schließt der Verkäufer die Transportversicherung ab, daher gehört ein Versicherungsdokument üblicherweise zu den Versanddokumenten.",
       "docset-typical": "Je nach Ware und Bestimmungsland können weitere Dokumente erforderlich sein, etwa ein Transportdokument, ein Ursprungszeugnis, Lizenzen oder Zertifikate. Prüfen Sie die Vorschriften des Bestimmungslandes.",
-      "docset-typical-country": "Je nach Ware können für {country} weitere Dokumente erforderlich sein, etwa ein Transportdokument, ein Ursprungszeugnis, Lizenzen oder Zertifikate. Prüfen Sie die Vorschriften für {country}."
+      "docset-typical-country": "Je nach Ware können für {country} weitere Dokumente erforderlich sein, etwa ein Transportdokument, ein Ursprungszeugnis, Lizenzen oder Zertifikate. Prüfen Sie die Vorschriften für {country}.",
+      "fmt-vat-id-greece": "{document}: {field} {value} beginnt mit GR. Griechische USt-IdNrn. verwenden das Präfix EL (MwSt-Richtlinie 2006/112/EG, Artikel 215).",
+      "fmt-vat-id-nl": "{document}: {field} {value} hat nicht den Aufbau einer niederländischen USt-IdNr.: NL, 9 Ziffern, der Buchstabe B und 2 Ziffern, wie von der Belastingdienst veröffentlicht.",
+      "fmt-eori": "{document}: {field} {value} hat nicht den Aufbau einer EORI-Nummer: ein zweistelliger Ländercode, gefolgt von bis zu 15 Buchstaben oder Ziffern, wie von der Europäischen Kommission beschrieben.",
+      "fmt-eori-nl": "{document}: {field} {value} hat nicht den Aufbau einer niederländischen EORI-Nummer: NL, gefolgt von der 9-stelligen RSIN, laut Europäischer Kommission.",
+      "xdoc-vat-id-seller": "USt-IdNr. des Verkäufers weicht ab: {valueA} in {docA}, {valueB} in {docB}.",
+      "xdoc-vat-id-buyer": "USt-IdNr. des Käufers weicht ab: {valueA} in {docA}, {valueB} in {docB}.",
+      "xdoc-eori-seller": "EORI-Nummer des Verkäufers weicht ab: {valueA} in {docA}, {valueB} in {docB}.",
+      "xdoc-eori-buyer": "EORI-Nummer des Käufers weicht ab: {valueA} in {docA}, {valueB} in {docB}."
     }
   },
   "results": {
@@ -408,6 +426,23 @@
       "documents": "Dokumente",
       "rules": "Prüfungen",
       "data": "Extrahierte Daten"
+    },
+    "identifiers": {
+      "heading": "Kennnummern der Parteien",
+      "lead": "TradeCheck prüft das Format dieser Nummern und ob die Dokumente übereinstimmen. Ob eine Nummer vergeben ist und wem sie gehört, kann nur der amtliche Dienst bestätigen.",
+      "party": "Partei",
+      "kind": "Nummer",
+      "value": "Wert",
+      "documents": "Dokumente",
+      "verify": "Überprüfen",
+      "seller": "Verkäufer",
+      "buyer": "Käufer",
+      "vatId": "USt-IdNr.",
+      "eori": "EORI-Nummer",
+      "vies": "In VIES prüfen",
+      "eoriCheck": "EORI prüfen",
+      "newTab": "(öffnet die amtliche Website in einem neuen Tab)",
+      "notEu": "Keine EU-USt-IdNr.; beim ausstellenden Land prüfen."
     }
   },
   "report": {
@@ -607,6 +642,10 @@
         "lc": {
           "q": "Prüft es Akkreditive oder die Einreihung in den HS?",
           "a": "Nein. Es prüft keine Akkreditive und reiht keine Waren ein. HS-Codes werden nur auf ihr Format und auf Übereinstimmung zwischen Ihren Dokumenten geprüft."
+        },
+        "counterparty": {
+          "q": "Prüft TradeCheck, ob Verkäufer oder Käufer ein echtes Unternehmen ist?",
+          "a": "Nein. Es prüft USt-IdNrn. und EORI-Nummern auf Format und Übereinstimmung zwischen Ihren Dokumenten und verlinkt die Dienste VIES und EORI der Europäischen Kommission, um zu bestätigen, dass eine Nummer vergeben ist. Handelsregister-, Sanktions- und Bonitätsprüfungen sind eigene Dienste."
         }
       }
     },

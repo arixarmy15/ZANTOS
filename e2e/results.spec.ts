@@ -101,6 +101,13 @@ test("the report shows the disclaimer, findings and checks that ran", async ({
   await expect(page.getByRole("heading", { name: "Please note" })).toBeVisible();
   await expect(page.getByText("Number of packages differs").first()).toBeVisible();
   await expect(page.getByRole("heading", { name: "Checks that ran" })).toBeVisible();
+  // Party identifiers are listed with the official service that can confirm them.
+  const identifiers = page.getByRole("region", { name: "Party identifiers" });
+  await expect(identifiers.getByText("NL000000000B00")).toBeVisible();
+  await expect(identifiers.getByRole("link", { name: /Check in VIES/ })).toHaveAttribute(
+    "href",
+    "https://ec.europa.eu/taxation_customs/vies/",
+  );
   await expect(page.getByRole("button", { name: "Print or save as PDF" })).toBeVisible();
   await expectAccessible(page);
 
