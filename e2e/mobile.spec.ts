@@ -196,8 +196,12 @@ test("phone layouts: card list, folded filters, jump links, bottom sheet, zoomab
 
   // Dialogs dock to the bottom of the screen.
   await page.getByRole("button", { name: "Delete check" }).click();
-  const box = (await page.getByRole("dialog").boundingBox())!;
-  expect(Math.round(box.y + box.height)).toBe(844);
+  // Polled, because the sheet slides up when it opens.
+  const bottom = async () => {
+    const box = (await page.getByRole("dialog").boundingBox())!;
+    return Math.round(box.y + box.height);
+  };
+  await expect.poll(bottom).toBe(page.viewportSize()!.height);
   await page.keyboard.press("Escape");
 
   // The page is drawn at the width it is shown at, so evidence stays on its text when zoomed.
