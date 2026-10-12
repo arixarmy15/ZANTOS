@@ -2,8 +2,9 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   DEFAULT_ANTHROPIC_MODEL,
-  isAnthropicConfigured,
+  isTaskConfigured,
   parseServerEnv,
+  resolveRoute,
   serverEnvSchema,
 } from "./env";
 
@@ -23,7 +24,8 @@ describe("parseServerEnv", () => {
     expect(env.ANTHROPIC_MODEL).toBe(DEFAULT_ANTHROPIC_MODEL);
     expect(env.UPLOAD_MAX_FILE_MB).toBe(20);
     expect(env.DATA_DIR).toBe("./data");
-    expect(isAnthropicConfigured(env)).toBe(false);
+    expect(env.AI_PROVIDER).toBe("anthropic");
+    expect(isTaskConfigured(env, "extract")).toBe(false);
   });
 
   it("treats empty values copied from .env.example as unset", () => {
@@ -79,5 +81,72 @@ describe(".env.example", () => {
 
   it("never exposes Anthropic settings to the browser bundle", () => {
     expect([...example.keys()].filter((key) => key.startsWith("NEXT_PUBLIC_"))).toEqual([]);
+  });
+});
+
+describe("AI routing", () => {
+  it("sends every task to the default provider and its model", () => {
+    const env = parseServerEnv({ ANTHROPIC_API_KEY: "test-anthropic-key" });
+    expect(resolveRoute(env, "extract")).toEqual({
+      task: "extract",
+      provider: "anthropic",
+      model: DEFAULT_ANTHROPIC_MODEL,
+    });
+    expect(isTaskConfigured(env, "email")).toBe(true);
+  });
+
+  it("uses an OpenAI-compatible endpoint when it is the default provider", () => {
+    const env = parseServerEnv({
+      AI_PROVIDER: "openai-compatible",
+      OPENAI_COMPATIBLE_BASE_URL: "https://llm.example.org/v1/",
+      OPENAI_COMPATIBLE_MODEL: "deepseek-v4.1-flash",
+    });
+    expect(env.OPENAI_COMPATIBLE_BASE_URL).toBe("https://llm.example.org/v1");
+    expect(resolveRoute(env, "compare")).toMatchObject({
+      provider: "openai-compatible",
+      model: "deepseek-v4.1-flash",
+    });
+    // A key is optional: local servers often run without one.
+    expect(isTaskConfigured(env, "compare")).toBe(true);
+  });
+
+  it("routes single tasks to another provider or model", () => {
+    const env = parseServerEnv({
+      ANTHROPIC_API_KEY: "test-anthropic-key",
+      OPENAI_COMPATIBLE_BASE_URL: "http://localhost:11434/v1",
+      AI_COMPARE_MODEL: "openai-compatible:qwen3:8b",
+      AI_EXPLAIN_MODEL: "claude-opus-5-5",
+    });
+    expect(resolveRoute(env, "extract")).toMatchObject({
+      provider: "anthropic",
+      model: DEFAULT_ANTHROPIC_MODEL,
+    });
+    expect(resolveRoute(env, "compare")).toMatchObject({
+      provider: "openai-compatible",
+      model: "qwen3:8b",
+    });
+    expect(resolveRoute(env, "explain")).toMatchObject({
+      provider: "anthropic",
+      model: "claude-opus-5-5",
+    });
+  });
+
+  it("is not configured without a model or without the provider's endpoint", () => {
+    const noModel = parseServerEnv({
+      AI_PROVIDER: "openai-compatible",
+      OPENAI_COMPATIBLE_BASE_URL: "https://llm.example.org/v1",
+    });
+    expect(resolveRoute(noModel, "extract").model).toBeNull();
+    expect(isTaskConfigured(noModel, "extract")).toBe(false);
+    const noEndpoint = parseServerEnv({ AI_EMAIL_MODEL: "openai-compatible:some-model" });
+    expect(isTaskConfigured(noEndpoint, "email")).toBe(false);
+  });
+
+  it("rejects malformed provider settings without echoing them", () => {
+    expect(() => parseServerEnv({ AI_PROVIDER: "gemini" })).toThrow(/AI_PROVIDER/);
+    expect(() => parseServerEnv({ OPENAI_COMPATIBLE_BASE_URL: "ftp://example.org" })).toThrow(
+      /OPENAI_COMPATIBLE_BASE_URL/,
+    );
+    expect(() => parseServerEnv({ AI_EXTRACT_MODEL: "has space" })).toThrow(/AI_EXTRACT_MODEL/);
   });
 });

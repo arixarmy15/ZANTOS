@@ -116,7 +116,13 @@ describe("structuredRequest", () => {
       usage,
       parsed_output: { explanation: "Plain words." },
     });
-    const result = await structuredRequest({ system: "S", user: "U", schema, maxTokens: 100 });
+    const result = await structuredRequest({
+      task: "explain",
+      system: "S",
+      user: "U",
+      schema,
+      maxTokens: 100,
+    });
     expect(result.output).toEqual({ explanation: "Plain words." });
     expect(result.usage).toMatchObject({ inputTokens: 300, outputTokens: 40 });
     const sent = parse.mock.calls[0]![0];
@@ -132,14 +138,14 @@ describe("structuredRequest", () => {
       parsed_output: { explanation: "" },
     });
     await expect(
-      structuredRequest({ system: "S", user: "U", schema, maxTokens: 100 }),
+      structuredRequest({ task: "explain", system: "S", user: "U", schema, maxTokens: 100 }),
     ).rejects.toMatchObject({
       code: "invalid_output",
       usage: { inputTokens: 300 },
     });
     parse.mockResolvedValue({ model: "m", stop_reason: "refusal", usage, parsed_output: null });
     await expect(
-      structuredRequest({ system: "S", user: "U", schema, maxTokens: 100 }),
+      structuredRequest({ task: "explain", system: "S", user: "U", schema, maxTokens: 100 }),
     ).rejects.toMatchObject({
       code: "refused",
     });

@@ -1,5 +1,5 @@
 import "server-only";
-import { AiError, logAiError, toAiError, type TokenUsage } from "@/lib/anthropic/client";
+import { AiError, aiErrorStatus, asAiError, logAiError, type TokenUsage } from "@/lib/ai/errors";
 import { errorResponse } from "@/lib/api/http";
 import type { Storage, UsageKind } from "@/lib/storage/types";
 
@@ -23,12 +23,12 @@ export async function cachedAssist<T>(input: {
     await storage.setCached(checkId, cacheKey, output);
     return { ok: true, output, cached: false };
   } catch (caught) {
-    const error: AiError = toAiError(caught);
+    const error: AiError = asAiError(caught);
     logAiError(kind, error);
     if (error.usage) await storage.recordUsage({ checkId, documentId: null, kind, ...error.usage });
     return {
       ok: false,
-      response: errorResponse(error.code, error.code === "not_configured" ? 503 : 502),
+      response: errorResponse(error.code, aiErrorStatus(error)),
     };
   }
 }

@@ -1,42 +1,22 @@
 import "server-only";
-import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import type { z } from "zod";
-import {
-  AiError,
-  fallbackOptions,
-  getAnthropic,
-  getModel,
-  toAiError,
-  usageFrom,
-  type TokenUsage,
-} from "@/lib/anthropic/client";
+import type { TokenUsage } from "@/lib/ai/errors";
+import { generateStructured } from "@/lib/ai/generate";
+import type { AiTask } from "@/lib/config/env";
 
-/** One structured-output request with the same safety handling as extraction. */
+/** One structured text request for an assist task, on the provider routed to that task. */
 export async function structuredRequest<T extends z.ZodType>(input: {
+  task: Extract<AiTask, "explain" | "email">;
   system: string;
   user: string;
   schema: T;
   maxTokens: number;
 }): Promise<{ output: z.infer<T>; usage: TokenUsage }> {
-  const client = getAnthropic();
-  const model = getModel();
-  let response;
-  try {
-    response = await client.beta.messages.parse({
-      model,
-      max_tokens: input.maxTokens,
-      system: [{ type: "text", text: input.system, cache_control: { type: "ephemeral" } }],
-      messages: [{ role: "user", content: input.user }],
-      output_config: { effort: "low", format: betaZodOutputFormat(input.schema) },
-      ...fallbackOptions(model),
-    });
-  } catch (error) {
-    throw toAiError(error);
-  }
-  const usage = usageFrom(response);
-  if (response.stop_reason === "refusal") throw new AiError("refused", usage);
-  if (response.stop_reason === "max_tokens") throw new AiError("truncated", usage);
-  const checked = input.schema.safeParse(response.parsed_output);
-  if (!checked.success) throw new AiError("invalid_output", usage);
-  return { output: checked.data, usage };
+  return generateStructured(input.task, {
+    system: input.system,
+    parts: [{ type: "text", text: input.user }],
+    schema: input.schema,
+    maxTokens: input.maxTokens,
+    effort: "low",
+  });
 }

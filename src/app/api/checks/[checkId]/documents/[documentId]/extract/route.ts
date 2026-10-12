@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { AiError, logAiError, toAiError } from "@/lib/anthropic/client";
+import { AiError, aiErrorStatus, asAiError, logAiError } from "@/lib/ai/errors";
 import { errorResponse, findDocument } from "@/lib/api/http";
-import { getServerEnv, isAnthropicConfigured } from "@/lib/config/env";
+import { getServerEnv, isTaskConfigured } from "@/lib/config/env";
 import { extractDocument } from "@/lib/extraction/extract";
 import { getStorage } from "@/lib/storage";
 
@@ -14,7 +14,7 @@ export async function POST(_request: Request, { params }: Context) {
   const { checkId, documentId } = await params;
   const found = await findDocument(checkId, documentId);
   if ("response" in found) return found.response;
-  if (!isAnthropicConfigured(getServerEnv())) return errorResponse("not_configured", 503);
+  if (!isTaskConfigured(getServerEnv(), "extract")) return errorResponse("not_configured", 503);
 
   const storage = await getStorage();
   const { document } = found;
@@ -47,12 +47,12 @@ export async function POST(_request: Request, { params }: Context) {
     });
     return NextResponse.json({ status: "extracted", usage });
   } catch (caught) {
-    const error: AiError = toAiError(caught);
+    const error: AiError = asAiError(caught);
     logAiError("extraction", error);
     if (error.usage) {
       await storage.recordUsage({ checkId, documentId, kind: "extract", ...error.usage });
     }
     await storage.updateDocument(documentId, { status: "failed", errorCode: error.code });
-    return errorResponse(error.code, error.code === "not_configured" ? 503 : 502);
+    return errorResponse(error.code, aiErrorStatus(error));
   }
 }

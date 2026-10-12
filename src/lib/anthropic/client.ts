@@ -1,5 +1,6 @@
 import "server-only";
 import Anthropic from "@anthropic-ai/sdk";
+import { AiError, type TokenUsage } from "@/lib/ai/errors";
 import { getServerEnv } from "@/lib/config/env";
 
 /** Server-side refusal fallback ("default" form, Claude API only) is accepted on these models. */
@@ -11,35 +12,8 @@ const SERVER_FALLBACK_MODELS = new Set([
 ]);
 const SERVER_FALLBACK_BETA = "server-side-fallback-2026-07-01";
 
-export type AiErrorCode =
-  | "not_configured"
-  | "refused"
-  | "truncated"
-  | "invalid_output"
-  | "auth"
-  | "rate_limited"
-  | "unreachable"
-  | "document_too_large"
-  | "api_error";
-
-export type TokenUsage = {
-  model: string;
-  inputTokens: number;
-  outputTokens: number;
-  cacheReadTokens: number;
-  cacheWriteTokens: number;
-};
-
-export class AiError extends Error {
-  constructor(
-    readonly code: AiErrorCode,
-    /** Present when the request reached the model and was billed. */
-    readonly usage: TokenUsage | null = null,
-  ) {
-    super(`AI request failed: ${code}`);
-    this.name = "AiError";
-  }
-}
+export { AiError, logAiError } from "@/lib/ai/errors";
+export type { AiErrorCode, TokenUsage } from "@/lib/ai/errors";
 
 let client: Anthropic | undefined;
 
@@ -48,10 +22,6 @@ export function getAnthropic(): Anthropic {
   if (!env.ANTHROPIC_API_KEY) throw new AiError("not_configured");
   client ??= new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 2, timeout: 180_000 });
   return client;
-}
-
-export function getModel(): string {
-  return getServerEnv().ANTHROPIC_MODEL;
 }
 
 /** Opt into server-side refusal fallback where the configured model supports it. */
@@ -94,9 +64,4 @@ export function toAiError(error: unknown): AiError {
   }
   // Anything else (for example a structured output the SDK could not parse).
   return new AiError("invalid_output");
-}
-
-/** Errors are logged by code only: never the request, the response or document content. */
-export function logAiError(operation: string, error: AiError) {
-  console.warn(`[tradecheck] ${operation} failed: ${error.code}`);
 }

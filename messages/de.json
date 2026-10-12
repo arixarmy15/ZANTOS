@@ -65,7 +65,7 @@
   },
   "permission": {
     "apiKeyMissingTitle": "Das Lesen von Dokumenten ist nicht eingerichtet",
-    "apiKeyMissingBody": "Auf dem Server ist kein ANTHROPIC_API_KEY hinterlegt, daher können noch keine Dokumente gelesen werden. Der Betreiber kann ihn wie in der README beschrieben hinzufügen."
+    "apiKeyMissingBody": "Auf dem Server ist kein KI-Anbieter eingerichtet, daher können noch keine Dokumente gelesen werden. Der Betreiber kann einen einrichten, wie in der README beschrieben."
   },
   "notFound": {
     "title": "Seite nicht gefunden",
@@ -89,12 +89,14 @@
     "refused": "Das Modell hat das Lesen dieses Dokuments abgelehnt. Es wurde nichts ausgefüllt.",
     "truncated": "Das Dokument ist zu lang, um es in einem Durchgang zu lesen. Es wurde nichts ausgefüllt.",
     "invalid_output": "Die Antwort des Modells entsprach nicht der erwarteten Struktur und wurde verworfen. Versuchen Sie es erneut.",
-    "auth": "Der Anthropic-API-Schlüssel des Servers wurde abgelehnt.",
-    "rate_limited": "Anthropic erhält gerade zu viele Anfragen. Versuchen Sie es in einer Minute erneut.",
-    "unreachable": "Anthropic war nicht erreichbar, daher wurde nichts gelesen. Versuchen Sie es später erneut.",
+    "auth": "Der KI-Anbieter hat den API-Schlüssel des Servers abgelehnt.",
+    "rate_limited": "Der KI-Anbieter erhält zu viele Anfragen. Versuchen Sie es in einer Minute erneut.",
+    "unreachable": "Der KI-Anbieter war nicht erreichbar, daher wurde nichts gelesen. Versuchen Sie es später erneut.",
     "document_too_large": "Das Dokument ist zu groß, um vom Modell gelesen zu werden.",
-    "api_error": "Anthropic hat einen Fehler gemeldet. Versuchen Sie es erneut.",
-    "no_issues": "Es gibt keine Fehler oder Warnungen, die gemeldet werden müssten."
+    "api_error": "Der KI-Anbieter hat einen Fehler gemeldet. Versuchen Sie es erneut.",
+    "no_issues": "Es gibt keine Fehler oder Warnungen, die gemeldet werden müssten.",
+    "unsupported_document": "Das eingerichtete Modell kann nur PDFs mit Text lesen, und dieses enthält keinen (vermutlich ein Scan). Laden Sie die Seiten als Bilder hoch oder verwenden Sie ein Modell, das PDF-Dateien liest.",
+    "internal": "Auf dem Server ist ein Fehler aufgetreten, daher wurde nichts gelesen. Versuchen Sie es erneut; wenn es wieder passiert, informieren Sie den Betreiber."
   },
   "check": {
     "untitled": "Prüfung vom {date, date, medium}",
@@ -113,7 +115,7 @@
     "addDocuments": "Dokumente hinzufügen",
     "readDocuments": "{count, plural, one {# Dokument lesen} other {# Dokumente lesen}}",
     "readAgain": "Erneut lesen",
-    "readHint": "Beim Lesen wird jedes Dokument an das Claude-Modell von Anthropic gesendet. Die verbrauchten Tokens werden erfasst und hier angezeigt.",
+    "readHint": "Beim Lesen wird jedes Dokument an das eingerichtete KI-Modell ({model}) gesendet. Die verbrauchten Tokens werden erfasst und hier angezeigt.",
     "extracted": "Ausgelesene Daten",
     "noExtraction": "Noch wurde kein Dokument gelesen. Lesen Sie die Dokumente, um ihre Daten und die Befunde zu sehen."
   },
@@ -362,7 +364,7 @@
     },
     "compare": {
       "title": "{count, plural, one {# Vergleich wartet auf die KI} other {# Vergleiche warten auf die KI}}",
-      "body": "Unterschiedlich geschriebene Namen und Warenbeschreibungen werden von Claude verglichen. Bis dahin werden sie als „nicht überprüfbar“ angezeigt.",
+      "body": "Unterschiedlich geschriebene Namen und Warenbeschreibungen werden vom KI-Modell verglichen. Bis dahin werden sie als „nicht überprüfbar“ angezeigt.",
       "button": "Mit KI vergleichen",
       "comparing": "Namen und Beschreibungen werden verglichen…"
     },
@@ -375,7 +377,7 @@
     "email": {
       "open": "Korrektur-E-Mail entwerfen",
       "title": "Entwurf einer Korrektur-E-Mail",
-      "description": "Claude entwirft eine E-Mail, in der die ausstellende Stelle gebeten wird, die gefundenen Fehler und Warnungen zu korrigieren. TradeCheck versendet nie E-Mails: Kopieren Sie den Entwurf oder öffnen Sie ihn in Ihrem eigenen E-Mail-Programm.",
+      "description": "Das KI-Modell entwirft eine E-Mail, in der die ausstellende Stelle gebeten wird, die gefundenen Fehler und Warnungen zu korrigieren. TradeCheck versendet nie E-Mails: Kopieren Sie den Entwurf oder öffnen Sie ihn in Ihrem eigenen E-Mail-Programm.",
       "language": "Sprache der E-Mail",
       "generate": "E-Mail entwerfen",
       "regenerate": "Neu entwerfen",
@@ -399,7 +401,7 @@
     "generated": "Bericht erstellt am {date}",
     "tolerance": "Rundungstoleranz {value}",
     "disclaimerHeading": "Bitte beachten",
-    "aiNote": "Claude (Anthropic) hat die Dokumente gelesen sowie Namen und Beschreibungen verglichen. Alle Berechnungen und Regelprüfungen wurden durch deterministischen Code durchgeführt. Als korrigiert markierte Werte wurden vom Benutzer eingegeben.",
+    "aiNote": "Ein KI-Modell hat die Dokumente gelesen sowie Namen und Beschreibungen verglichen (die verwendeten Modelle stehen beim Token-Verbrauch). Alle Berechnungen und Regelprüfungen wurden durch deterministischen Code durchgeführt. Als korrigiert markierte Werte wurden vom Benutzer eingegeben.",
     "documents": "Dokumente",
     "summary": "Zusammenfassung",
     "usage": "Token-Verbrauch",

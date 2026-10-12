@@ -13,7 +13,7 @@ import {
 } from "@/lib/assist/prompts";
 import { cachedAssist } from "@/lib/assist/route-helpers";
 import { presentCheck } from "@/lib/checks/view";
-import { getServerEnv, isAnthropicConfigured } from "@/lib/config/env";
+import { getServerEnv, isTaskConfigured } from "@/lib/config/env";
 import { getStorage } from "@/lib/storage";
 
 type Context = { params: Promise<{ checkId: string }> };
@@ -30,7 +30,7 @@ export async function POST(request: Request, { params }: Context) {
   if ("response" in found) return found.response;
   const body = bodySchema.safeParse(await readJson(request));
   if (!body.success) return errorResponse("invalid_request", 400);
-  if (!isAnthropicConfigured(getServerEnv())) return errorResponse("not_configured", 503);
+  if (!isTaskConfigured(getServerEnv(), "email")) return errorResponse("not_configured", 503);
 
   const storage = await getStorage();
   const { findings } = await presentCheck(storage, found.check, "en");
@@ -44,6 +44,7 @@ export async function POST(request: Request, { params }: Context) {
     cacheKey: `email:${contentHash(body.data.language, issues.map(findingFacts))}`,
     run: () =>
       structuredRequest({
+        task: "email",
         system: EMAIL_SYSTEM_PROMPT,
         user: emailRequest(issues, body.data.language),
         schema: emailSchema,

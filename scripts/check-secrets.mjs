@@ -6,6 +6,8 @@ import { readFileSync } from "node:fs";
 
 const PATTERNS = [
   { name: "Anthropic API key", regex: /sk-ant-[A-Za-z0-9_-]{20,}/ },
+  { name: "OpenAI-style API key", regex: /\bsk-(?:proj-|svcacct-)?[A-Za-z0-9_-]{32,}/ },
+  { name: "Evren LLM API key", regex: /evren_llm_[A-Za-z0-9_-]{20,}/ },
   { name: "Private key block", regex: /-----BEGIN (?:[A-Z]+ )?PRIVATE KEY-----/ },
 ];
 

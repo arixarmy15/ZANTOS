@@ -65,7 +65,7 @@
   },
   "permission": {
     "apiKeyMissingTitle": "Belge okuma ayarlanmamış",
-    "apiKeyMissingBody": "Sunucuda ANTHROPIC_API_KEY tanımlı olmadığı için belgeler henüz okunamıyor. Yönetici, README'de açıklandığı şekilde ekleyebilir."
+    "apiKeyMissingBody": "Sunucuda yapılandırılmış bir yapay zekâ sağlayıcısı yok, bu yüzden belgeler henüz okunamıyor. Yönetici README'de anlatıldığı gibi bir sağlayıcı ayarlayabilir."
   },
   "notFound": {
     "title": "Sayfa bulunamadı",
@@ -89,12 +89,14 @@
     "refused": "Model bu belgeyi okumayı reddetti. Hiçbir alan doldurulmadı.",
     "truncated": "Belge tek seferde okunamayacak kadar uzun. Hiçbir alan doldurulmadı.",
     "invalid_output": "Modelin yanıtı beklenen yapıya uymadığı için atıldı. Yeniden deneyin.",
-    "auth": "Sunucunun Anthropic API anahtarı reddedildi.",
-    "rate_limited": "Anthropic şu anda çok fazla istek alıyor. Bir dakika sonra yeniden deneyin.",
-    "unreachable": "Anthropic'e ulaşılamadı; hiçbir şey okunmadı. Daha sonra yeniden deneyin.",
+    "auth": "Yapay zekâ sağlayıcısı sunucunun API anahtarını reddetti.",
+    "rate_limited": "Yapay zekâ sağlayıcısı çok fazla istek alıyor. Bir dakika sonra yeniden deneyin.",
+    "unreachable": "Yapay zekâ sağlayıcısına ulaşılamadı, bu yüzden hiçbir şey okunmadı. Daha sonra yeniden deneyin.",
     "document_too_large": "Belge, modelin okuyabileceğinden büyük.",
-    "api_error": "Anthropic bir hata döndürdü. Yeniden deneyin.",
-    "no_issues": "Bildirilecek hata veya uyarı yok."
+    "api_error": "Yapay zekâ sağlayıcısı bir hata döndürdü. Yeniden deneyin.",
+    "no_issues": "Bildirilecek hata veya uyarı yok.",
+    "unsupported_document": "Yapılandırılmış model yalnızca metin içeren PDF'leri okuyabiliyor; bu PDF'te metin yok (büyük olasılıkla taranmış). Sayfaları görsel olarak yükleyin ya da PDF okuyabilen bir model kullanın.",
+    "internal": "Sunucuda bir sorun oluştu, bu yüzden hiçbir şey okunmadı. Yeniden deneyin; tekrarlarsa yöneticiye bildirin."
   },
   "check": {
     "untitled": "{date, date, medium} tarihli kontrol",
@@ -113,7 +115,7 @@
     "addDocuments": "Belge ekle",
     "readDocuments": "{count, plural, one {# belgeyi oku} other {# belgeyi oku}}",
     "readAgain": "Yeniden oku",
-    "readHint": "Okuma, her belgeyi Anthropic'in Claude modeline gönderir. Kullanılan token'lar kaydedilir ve burada gösterilir.",
+    "readHint": "Okuma, her belgeyi yapılandırılmış yapay zekâ modeline ({model}) gönderir. Kullanılan tokenlar kaydedilir ve burada gösterilir.",
     "extracted": "Çıkarılan veriler",
     "noExtraction": "Henüz hiçbir belge okunmadı. Verilerini ve bulguları görmek için belgeleri okutun."
   },
@@ -362,7 +364,7 @@
     },
     "compare": {
       "title": "{count, plural, one {# karşılaştırma yapay zekâyı bekliyor} other {# karşılaştırma yapay zekâyı bekliyor}}",
-      "body": "Farklı yazılmış isimler ve mal tanımları Claude tarafından karşılaştırılır. O zamana kadar “doğrulanamadı” olarak gösterilirler.",
+      "body": "Farklı yazılmış isimler ve mal tanımları yapay zekâ modeli tarafından karşılaştırılır. O zamana kadar “doğrulanamadı” olarak gösterilirler.",
       "button": "Yapay zekâ ile karşılaştır",
       "comparing": "İsimler ve tanımlar karşılaştırılıyor…"
     },
@@ -375,7 +377,7 @@
     "email": {
       "open": "Düzeltme e-postası taslağı",
       "title": "Düzeltme e-postası taslağı",
-      "description": "Claude, belgeyi düzenleyen kişiden bulunan hata ve uyarıları düzeltmesini isteyen bir e-posta taslağı hazırlar. TradeCheck asla e-posta göndermez: taslağı kopyalayın veya kendi e-posta programınızda açın.",
+      "description": "Yapay zekâ modeli, belgeyi düzenleyen kişiden bulunan hata ve uyarıları düzeltmesini isteyen bir e-posta taslağı hazırlar. TradeCheck asla e-posta göndermez: taslağı kopyalayın veya kendi e-posta programınızda açın.",
       "language": "E-postanın dili",
       "generate": "Taslak hazırla",
       "regenerate": "Yeniden hazırla",
@@ -399,7 +401,7 @@
     "generated": "Rapor oluşturuldu: {date}",
     "tolerance": "Yuvarlama toleransı {value}",
     "disclaimerHeading": "Lütfen dikkat",
-    "aiNote": "Belgeleri Claude (Anthropic) okudu ve isimlerle tanımları karşılaştırdı. Tüm hesaplamalar ve kural kontrolleri deterministik kodla yapıldı. Düzeltildi olarak işaretlenen değerler kullanıcı tarafından girildi.",
+    "aiNote": "Belgeleri bir yapay zekâ modeli okudu ve isimlerle tanımları karşılaştırdı (kullanılan modeller token kullanımında listelenir). Tüm hesaplamalar ve kural kontrolleri deterministik kodla yapıldı. Düzeltildi olarak işaretlenen değerler kullanıcı tarafından girildi.",
     "documents": "Belgeler",
     "summary": "Özet",
     "usage": "Token kullanımı",

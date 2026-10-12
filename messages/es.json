@@ -65,7 +65,7 @@
   },
   "permission": {
     "apiKeyMissingTitle": "La lectura de documentos no está configurada",
-    "apiKeyMissingBody": "El servidor no tiene ANTHROPIC_API_KEY, por lo que aún no se pueden leer documentos. El operador puede añadirla como se describe en el README."
+    "apiKeyMissingBody": "El servidor no tiene ningún proveedor de IA configurado, por lo que todavía no se pueden leer documentos. El operador puede configurar uno como se describe en el README."
   },
   "notFound": {
     "title": "Página no encontrada",
@@ -89,12 +89,14 @@
     "refused": "El modelo se negó a leer este documento. No se rellenó nada.",
     "truncated": "El documento es demasiado largo para leerlo de una vez. No se rellenó nada.",
     "invalid_output": "La respuesta del modelo no tenía la estructura esperada y se descartó. Inténtelo de nuevo.",
-    "auth": "Se rechazó la clave de API de Anthropic del servidor.",
-    "rate_limited": "Anthropic está recibiendo demasiadas solicitudes. Inténtelo de nuevo en un minuto.",
-    "unreachable": "No se pudo contactar con Anthropic, así que no se leyó nada. Inténtelo más tarde.",
+    "auth": "El proveedor de IA rechazó la clave de API del servidor.",
+    "rate_limited": "El proveedor de IA está recibiendo demasiadas solicitudes. Inténtelo de nuevo dentro de un minuto.",
+    "unreachable": "No se pudo contactar con el proveedor de IA, así que no se leyó nada. Inténtelo de nuevo más tarde.",
     "document_too_large": "El documento es demasiado grande para que el modelo lo lea.",
-    "api_error": "Anthropic devolvió un error. Inténtelo de nuevo.",
-    "no_issues": "No hay errores ni advertencias que comunicar."
+    "api_error": "El proveedor de IA devolvió un error. Inténtelo de nuevo.",
+    "no_issues": "No hay errores ni advertencias que comunicar.",
+    "unsupported_document": "El modelo configurado solo puede leer PDF que contengan texto, y este no tiene (probablemente es un escaneo). Suba las páginas como imágenes o use un modelo que lea archivos PDF.",
+    "internal": "Algo falló en el servidor, así que no se leyó nada. Inténtelo de nuevo; si vuelve a ocurrir, avise al operador."
   },
   "check": {
     "untitled": "Comprobación del {date, date, medium}",
@@ -113,7 +115,7 @@
     "addDocuments": "Añadir documentos",
     "readDocuments": "{count, plural, one {Leer # documento} other {Leer # documentos}}",
     "readAgain": "Volver a leer",
-    "readHint": "Al leer, cada documento se envía al modelo Claude de Anthropic. Los tokens usados se registran y se muestran aquí.",
+    "readHint": "La lectura envía cada documento al modelo de IA configurado ({model}). Los tokens consumidos se registran y se muestran aquí.",
     "extracted": "Datos extraídos",
     "noExtraction": "Aún no se ha leído ningún documento. Lea los documentos para ver sus datos y los hallazgos."
   },
@@ -362,7 +364,7 @@
     },
     "compare": {
       "title": "{count, plural, one {# comparación espera a la IA} other {# comparaciones esperan a la IA}}",
-      "body": "Claude compara los nombres y las descripciones de mercancías escritos de forma distinta. Hasta entonces se muestran como «no se pudo verificar».",
+      "body": "El modelo de IA compara los nombres y las descripciones de mercancías escritos de forma distinta. Hasta entonces se muestran como «no se pudo verificar».",
       "button": "Comparar con IA",
       "comparing": "Comparando nombres y descripciones…"
     },
@@ -375,7 +377,7 @@
     "email": {
       "open": "Redactar correo de corrección",
       "title": "Borrador de correo de corrección",
-      "description": "Claude redacta un correo en el que se pide a quien emitió los documentos que corrija los errores y advertencias encontrados. TradeCheck nunca envía correos: copie el borrador o ábralo en su propio programa de correo.",
+      "description": "El modelo de IA redacta un correo en el que se pide a quien emitió los documentos que corrija los errores y advertencias encontrados. TradeCheck nunca envía correos: copie el borrador o ábralo en su propio programa de correo.",
       "language": "Idioma del correo",
       "generate": "Redactar correo",
       "regenerate": "Redactar de nuevo",
@@ -399,7 +401,7 @@
     "generated": "Informe creado el {date}",
     "tolerance": "Tolerancia de redondeo {value}",
     "disclaimerHeading": "Tenga en cuenta",
-    "aiNote": "Claude (Anthropic) leyó los documentos y comparó nombres y descripciones. Todos los cálculos y comprobaciones de reglas los realizó código determinista. Los valores marcados como corregidos los introdujo el usuario.",
+    "aiNote": "Un modelo de IA leyó los documentos y comparó nombres y descripciones (los modelos usados figuran en el consumo de tokens). Todos los cálculos y comprobaciones de reglas los realizó código determinista. Los valores marcados como corregidos los introdujo el usuario.",
     "documents": "Documentos",
     "summary": "Resumen",
     "usage": "Consumo de tokens",

@@ -65,7 +65,7 @@
   },
   "permission": {
     "apiKeyMissingTitle": "La lecture des documents n'est pas configurée",
-    "apiKeyMissingBody": "Le serveur n'a pas de ANTHROPIC_API_KEY ; les documents ne peuvent donc pas encore être lus. L'opérateur peut l'ajouter comme indiqué dans le README."
+    "apiKeyMissingBody": "Aucun fournisseur d'IA n'est configuré sur le serveur : les documents ne peuvent donc pas encore être lus. L'exploitant peut en configurer un comme décrit dans le README."
   },
   "notFound": {
     "title": "Page introuvable",
@@ -89,12 +89,14 @@
     "refused": "Le modèle a refusé de lire ce document. Rien n'a été rempli.",
     "truncated": "Le document est trop long pour être lu en une fois. Rien n'a été rempli.",
     "invalid_output": "La réponse du modèle ne correspondait pas à la structure attendue ; elle a été écartée. Réessayez.",
-    "auth": "La clé d'API Anthropic du serveur a été refusée.",
-    "rate_limited": "Anthropic reçoit trop de requêtes en ce moment. Réessayez dans une minute.",
-    "unreachable": "Anthropic n'a pas pu être joint ; rien n'a été lu. Réessayez plus tard.",
+    "auth": "Le fournisseur d'IA a refusé la clé d'API du serveur.",
+    "rate_limited": "Le fournisseur d'IA reçoit trop de requêtes. Réessayez dans une minute.",
+    "unreachable": "Le fournisseur d'IA est injoignable ; rien n'a été lu. Réessayez plus tard.",
     "document_too_large": "Le document est trop volumineux pour être lu par le modèle.",
-    "api_error": "Anthropic a renvoyé une erreur. Réessayez.",
-    "no_issues": "Il n'y a aucune erreur ni aucun avertissement à signaler."
+    "api_error": "Le fournisseur d'IA a renvoyé une erreur. Réessayez.",
+    "no_issues": "Il n'y a aucune erreur ni aucun avertissement à signaler.",
+    "unsupported_document": "Le modèle configuré ne lit que les PDF contenant du texte, et celui-ci n'en contient pas (probablement un scan). Importez les pages sous forme d'images ou utilisez un modèle qui lit les fichiers PDF.",
+    "internal": "Une erreur s'est produite sur le serveur ; rien n'a été lu. Réessayez ; si cela se reproduit, prévenez l'exploitant."
   },
   "check": {
     "untitled": "Vérification du {date, date, medium}",
@@ -113,7 +115,7 @@
     "addDocuments": "Ajouter des documents",
     "readDocuments": "{count, plural, one {Lire # document} other {Lire # documents}}",
     "readAgain": "Relire",
-    "readHint": "La lecture envoie chaque document au modèle Claude d'Anthropic. Les jetons utilisés sont enregistrés et affichés ici.",
+    "readHint": "La lecture envoie chaque document au modèle d'IA configuré ({model}). Les tokens consommés sont enregistrés et affichés ici.",
     "extracted": "Données extraites",
     "noExtraction": "Aucun document n'a encore été lu. Lisez les documents pour voir leurs données et les constats."
   },
@@ -362,7 +364,7 @@
     },
     "compare": {
       "title": "{count, plural, one {# comparaison attend l'IA} other {# comparaisons attendent l'IA}}",
-      "body": "Claude compare les noms et les désignations de marchandises écrits différemment. En attendant, ils apparaissent comme « vérification impossible ».",
+      "body": "Le modèle d'IA compare les noms et les désignations de marchandises écrits différemment. En attendant, ils apparaissent comme « vérification impossible ».",
       "button": "Comparer avec l'IA",
       "comparing": "Comparaison des noms et des désignations…"
     },
@@ -375,7 +377,7 @@
     "email": {
       "open": "Rédiger un e-mail de correction",
       "title": "Brouillon d'e-mail de correction",
-      "description": "Claude rédige un e-mail demandant à l'émetteur des documents de corriger les erreurs et avertissements constatés. TradeCheck n'envoie jamais d'e-mail : copiez le brouillon ou ouvrez-le dans votre propre messagerie.",
+      "description": "Le modèle d'IA rédige un e-mail demandant à l'émetteur des documents de corriger les erreurs et avertissements constatés. TradeCheck n'envoie jamais d'e-mail : copiez le brouillon ou ouvrez-le dans votre propre messagerie.",
       "language": "Langue de l'e-mail",
       "generate": "Rédiger l'e-mail",
       "regenerate": "Rédiger à nouveau",
@@ -399,7 +401,7 @@
     "generated": "Rapport créé le {date}",
     "tolerance": "Tolérance d'arrondi {value}",
     "disclaimerHeading": "À noter",
-    "aiNote": "Claude (Anthropic) a lu les documents et comparé les noms et les désignations. Tous les calculs et toutes les vérifications de règles ont été effectués par du code déterministe. Les valeurs marquées comme corrigées ont été saisies par l'utilisateur.",
+    "aiNote": "Un modèle d'IA a lu les documents et comparé les noms et les désignations (les modèles utilisés figurent dans la consommation de tokens). Tous les calculs et toutes les vérifications de règles ont été effectués par du code déterministe. Les valeurs marquées comme corrigées ont été saisies par l'utilisateur.",
     "documents": "Documents",
     "summary": "Synthèse",
     "usage": "Consommation de tokens",

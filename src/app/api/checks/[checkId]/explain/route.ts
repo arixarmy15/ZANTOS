@@ -12,7 +12,7 @@ import {
 } from "@/lib/assist/prompts";
 import { cachedAssist } from "@/lib/assist/route-helpers";
 import { presentCheck } from "@/lib/checks/view";
-import { getServerEnv, isAnthropicConfigured } from "@/lib/config/env";
+import { getServerEnv, isTaskConfigured } from "@/lib/config/env";
 import { getStorage } from "@/lib/storage";
 
 type Context = { params: Promise<{ checkId: string }> };
@@ -29,7 +29,7 @@ export async function POST(request: Request, { params }: Context) {
   if ("response" in found) return found.response;
   const body = bodySchema.safeParse(await readJson(request));
   if (!body.success) return errorResponse("invalid_request", 400);
-  if (!isAnthropicConfigured(getServerEnv())) return errorResponse("not_configured", 503);
+  if (!isTaskConfigured(getServerEnv(), "explain")) return errorResponse("not_configured", 503);
 
   const storage = await getStorage();
   // The model sees the finding as the checks state it, in English, whatever the answer language.
@@ -44,6 +44,7 @@ export async function POST(request: Request, { params }: Context) {
     cacheKey: `explain:${contentHash(body.data.language, findingFacts(finding))}`,
     run: () =>
       structuredRequest({
+        task: "explain",
         system: EXPLAIN_SYSTEM_PROMPT,
         user: explainRequest(finding, body.data.language),
         schema: explanationSchema,

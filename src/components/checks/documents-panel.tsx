@@ -33,12 +33,15 @@ export function DocumentsPanel({
   limits,
   retentionHours,
   readingEnabled,
+  readingModel,
 }: {
   checkId: string;
   documents: DocumentRow[];
   limits: Limits;
   retentionHours: number;
   readingEnabled: boolean;
+  /** Model the documents are sent to, named in the hint next to the read button. */
+  readingModel: string;
 }) {
   const t = useTranslations();
   const locale = useLocale();
@@ -106,7 +109,7 @@ export function DocumentsPanel({
       </div>
       {readingEnabled ? (
         <p id={hintId} className="text-small text-slate">
-          {t("check.readHint")}
+          {t("check.readHint", { model: readingModel })}
         </p>
       ) : null}
       <p role="status" aria-live="polite" className="sr-only">

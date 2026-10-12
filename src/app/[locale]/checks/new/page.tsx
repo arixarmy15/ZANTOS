@@ -4,9 +4,9 @@ import { requireLocale } from "@/i18n/require-locale";
 import { NewCheckForm } from "@/components/checks/new-check-form";
 import { PageContainer, PageHeader } from "@/components/page-header";
 import { Notice } from "@/components/ui/notice";
-import { getServerEnv, isAnthropicConfigured } from "@/lib/config/env";
+import { getServerEnv, isTaskConfigured } from "@/lib/config/env";
 
-// Reads server configuration (API key, limits) at request time, not at build time.
+// Reads server configuration (AI provider, limits) at request time, not at build time.
 export const dynamic = "force-dynamic";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -26,7 +26,7 @@ export default async function NewCheckPage({ params }: Props) {
   return (
     <PageContainer>
       <PageHeader title={t("newCheck.title")}>{t("newCheck.intro")}</PageHeader>
-      {isAnthropicConfigured(env) ? null : (
+      {isTaskConfigured(env, "extract") ? null : (
         <Notice status="info" title={t("permission.apiKeyMissingTitle")}>
           {t("permission.apiKeyMissingBody")}
         </Notice>

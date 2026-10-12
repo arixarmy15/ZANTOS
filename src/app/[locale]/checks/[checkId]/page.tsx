@@ -20,7 +20,7 @@ import { requireLocale } from "@/i18n/require-locale";
 import { routing } from "@/i18n/routing";
 import { emailIssues } from "@/lib/assist/prompts";
 import { presentCheck } from "@/lib/checks/view";
-import { getServerEnv, isAnthropicConfigured } from "@/lib/config/env";
+import { getServerEnv, isTaskConfigured, resolveRoute } from "@/lib/config/env";
 import { formatTimestamp } from "@/lib/format";
 import { getStorage } from "@/lib/storage";
 import type { DocumentRecord } from "@/lib/storage/types";
@@ -68,7 +68,14 @@ export default async function CheckPage({ params }: Props) {
   const { storage, check, usage } = data;
   const t = await getTranslations();
   const env = getServerEnv();
-  const aiEnabled = isAnthropicConfigured(env);
+  // Each AI feature can run on its own provider and model (README: AI providers).
+  const ai = {
+    extract: isTaskConfigured(env, "extract"),
+    compare: isTaskConfigured(env, "compare"),
+    explain: isTaskConfigured(env, "explain"),
+    email: isTaskConfigured(env, "email"),
+  };
+  const readingModel = resolveRoute(env, "extract").model ?? "";
   const { evaluation, findings, rules, summary } = await presentCheck(storage, check, locale);
   const { documents, effective, pending } = evaluation;
 
@@ -135,7 +142,7 @@ export default async function CheckPage({ params }: Props) {
         </p>
       </PageHeader>
 
-      {aiEnabled ? null : (
+      {ai.extract ? null : (
         <Notice status="info" title={t("permission.apiKeyMissingTitle")}>
           {t("permission.apiKeyMissingBody")}
         </Notice>
@@ -159,7 +166,7 @@ export default async function CheckPage({ params }: Props) {
             <CategoryChart summary={summary} />
           </div>
           {pending.length > 0 ? (
-            <CompareNotice checkId={check.id} pending={pending.length} enabled={aiEnabled} />
+            <CompareNotice checkId={check.id} pending={pending.length} enabled={ai.compare} />
           ) : null}
           <EvidenceLedger
             checkId={check.id}
@@ -170,14 +177,14 @@ export default async function CheckPage({ params }: Props) {
               pageCount: doc.record.pageCount,
             }))}
             findings={findings}
-            canUseAi={aiEnabled}
+            canUseAi={ai.explain}
             toolbar={
               <EmailDraft
                 checkId={check.id}
                 languages={email.languages}
                 defaultLanguage={email.defaultLanguage}
                 issueCount={issues.length}
-                enabled={aiEnabled}
+                enabled={ai.email}
               />
             }
           />
@@ -187,7 +194,8 @@ export default async function CheckPage({ params }: Props) {
       <DocumentsPanel
         checkId={check.id}
         documents={rows}
-        readingEnabled={aiEnabled}
+        readingEnabled={ai.extract}
+        readingModel={readingModel}
         retentionHours={env.RETENTION_HOURS}
         limits={{
           maxMb: env.UPLOAD_MAX_FILE_MB,

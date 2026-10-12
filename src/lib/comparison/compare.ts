@@ -1,15 +1,7 @@
 import "server-only";
-import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { z } from "zod";
-import {
-  AiError,
-  fallbackOptions,
-  getAnthropic,
-  getModel,
-  toAiError,
-  usageFrom,
-  type TokenUsage,
-} from "@/lib/anthropic/client";
+import type { TokenUsage } from "@/lib/ai/errors";
+import { generateStructured } from "@/lib/ai/generate";
 import type { SemanticRequest } from "@/lib/validation/semantic";
 import type { SemanticVerdict } from "@/lib/validation/types";
 
@@ -39,8 +31,6 @@ export const COMPARE_BATCH_SIZE = 80;
 export async function compareTexts(
   requests: SemanticRequest[],
 ): Promise<{ verdicts: Map<string, SemanticVerdict>; usage: TokenUsage }> {
-  const client = getAnthropic();
-  const model = getModel();
   const pairs = requests.map((request, index) => ({
     id: `p${index + 1}`,
     kind: request.kind,
@@ -48,34 +38,22 @@ export async function compareTexts(
     b: request.b,
   }));
 
-  let response;
-  try {
-    response = await client.beta.messages.parse({
-      model,
-      max_tokens: 8000,
-      system: [{ type: "text", text: COMPARE_SYSTEM_PROMPT, cache_control: { type: "ephemeral" } }],
-      messages: [
-        {
-          role: "user",
-          content: `Compare each pair. The pairs are JSON data:\n<pairs>\n${JSON.stringify(pairs)}\n</pairs>`,
-        },
-      ],
-      output_config: { effort: "low", format: betaZodOutputFormat(resultSchema) },
-      ...fallbackOptions(model),
-    });
-  } catch (error) {
-    throw toAiError(error);
-  }
-
-  const usage = usageFrom(response);
-  if (response.stop_reason === "refusal") throw new AiError("refused", usage);
-  if (response.stop_reason === "max_tokens") throw new AiError("truncated", usage);
-  const checked = resultSchema.safeParse(response.parsed_output);
-  if (!checked.success) throw new AiError("invalid_output", usage);
+  const { output, usage } = await generateStructured("compare", {
+    system: COMPARE_SYSTEM_PROMPT,
+    parts: [
+      {
+        type: "text",
+        text: `Compare each pair. The pairs are JSON data:\n<pairs>\n${JSON.stringify(pairs)}\n</pairs>`,
+      },
+    ],
+    schema: resultSchema,
+    maxTokens: 8000,
+    effort: "low",
+  });
 
   // Unknown ids are ignored; a pair without an answer simply stays unverified.
   const verdicts = new Map<string, SemanticVerdict>();
-  for (const result of checked.data.results) {
+  for (const result of output.results) {
     const index = /^p(\d+)$/.exec(result.id)?.[1];
     const request = index === undefined ? undefined : requests[Number(index) - 1];
     if (!request || verdicts.has(request.key)) continue;

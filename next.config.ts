@@ -20,6 +20,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // PDF.js loads its worker from its own package folder; bundling it into the server build
+  // breaks that path, so the server uses the published package as is.
+  serverExternalPackages: ["pdfjs-dist"],
   env: {
     TRADECHECK_LOCALES: locales.join(","),
   },

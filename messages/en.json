@@ -65,7 +65,7 @@
   },
   "permission": {
     "apiKeyMissingTitle": "Document reading is not set up",
-    "apiKeyMissingBody": "The server has no ANTHROPIC_API_KEY, so documents cannot be read yet. The operator can add it as described in the README."
+    "apiKeyMissingBody": "No AI provider is configured on the server, so documents cannot be read yet. The operator can set one up as described in the README."
   },
   "notFound": {
     "title": "Page not found",
@@ -89,12 +89,14 @@
     "refused": "The model declined to read this document. Nothing was filled in.",
     "truncated": "The document is too long to read in one pass. Nothing was filled in.",
     "invalid_output": "The model's answer did not match the expected structure, so it was discarded. Try again.",
-    "auth": "The server's Anthropic API key was rejected.",
-    "rate_limited": "Anthropic is receiving too many requests. Try again in a minute.",
-    "unreachable": "Anthropic could not be reached, so nothing was read. Try again later.",
+    "auth": "The AI provider rejected the server's API key.",
+    "rate_limited": "The AI provider is receiving too many requests. Try again in a minute.",
+    "unreachable": "The AI provider could not be reached, so nothing was read. Try again later.",
     "document_too_large": "The document is too large for the model to read.",
-    "api_error": "Anthropic returned an error. Try again.",
-    "no_issues": "There are no errors or warnings to raise."
+    "api_error": "The AI provider returned an error. Try again.",
+    "no_issues": "There are no errors or warnings to raise.",
+    "unsupported_document": "The configured model can only read PDFs that contain text, and this one has none (it is probably a scan). Upload the pages as images or use a model that reads PDF files.",
+    "internal": "Something went wrong on the server, so nothing was read. Try again; if it keeps happening, tell the operator."
   },
   "check": {
     "untitled": "Check of {date, date, medium}",
@@ -113,7 +115,7 @@
     "addDocuments": "Add documents",
     "readDocuments": "{count, plural, one {Read # document} other {Read # documents}}",
     "readAgain": "Read again",
-    "readHint": "Reading sends each document to Anthropic's Claude model. The tokens used are recorded and shown here.",
+    "readHint": "Reading sends each document to the configured AI model ({model}). The tokens used are recorded and shown here.",
     "extracted": "Extracted data",
     "noExtraction": "No document has been read yet. Read the documents to see their data and the findings."
   },
@@ -362,7 +364,7 @@
     },
     "compare": {
       "title": "{count, plural, one {# comparison is waiting for AI} other {# comparisons are waiting for AI}}",
-      "body": "Names and goods descriptions that are written differently are compared by Claude. Until then they are shown as “could not be verified”.",
+      "body": "Names and goods descriptions that are written differently are compared by the AI model. Until then they are shown as “could not be verified”.",
       "button": "Compare with AI",
       "comparing": "Comparing names and descriptions…"
     },
@@ -375,7 +377,7 @@
     "email": {
       "open": "Draft correction e-mail",
       "title": "Correction e-mail draft",
-      "description": "Claude drafts an e-mail asking the document issuer to correct the errors and warnings found. TradeCheck never sends e-mail: copy the draft or open it in your own mail program.",
+      "description": "The AI model drafts an e-mail asking the document issuer to correct the errors and warnings found. TradeCheck never sends e-mail: copy the draft or open it in your own mail program.",
       "language": "Language of the e-mail",
       "generate": "Draft e-mail",
       "regenerate": "Draft again",
@@ -399,7 +401,7 @@
     "generated": "Report created {date}",
     "tolerance": "Rounding tolerance {value}",
     "disclaimerHeading": "Please note",
-    "aiNote": "Claude (Anthropic) read the documents and compared names and descriptions. Every calculation and rule check was done by deterministic code. Values marked as corrected were entered by the user.",
+    "aiNote": "An AI model read the documents and compared names and descriptions (the models used are listed under token usage). Every calculation and rule check was done by deterministic code. Values marked as corrected were entered by the user.",
     "documents": "Documents",
     "summary": "Summary",
     "usage": "Token usage",

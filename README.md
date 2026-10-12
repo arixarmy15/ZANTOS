@@ -14,21 +14,21 @@ A multilingual pre-shipment check for international trade documents. Exporters u
 ## How it works
 
 1. **Upload** PDF, PNG or JPG documents for one shipment. Files are checked by their content (magic bytes), size and page count.
-2. **Read** — Claude reads each document, in any language, and returns structured fields. Every field keeps the value as printed, a normalized value, a confidence score and its source (page and text excerpt). Output that does not match the schema is rejected.
+2. **Read** — the configured AI model (Claude by default, see [AI providers](#ai-providers)) reads each document, in any language, and returns structured fields. Every field keeps the value as printed, a normalized value, a confidence score and its source (page and text excerpt). Output that does not match the schema is rejected.
 3. **Review** — any extracted value can be corrected. Corrected values are labelled "Corrected by you" and every check runs again; low-confidence values are marked.
 4. **Check** — deterministic code runs the arithmetic, format, cross-document and completeness checks.
 5. **Report** — findings appear next to the document with the evidence highlighted, and the report can be printed or saved as PDF in the selected interface language.
 
 ### Who does what
 
-| Done by deterministic code                                                        | Done by Claude                                                     |
+| Done by deterministic code                                                        | Done by the AI model (Claude by default)                           |
 | --------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | Line arithmetic (quantity × unit price = line total; lines add up to the total)   | Reading documents and extracting fields                            |
 | Format checks: ISO 4217, ISO 3166-1, Incoterms® 2020, HS code format, IBAN mod-97 | Deciding whether differently written names or descriptions match   |
 | Date logic, expected fields per document type, missing documents                  | Optional plain-language explanations (labelled as AI-generated)    |
 | Cross-document comparison of totals, packages, weights, parties, references       | Optional correction e-mail drafts (labelled as AI-generated draft) |
 
-Claude never produces HS codes, tax-ID formats or regulations from memory, and instructions found inside documents are never followed.
+The model is never asked for HS codes, tax-ID formats or regulations, its prompts tell it never to follow instructions found inside documents, and every answer is validated against a schema whichever provider produced it.
 
 ## Two-minute demo
 
@@ -36,7 +36,7 @@ Use your own documents for one shipment, kept in `/samples` (git-ignored). Trade
 
 1. `npm run dev`, open http://localhost:3000 — you land in your browser's language; switch it top right.
 2. **New check** → give it a reference, drop the invoice, packing list and purchase order, **Create check** → **Continue to the check**. A file that is not really a PDF, PNG or JPG is rejected with the reason next to it.
-3. **Read documents.** Each document shows "Reading…" and then its detected type and language; the type can be changed. After reading, names and descriptions written differently are compared by Claude automatically.
+3. **Read documents.** Each document shows "Reading…" and then its detected type and language; the type can be changed. After reading, names and descriptions written differently are compared by the AI model automatically.
 4. **Findings.** The summary shows errors, warnings, results that could not be verified and notes, plus issues per check category. Filter by status, category or document.
 5. Click **Show in document** on a finding: the page opens with the evidence highlighted, a bracket in the margin and the same `F` tag. Click a tag in the margin to jump back to its finding.
 6. In **Extracted data**, correct a value that was read wrongly — the findings update. Change the **rounding tolerance** under "Checks that ran" to see the arithmetic checks re-run.
@@ -54,33 +54,41 @@ Use your own documents for one shipment, kept in `/samples` (git-ignored). Trade
 
 ## Getting started
 
-Requirements: Node.js 22.12 or newer (Node 24 LTS recommended, see `.nvmrc`) and an Anthropic API key.
+Requirements: Node.js 22.12 or newer (Node 24 LTS recommended, see `.nvmrc`) and access to an AI provider — an Anthropic API key, or any OpenAI-compatible endpoint (see [AI providers](#ai-providers)).
 
 ```bash
 npm ci
-cp .env.example .env.local   # then set ANTHROPIC_API_KEY in .env.local
+cp .env.example .env.local   # then configure a provider in .env.local
 npm run dev                  # http://localhost:3000
 ```
 
-Without `ANTHROPIC_API_KEY` the app runs, but reading and the AI features are disabled and the interface says so.
+Without a configured provider the app runs, but reading and the AI features are disabled and the interface says so.
 
 ### GitHub Codespaces
 
-The repository includes `.devcontainer/devcontainer.json` (Node 24 LTS, port 3000 forwarded, Playwright Chromium installed on create). Add `ANTHROPIC_API_KEY` as a [Codespaces secret](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-your-account-specific-secrets-for-github-codespaces) rather than writing it to a file.
+The repository includes `.devcontainer/devcontainer.json` (Node 24 LTS, port 3000 forwarded, Playwright Chromium installed on create). Add `ANTHROPIC_API_KEY` or `OPENAI_COMPATIBLE_API_KEY` as a [Codespaces secret](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-your-account-specific-secrets-for-github-codespaces) rather than writing it to a file.
 
 ### Configuration
 
 All variables are server-side only. See `.env.example` for the template.
 
-| Variable                     | Default             | Purpose                                                                 |
-| ---------------------------- | ------------------- | ----------------------------------------------------------------------- |
-| `ANTHROPIC_API_KEY`          | —                   | Required for reading and the AI features. Without it they are disabled. |
-| `ANTHROPIC_MODEL`            | `claude-sonnet-5-5` | Model used for reading, comparison, explanations and e-mail drafts.     |
-| `DATA_DIR`                   | `./data`            | SQLite database and uploaded files (git-ignored).                       |
-| `UPLOAD_MAX_FILE_MB`         | `20`                | Max size per file, 1–20 MB.                                             |
-| `UPLOAD_MAX_PAGES`           | `20`                | Max pages per PDF, 1–100.                                               |
-| `UPLOAD_MAX_FILES_PER_CHECK` | `10`                | Max documents in one check, 1–20.                                       |
-| `RETENTION_HOURS`            | `24`                | Files, extracted data and findings are deleted after this many hours.   |
+| Variable                     | Default             | Purpose                                                                  |
+| ---------------------------- | ------------------- | ------------------------------------------------------------------------ |
+| `AI_PROVIDER`                | `anthropic`         | Default provider for every AI task: `anthropic` or `openai-compatible`.  |
+| `ANTHROPIC_API_KEY`          | —                   | Anthropic key. Tasks routed to Anthropic are disabled without it.        |
+| `ANTHROPIC_MODEL`            | `claude-sonnet-5-5` | Model for tasks that run on Anthropic.                                   |
+| `OPENAI_COMPATIBLE_BASE_URL` | —                   | Base URL of an OpenAI-compatible API, up to and including `/v1`.         |
+| `OPENAI_COMPATIBLE_API_KEY`  | —                   | Key for that endpoint (optional for local servers).                      |
+| `OPENAI_COMPATIBLE_MODEL`    | —                   | Default model id on that endpoint.                                       |
+| `AI_EXTRACT_MODEL`           | —                   | Optional route for reading documents: `<model>` or `<provider>:<model>`. |
+| `AI_COMPARE_MODEL`           | —                   | Optional route for comparing names and descriptions.                     |
+| `AI_EXPLAIN_MODEL`           | —                   | Optional route for plain-language explanations.                          |
+| `AI_EMAIL_MODEL`             | —                   | Optional route for correction e-mail drafts.                             |
+| `DATA_DIR`                   | `./data`            | SQLite database and uploaded files (git-ignored).                        |
+| `UPLOAD_MAX_FILE_MB`         | `20`                | Max size per file, 1–20 MB.                                              |
+| `UPLOAD_MAX_PAGES`           | `20`                | Max pages per PDF, 1–100.                                                |
+| `UPLOAD_MAX_FILES_PER_CHECK` | `10`                | Max documents in one check, 1–20.                                        |
+| `RETENTION_HOURS`            | `24`                | Files, extracted data and findings are deleted after this many hours.    |
 
 ### Scripts
 
@@ -94,13 +102,15 @@ All variables are server-side only. See `.env.example` for the template.
 | `npm run test`            | Vitest unit tests                                                 |
 | `npm run test:e2e`        | Playwright end-to-end and axe accessibility tests at three widths |
 | `npm run check:secrets`   | Fails if a tracked file looks like it contains a key              |
+| `npm run ai:models`       | Lists the models the OpenAI-compatible endpoint offers            |
+| `npm run test:live`       | Opt-in checks against the configured provider (real requests)     |
 | `npm run check`           | All of the above except the end-to-end tests                      |
 
 If Playwright cannot download its browser, point it at an installed Chromium with `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`.
 
 ## Checks
 
-All arithmetic and rule-based checks are deterministic code (`src/lib/validation/`) using exact decimal arithmetic. Claude is asked only whether two differently written names or goods descriptions mean the same thing; those answers are labelled "AI-assisted", cached by content hash, and a missing or low-confidence answer is shown as "could not be verified".
+All arithmetic and rule-based checks are deterministic code (`src/lib/validation/`) using exact decimal arithmetic. The AI model is asked only whether two differently written names or goods descriptions mean the same thing; those answers are labelled "AI-assisted", cached by content hash, and a missing or low-confidence answer is shown as "could not be verified".
 
 | Category         | Checks                                                                                                                                                                                                          |
 | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -108,6 +118,28 @@ All arithmetic and rule-based checks are deterministic code (`src/lib/validation
 | Across documents | total quantity, packages, gross and net weight (unit-converted), order reference, currency, Incoterms® rule and place, origin, destination, exporter, importer, goods descriptions, HS codes (first six digits) |
 | Formats          | ISO 4217 currency, ISO 3166-1 country, Incoterms® 2020, HS code format (never the classification), IBAN check digits, readable values, purchase order dated first                                               |
 | Completeness     | expected fields per document type, missing or unread documents, a general reminder to check the destination country's rules                                                                                     |
+
+## AI providers
+
+The AI tasks — reading documents, comparing names and descriptions, explanations and e-mail drafts — go through one provider layer (`src/lib/ai/`). Each task can run on a different provider and model; the deterministic checks never depend on which one is used.
+
+- **Anthropic** (default): Claude reads PDFs and images natively, with schema-constrained output, prompt caching and server-side refusal fallback.
+- **OpenAI-compatible**: any server that implements the chat completions API — an LLM gateway, OpenAI, vLLM, Ollama and others — called directly with `fetch`. Structured output is negotiated per endpoint and model (JSON Schema, then JSON mode, then instructions only); every answer is still validated with Zod and rejected if it does not match. PDFs are sent as their text layer, page by page, because chat models generally cannot read PDF files; scanned PDFs without a text layer are refused with an explanation, and images are sent as image inputs, which need a vision-capable model.
+
+Example: an OpenAI-compatible gateway for everything except reading, which stays on Claude:
+
+```bash
+AI_PROVIDER=openai-compatible
+OPENAI_COMPATIBLE_BASE_URL=https://evren-llmapi.ssyz.org.tr/v1
+OPENAI_COMPATIBLE_API_KEY=…            # in .env.local or a secret store, never in git
+OPENAI_COMPATIBLE_MODEL=deepseek-v4.1-flash
+ANTHROPIC_API_KEY=…
+AI_EXTRACT_MODEL=anthropic:claude-sonnet-5-5
+```
+
+`npm run ai:models` lists the models the endpoint offers (the key is sent as `Authorization: Bearer` and `X-API-Key`). `npm run test:live` sends a synthetic invoice through reading, comparison, explanation and e-mail drafting on whatever is configured and checks the answers — real requests that use tokens. Behind a corporate proxy, Node needs `NODE_USE_ENV_PROXY=1` to use `HTTPS_PROXY`.
+
+The token usage of every request is recorded with the model that answered, whichever provider it came from.
 
 ## Results, report and AI assistance
 
@@ -134,13 +166,13 @@ Interface languages: English (default), Turkish, German, Spanish, French and Ara
 
 - **Adding a language** only requires adding `messages/<code>.json` with the same keys and `meta.name` / `meta.direction`; the i18n test checks key and placeholder parity.
 - Translations other than English are **machine-generated drafts and need human review** before production use.
-- The interface language and the document language are independent: documents can be in any language Claude can read, and e-mail drafts default to the documents' language.
+- The interface language and the document language are independent: documents can be in any language the configured model can read, and e-mail drafts default to the documents' language.
 - Numbers, dates and currencies are formatted with `Intl`; Arabic uses Latin digits so values look like the paper documents.
 
 ## Privacy and data
 
 - Everything is stored locally under `DATA_DIR`: a SQLite database and the uploaded files (created with owner-only permissions).
-- Documents are sent to Anthropic's API only when the user chooses **Read documents**. Names and descriptions are sent for comparison, and findings for explanations and e-mail drafts, only when those features run.
+- Documents are sent to the configured AI provider only when the user chooses **Read documents**. Names and descriptions are sent for comparison, and findings for explanations and e-mail drafts, only when those features run.
 - Checks expire after `RETENTION_HOURS` and are purged automatically; **Delete check** and **Remove** delete immediately.
 - Logs never contain document content.
 
@@ -153,14 +185,15 @@ Interface languages: English (default), Turkish, German, Spanish, French and Ara
 - **Reference lists are bundled.** ISO 4217 comes from the `currency-codes` package (SIX list dated 2024-06-25) — a newer code is reported as a warning that names the list date; ISO 3166-1 comes from `i18n-iso-countries`; the Incoterms® 2020 rules are listed in code.
 - **Expected fields are general practice**, not any country's legal requirements; no country rule packs ship.
 - **Weight units:** kg, g, t and lb.
-- **AI features need a key** and were exercised with mocked responses in automated tests; review their output on real documents before production use.
+- **AI features need a provider** and were exercised with mocked responses and a local OpenAI-compatible stand-in in automated tests; run `npm run test:live` and review the output on real documents before production use.
+- **OpenAI-compatible models read PDFs as text.** Scanned PDFs need Anthropic (or another provider that reads PDF files natively) or must be uploaded as images for a vision-capable model; extraction quality depends on the model chosen.
 - **Single instance, no accounts.** SQLite and the local file system suit one server; there is no authentication, so any deployment must sit behind your own access control. Node's built-in SQLite prints an "experimental" warning.
 - **Light theme only**, by design for the MVP.
 - **Translations are machine-generated** and need native-speaker review.
 
 ## Testing
 
-- **Unit tests** (Vitest): every rule, the engine, rule-pack validation, extraction and comparison calls with a mocked client, storage, evidence location, presentation in several languages, design tokens (WCAG contrast) and translation parity.
+- **Unit tests** (Vitest): every rule, the engine, rule-pack validation, extraction and comparison calls with a mocked client, the OpenAI-compatible client (wire format, format negotiation, retries, error mapping) and real HTTP round trips to a local stand-in with per-task routing, storage, evidence location, presentation in several languages, design tokens (WCAG contrast) and translation parity.
 - **End-to-end tests** (Playwright) at 390, 834 and 1440 px: every page in every language with axe (WCAG 2.2 AA tags), upload and rejection, field correction, findings, filters, evidence selection, the report and the rounding tolerance — using synthetic, labelled fixtures generated at test time.
 - **Review screenshots** of every screen and content state at three widths, in English and Arabic: `SCREENSHOTS=1 npm run test:e2e -- e2e/screenshots.spec.ts` (output in `screenshots/`, git-ignored). The Phase 6 review is summarized in [DESIGN.md](DESIGN.md#14-phase-6-review).
 
