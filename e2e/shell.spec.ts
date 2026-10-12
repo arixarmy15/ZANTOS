@@ -54,11 +54,24 @@ test("the language switcher keeps the current page", async ({ page }, testInfo) 
 
 test("switching language keeps the reader's place", async ({ page }, testInfo) => {
   // The section being read stays where it was; the page does not jump to the top.
+  // Fonts arrive late, as on a first visit, so the new language's fonts reflow the page.
+  await page.route(/\.woff2$/, async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 400));
+    await route.continue();
+  });
   await page.goto("/en#checks");
   const top = () => page.locator("#checks").evaluate((node) => node.getBoundingClientRect().top);
-  await expect.poll(top).toBeLessThan(200);
-  await page.waitForTimeout(300);
-  const before = await top();
+  // Measure once fonts have loaded and the hash scroll has settled.
+  await page.evaluate(() => document.fonts.ready);
+  let before = Number.NaN;
+  await expect
+    .poll(async () => {
+      const previous = before;
+      before = await top();
+      return before === previous;
+    })
+    .toBe(true);
+  expect(before).toBeLessThan(200);
   if (testInfo.project.name === "mobile") {
     // Dispatched like a tap: Playwright's click would first scroll the sticky header button.
     await page.getByRole("button", { name: "Menu" }).dispatchEvent("click");
