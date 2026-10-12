@@ -40,7 +40,9 @@
       "documents": "Belgeler",
       "tokens": "Kullanılan token",
       "deletes": "Otomatik silinme"
-    }
+    },
+    "documentCount": "{count, plural, one {# belge} other {# belge}}",
+    "tokenCount": "{count, plural, one {# token kullanıldı} other {# token kullanıldı}}"
   },
   "newCheck": {
     "title": "Yeni kontrol",
@@ -61,7 +63,9 @@
     "noDocuments": "Henüz belge eklenmedi.",
     "uploading": "Yükleniyor",
     "added": "Eklendi",
-    "removeFile": "{name} dosyasını kaldır"
+    "removeFile": "{name} dosyasını kaldır",
+    "touchTitle": "Bu sevkiyatın belgelerini ekleyin",
+    "touchHint": "Telefonda bir sayfanın fotoğrafını da çekebilirsiniz."
   },
   "permission": {
     "apiKeyMissingTitle": "Belge okuma ayarlanmamış",
@@ -335,7 +339,9 @@
       "allDocuments": "Tüm belgeler",
       "reset": "Filtreleri temizle",
       "showing": "{total} bulgudan {shown} tanesi gösteriliyor",
-      "noMatch": "Bu filtrelere uyan bulgu yok."
+      "noMatch": "Bu filtrelere uyan bulgu yok.",
+      "more": "Diğer filtreler",
+      "active": "{count, plural, one {# etkin} other {# etkin}}"
     },
     "tabs": {
       "findings": "Bulgular",
@@ -360,7 +366,10 @@
       "positionUnavailable": "Tam konum belirlenemedi",
       "pageImage": "{name}, sayfa {page}",
       "imageNote": "Görsellerde metin katmanı yoktur; bu nedenle kanıtlar görselin üzerinde işaretlenmek yerine üstünde listelenir.",
-      "close": "Kapat"
+      "close": "Kapat",
+      "zoom": "Yakınlaştırma",
+      "zoomIn": "Yakınlaştır",
+      "zoomOut": "Uzaklaştır"
     },
     "compare": {
       "title": "{count, plural, one {# karşılaştırma yapay zekâyı bekliyor} other {# karşılaştırma yapay zekâyı bekliyor}}",
@@ -391,6 +400,13 @@
       "copyFailed": "Taslak kopyalanamadı. Metni seçip elle kopyalayın.",
       "openMail": "E-posta programında aç",
       "neverSent": "TradeCheck bu e-postayı göndermez."
+    },
+    "jump": {
+      "label": "Bu sayfada",
+      "findings": "Bulgular",
+      "documents": "Belgeler",
+      "rules": "Kontroller",
+      "data": "Çıkarılan veriler"
     }
   },
   "report": {

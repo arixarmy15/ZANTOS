@@ -19,7 +19,7 @@ export function TabsTrigger({
   return (
     <TabsPrimitive.Trigger
       className={cn(
-        "-mb-px inline-flex min-h-10 items-center gap-2 border-b-2 border-transparent px-3 font-medium text-slate",
+        "-mb-px inline-flex min-h-10 pointer-coarse:min-h-11 items-center gap-2 border-b-2 border-transparent px-3 font-medium text-slate",
         "transition-control hover:text-carbon data-[state=active]:border-harbor data-[state=active]:text-carbon",
         className,
       )}

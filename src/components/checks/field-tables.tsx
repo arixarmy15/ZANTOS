@@ -348,7 +348,7 @@ function SplitFieldRows({
       ) : null}
       {missing.length > 0 ? (
         <details className="group border border-rule bg-paper">
-          <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-2.5 text-slate transition-control hover:bg-ledger hover:text-carbon">
+          <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 px-3 py-2.5 text-slate transition-control hover:bg-ledger hover:text-carbon">
             <ChevronDown
               aria-hidden="true"
               className="size-4 transition-transform group-open:rotate-180"
@@ -387,7 +387,7 @@ export function FieldTables({ checkId, document }: { checkId: string; document: 
             const corrected = LINE_FIELD_KEYS.some((key) => line[key].corrected);
             return (
               <details key={index} className="group border border-rule bg-paper">
-                <summary className="flex cursor-pointer list-none flex-wrap items-center gap-x-3 gap-y-1 px-3 py-2.5 transition-control hover:bg-ledger">
+                <summary className="flex min-h-11 cursor-pointer list-none flex-wrap items-center gap-x-3 gap-y-1 px-3 py-2.5 transition-control hover:bg-ledger">
                   <ChevronDown
                     aria-hidden="true"
                     className="size-4 text-slate transition-transform group-open:rotate-180"

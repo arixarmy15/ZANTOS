@@ -97,7 +97,25 @@ export default async function ReportPage({ params }: Props) {
         <h2 id="documents-heading" className="text-title font-semibold">
           {t("report.documents")}
         </h2>
-        <div className="overflow-x-auto">
+        {/* Phones: one block per document; the table is for wider screens and for print. */}
+        <ul className="divide-y divide-rule border border-rule bg-paper text-small sm:hidden print:hidden">
+          {evaluation.documents.map((doc) => (
+            <li key={doc.id} className="grid gap-0.5 px-3 py-2.5">
+              <span className="font-medium break-all" dir="auto">
+                {doc.fileName}
+              </span>
+              <span className="text-slate">
+                {t(`document.types.${doc.documentType ?? "unknown"}`)}
+                {doc.documentLanguage && doc.documentLanguage !== "und"
+                  ? ` · ${languageName(doc.documentLanguage, locale)}`
+                  : ""}
+                {doc.pageCount ? ` · ${t("document.pages", { count: doc.pageCount })}` : ""}
+                {` · ${t(`document.status.${doc.status}`)}`}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <div className="hidden overflow-x-auto sm:block print:block">
           <table className="w-full border-collapse border border-rule bg-paper text-small">
             <thead>
               <tr className="border-b border-rule">

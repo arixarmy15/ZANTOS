@@ -9,7 +9,7 @@ export function SiteHeader({ languages }: { languages: LanguageOption[] }) {
   const t = useTranslations("nav");
   return (
     <header className="sticky top-0 z-30 border-b border-rule bg-paper print:hidden">
-      <div className="mx-auto flex h-12 max-w-[1440px] items-center gap-4 px-4 md:px-6 xl:px-8">
+      <div className="mx-auto flex h-12 max-w-[1440px] items-center gap-4 px-page">
         <Link
           href="/"
           aria-label={t("home")}

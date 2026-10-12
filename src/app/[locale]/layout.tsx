@@ -8,7 +8,7 @@ import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "../globals.css";
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -35,8 +35,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: { default: t("title"), template: `%s · ${t("title")}` },
     description: t("description"),
+    applicationName: "TradeCheck",
+    appleWebApp: { capable: true, title: "TradeCheck", statusBarStyle: "default" },
+    // Invoice numbers, IBANs, amounts and dates must not turn into phone, map or calendar links.
+    formatDetection: { telephone: false, date: false, address: false, email: false },
   };
 }
+
+/** Phones: full width, room for the notch (safe areas are padded), browser bars in Paper. */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#FFFFFF",
+  colorScheme: "light",
+};
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;

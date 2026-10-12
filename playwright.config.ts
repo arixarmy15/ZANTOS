@@ -19,10 +19,29 @@ export default defineConfig({
     baseURL,
     trace: "retain-on-failure",
   },
-  // Three reference widths used for layout and RTL screenshots.
+  // Three reference widths used for layout and RTL screenshots. Phone and tablet are touch
+  // devices, so pointer: coarse styles (44 px targets, 16 px form text) are what they test.
   projects: [
-    { name: "mobile", use: { ...chromium, viewport: { width: 390, height: 844 } } },
-    { name: "tablet", use: { ...chromium, viewport: { width: 834, height: 1112 } } },
+    {
+      name: "mobile",
+      use: {
+        ...chromium,
+        viewport: { width: 390, height: 844 },
+        isMobile: true,
+        hasTouch: true,
+        deviceScaleFactor: 3,
+      },
+    },
+    {
+      name: "tablet",
+      use: {
+        ...chromium,
+        viewport: { width: 834, height: 1112 },
+        isMobile: true,
+        hasTouch: true,
+        deviceScaleFactor: 2,
+      },
+    },
     { name: "desktop", use: { ...chromium, viewport: { width: 1440, height: 900 } } },
   ],
   webServer: {

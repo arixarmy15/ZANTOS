@@ -40,7 +40,9 @@
       "documents": "Documentos",
       "tokens": "Tokens usados",
       "deletes": "Eliminación automática"
-    }
+    },
+    "documentCount": "{count, plural, one {# documento} other {# documentos}}",
+    "tokenCount": "{count, plural, one {# token consumido} other {# tokens consumidos}}"
   },
   "newCheck": {
     "title": "Nueva comprobación",
@@ -61,7 +63,9 @@
     "noDocuments": "Aún no se han añadido documentos.",
     "uploading": "Subiendo",
     "added": "Añadido",
-    "removeFile": "Quitar {name}"
+    "removeFile": "Quitar {name}",
+    "touchTitle": "Añada los documentos de este envío",
+    "touchHint": "En el teléfono también puede fotografiar una página."
   },
   "permission": {
     "apiKeyMissingTitle": "La lectura de documentos no está configurada",
@@ -335,7 +339,9 @@
       "allDocuments": "Todos los documentos",
       "reset": "Quitar filtros",
       "showing": "Se muestran {shown} de {total} hallazgos",
-      "noMatch": "Ningún hallazgo coincide con estos filtros."
+      "noMatch": "Ningún hallazgo coincide con estos filtros.",
+      "more": "Más filtros",
+      "active": "{count, plural, one {# activo} other {# activos}}"
     },
     "tabs": {
       "findings": "Hallazgos",
@@ -360,7 +366,10 @@
       "positionUnavailable": "Posición exacta no disponible",
       "pageImage": "Página {page} de {name}",
       "imageNote": "Las imágenes no tienen capa de texto, así que su evidencia se muestra encima de la imagen en lugar de marcarse sobre ella.",
-      "close": "Cerrar"
+      "close": "Cerrar",
+      "zoom": "Zoom",
+      "zoomIn": "Acercar",
+      "zoomOut": "Alejar"
     },
     "compare": {
       "title": "{count, plural, one {# comparación espera a la IA} other {# comparaciones esperan a la IA}}",
@@ -391,6 +400,13 @@
       "copyFailed": "No se pudo copiar el borrador. Seleccione el texto y cópielo a mano.",
       "openMail": "Abrir en el programa de correo",
       "neverSent": "TradeCheck no envía este correo."
+    },
+    "jump": {
+      "label": "En esta página",
+      "findings": "Hallazgos",
+      "documents": "Documentos",
+      "rules": "Comprobaciones",
+      "data": "Datos extraídos"
     }
   },
   "report": {

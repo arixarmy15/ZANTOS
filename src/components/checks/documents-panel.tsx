@@ -253,7 +253,7 @@ function DocumentTypeSelect({ checkId, doc }: { checkId: string; doc: DocumentRo
       </label>
       <NativeSelect
         id={id}
-        className="h-8 w-auto text-small"
+        className="h-8 w-auto text-small pointer-coarse:h-11"
         value={doc.documentType ?? ""}
         disabled={doc.status !== "extracted"}
         onChange={async (event) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { FilterX, SearchX } from "lucide-react";
+import { FilterX, SearchX, SlidersHorizontal } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useCallback, useId, useMemo, useState, useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/button";
@@ -66,7 +66,9 @@ export function EvidenceLedger({
   const locale = useLocale();
   const router = useRouter();
   const layout = useLayout();
-  const ids = { category: useId(), document: useId(), count: useId() };
+  const ids = { category: useId(), document: useId(), count: useId(), more: useId() };
+  // Phones keep the status filters in view and fold the two selects away.
+  const [moreOpen, setMoreOpen] = useState(false);
 
   const [statuses, setStatuses] = useState<Set<DisplayStatus>>(new Set());
   const [category, setCategory] = useState<RuleCategory | "">("");
@@ -192,7 +194,29 @@ export function EvidenceLedger({
             );
           })}
         </div>
-        <div className="grid gap-3 sm:grid-cols-2">
+        {layout === "narrow" ? (
+          <Button
+            variant="ghost"
+            size="sm"
+            aria-expanded={moreOpen}
+            aria-controls={ids.more}
+            onClick={() => setMoreOpen((open) => !open)}
+            className="justify-self-start"
+          >
+            <SlidersHorizontal aria-hidden="true" />
+            {t("filters.more")}
+            {(category ? 1 : 0) + (documentFilter ? 1 : 0) > 0 ? (
+              <span className="text-slate">
+                ({t("filters.active", { count: (category ? 1 : 0) + (documentFilter ? 1 : 0) })})
+              </span>
+            ) : null}
+          </Button>
+        ) : null}
+        <div
+          id={ids.more}
+          hidden={layout === "narrow" && !moreOpen}
+          className="grid gap-3 sm:grid-cols-2"
+        >
           <div className="grid gap-1">
             <Label htmlFor={ids.category}>{t("filters.category")}</Label>
             <NativeSelect
@@ -305,7 +329,7 @@ export function EvidenceLedger({
           <SheetContent
             closeLabel={t("viewer.close")}
             aria-describedby={undefined}
-            className="w-full max-w-none gap-4 p-4 pt-14"
+            className="w-full max-w-none gap-4 px-[max(1rem,env(safe-area-inset-left),env(safe-area-inset-right))] pt-[calc(3.5rem+env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))]"
           >
             {selected ? (
               <div className="grid gap-1 border-b border-rule pb-3">

@@ -242,7 +242,13 @@ rgba(23,33,43,.12)`. Nothing that sits in the page flow has a shadow.
   a bottom Rule; the page below on Ledger. Below 640 px the navigation and language switcher move
   into a "Menu" button. A footer line carries the information-only notice.
 - **Grid:** content max width 1440 px; inline page padding 16 / 24 / 32 px at phone / tablet /
-  desktop.
+  desktop, never less than the device's safe-area inset.
+- **Touch:** on coarse pointers controls are at least 44 px tall (small buttons extend their hit
+  area with an invisible overlay) and form text is 16 px. Grid tracks are `minmax(0, 1fr)` so long
+  unbroken text cannot widen a phone layout.
+- **Phones:** tables become card lists; dialogs dock to the bottom as sheets; the evidence sheet
+  has zoom steps 100 / 150 / 200 / 300 % and scrolls sideways; check pages get jump links and
+  fold the category and document filters behind "More filters".
 - **Evidence ledger (check detail):**
   - **≥ 1024 px:** two panes. The document pane on the _start_ side (7 fr), findings on the
     _end_ side (5 fr), both scrolling independently under a sticky check header (document set,

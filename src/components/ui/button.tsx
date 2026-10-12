@@ -21,11 +21,11 @@ export const buttonVariants = cva(
           "border-error-fg bg-error-fg text-paper hover:border-error-mark hover:bg-error-mark",
       },
       size: {
-        // 28 px visible; the hit area extends to 36 px without overlapping 8 px gaps.
-        sm: "relative h-7 px-2.5 text-small after:absolute after:inset-x-0 after:-inset-y-1 after:content-['']",
-        md: "h-9 px-3.5 text-body",
+        // 28 px visible with a 36 px hit area; on touch screens 36 px visible and 44 px to hit.
+        sm: "relative h-7 px-2.5 text-small after:absolute after:inset-x-0 after:-inset-y-1 after:content-[''] pointer-coarse:h-9 pointer-coarse:px-3",
+        md: "h-9 px-3.5 text-body pointer-coarse:h-11",
         lg: "h-11 px-4 text-body",
-        icon: "size-10 p-0",
+        icon: "size-10 p-0 pointer-coarse:size-11",
       },
     },
     defaultVariants: { variant: "secondary", size: "md" },

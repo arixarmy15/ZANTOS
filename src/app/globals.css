@@ -87,6 +87,7 @@
   --animate-bracket-draw: bracket-draw var(--duration-normal) var(--ease-out);
   --animate-fade-in: overlay-in var(--duration-fast) var(--ease-out);
   --animate-fade-out: fade-out var(--duration-fast) var(--ease-in);
+  --animate-sheet-up: sheet-up var(--duration-normal) var(--ease-out);
 }
 
 :root {
@@ -107,6 +108,13 @@
 @keyframes fade-out {
   to {
     opacity: 0;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
 }
 
@@ -147,13 +155,35 @@
   }
 }
 
+/* Page gutters that also clear the notch and rounded corners (viewport-fit=cover). */
+@utility px-page {
+  padding-inline: max(var(--page-gutter), env(safe-area-inset-left), env(safe-area-inset-right));
+}
+
 @utility code {
   font-family: var(--font-mono);
   white-space: nowrap;
 }
 
 @layer base {
+  :root {
+    --page-gutter: 1rem;
+  }
+  @media (width >= 48rem) {
+    :root {
+      --page-gutter: 1.5rem;
+    }
+  }
+  @media (width >= 80rem) {
+    :root {
+      --page-gutter: 2rem;
+    }
+  }
+
   html {
+    /* Taps get a brand-tinted flash instead of the grey default; pinch zoom stays on. */
+    -webkit-tap-highlight-color: rgb(14 94 109 / 0.14);
+    touch-action: manipulation;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-size-adjust: 100%;
@@ -171,6 +201,15 @@
   html:lang(ar) body {
     font-family: var(--font-arabic);
     line-height: 22px;
+  }
+
+  /*
+   * Stacked grids: the column never grows past its container, so one long unbreakable string
+   * (a file name, an IBAN, a reference) cannot widen the whole page on a phone. Grids with
+   * explicit columns (grid-cols-*) override this.
+   */
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   h1,
@@ -224,5 +263,17 @@
   body {
     background: var(--color-paper);
     print-color-adjust: exact;
+  }
+}
+
+/*
+ * Touch screens. Unlayered on purpose so it wins over text-size utilities: iOS Safari zooms
+ * the whole page into any focused field whose text is smaller than 16px.
+ */
+@media (pointer: coarse) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
   }
 }

@@ -142,6 +142,35 @@ export default async function CheckPage({ params }: Props) {
         </p>
       </PageHeader>
 
+      {hasResults ? (
+        // Phones and tablets: the page is long, so its sections are one tap away.
+        <nav
+          aria-label={t("results.jump.label")}
+          className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 lg:hidden"
+        >
+          {(
+            [
+              ["results-heading", "findings"],
+              ["documents-heading", "documents"],
+              ["rules-heading", "rules"],
+              ["extracted-heading", "data"],
+            ] as const
+          ).map(([target, label]) => (
+            <a
+              key={target}
+              href={`#${target}`}
+              className={buttonVariants({
+                variant: "secondary",
+                size: "sm",
+                className: "shrink-0",
+              })}
+            >
+              {t(`results.jump.${label}`)}
+            </a>
+          ))}
+        </nav>
+      ) : null}
+
       {ai.extract ? null : (
         <Notice status="info" title={t("permission.apiKeyMissingTitle")}>
           {t("permission.apiKeyMissingBody")}

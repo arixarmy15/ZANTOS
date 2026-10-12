@@ -70,7 +70,7 @@ export function CategoryChart({ summary }: { summary: CheckSummary }) {
       </div>
 
       <details className="text-small">
-        <summary className="cursor-pointer text-harbor underline-offset-2 hover:underline">
+        <summary className="cursor-pointer text-harbor underline-offset-2 hover:underline pointer-coarse:flex pointer-coarse:min-h-11 pointer-coarse:items-center">
           {t("showTable")}
         </summary>
         <table className="mt-2 w-full border-collapse">

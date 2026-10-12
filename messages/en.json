@@ -40,7 +40,9 @@
       "documents": "Documents",
       "tokens": "Tokens used",
       "deletes": "Deleted automatically"
-    }
+    },
+    "documentCount": "{count, plural, one {# document} other {# documents}}",
+    "tokenCount": "{count, plural, one {# token used} other {# tokens used}}"
   },
   "newCheck": {
     "title": "New check",
@@ -61,7 +63,9 @@
     "noDocuments": "No documents added yet.",
     "uploading": "Uploading",
     "added": "Added",
-    "removeFile": "Remove {name}"
+    "removeFile": "Remove {name}",
+    "touchTitle": "Add the documents for this shipment",
+    "touchHint": "On a phone you can also take a photo of a page."
   },
   "permission": {
     "apiKeyMissingTitle": "Document reading is not set up",
@@ -335,7 +339,9 @@
       "allDocuments": "All documents",
       "reset": "Clear filters",
       "showing": "Showing {shown} of {total} findings",
-      "noMatch": "No findings match these filters."
+      "noMatch": "No findings match these filters.",
+      "more": "More filters",
+      "active": "{count, plural, one {# active} other {# active}}"
     },
     "tabs": {
       "findings": "Findings",
@@ -360,7 +366,10 @@
       "positionUnavailable": "Exact position not available",
       "pageImage": "Page {page} of {name}",
       "imageNote": "Images have no text layer, so their evidence is listed above the image instead of being marked on it.",
-      "close": "Close"
+      "close": "Close",
+      "zoom": "Zoom",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out"
     },
     "compare": {
       "title": "{count, plural, one {# comparison is waiting for AI} other {# comparisons are waiting for AI}}",
@@ -391,6 +400,13 @@
       "copyFailed": "The draft could not be copied. Select the text and copy it by hand.",
       "openMail": "Open in mail program",
       "neverSent": "TradeCheck does not send this e-mail."
+    },
+    "jump": {
+      "label": "On this page",
+      "findings": "Findings",
+      "documents": "Documents",
+      "rules": "Checks",
+      "data": "Extracted data"
     }
   },
   "report": {

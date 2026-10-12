@@ -48,9 +48,14 @@ export function Dropzone({
       )}
     >
       <Upload aria-hidden="true" className="size-5 text-slate" />
-      <p className="font-medium">{t("dropTitle")}</p>
+      {/* Touch screens have nothing to drop files from; they get a camera hint instead. */}
+      <p className="font-medium">
+        <span className="pointer-coarse:hidden">{t("dropTitle")}</span>
+        <span className="hidden pointer-coarse:inline">{t("touchTitle")}</span>
+      </p>
       <div id={descriptionId} className="grid gap-1 text-small text-slate">
         <p>{t("limits", limits)}</p>
+        <p className="hidden pointer-coarse:block">{t("touchHint")}</p>
         <p>{t("privacy", { hours: retentionHours })}</p>
       </div>
       <Button

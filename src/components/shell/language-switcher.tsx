@@ -31,7 +31,7 @@ export function LanguageSwitcher({
         id={id}
         value={locale}
         disabled={pending}
-        className="h-8 w-auto text-small"
+        className="h-8 w-auto text-small pointer-coarse:h-11"
         onChange={(event) => {
           const next = event.target.value;
           startTransition(() => router.replace(pathname, { locale: next }));

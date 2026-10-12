@@ -40,7 +40,9 @@
       "documents": "Documents",
       "tokens": "Jetons utilisés",
       "deletes": "Suppression automatique"
-    }
+    },
+    "documentCount": "{count, plural, one {# document} other {# documents}}",
+    "tokenCount": "{count, plural, one {# token consommé} other {# tokens consommés}}"
   },
   "newCheck": {
     "title": "Nouvelle vérification",
@@ -61,7 +63,9 @@
     "noDocuments": "Aucun document ajouté pour l'instant.",
     "uploading": "Téléversement",
     "added": "Ajouté",
-    "removeFile": "Retirer {name}"
+    "removeFile": "Retirer {name}",
+    "touchTitle": "Ajoutez les documents de cet envoi",
+    "touchHint": "Sur un téléphone, vous pouvez aussi photographier une page."
   },
   "permission": {
     "apiKeyMissingTitle": "La lecture des documents n'est pas configurée",
@@ -335,7 +339,9 @@
       "allDocuments": "Tous les documents",
       "reset": "Effacer les filtres",
       "showing": "{shown} constats affichés sur {total}",
-      "noMatch": "Aucun constat ne correspond à ces filtres."
+      "noMatch": "Aucun constat ne correspond à ces filtres.",
+      "more": "Plus de filtres",
+      "active": "{count, plural, one {# actif} other {# actifs}}"
     },
     "tabs": {
       "findings": "Constats",
@@ -360,7 +366,10 @@
       "positionUnavailable": "Position exacte indisponible",
       "pageImage": "Page {page} de {name}",
       "imageNote": "Les images n'ont pas de couche de texte : leurs preuves sont donc listées au-dessus de l'image au lieu d'y être marquées.",
-      "close": "Fermer"
+      "close": "Fermer",
+      "zoom": "Zoom",
+      "zoomIn": "Agrandir",
+      "zoomOut": "Réduire"
     },
     "compare": {
       "title": "{count, plural, one {# comparaison attend l'IA} other {# comparaisons attendent l'IA}}",
@@ -391,6 +400,13 @@
       "copyFailed": "Le brouillon n'a pas pu être copié. Sélectionnez le texte et copiez-le manuellement.",
       "openMail": "Ouvrir dans la messagerie",
       "neverSent": "TradeCheck n'envoie pas cet e-mail."
+    },
+    "jump": {
+      "label": "Sur cette page",
+      "findings": "Constats",
+      "documents": "Documents",
+      "rules": "Vérifications",
+      "data": "Données extraites"
     }
   },
   "report": {

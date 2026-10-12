@@ -40,7 +40,9 @@
       "documents": "Dokumente",
       "tokens": "Verbrauchte Tokens",
       "deletes": "Automatisch gelöscht"
-    }
+    },
+    "documentCount": "{count, plural, one {# Dokument} other {# Dokumente}}",
+    "tokenCount": "{count, plural, one {# Token verbraucht} other {# Tokens verbraucht}}"
   },
   "newCheck": {
     "title": "Neue Prüfung",
@@ -61,7 +63,9 @@
     "noDocuments": "Noch keine Dokumente hinzugefügt.",
     "uploading": "Wird hochgeladen",
     "added": "Hinzugefügt",
-    "removeFile": "{name} entfernen"
+    "removeFile": "{name} entfernen",
+    "touchTitle": "Fügen Sie die Dokumente dieser Sendung hinzu",
+    "touchHint": "Auf dem Telefon können Sie auch eine Seite fotografieren."
   },
   "permission": {
     "apiKeyMissingTitle": "Das Lesen von Dokumenten ist nicht eingerichtet",
@@ -335,7 +339,9 @@
       "allDocuments": "Alle Dokumente",
       "reset": "Filter zurücksetzen",
       "showing": "{shown} von {total} Befunden",
-      "noMatch": "Keine Befunde entsprechen diesen Filtern."
+      "noMatch": "Keine Befunde entsprechen diesen Filtern.",
+      "more": "Weitere Filter",
+      "active": "{count, plural, one {# aktiv} other {# aktiv}}"
     },
     "tabs": {
       "findings": "Befunde",
@@ -360,7 +366,10 @@
       "positionUnavailable": "Genaue Position nicht verfügbar",
       "pageImage": "Seite {page} von {name}",
       "imageNote": "Bilder haben keine Textebene; ihre Belege werden daher über dem Bild aufgeführt statt darauf markiert.",
-      "close": "Schließen"
+      "close": "Schließen",
+      "zoom": "Zoom",
+      "zoomIn": "Vergrößern",
+      "zoomOut": "Verkleinern"
     },
     "compare": {
       "title": "{count, plural, one {# Vergleich wartet auf die KI} other {# Vergleiche warten auf die KI}}",
@@ -391,6 +400,13 @@
       "copyFailed": "Der Entwurf konnte nicht kopiert werden. Markieren Sie den Text und kopieren Sie ihn manuell.",
       "openMail": "Im E-Mail-Programm öffnen",
       "neverSent": "TradeCheck versendet diese E-Mail nicht."
+    },
+    "jump": {
+      "label": "Auf dieser Seite",
+      "findings": "Befunde",
+      "documents": "Dokumente",
+      "rules": "Prüfungen",
+      "data": "Extrahierte Daten"
     }
   },
   "report": {

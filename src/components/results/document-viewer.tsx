@@ -1,14 +1,16 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, LoaderCircle } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { ChevronLeft, ChevronRight, LoaderCircle, ZoomIn, ZoomOut } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { NativeSelect } from "@/components/ui/native-select";
 import { RefTag, statusIcons, statusTextClasses } from "@/components/ui/tag";
+import { useMediaQuery } from "@/components/ui/use-media-query";
 import type { EvidenceView, FindingView } from "@/lib/checks/present";
 import { locateEvidence, type Box, type TextRun } from "@/lib/evidence/locate";
+import { dataLocale } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 export type ViewerDocument = {
@@ -122,6 +124,9 @@ function usePageRender(isPdf: boolean, url: string, page: number, width: number)
   return { canvas, state };
 }
 
+/** Zoom steps; a phone renders a whole page about 280 px wide, too small to read evidence. */
+const ZOOMS = [1, 1.5, 2, 3] as const;
+
 type Placed = { finding: FindingView; evidence: EvidenceView; boxes: Box[] | null };
 
 /**
@@ -153,23 +158,30 @@ export function DocumentViewer({
   const document = documents.find((doc) => doc.id === documentId) ?? documents[0]!;
   const url = `/api/checks/${checkId}/documents/${document.id}/file`;
   const isPdf = document.mimeType === "application/pdf";
-  const frame = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(0);
+  const locale = useLocale();
+  const coarse = useMediaQuery("(pointer: coarse)");
+  const pageArea = useRef<HTMLDivElement>(null);
+  const [areaWidth, setAreaWidth] = useState(0);
+  const [zoom, setZoom] = useState<(typeof ZOOMS)[number]>(1);
   const [image, setImage] = useState<{ width: number; height: number } | null>(null);
   const selectId = `viewer-doc-${checkId}`;
 
+  // The page area itself is measured (not the row with the tag margin), and the page is drawn
+  // at exactly that width times the zoom, so evidence boxes and the drawn text always line up.
   useEffect(() => {
-    const element = frame.current;
+    const element = pageArea.current;
     if (!element) return;
     const observer = new ResizeObserver(([entry]) => {
       const next = Math.floor(entry!.contentRect.width);
-      setWidth((current) => (Math.abs(current - next) > 8 ? next : current));
+      setAreaWidth((current) => (Math.abs(current - next) > 8 ? next : current));
     });
     observer.observe(element);
     return () => observer.disconnect();
   }, []);
+  // 2 px for the page border.
+  const renderWidth = areaWidth > 0 ? Math.floor((areaWidth - 2) * zoom) : 0;
 
-  const { canvas, state: pdf } = usePageRender(isPdf, url, page, width);
+  const { canvas, state: pdf } = usePageRender(isPdf, url, page, renderWidth);
   const pageCount = (pdf.status === "ready" ? pdf.pageCount : document.pageCount) ?? 1;
   const ready = isPdf ? pdf.status === "ready" : image !== null;
 
@@ -204,13 +216,6 @@ export function DocumentViewer({
       if (markRefs.current.get(findingId) === element) markRefs.current.delete(findingId);
     };
   };
-  useEffect(() => {
-    if (!selectedId) return;
-    const target = markRefs.current.get(selectedId);
-    if (!target) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    target.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
-  }, [selectedId, located.length, document.id, page]);
 
   // One tag per finding: evidence fields that point at the same text share their boxes.
   const groups: { finding: FindingView; labels: string[]; boxes: Box[] }[] = [];
@@ -231,8 +236,8 @@ export function DocumentViewer({
   }
   groups.sort((a, b) => a.boxes[0]!.y - b.boxes[0]!.y);
 
-  // Tags are 24 px targets (WCAG 2.5.8); tags on the same line stack instead of overlapping.
-  const TAG_STEP = 26;
+  // Tags are 24 px targets (WCAG 2.5.8), 36 px on touch screens; tags on the same line stack.
+  const TAG_STEP = (coarse ? 36 : 24) + 2;
   const tagTops = new Map<string, number>();
   const usedRows: number[] = [];
   for (const group of groups) {
@@ -243,6 +248,24 @@ export function DocumentViewer({
   }
 
   const pageHeight = isPdf ? (pdf.status === "ready" ? pdf.height : 0) : (image?.height ?? 0);
+
+  // Bring the selected finding's evidence into view, also sideways when the page is zoomed;
+  // jump instead of animating under reduced motion.
+  const selectedX = groups.find((group) => group.finding.id === selectedId)?.boxes[0]?.x ?? null;
+  useEffect(() => {
+    if (!selectedId) return;
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? "auto"
+      : "smooth";
+    markRefs.current.get(selectedId)?.scrollIntoView({ block: "center", behavior });
+    const area = pageArea.current;
+    if (area && selectedX !== null) {
+      area.scrollTo({ left: Math.max(0, selectedX - area.clientWidth / 4), behavior });
+    }
+  }, [selectedId, selectedX, located.length, document.id, page, renderWidth]);
+
+  const percent = new Intl.NumberFormat(dataLocale(locale), { style: "percent" });
+  const zoomIndex = ZOOMS.indexOf(zoom);
 
   return (
     <div className="grid min-w-0 gap-3">
@@ -268,29 +291,54 @@ export function DocumentViewer({
             {document.fileName}
           </p>
         )}
-        <nav aria-label={t("pages")} className="flex items-center gap-1">
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label={t("previous")}
-            disabled={page <= 1}
-            onClick={() => onNavigate(document.id, page - 1)}
-          >
-            <ChevronLeft aria-hidden="true" className="rtl:-scale-x-100" />
-          </Button>
-          <span className="min-w-24 text-center text-small tabular-nums" aria-live="polite">
-            {t("page", { page, count: pageCount })}
-          </span>
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label={t("next")}
-            disabled={page >= pageCount}
-            onClick={() => onNavigate(document.id, page + 1)}
-          >
-            <ChevronRight aria-hidden="true" className="rtl:-scale-x-100" />
-          </Button>
-        </nav>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <div role="group" aria-label={t("zoom")} className="flex items-center gap-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={t("zoomOut")}
+              disabled={zoomIndex === 0}
+              onClick={() => setZoom(ZOOMS[zoomIndex - 1]!)}
+            >
+              <ZoomOut aria-hidden="true" />
+            </Button>
+            <span className="min-w-12 text-center text-small tabular-nums" aria-live="polite">
+              {percent.format(zoom)}
+            </span>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={t("zoomIn")}
+              disabled={zoomIndex === ZOOMS.length - 1}
+              onClick={() => setZoom(ZOOMS[zoomIndex + 1]!)}
+            >
+              <ZoomIn aria-hidden="true" />
+            </Button>
+          </div>
+          <nav aria-label={t("pages")} className="flex items-center gap-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={t("previous")}
+              disabled={page <= 1}
+              onClick={() => onNavigate(document.id, page - 1)}
+            >
+              <ChevronLeft aria-hidden="true" className="rtl:-scale-x-100" />
+            </Button>
+            <span className="min-w-24 text-center text-small tabular-nums" aria-live="polite">
+              {t("page", { page, count: pageCount })}
+            </span>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label={t("next")}
+              disabled={page >= pageCount}
+              onClick={() => onNavigate(document.id, page + 1)}
+            >
+              <ChevronRight aria-hidden="true" className="rtl:-scale-x-100" />
+            </Button>
+          </nav>
+        </div>
       </div>
 
       {unlocated.length > 0 ? (
@@ -306,7 +354,7 @@ export function DocumentViewer({
                   type="button"
                   onClick={() => onSelectFinding(finding.id)}
                   aria-pressed={finding.id === selectedId}
-                  className="inline-flex min-h-6 items-center gap-1 rounded-xs"
+                  className="inline-flex min-h-6 items-center gap-1 rounded-xs pointer-coarse:min-h-11"
                   ref={registerMark(finding.id)}
                 >
                   <RefTag
@@ -332,70 +380,79 @@ export function DocumentViewer({
         </ul>
       ) : null}
 
-      <div ref={frame} className="flex min-w-0 gap-2">
-        {/* The page is paper: its coordinates are physical, so it is laid out left to right. */}
-        <div
-          dir="ltr"
-          className={cn(
-            "relative min-w-0 flex-1 border border-rule bg-paper",
-            // Reserve a page-shaped area until the page is drawn, so nothing jumps.
-            !ready && "aspect-[1/1.414]",
-          )}
-        >
-          {isPdf ? (
-            <canvas
-              ref={canvas}
-              role="img"
-              aria-label={t("pageImage", { page, name: document.fileName })}
-              className={cn("block max-w-full", pdf.status !== "ready" && "invisible")}
-            />
-          ) : (
-            // eslint-disable-next-line @next/next/no-img-element -- authenticated API file, not a static asset
-            <img
-              src={url}
-              alt={t("pageImage", { page, name: document.fileName })}
-              className="block h-auto w-full"
-              onLoad={(event) =>
-                setImage({ width: event.currentTarget.width, height: event.currentTarget.height })
-              }
-              onError={() => setImage(null)}
-            />
-          )}
-          {groups.map(({ finding, boxes }) =>
-            boxes.map((box, index) => (
-              <span
-                key={`${finding.id}:${index}`}
-                aria-hidden="true"
-                className={cn(
-                  "pointer-events-none absolute mix-blend-multiply transition-colors duration-(--duration-fast)",
-                  finding.id === selectedId
-                    ? "bg-evidence-wash outline-2 outline-harbor"
-                    : "bg-evidence-wash/70",
-                )}
-                style={{
-                  insetInlineStart: box.x - 2,
-                  top: box.y - 2,
-                  inlineSize: box.width + 4,
-                  blockSize: box.height + 4,
-                }}
+      <div className="flex min-w-0 gap-2">
+        {/* Scrolls sideways when the page is zoomed wider than the screen. */}
+        <div ref={pageArea} className="min-w-0 flex-1 overflow-x-auto overscroll-x-contain">
+          {/* The page is paper: its coordinates are physical, so it is laid out left to right. */}
+          <div
+            dir="ltr"
+            className={cn(
+              "relative border border-rule bg-paper",
+              // Reserve a page-shaped area until the page is drawn, so nothing jumps.
+              ready && isPdf ? "w-max" : "w-full",
+              !ready && "aspect-[1/1.414]",
+            )}
+            style={!isPdf && renderWidth > 0 ? { inlineSize: renderWidth + 2 } : undefined}
+          >
+            {isPdf ? (
+              <canvas
+                ref={canvas}
+                role="img"
+                aria-label={t("pageImage", { page, name: document.fileName })}
+                className={cn("block", pdf.status !== "ready" && "invisible")}
               />
-            )),
-          )}
-          {isPdf && pdf.status === "loading" ? (
-            <p className="absolute inset-0 flex items-center justify-center gap-2 text-small text-slate">
-              <LoaderCircle aria-hidden="true" className="size-4 motion-safe:animate-spin" />
-              {t("loading")}
-            </p>
-          ) : null}
-          {isPdf && pdf.status === "error" ? (
-            <p role="alert" className="p-4 text-small text-error-fg">
-              {t("error")}
-            </p>
-          ) : null}
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element -- authenticated API file, not a static asset
+              <img
+                src={url}
+                alt={t("pageImage", { page, name: document.fileName })}
+                className="block h-auto w-full"
+                onLoad={(event) =>
+                  setImage({ width: event.currentTarget.width, height: event.currentTarget.height })
+                }
+                onError={() => setImage(null)}
+              />
+            )}
+            {groups.map(({ finding, boxes }) =>
+              boxes.map((box, index) => (
+                <span
+                  key={`${finding.id}:${index}`}
+                  aria-hidden="true"
+                  className={cn(
+                    "pointer-events-none absolute mix-blend-multiply transition-colors duration-(--duration-fast)",
+                    finding.id === selectedId
+                      ? "bg-evidence-wash outline-2 outline-harbor"
+                      : "bg-evidence-wash/70",
+                  )}
+                  style={{
+                    insetInlineStart: box.x - 2,
+                    top: box.y - 2,
+                    inlineSize: box.width + 4,
+                    blockSize: box.height + 4,
+                  }}
+                />
+              )),
+            )}
+            {isPdf && pdf.status === "loading" ? (
+              <p className="absolute inset-0 flex items-center justify-center gap-2 text-small text-slate">
+                <LoaderCircle aria-hidden="true" className="size-4 motion-safe:animate-spin" />
+                {t("loading")}
+              </p>
+            ) : null}
+            {isPdf && pdf.status === "error" ? (
+              <p role="alert" className="p-4 text-small text-error-fg">
+                {t("error")}
+              </p>
+            ) : null}
+          </div>
         </div>
 
         {/* Margin: bracket and finding tag beside each located piece of evidence. */}
-        <div className="relative w-12 shrink-0" style={{ blockSize: pageHeight || undefined }}>
+        <div
+          data-evidence-margin
+          className="relative w-12 shrink-0"
+          style={{ blockSize: pageHeight || undefined }}
+        >
           {groups.map(({ finding, labels, boxes }) => {
             const selected = finding.id === selectedId;
             const Icon = statusIcons[finding.status];
@@ -418,7 +475,10 @@ export function DocumentViewer({
                   aria-pressed={selected}
                   aria-label={`${finding.ref} · ${ts(finding.status)} · ${labels.join(", ")}`}
                   ref={registerMark(finding.id)}
-                  className="absolute start-1.5 flex min-h-6 min-w-6 items-center gap-0.5 rounded-xs"
+                  className={cn(
+                    "absolute start-1.5 flex items-center gap-0.5 rounded-xs",
+                    coarse ? "min-h-9 min-w-9" : "min-h-6 min-w-6",
+                  )}
                   style={{ top: tagTops.get(finding.id) }}
                 >
                   <RefTag className={cn("px-1", selected && "border-harbor bg-harbor-tint")}>

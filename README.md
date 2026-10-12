@@ -169,6 +169,16 @@ Interface languages: English (default), Turkish, German, Spanish, French and Ara
 - The interface language and the document language are independent: documents can be in any language the configured model can read, and e-mail drafts default to the documents' language.
 - Numbers, dates and currencies are formatted with `Intl`; Arabic uses Latin digits so values look like the paper documents.
 
+## Phones and tablets
+
+Every screen works on phones down to 320 px wide, with touch emulation in the tests:
+
+- **No sideways scrolling.** Long file names and values wrap or truncate; wide tables become card lists on phones (check list, report documents).
+- **Touch-sized controls.** On touch screens buttons, fields, tabs and menus are at least 44 px tall, and form text is 16 px so iOS does not zoom in on focus.
+- **Evidence on a small screen.** The document opens as a full-screen sheet with zoom (100–300 %) and horizontal scrolling; the page is redrawn at the shown size, so highlights stay on their text. Category and document filters fold behind "More filters", and jump links lead to each section of a check.
+- **Dialogs dock to the bottom** of the screen, and the layout respects notches and the home indicator (`viewport-fit=cover` with safe-area insets).
+- **Add to home screen** opens TradeCheck full-screen (web app manifest and icons). There is deliberately no service worker, so no documents are cached on the device.
+
 ## Privacy and data
 
 - Everything is stored locally under `DATA_DIR`: a SQLite database and the uploaded files (created with owner-only permissions).
@@ -194,7 +204,7 @@ Interface languages: English (default), Turkish, German, Spanish, French and Ara
 ## Testing
 
 - **Unit tests** (Vitest): every rule, the engine, rule-pack validation, extraction and comparison calls with a mocked client, the OpenAI-compatible client (wire format, format negotiation, retries, error mapping) and real HTTP round trips to a local stand-in with per-task routing, storage, evidence location, presentation in several languages, design tokens (WCAG contrast) and translation parity.
-- **End-to-end tests** (Playwright) at 390, 834 and 1440 px: every page in every language with axe (WCAG 2.2 AA tags), upload and rejection, field correction, findings, filters, evidence selection, the report and the rounding tolerance — using synthetic, labelled fixtures generated at test time.
+- **End-to-end tests** (Playwright) at 390 (touch), 834 (touch) and 1440 px, plus a phone sweep at 320 and 390 px that fails on sideways scrolling, touch targets under 44 px or form text under 16 px: every page in every language with axe (WCAG 2.2 AA tags), upload and rejection, field correction, findings, filters, evidence selection, the report and the rounding tolerance — using synthetic, labelled fixtures generated at test time.
 - **Review screenshots** of every screen and content state at three widths, in English and Arabic: `SCREENSHOTS=1 npm run test:e2e -- e2e/screenshots.spec.ts` (output in `screenshots/`, git-ignored). The Phase 6 review is summarized in [DESIGN.md](DESIGN.md#14-phase-6-review).
 
 ## Development phases
