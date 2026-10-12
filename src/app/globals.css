@@ -86,6 +86,7 @@
   --animate-popover-in: popover-in var(--duration-fast) var(--ease-out);
   --animate-bracket-draw: bracket-draw var(--duration-normal) var(--ease-out);
   --animate-fade-in: overlay-in var(--duration-fast) var(--ease-out);
+  --animate-fade-out: fade-out var(--duration-fast) var(--ease-in);
 }
 
 :root {
@@ -99,6 +100,12 @@
 
 @keyframes overlay-in {
   from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
     opacity: 0;
   }
 }

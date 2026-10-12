@@ -11,7 +11,7 @@ export const DialogClose = DialogPrimitive.Close;
 
 function Overlay() {
   return (
-    <DialogPrimitive.Overlay className="fixed inset-0 z-40 bg-(--scrim) data-[state=open]:animate-overlay-in" />
+    <DialogPrimitive.Overlay className="fixed inset-0 z-40 bg-(--scrim) data-[state=open]:animate-overlay-in data-[state=closed]:animate-fade-out" />
   );
 }
 
@@ -29,7 +29,7 @@ export function DialogContent({
         className={cn(
           // Centred with auto margins so the entry animation's transform cannot shift it.
           "fixed inset-0 z-50 m-auto grid h-fit max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[560px] gap-4 overflow-auto",
-          "rounded-md bg-paper p-6 shadow-overlay data-[state=open]:animate-dialog-in",
+          "rounded-md bg-paper p-6 shadow-overlay data-[state=open]:animate-dialog-in data-[state=closed]:animate-fade-out",
           className,
         )}
         {...props}
@@ -59,7 +59,7 @@ export function SheetContent({
       <DialogPrimitive.Content
         className={cn(
           "fixed inset-y-0 end-0 z-50 grid w-[min(320px,100%)] content-start gap-6 overflow-auto bg-paper p-6 shadow-overlay",
-          "data-[state=open]:animate-overlay-in",
+          "data-[state=open]:animate-overlay-in data-[state=closed]:animate-fade-out",
           className,
         )}
         {...props}

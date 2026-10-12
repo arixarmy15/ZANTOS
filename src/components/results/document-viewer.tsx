@@ -334,7 +334,14 @@ export function DocumentViewer({
 
       <div ref={frame} className="flex min-w-0 gap-2">
         {/* The page is paper: its coordinates are physical, so it is laid out left to right. */}
-        <div dir="ltr" className="relative min-w-0 flex-1 border border-rule bg-paper">
+        <div
+          dir="ltr"
+          className={cn(
+            "relative min-w-0 flex-1 border border-rule bg-paper",
+            // Reserve a page-shaped area until the page is drawn, so nothing jumps.
+            !ready && "aspect-[1/1.414]",
+          )}
+        >
           {isPdf ? (
             <canvas
               ref={canvas}

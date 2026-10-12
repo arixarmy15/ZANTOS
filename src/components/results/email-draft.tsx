@@ -120,7 +120,7 @@ export function EmailDraft({
             </p>
           ) : null}
           {draft ? (
-            <div className="grid gap-3 rounded-sm border border-rule p-3">
+            <div className="grid gap-3 rounded-sm border border-rule p-3 animate-fade-in">
               <p className="flex items-center gap-1.5 text-caption font-medium text-slate">
                 <Bot aria-hidden="true" className="size-3.5" />
                 {t("aiDraft")}

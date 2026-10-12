@@ -58,7 +58,7 @@ export function CategoryChart({ summary }: { summary: CheckSummary }) {
               {hovered === category ? (
                 <span
                   role="presentation"
-                  className="pointer-events-none absolute start-[min(10rem,40%)] -top-8 z-10 rounded-sm bg-carbon px-2 py-1 text-caption whitespace-nowrap text-paper shadow-overlay"
+                  className="pointer-events-none absolute start-[min(10rem,40%)] -top-8 z-10 animate-popover-in rounded-sm bg-carbon px-2 py-1 text-caption whitespace-nowrap text-paper shadow-overlay"
                 >
                   <strong className="font-semibold tabular-nums">{count}</strong>{" "}
                   {t("chartTooltip", { category: tc(category), total })}

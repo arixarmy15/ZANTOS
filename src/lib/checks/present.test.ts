@@ -7,6 +7,7 @@ import { runChecks } from "@/lib/validation/engine";
 import { IntlMessageFormat } from "intl-messageformat";
 import {
   fieldLabel,
+  joinFieldLabels,
   presentFindings,
   presentRules,
   quotes,
@@ -109,6 +110,16 @@ describe("helpers", () => {
     expect(fieldLabel("header.grossWeight", t)).toBe("Gross weight");
     expect(fieldLabel("lines.2.hsCode", t)).toBe("Line 3 · HS code");
     expect(fieldLabel("quantity", t)).toBe("Quantity");
+  });
+
+  it("names a shared line once when joining field labels", () => {
+    expect(joinFieldLabels(["Line 1 · Quantity", "Line 1 · Unit price"])).toBe(
+      "Line 1 · Quantity, Unit price",
+    );
+    expect(joinFieldLabels(["Net weight", "Gross weight"])).toBe("Net weight, Gross weight");
+    expect(joinFieldLabels(["Line 1 · Quantity", "Line 2 · Quantity"])).toBe(
+      "Line 1 · Quantity, Line 2 · Quantity",
+    );
   });
 
   it("skips evidence without an excerpt when quoting", () => {

@@ -21,7 +21,8 @@ export const buttonVariants = cva(
           "border-error-fg bg-error-fg text-paper hover:border-error-mark hover:bg-error-mark",
       },
       size: {
-        sm: "h-7 px-2.5 text-small",
+        // 28 px visible; the hit area extends to 36 px without overlapping 8 px gaps.
+        sm: "relative h-7 px-2.5 text-small after:absolute after:inset-x-0 after:-inset-y-1 after:content-['']",
         md: "h-9 px-3.5 text-body",
         lg: "h-11 px-4 text-body",
         icon: "size-10 p-0",

@@ -187,7 +187,7 @@ export default async function ReportPage({ params }: Props) {
                   <q dir="auto">{quote.text}</q>
                   <span className="text-slate">
                     {" "}
-                    — <span dir="auto">{quote.documentName}</span> · {quote.fields.join(", ")}
+                    — <span dir="auto">{quote.documentName}</span> · {quote.label}
                     {quote.page ? ` · ${t("results.finding.page", { page: quote.page })}` : null}
                   </span>
                 </p>

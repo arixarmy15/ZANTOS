@@ -72,7 +72,7 @@ test("findings are summarized, filterable and linked to the evidence in the docu
     await page.keyboard.press("Escape");
   } else {
     if (testInfo.project.name === "tablet") {
-      await expect(page.getByRole("tab", { name: "Documents" })).toHaveAttribute(
+      await expect(page.getByRole("tab", { name: "Document view" })).toHaveAttribute(
         "aria-selected",
         "true",
       );
@@ -144,3 +144,17 @@ test("the rounding tolerance re-runs the checks", async ({ page }, testInfo) => 
   await expect(page.getByText(text("Line 1 of synthetic-invoice.pdf"))).toHaveCount(0);
   await expect(page.getByText(text("Currently 5."))).toBeVisible();
 });
+
+// One test per language, so each page pair has its own time budget and runs in parallel.
+for (const locale of ["en", "tr", "de", "es", "fr", "ar"]) {
+  test(`results and report pass axe in ${locale}`, async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop", "Language sweep runs once");
+    const { checkId } = await seedConflicts(`E2E axe ${locale}`);
+    await page.goto(`/${locale}/checks/${checkId}`);
+    await expect(page.locator("html")).toHaveAttribute("lang", locale);
+    await expect(page.locator("article[data-finding]").first()).toBeVisible();
+    await expectAccessible(page);
+    await page.goto(`/${locale}/checks/${checkId}/report`);
+    await expectAccessible(page);
+  });
+}

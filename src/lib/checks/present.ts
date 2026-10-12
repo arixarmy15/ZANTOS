@@ -30,6 +30,8 @@ export type QuoteView = {
   page: number | null;
   text: string;
   fields: string[];
+  /** "Line 1 · Quantity, Unit price" rather than repeating the line for every field. */
+  label: string;
 };
 
 export type FindingView = {
@@ -79,6 +81,18 @@ export function withCents(value: string): string {
   return `${whole}.${fraction.padEnd(2, "0")}`;
 }
 
+export function joinFieldLabels(fields: string[]): string {
+  const separator = " · ";
+  const prefixes = fields.map((label) =>
+    label.includes(separator) ? label.slice(0, label.indexOf(separator) + separator.length) : "",
+  );
+  const shared = prefixes[0];
+  if (fields.length > 1 && shared && prefixes.every((prefix) => prefix === shared)) {
+    return shared + fields.map((label) => label.slice(shared.length)).join(", ");
+  }
+  return fields.join(", ");
+}
+
 /** Evidence excerpts quoted once, with every field they support. */
 export function quotes(evidence: EvidenceView[]): QuoteView[] {
   const grouped: QuoteView[] = [];
@@ -99,10 +113,11 @@ export function quotes(evidence: EvidenceView[]): QuoteView[] {
         page: item.page,
         text: item.text,
         fields: [item.fieldLabel],
+        label: "",
       });
     }
   }
-  return grouped;
+  return grouped.map((quote) => ({ ...quote, label: joinFieldLabels(quote.fields) }));
 }
 
 export function fieldLabel(path: string, t: Translate): string {

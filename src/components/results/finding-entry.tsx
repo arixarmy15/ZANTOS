@@ -61,7 +61,7 @@ export function FindingEntry({
                 {quote.text}
               </q>
               <span className="text-slate">
-                <span dir="auto">{quote.documentName}</span> · {quote.fields.join(", ")}
+                <span dir="auto">{quote.documentName}</span> · {quote.label}
                 {quote.page ? ` · ${t("page", { page: quote.page })}` : null}
               </span>
             </li>
@@ -91,7 +91,7 @@ export function FindingEntry({
 
       <div aria-live="polite">
         {explanation?.status === "done" ? (
-          <div className="grid gap-1 rounded-sm border border-rule bg-paper p-3">
+          <div className="grid gap-1 rounded-sm border border-rule bg-paper p-3 animate-fade-in">
             <p className="flex items-center gap-1.5 text-caption font-medium text-slate">
               <Bot aria-hidden="true" className="size-3.5" />
               {t("aiExplanation")}

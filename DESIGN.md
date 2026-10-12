@@ -416,10 +416,33 @@ Target: **WCAG 2.2 AA** (`accessibility`, `frontend-a11y`).
 
 ## 13. Open items for later phases
 
-- Phase 2: turn `tokens.json` into CSS custom properties and the Tailwind theme; add a lint rule
-  against physical left/right utilities; draw the mark with `canvas-design`.
-- Phase 3: the confidence threshold for "Low confidence" (a validation setting, not a design
-  token).
-- Phase 5: the PDF report reuses these tokens in print form (status icons survive greyscale).
-- Phase 6: the rendered finish gate from `frontend-design-direction` (screenshots at the three
-  target viewports and in RTL, evidence record checked with its `check-evidence.js`).
+All closed:
+
+- Phase 2: tokens became CSS custom properties and the Tailwind theme; a test forbids physical
+  left/right utilities; the mark was drawn with `canvas-design` ("Reconciled Lines").
+- Phase 3: the low-confidence threshold is a validation setting (`LOW_CONFIDENCE_THRESHOLD`, 0.7).
+- Phase 5: the report is an HTML page printed by the browser ("Save as PDF"), so Arabic is shaped
+  correctly; status icons and labels survive greyscale, and status tints print exactly.
+- Phase 6: the rendered finish gate ran — see §14.
+
+## 14. Phase 6 review
+
+**Rendered finish gate.** `e2e/screenshots.spec.ts` captures the check, the evidence view, the report
+and the loading, empty, error and permission states at 390 × 844, 834 × 1112 and 1440 × 900, in
+English and Arabic, from synthetic labelled fixtures. The evidence record (33 artifacts, every
+content state, accessibility and responsive observations) passes `check-evidence.js` from
+`frontend-design-direction`. axe reports no WCAG 2.2 AA violations on any page, in all six
+languages, at all three widths.
+
+**Polish pass** (`make-interfaces-feel-better`), changes only:
+
+| Principle        | Before                                                                                 | After                                                                                                            |
+| ---------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Hit areas        | Small buttons 28 px; evidence tags 20 px, stacked 22 px apart (axe `target-size` fail) | Small buttons keep 28 px visually with a 36 px hit area (`::after`); one 24 px tag per finding, stacked at 26 px |
+| Enter and exit   | Dialogs and sheets appeared with a fade but vanished instantly                         | Exit fades out at `fast` with the `in` easing; AI blocks and the chart tooltip fade in on request                |
+| Layout stability | The page frame collapsed while a PDF loaded, then jumped                               | An A4-shaped frame is reserved until the page is drawn                                                           |
+| Numbers          | Amounts lost their decimals in messages ("10 × 9 = 90")                                | Amounts keep at least two decimals ("10 × 9.00 = 90.00")                                                         |
+| Text density     | One excerpt quoted three times for three fields                                        | One quote per excerpt: "Line 1 · Quantity, Unit price, Line total"                                               |
+| Naming           | Tablet tab "Documents" next to the "Documents" file section                            | Tab renamed "Document view"                                                                                      |
+| RTL              | Arabic dates forced left-to-right displayed as "012026/03/"                            | Dates keep the language's own direction; codes and numbers stay left-to-right                                    |
+| Browser support  | PDF.js modern build needed `Map.prototype.getOrInsertComputed`; pages failed to render | PDF.js legacy build with polyfills                                                                               |
